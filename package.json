@@ -1,0 +1,21 @@
+{
+  "name": "courses-ada",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "material-ui": "next",
+    "material-ui-icons": "^1.0.0-alpha.3",
+    "react": "^15.5.4",
+    "react-dom": "^15.5.4",
+    "react-select": "1.0.0-rc"
+  },
+  "devDependencies": {
+    "react-scripts": "1.0.1"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
+  }
+}
