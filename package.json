@@ -5,9 +5,10 @@
   "dependencies": {
     "material-ui": "next",
     "material-ui-icons": "^1.0.0-alpha.3",
+    "raleway-webfont": "^3.0.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
-    "react-select": "1.0.0-rc"
+    "typeface-oxygen": "^0.0.22"
   },
   "devDependencies": {
     "react-scripts": "1.0.1"

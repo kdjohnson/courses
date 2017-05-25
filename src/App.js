@@ -6,6 +6,7 @@ import SimpleMenu from "./TermsMenu"
 
 class App extends Component {
   render() {
+    console.log(this.props.theme)
     return (
       <div style={{ padding: "2em" }}>
         <SimpleMenu />

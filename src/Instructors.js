@@ -49,7 +49,7 @@ class Instructors extends Component {
     if (this.props.teachers.length >= 2) {
       return <ExpandableInstructors teachers={this.props.teachers} />
     } else {
-      this.props.teachers.map((teacher, i) => {
+      for (let i = 0, total = this.props.teachers.length; i < total; i++) {
         elements.push(
           <div>
             <Typography
@@ -58,7 +58,9 @@ class Instructors extends Component {
               className={classes.teacher}
               tabIndex="0"
             >
-              {teacher.firstName + " " + teacher.lastName}
+              {this.props.teachers[i].firstName +
+                " " +
+                this.props.teachers[i].lastName}
             </Typography>
             <div className={classes.links}>
               <a
@@ -67,15 +69,15 @@ class Instructors extends Component {
                 href="https://oakland.edu"
                 tabIndex="0"
               >
-                {teacher.office}
+                {this.props.teachers[i].office}
               </a>
               <a target="_blank" href="mailto:https://oakland.edu" tabIndex="0">
-                {teacher.email}
+                {this.props.teachers[i].email}
               </a>
             </div>
           </div>
         )
-      })
+      }
     }
     return elements
   }
