@@ -60,7 +60,11 @@ class BasicTabs extends Component {
         {this.state.index === 0 &&
           <TabContainer>
             <div>
-              <Courses tabIndex="0" term={this.props.term} />
+              <Courses
+                tabIndex="0"
+                currentTermCode={this.props.currentTermCode}
+                courses={this.props.courses}
+              />
             </div>
           </TabContainer>}
         {this.state.index === 1 &&

@@ -43,13 +43,7 @@ const styleSheet = createStyleSheet("Courses", theme => ({
 
 class Courses extends Component {
   componentDidMount() {
-    console.log("componentDidMount")
-    console.log(this.props.term)
     window.addEventListener("resize", this.handleResize)
-    getCourses(this.props.term).then(courses => {
-      console.log(courses)
-      this.setState({ courses })
-    })
   }
 
   handleResize = () => {
@@ -65,31 +59,30 @@ class Courses extends Component {
   }
 
   state = {
-    courses: null,
     mobile: false
   }
 
   getCourses = () => {
     const classes = this.props.classes
     let elements = []
-    for (let i = 0, total = this.state.courses.length; i < total; i++) {
+    for (let i = 0, total = this.props.courses.length; i < total; i++) {
       if (
-        this.state.courses[i].meetings.length >= 2 ||
-        this.state.courses[i].instructors.length >= 2
+        this.props.courses[i].meetings.length >= 2 ||
+        this.props.courses[i].instructors.length >= 2
       ) {
         elements.push(
           <ExpandableCourse
-            course={this.state.courses[i]}
+            course={this.props.courses[i]}
             key={"expandable" + i}
           />
         )
       } else {
         elements.push(
-          <div key={this.state.courses[i].crn + i}>
+          <div key={this.props.courses[i].crn + i}>
             <div style={{ marginTop: "1em" }}>
               <Card
                 className={classes.card}
-                key={this.state.courses[i].crn + i + 1}
+                key={this.props.courses[i].crn + i + 1}
               >
                 <CardHeader
                   className={classes.classHeader}
@@ -99,66 +92,66 @@ class Courses extends Component {
                       className={classes.classHeaderSpan}
                       style={{ fontSize: "20px" }}
                     >
-                      {this.state.courses[i].courseTitle}
+                      {this.props.courses[i].courseTitle}
                     </span>
                   }
-                  key={this.state.courses[i].crn + i + 2}
+                  key={this.props.courses[i].crn + i + 2}
                   subheader={
                     <span tabIndex="0" className={classes.classHeaderSpan}>
-                      {this.state.courses[i].subjectCode +
+                      {this.props.courses[i].subjectCode +
                         "-" +
-                        this.state.courses[i].subjectNumber +
+                        this.props.courses[i].subjectNumber +
                         "-" +
-                        this.state.courses[i].section}
+                        this.props.courses[i].section}
                     </span>
                   }
                 />
                 <CardContent
                   className={classes.content}
-                  key={this.state.courses[i].crn + i + 3}
+                  key={this.props.courses[i].crn + i + 3}
                 >
                   <Typography
                     type="headline"
                     component="h2"
                     className={classes.courseTitle}
                     tabIndex="0"
-                    key={this.state.courses[i].crn + i + 4}
+                    key={this.props.courses[i].crn + i + 4}
                   >
-                    {"Section: " + this.state.courses[i].section}
+                    {"Section: " + this.props.courses[i].section}
                   </Typography>
                   <Typography
                     type="headline"
                     component="h2"
                     className={classes.courseTitle}
                     tabIndex="0"
-                    key={this.state.courses[i].crn + i + 5}
+                    key={this.props.courses[i].crn + i + 5}
                   >
-                    {" CRN: " + this.state.courses[i].crn}
+                    {" CRN: " + this.props.courses[i].crn}
                   </Typography>
                   <Typography
                     type="headline"
                     component="h2"
                     className={classes.courseTitle}
                     tabIndex="0"
-                    key={this.state.courses[i].crn + i + 6}
+                    key={this.props.courses[i].crn + i + 6}
                   >
-                    {"Credits: " + this.state.courses[i].credit}
+                    {"Credits: " + this.props.courses[i].credit}
                   </Typography>
                   <div
                     style={{ marginTop: "1em" }}
-                    key={this.state.courses[i].crn + i + 7}
+                    key={this.props.courses[i].crn + i + 7}
                   >
-                    <Meetings meetings={this.state.courses[i].meetings} />
+                    <Meetings meetings={this.props.courses[i].meetings} />
                   </div>
                   <div
                     style={{ marginTop: "1em" }}
-                    key={this.state.courses[i].crn + i + 8}
+                    key={this.props.courses[i].crn + i + 8}
                   >
-                    <Instructors teachers={this.state.courses[i].instructors} />
+                    <Instructors teachers={this.props.courses[i].instructors} />
                   </div>
                 </CardContent>
-                <CardActions key={this.state.courses[i].crn + i + 9}>
-                  <CourseDetails course={this.state.courses[i]} />
+                <CardActions key={this.props.courses[i].crn + i + 9}>
+                  <CourseDetails course={this.props.courses[i]} />
                 </CardActions>
               </Card>
             </div>
@@ -170,7 +163,7 @@ class Courses extends Component {
   }
 
   render() {
-    if (this.state.courses === null) {
+    if (this.props.courses === null) {
       return <div />
     } else if (!this.state.mobile) {
       return (

@@ -6,55 +6,48 @@ import Menu, { MenuItem } from "material-ui/Menu"
 import { getTerms } from "./fetchData"
 
 class TermsMenu extends Component {
-  componentWillMount() {
-    getTerms()
-      .then(terms => {
-        console.log(terms)
-        this.setState({ terms })
-      })
-      .then(() => {
-        this.state.terms.map(term => {
-          if (Object.is(term.current, "true")) {
-            this.setState({ selected: term.description })
-          }
-        })
-      })
+  componentDidMount() {
+    this.setState({
+      selected: this.props.currentTermDescription
+    })
   }
 
   state = {
     anchorEl: undefined,
     open: false,
-    selected: "",
-    code: "",
-    terms: []
+    selected: ""
   }
 
   handleClick = event => {
     this.setState({ open: true, anchorEl: event.currentTarget })
   }
 
-  handleSelect = (selected, term) => {
-    this.setState({ selected, term, open: false })
+  handleSelect = (selected, code) => {
+    this.setState({ selected, open: false })
+    this.props.updateTerm(code)
   }
 
   getTerms = () => {
     let elements = []
-    this.state.terms.map(term =>
+    for (let i = 0, total = this.props.terms.length; i < total; i++) {
       elements.push(
         <MenuItem
-          key={term.code}
-          onClick={() => this.handleSelect(term.description, term)}
+          key={this.props.terms[i].code}
+          onClick={() =>
+            this.handleSelect(
+              this.props.terms[i].description,
+              this.props.terms[i].code
+            )}
         >
-          {term.description}
+          {this.props.terms[i].description}
         </MenuItem>
       )
-    )
-
+    }
     return elements
   }
 
   render() {
-    if (Object.is(this.state.terms, null)) {
+    if (Object.is(this.props.terms, null)) {
       return <div />
     } else {
       return (
