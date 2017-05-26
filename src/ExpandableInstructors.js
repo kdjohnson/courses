@@ -89,7 +89,7 @@ class ExpandableInstructors extends Component {
   getExpandedInstructors = () => {
     const classes = this.props.classes
     let elements = []
-    for (let i = 0, total = this.props.teachers.length; i < total; i++) {
+    for (let i = 1, total = this.props.teachers.length; i < total; i++) {
       elements.push(
         <div key={this.props.teachers[0].lastName + Math.random() + 1}>
           <Typography
