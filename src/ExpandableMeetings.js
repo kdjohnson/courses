@@ -23,7 +23,7 @@ const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
   flexGrow: { flex: "1 1 auto" },
 
   meet: {
-    color: "rgba(0, 0, 0, 0.54)"
+    color: theme.palette.text.primary
   },
 
   iconButtonDiv: {

@@ -23,7 +23,7 @@ const styleSheet = createStyleSheet("Courses", theme => ({
 
   courseTitle: {
     fontSize: 16,
-    color: theme.palette.text.secondary
+    color: theme.palette.text.primary
   },
 
   classHeader: {
@@ -32,7 +32,7 @@ const styleSheet = createStyleSheet("Courses", theme => ({
 
   classHeaderSpan: {
     fontWeight: 600,
-    color: "rgba(0, 0, 0, 0.87)"
+    color: "rgba(0, 0, 0, 0.75)"
   },
 
   content: {

@@ -26,12 +26,12 @@ const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
 
   classHeaderSpan: {
     fontWeight: 600,
-    color: "rgba(0, 0, 0, 0.87)"
+    color: "rgba(0, 0, 0, 0.75)"
   },
 
   courseTitle: {
     fontSize: 16,
-    color: theme.palette.text.secondary
+    color: theme.palette.text.primary
   },
 
   content: {

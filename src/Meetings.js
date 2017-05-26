@@ -5,7 +5,7 @@ import Typography from "material-ui/Typography"
 
 const styleSheet = createStyleSheet("Meetings", theme => ({
   meet: {
-    color: "rgba(0, 0, 0, 0.54)"
+    color: theme.palette.text.primary
   },
   meetLink: {
     color: "#3344dd"
