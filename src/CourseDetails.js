@@ -83,7 +83,7 @@ class CourseDetails extends Component {
               <List>
                 <ListItem tabIndex="0">
                   <ListItemText
-                    primary="Course title"
+                    primary="Course Title"
                     secondary={
                       <p className={classes.list}>
                         {this.props.course.courseTitle}
