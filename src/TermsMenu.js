@@ -3,7 +3,6 @@
 import React, { Component } from "react"
 import Button from "material-ui/Button"
 import Menu, { MenuItem } from "material-ui/Menu"
-import { getTerms } from "./fetchData"
 
 class TermsMenu extends Component {
   componentDidMount() {
@@ -32,7 +31,7 @@ class TermsMenu extends Component {
     for (let i = 0, total = this.props.terms.length; i < total; i++) {
       elements.push(
         <MenuItem
-          key={this.props.terms[i].code}
+          key={this.props.terms[i].code + Math.random()}
           onClick={() =>
             this.handleSelect(
               this.props.terms[i].description,
@@ -55,14 +54,14 @@ class TermsMenu extends Component {
           <Button
             accent
             raised
-            aria-owns="simple-menu"
+            aria-owns="terms-menu"
             aria-haspopup="true"
             onClick={this.handleClick}
           >
             {this.state.selected}
           </Button>
           <Menu
-            id="simple-menu"
+            id="terms-menu"
             anchorEl={this.state.anchorEl}
             open={this.state.open}
             onRequestClose={this.handleRequestClose}

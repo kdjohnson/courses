@@ -2,12 +2,11 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import Typography from "material-ui/Typography"
-import Button from "material-ui/Button"
 import Collapse from "material-ui/transitions/Collapse"
 import IconButton from "material-ui/IconButton"
 import ExpandMoreIcon from "material-ui-icons/ExpandMore"
 import { CardContent } from "material-ui/Card"
-import Divider from "material-ui/Divider"
+import classnames from "classnames"
 
 const styleSheet = createStyleSheet("ExpandableInstructors", theme => ({
   button: {
@@ -18,7 +17,7 @@ const styleSheet = createStyleSheet("ExpandableInstructors", theme => ({
     display: "flex",
     flexDirection: "column",
     borderLeftStyle: "solid",
-    borderLeftColor: "black",
+    borderLeftColor: theme.palette.accent[400],
     borderLeftWidth: "0.3em",
     paddingLeft: "1em"
   },
@@ -70,10 +69,16 @@ class ExpandableInstructors extends Component {
             target="_blank"
             href="https://oakland.edu"
             tabIndex="0"
+            rel="noopener noreferrer"
           >
             {this.props.teachers[0].office}
           </a>
-          <a target="_blank" href="mailto:https://oakland.edu" tabIndex="0">
+          <a
+            target="_blank"
+            href="mailto:https://oakland.edu"
+            tabIndex="0"
+            rel="noopener noreferrer"
+          >
             {this.props.teachers[0].email}
           </a>
         </div>
@@ -86,27 +91,39 @@ class ExpandableInstructors extends Component {
     let elements = []
     for (let i = 0, total = this.props.teachers.length; i < total; i++) {
       elements.push(
-        <div>
+        <div key={this.props.teachers[0].lastName + Math.random() + 1}>
           <Typography
             type="headline"
             component="h3"
             className={classes.teacher}
             tabIndex="0"
+            key={this.props.teachers[0].lastName + Math.random() + 2}
           >
             {this.props.teachers[i].firstName +
               " " +
               this.props.teachers[i].lastName}
           </Typography>
-          <div className={classes.links}>
+          <div
+            className={classes.links}
+            key={this.props.teachers[0].lastName + Math.random() + 3}
+          >
             <a
               className={classes.link}
               target="_blank"
               href="https://oakland.edu"
+              rel="noopener noreferrer"
               tabIndex="0"
+              key={this.props.teachers[0].lastName + Math.random() + 4}
             >
               {this.props.teachers[i].office}
             </a>
-            <a target="_blank" href="mailto:https://oakland.edu" tabIndex="0">
+            <a
+              target="_blank"
+              href="mailto:https://oakland.edu"
+              tabIndex="0"
+              rel="noopener noreferrer"
+              key={this.props.teachers[0].lastName + Math.random() + 5}
+            >
               {this.props.teachers[i].email}
             </a>
           </div>
@@ -122,11 +139,14 @@ class ExpandableInstructors extends Component {
         <div style={{ display: "flex", justifyContent: "space-between" }}>
           {this.getInstructor()}
           <IconButton
-            className={
-              (classes.expand, {
-                [classes.expandOpen]: this.state.expanded
-              })
+            aria-label={
+              this.state.expanded
+                ? "Close more instructors"
+                : "Open more instructors"
             }
+            className={classnames(classes.expand, {
+              [classes.expandOpen]: this.state.expanded
+            })}
             onClick={this.handleExpandClick}
           >
             <ExpandMoreIcon />

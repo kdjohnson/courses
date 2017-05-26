@@ -3,7 +3,6 @@ import PropTypes from "prop-types"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import Card, { CardHeader, CardActions, CardContent } from "material-ui/Card"
 import Typography from "material-ui/Typography"
-import Button from "material-ui/Button"
 import Instructors from "./Instructors"
 import Meetings from "./Meetings"
 import ExpandableMeetings from "./ExpandableMeetings"
@@ -26,7 +25,8 @@ const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
   },
 
   classHeaderSpan: {
-    fontWeight: 600
+    fontWeight: 600,
+    color: "rgba(0, 0, 0, 0.87)"
   },
 
   courseTitle: {
@@ -41,8 +41,6 @@ const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
 
 class ExpandableCourse extends Component {
   checkExpandableMeetings = () => {
-    console.log("I'm here")
-    console.log(this.props.course.meetings.length)
     if (this.props.course.meetings.length > 2) {
       return <Meetings meetings={this.props.course.meetings} />
     } else {
@@ -58,13 +56,14 @@ class ExpandableCourse extends Component {
             <CardHeader
               className={classes.classHeader}
               title={
-                <span
+                <Typography
                   tabIndex="0"
+                  component="h1"
                   className={classes.classHeaderSpan}
                   style={{ fontSize: "20px" }}
                 >
                   {this.props.course.courseTitle}
-                </span>
+                </Typography>
               }
               key={this.props.course.crn + 0 + 3}
               subheader={

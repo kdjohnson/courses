@@ -1,9 +1,7 @@
 import React, { Component } from "react"
 import "./App.css"
-import AlertDialog from "./AlertDialog"
 import BasicTabs from "./BasicTabs"
 import TermsMenu from "./TermsMenu"
-import { test } from "./fetchData"
 import { getTerms, getCourses } from "./fetchData"
 
 class App extends Component {
@@ -29,7 +27,6 @@ class App extends Component {
       })
       .then(() => {
         getCourses(this.state.currentTermCode).then(courses => {
-          console.log(courses)
           this.setState({ courses })
         })
       })
@@ -37,13 +34,12 @@ class App extends Component {
 
   updateTerm = currentTermCode => {
     getCourses(currentTermCode).then(courses => {
-      console.log("update terms")
-      console.log(courses)
       this.setState({ courses })
     })
   }
 
   render() {
+    console.log(this.props.theme)
     if (this.state.terms === null) {
       return <div />
     } else {

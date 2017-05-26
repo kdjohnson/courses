@@ -28,43 +28,28 @@ const oakland = {
   contrastDefaultColor: "light"
 }
 
+const oaklandAccent = {
+  50: "#eo33f6",
+  100: "#b3d5e9",
+  200: "#80badb",
+  300: "#4d9ecd",
+  400: "#2689c2",
+  500: "#007467",
+  600: "#006c60",
+  700: "#0061a7",
+  800: "#00579f",
+  900: "#004490",
+  A100: "#bcd6ff",
+  A200: "#0074b7",
+  A400: "#5699ff",
+  A700: "#3c8aff",
+  contrastDefaultColor: "light"
+}
+
 const palette = createPalette({
   type: "light",
-  accent: {
-    50: "#eo33f6",
-    100: "#b3d5e9",
-    200: "#80badb",
-    300: "#4d9ecd",
-    400: "#2689c2",
-    500: "#007467",
-    600: "#006c60",
-    700: "#0061a7",
-    800: "#00579f",
-    900: "#004490",
-    A100: "#bcd6ff",
-    A200: "#0074b7",
-    A400: "#5699ff",
-    A700: "#3c8aff",
-    contrastDefaultColor: "light"
-  },
-  primary: oakland,
-  secondary: {
-    50: "#e0eef6",
-    100: "#b3d5e9",
-    200: "#80badb",
-    300: "#4d9ecd",
-    400: "#2689c2",
-    500: "#0074b7",
-    600: "#006cb0",
-    700: "#0061a7",
-    800: "#00579f",
-    900: "#004490",
-    A100: "#bcd6ff",
-    A200: "#89b8ff",
-    A400: "#5699ff",
-    A700: "#3c8aff",
-    constrastDefaultColor: "light"
-  }
+  accent: oaklandAccent,
+  primary: oakland
 })
 
 const theme = createMuiTheme({

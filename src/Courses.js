@@ -4,9 +4,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import Card, { CardHeader, CardActions, CardContent } from "material-ui/Card"
-import Button from "material-ui/Button"
 import Typography from "material-ui/Typography"
-import { getCourses } from "./fetchData"
 import Instructors from "./Instructors"
 import ExpandableCourse from "./ExpandableCourse"
 import Meetings from "./Meetings"
@@ -33,7 +31,8 @@ const styleSheet = createStyleSheet("Courses", theme => ({
   },
 
   classHeaderSpan: {
-    fontWeight: 600
+    fontWeight: 600,
+    color: "rgba(0, 0, 0, 0.87)"
   },
 
   content: {
@@ -73,29 +72,30 @@ class Courses extends Component {
         elements.push(
           <ExpandableCourse
             course={this.props.courses[i]}
-            key={"expandable" + i}
+            key={"expandable" + Math.random()}
           />
         )
       } else {
         elements.push(
-          <div key={this.props.courses[i].crn + i}>
+          <div key={this.props.courses[i].crn + i + Math.random()}>
             <div style={{ marginTop: "1em" }}>
               <Card
                 className={classes.card}
-                key={this.props.courses[i].crn + i + 1}
+                key={this.props.courses[i].crn + i + Math.random()}
               >
                 <CardHeader
                   className={classes.classHeader}
                   title={
-                    <span
+                    <Typography
                       tabIndex="0"
+                      component="h1"
                       className={classes.classHeaderSpan}
                       style={{ fontSize: "20px" }}
                     >
                       {this.props.courses[i].courseTitle}
-                    </span>
+                    </Typography>
                   }
-                  key={this.props.courses[i].crn + i + 2}
+                  key={this.props.courses[i].crn + i + Math.random()}
                   subheader={
                     <span tabIndex="0" className={classes.classHeaderSpan}>
                       {this.props.courses[i].subjectCode +
@@ -108,14 +108,14 @@ class Courses extends Component {
                 />
                 <CardContent
                   className={classes.content}
-                  key={this.props.courses[i].crn + i + 3}
+                  key={this.props.courses[i].crn + i + Math.random()}
                 >
                   <Typography
                     type="headline"
                     component="h2"
                     className={classes.courseTitle}
                     tabIndex="0"
-                    key={this.props.courses[i].crn + i + 4}
+                    key={this.props.courses[i].crn + i + Math.random()}
                   >
                     {"Section: " + this.props.courses[i].section}
                   </Typography>
@@ -124,7 +124,7 @@ class Courses extends Component {
                     component="h2"
                     className={classes.courseTitle}
                     tabIndex="0"
-                    key={this.props.courses[i].crn + i + 5}
+                    key={this.props.courses[i].crn + i + Math.random()}
                   >
                     {" CRN: " + this.props.courses[i].crn}
                   </Typography>
@@ -133,24 +133,26 @@ class Courses extends Component {
                     component="h2"
                     className={classes.courseTitle}
                     tabIndex="0"
-                    key={this.props.courses[i].crn + i + 6}
+                    key={this.props.courses[i].crn + i + Math.random()}
                   >
                     {"Credits: " + this.props.courses[i].credit}
                   </Typography>
                   <div
                     style={{ marginTop: "1em" }}
-                    key={this.props.courses[i].crn + i + 7}
+                    key={this.props.courses[i].crn + i + Math.random()}
                   >
                     <Meetings meetings={this.props.courses[i].meetings} />
                   </div>
                   <div
                     style={{ marginTop: "1em" }}
-                    key={this.props.courses[i].crn + i + 8}
+                    key={this.props.courses[i].crn + i + Math.random()}
                   >
                     <Instructors teachers={this.props.courses[i].instructors} />
                   </div>
                 </CardContent>
-                <CardActions key={this.props.courses[i].crn + i + 9}>
+                <CardActions
+                  key={this.props.courses[i].crn + i + Math.random()}
+                >
                   <CourseDetails course={this.props.courses[i]} />
                 </CardActions>
               </Card>

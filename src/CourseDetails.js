@@ -1,9 +1,8 @@
 import React, { Component } from "react"
-import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List"
+import List, { ListItem, ListItemText } from "material-ui/List"
 import Dialog, {
   DialogActions,
   DialogContent,
-  DialogContentText,
   DialogTitle
 } from "material-ui/Dialog"
 import Button from "material-ui/Button"
@@ -22,6 +21,10 @@ const styleSheet = createStyleSheet("CourseDetails", theme => ({
 
   dialogBackground: {
     background: "#E8EAEE"
+  },
+
+  title: {
+    fontWeight: 600
   }
 }))
 
@@ -40,15 +43,15 @@ class CourseDetails extends Component {
 
   render() {
     const classes = this.props.classes
-    if (this.state.courses === null) return <div />
+    if (this.props.courses === null) return <div />
     else {
       return (
-        <div aria-labelledby="openbutton">
+        <div aria-labelledby={"openbutton" + this.props.course.crn}>
           <Button
             raised
             accent
             onClick={this.handleOpen}
-            id="openbutton"
+            id={"openbutton" + this.props.course.crn}
             aria-label="more course information"
           >
             course details
@@ -64,8 +67,11 @@ class CourseDetails extends Component {
             transition={<Slide direction="down" />}
           >
 
-            <DialogTitle className={classes.dialogHeader}>
-              <Typography type="title" tabIndex="0">
+            <DialogTitle
+              className={classes.dialogHeader}
+              disableTypography={true}
+            >
+              <Typography type="title" tabIndex="0" className={classes.title}>
                 {this.props.course.courseTitle}
               </Typography>
 

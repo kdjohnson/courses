@@ -2,12 +2,11 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import Typography from "material-ui/Typography"
-import Button from "material-ui/Button"
 import Collapse from "material-ui/transitions/Collapse"
 import IconButton from "material-ui/IconButton"
 import ExpandMoreIcon from "material-ui-icons/ExpandMore"
 import { CardContent } from "material-ui/Card"
-import Divider from "material-ui/Divider"
+import classnames from "classnames"
 
 const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
   card: { maxWidth: 400 },
@@ -37,7 +36,7 @@ const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
     display: "flex",
     flexDirection: "column",
     borderLeftStyle: "solid",
-    borderLeftColor: "black",
+    borderLeftColor: theme.palette.accent[400],
     borderLeftWidth: "0.3em",
     paddingLeft: "1em"
   }
@@ -53,50 +52,60 @@ class ExpandableMeetings extends Component {
   getExpandedMeetings = () => {
     let elements = []
     const classes = this.props.classes
-    this.props.meetings.map((meet, i) => {
+    for (let i = 1, total = this.props.meetings.length; i < total; i++) {
       elements.push(
-        <div key={meet.endDate + i + 1} className={classes.expandedDiv}>
+        <div
+          key={this.props.meetings[i].endDate + i + Math.random()}
+          className={classes.expandedDiv}
+        >
           <a
             type="body2"
             tabIndex="0"
             target="_blank"
             href="https://oakland.edu"
-            key={meet.endDate + i + 2}
+            rel="noopener noreferrer"
+            key={this.props.meetings[i].endDate + i + Math.random()}
           >
-            {meet.buildingRoom + " [" + meet.campus + " ] "}
+            {this.props.meetings[i].buildingRoom +
+              " [" +
+              this.props.meetings[i].campus +
+              " ] "}
           </a>
           <Typography
             type="body2"
             className={classes.meet}
             tabIndex="0"
-            key={meet.endDate + i + 3}
+            key={this.props.meetings[i].endDate + i + Math.random()}
           >
-            {meet.courseType}
+            {this.props.meetings[i].courseType}
           </Typography>
           <Typography
             type="body2"
             className={classes.meet}
             tabIndex="0"
-            key={meet.endDate + i + 4}
+            key={this.props.meetings[i].endDate + i + Math.random()}
           >
-            {meet.startTime + " - " + meet.endTime}
+            {this.props.meetings[i].startTime +
+              " - " +
+              this.props.meetings[i].endTime}
           </Typography>
         </div>
       )
-    })
+    }
     return elements
   }
 
   getMeeting = () => {
     const classes = this.props.classes
     return (
-      <div key={this.props.meetings[0].endDate + 0 + 1}>
+      <div key={this.props.meetings[0].endDate + Math.random()}>
         <a
           type="body2"
           tabIndex="0"
           target="_blank"
           href="https://oakland.edu"
-          key={this.props.meetings[0].endDate + 1 + 2}
+          rel="noopener noreferrer"
+          key={this.props.meetings[0].endDate + Math.random()}
         >
           {this.props.meetings[0].buildingRoom +
             " [" +
@@ -107,7 +116,7 @@ class ExpandableMeetings extends Component {
           type="body2"
           className={classes.meet}
           tabIndex="0"
-          key={this.props.meetings[0].endDate + 1 + 3}
+          key={this.props.meetings[0].endDate + Math.random()}
         >
           {this.props.meetings[0].courseType}
         </Typography>
@@ -115,7 +124,7 @@ class ExpandableMeetings extends Component {
           type="body2"
           className={classes.meet}
           tabIndex="0"
-          key={this.props.meetings[0].endDate + 1 + 4}
+          key={this.props.meetings[0].endDate + Math.random()}
         >
           {this.props.meetings[0].startTime +
             " - " +
@@ -132,11 +141,12 @@ class ExpandableMeetings extends Component {
         <div className={classes.iconButtonDiv}>
           {this.getMeeting()}
           <IconButton
-            className={
-              (classes.expand, {
-                [classes.expandOpen]: this.state.expanded
-              })
+            aria-label={
+              this.state.expanded ? "Close more meetings" : "Open more meetings"
             }
+            className={classnames(classes.expand, {
+              [classes.expandOpen]: this.state.expanded
+            })}
             onClick={this.handleExpandClick}
           >
             <ExpandMoreIcon />

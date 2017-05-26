@@ -1,6 +1,6 @@
 export const getTerms = async () => {
   try {
-    const response = await fetch("http://localhost:8082/api/terms")
+    const response = await fetch("http://141.210.186.165:8082/api/terms")
     const terms = await response.json()
     return terms.terms
   } catch (err) {
@@ -10,9 +10,7 @@ export const getTerms = async () => {
 
 export const getCourses = async code => {
   try {
-    console.log("getCourses")
-    console.log(code)
-    const response = await fetch("http://localhost:8082/api/courses", {
+    const response = await fetch("http://141.210.186.165:8082/api/courses", {
       body: JSON.stringify({ code: code }),
       method: "POST"
     })
