@@ -23,23 +23,3 @@ export const getCourses = async code => {
     return err
   }
 }
-
-/*
-export const getCourses = code => {
-  console.log("getCourses")
-  console.log(code)
-  return fetch("http://localhost:8082/api/courses", {
-    body: JSON.stringify({ code: code }),
-    method: "POST"
-  })
-    .then(response => {
-      return response.json()
-    })
-    .then(myJSON => {
-      return myJSON.courses
-    })
-    .catch(err => {
-      return err
-    })
-}
-*/
