@@ -5,7 +5,7 @@ import Button from "material-ui/Button"
 import Menu, { MenuItem } from "material-ui/Menu"
 import { getTerms } from "./fetchData"
 
-class SimpleMenu extends Component {
+class TermsMenu extends Component {
   componentWillMount() {
     getTerms()
       .then(terms => {
@@ -25,6 +25,7 @@ class SimpleMenu extends Component {
     anchorEl: undefined,
     open: false,
     selected: "",
+    code: "",
     terms: []
   }
 
@@ -32,8 +33,8 @@ class SimpleMenu extends Component {
     this.setState({ open: true, anchorEl: event.currentTarget })
   }
 
-  handleSelect = selected => {
-    this.setState({ selected, open: false })
+  handleSelect = (selected, term) => {
+    this.setState({ selected, term, open: false })
   }
 
   getTerms = () => {
@@ -42,7 +43,7 @@ class SimpleMenu extends Component {
       elements.push(
         <MenuItem
           key={term.code}
-          onClick={() => this.handleSelect(term.description)}
+          onClick={() => this.handleSelect(term.description, term)}
         >
           {term.description}
         </MenuItem>
@@ -59,6 +60,8 @@ class SimpleMenu extends Component {
       return (
         <div style={{ marginTop: "2em" }}>
           <Button
+            accent
+            raised
             aria-owns="simple-menu"
             aria-haspopup="true"
             onClick={this.handleClick}
@@ -79,4 +82,4 @@ class SimpleMenu extends Component {
   }
 }
 
-export default SimpleMenu
+export default TermsMenu

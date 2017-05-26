@@ -1,7 +1,4 @@
 import React, { Component } from "react"
-import ReactDOM from "react-dom"
-import App from "./App"
-import "./index.css"
 import List, { ListItem, ListItemIcon, ListItemText } from "material-ui/List"
 import Dialog, {
   DialogActions,
@@ -12,26 +9,25 @@ import Dialog, {
 import Button from "material-ui/Button"
 import Slide from "material-ui/transitions/Slide"
 import Typography from "material-ui/Typography"
-import styles from "material-ui/styles"
+import { withStyles, createStyleSheet } from "material-ui/styles"
+
+const styleSheet = createStyleSheet("CourseDetails", theme => ({
+  dialogHeader: {
+    backgroundColor: theme.palette.primary[400]
+  },
+
+  list: {
+    color: "rgba(0, 0, 0, 0.68)"
+  },
+
+  dialogBackground: {
+    background: "#E8EAEE"
+  }
+}))
 
 class CourseDetails extends Component {
-  constructor() {
-    super()
-    this.state = {
-      courses: null,
-      open: false
-    }
-  }
-
-  componentDidMount() {
-    fetch("http://localhost:8082/api/courses")
-      .then(response => {
-        return response.json()
-      })
-      .then(data => {
-        console.log(data)
-        this.setState({ courses: data.courses })
-      })
+  state = {
+    open: false
   }
 
   handleOpen = () => {
@@ -43,24 +39,19 @@ class CourseDetails extends Component {
   }
 
   render() {
-    console.log(this.state.courses)
-    console.log(this.state.open)
+    const classes = this.props.classes
     if (this.state.courses === null) return <div />
     else {
       return (
         <div aria-labelledby="openbutton">
           <Button
+            raised
+            accent
             onClick={this.handleOpen}
             id="openbutton"
             aria-label="more course information"
-            style={{
-              background: "#1B365D",
-              color: "white",
-              fontWeight: "medium",
-              borderRadius: 5
-            }}
           >
-            COURSE INFO
+            course details
           </Button>
 
           <Dialog
@@ -73,55 +64,67 @@ class CourseDetails extends Component {
             transition={<Slide direction="down" />}
           >
 
-            <DialogTitle
-              style={{
-                background: "#1B365D"
-              }}
-            >
-              <Typography type="title" style={{ color: "white" }}>
-                Course Information
+            <DialogTitle className={classes.dialogHeader}>
+              <Typography type="title" tabIndex="0">
+                {this.props.course.courseTitle}
               </Typography>
 
             </DialogTitle>
             <DialogContent
-              style={{
-                background: "#E8EAEE"
-              }}
+              className={classes.dialogBackground}
               aria-labelledby="dialogbox"
             >
               <List>
                 <ListItem tabIndex="0">
                   <ListItemText
                     primary="Course title"
-                    secondary={this.state.courses[0].courseTitle}
+                    secondary={
+                      <p className={classes.list}>
+                        {this.props.course.courseTitle}
+                      </p>
+                    }
                   />
                 </ListItem>
 
                 <ListItem tabIndex="0">
                   <ListItemText
                     primary="CRN"
-                    secondary={this.state.courses[0].crn}
+                    secondary={
+                      <p className={classes.list}>{this.props.course.crn}</p>
+                    }
                   />
                 </ListItem>
 
                 <ListItem tabIndex="0">
                   <ListItemText
                     primary="Department"
-                    secondary={this.state.courses[0].departmentDescription}
+                    secondary={
+                      <p className={classes.list}>
+                        {this.props.course.departmentDescription}
+                      </p>
+                    }
                   />
                 </ListItem>
 
                 <ListItem tabIndex="0">
                   <ListItemText
                     primary="Grade"
-                    secondary={this.state.courses[0].grade.grade}
+                    secondary={
+                      <p className={classes.list}>
+                        {this.props.course.grade.grade}
+                      </p>
+                    }
                   />
                 </ListItem>
 
                 <ListItem tabIndex="0">
                   <ListItemText
                     primary="Description"
-                    secondary={this.state.courses[0].courseDescription}
+                    secondary={
+                      <p className={classes.list}>
+                        {this.props.course.courseDescription}
+                      </p>
+                    }
                   />
                 </ListItem>
               </List>
@@ -131,12 +134,8 @@ class CourseDetails extends Component {
                   onClick={this.handleClose}
                   aria-label="close course information"
                   tabIndex="0"
-                  style={{
-                    background: "#1B365D",
-                    color: "white",
-                    fontWeight: "medium",
-                    borderRadius: 5
-                  }}
+                  raised
+                  accent
                 >
                   Close
                 </Button>
@@ -149,4 +148,4 @@ class CourseDetails extends Component {
     }
   }
 }
-export default CourseDetails
+export default withStyles(styleSheet)(CourseDetails)

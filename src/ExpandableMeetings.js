@@ -20,9 +20,26 @@ const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
   expandOpen: {
     transform: "rotate(180deg)"
   },
+
   flexGrow: { flex: "1 1 auto" },
+
   meet: {
     color: "rgba(0, 0, 0, 0.54)"
+  },
+
+  iconButtonDiv: {
+    display: "flex",
+    justifyContent: "space-between"
+  },
+
+  expandedDiv: {
+    color: "#3344dd",
+    display: "flex",
+    flexDirection: "column",
+    borderLeftStyle: "solid",
+    borderLeftColor: "black",
+    borderLeftWidth: "0.3em",
+    paddingLeft: "1em"
   }
 }))
 
@@ -38,7 +55,7 @@ class ExpandableMeetings extends Component {
     const classes = this.props.classes
     this.props.meetings.map((meet, i) => {
       elements.push(
-        <div key={meet.endDate + i + 1}>
+        <div key={meet.endDate + i + 1} className={classes.expandedDiv}>
           <a
             type="body2"
             tabIndex="0"
@@ -112,7 +129,7 @@ class ExpandableMeetings extends Component {
     const classes = this.props.classes
     return (
       <div>
-        <div style={{ display: "flex", justifyContent: "space-between" }}>
+        <div className={classes.iconButtonDiv}>
           {this.getMeeting()}
           <IconButton
             className={
@@ -126,7 +143,6 @@ class ExpandableMeetings extends Component {
           </IconButton>
         </div>
         <div className={classes.flexGrow} />
-        <Divider />
         <Collapse
           in={this.state.expanded}
           transitionDuration="auto"

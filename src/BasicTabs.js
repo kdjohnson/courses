@@ -23,6 +23,9 @@ const styleSheet = createStyleSheet("BasicTabs", theme => ({
     flexGrow: 1,
     marginTop: 30
   },
+  tabs: {
+    height: "0.3em"
+  },
   appBar: {
     backgroundColor: theme.palette.primary[500],
     color: theme.palette.getContrastText(theme.palette.primary[500])
@@ -44,7 +47,11 @@ class BasicTabs extends Component {
     return (
       <Paper className={classes.root}>
         <div className={classes.appBar}>
-          <Tabs index={this.state.index} onChange={this.handleChange}>
+          <Tabs
+            index={this.state.index}
+            onChange={this.handleChange}
+            indicatorClassName={classes.tabs}
+          >
             <Tab label="Courses" tabIndex="0" />
             <Tab label="Calendar" tabIndex="0" />
             <Tab label="Grades" tabIndex="0" />
@@ -53,7 +60,7 @@ class BasicTabs extends Component {
         {this.state.index === 0 &&
           <TabContainer>
             <div>
-              <Courses tabIndex="0" />
+              <Courses tabIndex="0" term={this.props.term} />
             </div>
           </TabContainer>}
         {this.state.index === 1 &&

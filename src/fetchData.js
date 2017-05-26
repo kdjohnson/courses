@@ -13,7 +13,7 @@ export const getTerms = () => {
 
 export const getCourses = () => {
   return fetch("http://localhost:8082/api/courses", {
-    body: JSON.stringify({ code: "201610" }),
+    body: JSON.stringify({ code: "201830" }),
     method: "POST"
   })
     .then(response => {

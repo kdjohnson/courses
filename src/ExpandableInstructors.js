@@ -84,7 +84,7 @@ class ExpandableInstructors extends Component {
   getExpandedInstructors = () => {
     const classes = this.props.classes
     let elements = []
-    this.props.teachers.map(teacher => {
+    for (let i = 0, total = this.props.teachers.length; i < total; i++) {
       elements.push(
         <div>
           <Typography
@@ -93,7 +93,9 @@ class ExpandableInstructors extends Component {
             className={classes.teacher}
             tabIndex="0"
           >
-            {teacher.firstName + " " + teacher.lastName}
+            {this.props.teachers[i].firstName +
+              " " +
+              this.props.teachers[i].lastName}
           </Typography>
           <div className={classes.links}>
             <a
@@ -102,15 +104,15 @@ class ExpandableInstructors extends Component {
               href="https://oakland.edu"
               tabIndex="0"
             >
-              {teacher.office}
+              {this.props.teachers[i].office}
             </a>
             <a target="_blank" href="mailto:https://oakland.edu" tabIndex="0">
-              {teacher.email}
+              {this.props.teachers[i].email}
             </a>
           </div>
         </div>
       )
-    })
+    }
     return elements
   }
   render() {

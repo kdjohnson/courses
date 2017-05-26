@@ -2,16 +2,14 @@ import React, { Component } from "react"
 import "./App.css"
 import AlertDialog from "./AlertDialog"
 import BasicTabs from "./BasicTabs"
-import SimpleMenu from "./TermsMenu"
+import TermsMenu from "./TermsMenu"
 
 class App extends Component {
   render() {
-    console.log(this.props.theme)
     return (
       <div style={{ padding: "2em" }}>
-        <SimpleMenu />
+        <TermsMenu />
         <BasicTabs />
-        <AlertDialog />
       </div>
     )
   }

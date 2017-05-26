@@ -7,16 +7,26 @@ import Button from "material-ui/Button"
 import Instructors from "./Instructors"
 import Meetings from "./Meetings"
 import ExpandableMeetings from "./ExpandableMeetings"
+import CourseDetails from "./CourseDetails"
 
 const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
   card: {
-    width: 345
+    width: 345,
+    backgroundColor: "#fafafa"
   },
 
   courseTitleH1: {
     fontSize: 16,
     fontWeight: 800,
     color: theme.palette.text.secondary
+  },
+
+  classHeader: {
+    backgroundColor: theme.palette.primary[400]
+  },
+
+  classHeaderSpan: {
+    fontWeight: 600
   },
 
   courseTitle: {
@@ -46,14 +56,19 @@ class ExpandableCourse extends Component {
         <div style={{ marginTop: "1em" }}>
           <Card className={classes.card}>
             <CardHeader
+              className={classes.classHeader}
               title={
-                <span tabIndex="0" style={{ fontSize: "20px" }}>
+                <span
+                  tabIndex="0"
+                  className={classes.classHeaderSpan}
+                  style={{ fontSize: "20px" }}
+                >
                   {this.props.course.courseTitle}
                 </span>
               }
               key={this.props.course.crn + 0 + 3}
               subheader={
-                <span tabIndex="0">
+                <span tabIndex="0" className={classes.classHeaderSpan}>
                   {this.props.course.subjectCode +
                     "-" +
                     this.props.course.subjectNumber +
@@ -95,7 +110,7 @@ class ExpandableCourse extends Component {
               </div>
             </CardContent>
             <CardActions>
-              <Button compact>Course Details</Button>
+              <CourseDetails course={this.props.course} />
             </CardActions>
           </Card>
         </div>
