@@ -31,4 +31,5 @@
 #### Note if you ever want to change data in you table. Do the following `update TABLE set COLUMN = VALUE where id = ID_NUMBER_OF_ROW;`
 
 ## Running React code
-1. Simply run `yarn start` from the base directory and it should open in your default browser 
+1. Install [yarn](https://yarnpkg.com/)
+2. Then, simply run `yarn start` from the base directory and it should open in your default browser 
