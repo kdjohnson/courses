@@ -3,12 +3,6 @@
 # Vim
 *.sw*
 
-database.json
-
-main_go.go
-
-sql.sql
-
 old
 
 # dependencies
