@@ -26,7 +26,9 @@
     ```
 
     Also note that it will not check for duplicates so if you do not want that you will need to comment out what you do not want. 
-7. To view you data in a colomn layout do the following `psql -d DATABASE_NAME -U USER`. Then `select * from terms;` and you should see data.
+7. To view your data in a colomn layout do the following `psql -d DATABASE_NAME -U USER`. Then `select * from terms;` and you should see data.
 
 #### Note if you ever want to change data in you table. Do the following `update TABLE set COLUMN = VALUE where id = ID_NUMBER_OF_ROW;`
 
+## Running React code
+1. Simply run `yarn start` from the base directory and it should open in your default browser 
