@@ -33,3 +33,7 @@
 ## Running React code
 1. Install [yarn](https://yarnpkg.com/)
 2. Then, simply run `yarn start` from the base directory and it should open in your default browser 
+
+
+## Credits
+Thanks to [Brandon Powell](https://github.com/bpowell) for a lot of help with the Go code. 
