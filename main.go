@@ -13,22 +13,34 @@ import (
 var db *sql.DB
 
 const (
-	TERM_SQL       = "create table if not exists terms(id serial primary key, description text, code text, starttime text, endtime text, current text)"
-	COURSE_SQL     = "create table if not exists courses(id serial primary key, crn text, waitlistpos text, registrationstatus text, registrationdescription text, departmentcode text, departmentdescription text, coursetitle text, coursedescription text, termcode text, subjectcode text, subjectnumber text, credit text)"
-	MEETING_SQL    = "create table if not exists meeting(id serial primary key, crn text, startdate text, enddate text, starttime text, endtime text, coursetype text, coursetypecode text, buildingroom text, campus text, meetdays text, starthour text, startminutes text, startmonth text, startyear text, startdayofmonth text, startdayofweek text, startweekofmonth text, endhour text, endminutes text, endmonth text, endyear text, enddayofmonth text, enddayofweek text, endweekofmonth text)"
-	INSTRUCTOR_SQL = "create table if not exists instructors(id serial primary key, crn text, firstname text, lastname text, office text, email text)"
-	GRADE_SQL      = "create table if not exists grades(id serial primary key, credit text, grade text, crn text)"
+	//Term table creation.
+	termSQL = "create table if not exists terms(id serial primary key, description text, code text, starttime text, endtime text, current text)"
+
+	//Course table creation.
+	courseSQL = "create table if not exists courses(id serial primary key, crn text, waitlistpos text, registrationstatus text, registrationdescription text, departmentcode text, departmentdescription text, coursetitle text, coursedescription text, termcode text, subjectcode text, subjectnumber text, credit text, section text)"
+
+	//Meeting table creation.
+	meetingSQL = "create table if not exists meetings(id serial primary key, crn text, startdate text, enddate text, starttime text, endtime text, coursetype text, coursetypecode text, buildingroom text, campus text, meetday text)"
+
+	//meetingSQL = "create table if not exists meeting(id serial primary key, crn text, startdate text, enddate text, starttime text, endtime text, coursetype text, coursetypecode text, buildingroom text, campus text, meetdays text, starthour text, startminutes text, startmonth text, startyear text, startdayofmonth text, startdayofweek text, startweekofmonth text, endhour text, endminutes text, endmonth text, endyear text, enddayofmonth text, enddayofweek text, endweekofmonth text)"
+	//Instructor table creation.
+	instructorSQL = "create table if not exists instructors(id serial primary key, crn text, firstname text, lastname text, office text, email text)"
+
+	//Grade table creation.
+	gradeSQL = "create table if not exists grades(id serial primary key, credit text, grade text, crn text)"
 )
 
+// Configurations for the database
 type config struct {
-	Url      string
+	URL      string
 	Username string
 	Password string
 	Dbname   string
 }
 
+// Term represents the current time period that will be displayed (e.g Winter Semester 2018, Fall Semester 1989).
 type Term struct {
-	Id          int
+	ID          int
 	Description string `json:"description"`
 	Code        string `json:"code"`
 	Start       string `json:"start"`
@@ -36,8 +48,9 @@ type Term struct {
 	Current     string `json:"current"`
 }
 
+// Course represents the class that is assosciated with a given term (e.g Introduction to Golang).
 type Course struct {
-	Id                            int
+	ID                            int
 	Crn                           string       `json:"crn"`
 	WaitlistPos                   string       `json:"waitlistPost"`
 	RegistrationStatus            string       `json:"registrationStatus"`
@@ -56,36 +69,24 @@ type Course struct {
 	Grade                         Grade        `json:"grade"`
 }
 
+// Meeting represents the times and locations a course will gather (e.g. Monday at 1:47 PM).
 type Meeting struct {
-	Id               int
-	Crn              string `json:"crn"`
-	StartDate        string `json:"startDate"`
-	EndDate          string `json:"endDate"`
-	StartTime        string `json:"startTime"`
-	EndTime          string `json:"endTime"`
-	CourseType       string `json:"courseType"`
-	CourseTypeCode   string `json:"courseTypeCode"`
-	BuildingRoom     string `json:"buildingRoom"`
-	Campus           string `json:"campus"`
-	MeetDays         string `json:"meetDays"`
-	StartHour        string `json:"startHour"`
-	StartMinutes     string `json:"startMinutes"`
-	StartMonth       string `json:"startMonth"`
-	StartYear        string `json:"startYear"`
-	StartDayOfMonth  string `json:"startDayOfMonth"`
-	StartDayOfWeek   string `json:"startDayOfWeek"`
-	StartWeekOfMonth string `json:"startWeekOfMonth"`
-	EndHour          string `json:"endHour"`
-	EndMinutes       string `json:"endMinutes"`
-	EndMonth         string `json:"endMonth"`
-	EndYear          string `json:"endYear"`
-	EndDayOfMonth    string `json:"endDayOfMonth"`
-	EndDayOfWeek     string `json:"endDayOfWeek"`
-	EndWeekOfMonth   string `json:"endWeekOfMonth"`
+	ID             int
+	Crn            string `json:"crn"`
+	StartDate      string `json:"startDate"`
+	EndDate        string `json:"endDate"`
+	StartTime      string `json:"startTime"`
+	EndTime        string `json:"endTime"`
+	CourseType     string `json:"courseType"`
+	CourseTypeCode string `json:"courseTypeCode"`
+	BuildingRoom   string `json:"buildingRoom"`
+	Campus         string `json:"campus"`
+	MeetDays       string `json:"meetDays"`
 }
 
+//Instructor represents the person(s) who will teach a course.
 type Instructor struct {
-	Id        int
+	ID        int
 	Crn       string `json:"crn"`
 	FirstName string `json:"firstName"`
 	LastName  string `json:"lastName"`
@@ -93,13 +94,15 @@ type Instructor struct {
 	Email     string `json:"email"`
 }
 
+// Grade represents the score the student received for a course.
 type Grade struct {
-	Id     int
+	ID     int
 	Credit string `json:"credit"`
 	Grade  string `json:"grade"`
 	Crn    string `json:"crn"`
 }
 
+// Student represents the academic information about a student
 type Student struct {
 	ClassStanding        string `json:"classStanding"`
 	Major1               string `json:"major1"`
@@ -118,6 +121,7 @@ type Student struct {
 	Minor2               string `json:"minor2"`
 }
 
+// Person represents the personal information about a student
 type Person struct {
 	Address       string `json:"address"`
 	Email         string `json:"email"`
@@ -195,20 +199,20 @@ func courses(w http.ResponseWriter, r *http.Request) {
 
 	for rows.Next() {
 		var c Course
-		if err := rows.Scan(&c.Id, &c.Crn, &c.WaitlistPos, &c.RegistrationStatus, &c.RegistrationStatusDescription, &c.DepartmentCode, &c.DepartmentDescription, &c.CourseTitle, &c.CourseDescription, &c.TermCode, &c.SubjectCode, &c.SubjectNumber, &c.Credit, &c.Section); err != nil {
+		if err := rows.Scan(&c.ID, &c.Crn, &c.WaitlistPos, &c.RegistrationStatus, &c.RegistrationStatusDescription, &c.DepartmentCode, &c.DepartmentDescription, &c.CourseTitle, &c.CourseDescription, &c.TermCode, &c.SubjectCode, &c.SubjectNumber, &c.Credit, &c.Section); err != nil {
 			fmt.Println("error on coruses")
 			panic(err)
 		} else {
-			instructor_rows, err := db.Query("select * from instructors where crn = $1", c.Crn)
+			instructorRows, err := db.Query("select * from instructors where crn = $1", c.Crn)
 			if err != nil {
 				fmt.Printf("Failed on instructors for crn %s\n", c.Crn)
 				panic(err)
 			}
-			defer instructor_rows.Close()
+			defer instructorRows.Close()
 
-			for instructor_rows.Next() {
+			for instructorRows.Next() {
 				var i Instructor
-				if err := instructor_rows.Scan(&i.Id, &i.Crn, &i.FirstName, &i.LastName, &i.Office, &i.Email); err != nil {
+				if err := instructorRows.Scan(&i.ID, &i.Crn, &i.FirstName, &i.LastName, &i.Office, &i.Email); err != nil {
 					fmt.Println("error on instructors")
 					panic(err)
 				} else {
@@ -216,16 +220,16 @@ func courses(w http.ResponseWriter, r *http.Request) {
 				}
 			}
 
-			meeting_rows, err := db.Query("select * from meeting where crn = $1", c.Crn)
+			meetingRows, err := db.Query("select * from meetings where crn = $1", c.Crn)
 			if err != nil {
 				fmt.Printf("Failed on meetings for crn %s\n", c.Crn)
 				panic(err)
 			}
-			defer meeting_rows.Close()
+			defer meetingRows.Close()
 
-			for meeting_rows.Next() {
+			for meetingRows.Next() {
 				var m Meeting
-				if err := meeting_rows.Scan(&m.Id, &m.Crn, &m.StartDate, &m.EndDate, &m.StartTime, &m.EndTime, &m.CourseType, &m.CourseTypeCode, &m.BuildingRoom, &m.Campus, &m.MeetDays, &m.StartHour, &m.StartMinutes, &m.StartMonth, &m.StartYear, &m.StartDayOfMonth, &m.StartDayOfWeek, &m.StartWeekOfMonth, &m.EndHour, &m.EndMinutes, &m.EndMonth, &m.EndYear, &m.EndDayOfMonth, &m.EndDayOfWeek, &m.EndWeekOfMonth); err != nil {
+				if err := meetingRows.Scan(&m.ID, &m.Crn, &m.StartDate, &m.EndDate, &m.StartTime, &m.EndTime, &m.CourseType, &m.CourseTypeCode, &m.BuildingRoom, &m.Campus, &m.MeetDays); err != nil {
 					fmt.Println("error on meetings")
 					panic(err)
 				} else {
@@ -234,7 +238,7 @@ func courses(w http.ResponseWriter, r *http.Request) {
 			}
 
 			var g Grade
-			err = db.QueryRow("select * from grades where crn = $1", c.Crn).Scan(&g.Id, &g.Credit, &g.Grade, &g.Crn)
+			err = db.QueryRow("select * from grades where crn = $1", c.Crn).Scan(&g.ID, &g.Credit, &g.Grade, &g.Crn)
 			if err != nil {
 				fmt.Printf("Failed on grades for crn %s\n", c.Crn)
 				panic(err)
@@ -268,7 +272,7 @@ func terms(w http.ResponseWriter, r *http.Request) {
 
 	for rows.Next() {
 		var t Term
-		if err := rows.Scan(&t.Id, &t.Description, &t.Code, &t.Start, &t.End, &t.Current); err != nil {
+		if err := rows.Scan(&t.ID, &t.Description, &t.Code, &t.Start, &t.End, &t.Current); err != nil {
 			fmt.Println("error on coruses")
 			panic(err)
 		}
@@ -302,34 +306,34 @@ func init() {
 	}
 
 	fmt.Println(c)
-	dbURL := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable", c.Username, c.Password, c.Url, c.Dbname)
+	dbURL := fmt.Sprintf("postgres://%s:%s@%s/%s?sslmode=disable", c.Username, c.Password, c.URL, c.Dbname)
 
 	db, err = sql.Open("postgres", dbURL)
 	if err != nil {
 		panic(err)
 	}
 
-	_, err = db.Query(TERM_SQL)
+	_, err = db.Query(termSQL)
 	if err != nil {
 		panic(err)
 	}
 
-	_, err = db.Query(COURSE_SQL)
+	_, err = db.Query(courseSQL)
 	if err != nil {
 		panic(err)
 	}
 
-	_, err = db.Query(MEETING_SQL)
+	_, err = db.Query(meetingSQL)
 	if err != nil {
 		panic(err)
 	}
 
-	_, err = db.Query(INSTRUCTOR_SQL)
+	_, err = db.Query(instructorSQL)
 	if err != nil {
 		panic(err)
 	}
 
-	_, err = db.Query(GRADE_SQL)
+	_, err = db.Query(gradeSQL)
 	if err != nil {
 		panic(err)
 	}
