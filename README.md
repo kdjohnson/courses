@@ -31,7 +31,8 @@
 ## Dropping data
 Run the following command to drop all tables created: `psql -d DATABASE_NAME -U USERNAME -W < drop.sql`
 
-#### Note if you ever want to change data in you table. Do the following `update TABLE set COLUMN = VALUE where id = ID_NUMBER_OF_ROW;`
+## Modifying data
+Note if you ever want to change data in you table. Do the following `update TABLE set COLUMN = VALUE where id = ID_NUMBER_OF_ROW;`
 
 ## Running React code
 1. Install [yarn](https://yarnpkg.com/)
