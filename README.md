@@ -37,6 +37,9 @@ Run the following command to drop all tables created: `psql -d DATABASE_NAME -U 
 1. Install [yarn](https://yarnpkg.com/)
 2. Then, simply run `yarn start` from the base directory and it should open in your default browser 
 
+## Running Go code
+1. Do a `go get` to install the golang postgresql driver
+2. Then `go run main.go` and the server will be started on port 8082
 
 ## Credits
 Thanks to [Brandon Powell](https://github.com/bpowell) for a lot of help with the Go code. 
