@@ -9,6 +9,8 @@ import Instructors from "./Instructors"
 import ExpandableCourse from "./ExpandableCourse"
 import Meetings from "./Meetings"
 import CourseDetails from "./CourseDetails"
+import { translate, Interpolate } from "react-i18next"
+import i18n from "./utils/i18n"
 
 const styleSheet = createStyleSheet("Courses", theme => ({
   cardDiv: {
@@ -63,6 +65,7 @@ class Courses extends Component {
 
   getCourses = () => {
     const classes = this.props.classes
+    const { t } = this.props
     let elements = []
     for (let i = 0, total = this.props.courses.length; i < total; i++) {
       if (
@@ -117,7 +120,7 @@ class Courses extends Component {
                     tabIndex="0"
                     key={this.props.courses[i].crn + i + Math.random()}
                   >
-                    {"Section: " + this.props.courses[i].section}
+                    {t("section", {}) + ": " + this.props.courses[i].section}
                   </Typography>
                   <Typography
                     type="headline"
@@ -126,7 +129,7 @@ class Courses extends Component {
                     tabIndex="0"
                     key={this.props.courses[i].crn + i + Math.random()}
                   >
-                    {" CRN: " + this.props.courses[i].crn}
+                    {t("crn", {}) + ": " + this.props.courses[i].crn}
                   </Typography>
                   <Typography
                     type="headline"
@@ -135,7 +138,7 @@ class Courses extends Component {
                     tabIndex="0"
                     key={this.props.courses[i].crn + i + Math.random()}
                   >
-                    {"Credits: " + this.props.courses[i].credit}
+                    {t("credits", {}) +  ": " + this.props.courses[i].credit}
                   </Typography>
                   <div
                     style={{ marginTop: "1em" }}
@@ -199,4 +202,4 @@ Courses.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(Courses)
+export default withStyles(styleSheet) (translate("view", { wait: true })(Courses))

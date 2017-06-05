@@ -1,10 +1,11 @@
 import i18n from "i18next"
 import XHR from "i18next-xhr-backend"
+import Fetch from 'i18next-fetch-backend';
 import Cache from "i18next-localstorage-cache"
 import LanguageDetector from "i18next-browser-languagedetector"
 
 i18n
-  .use(XHR)
+  .use(Fetch)
   // .use(Cache)
   .use(LanguageDetector)
   .init({
@@ -19,17 +20,13 @@ i18n
     debug: true,
     load: "all",
     backend: {
-      loadPath: "http://localhost:8082/locales/{{lng}}/{{ns}}.json"
+        loadPath: 'http://localhost:8082/locales/{{lng}}/{{ns}}.json',
     },
-
-    // cache: {
-    //   enabled: true
-    // },
-
     interpolation: {
       escapeValue: false, // not needed for react!!
       formatSeparator: ",",
       format: function(value, format, lng) {
+        console.log(lng)
         if (format === "uppercase") return value.toUpperCase()
         return value
       }

@@ -71,8 +71,8 @@ type Course struct {
 	Grade                         Grade        `json:"grade"`
 }
 
-// AaronStrings represents internationalization
-type AaronStrings struct {
+// lanStrings represents internationalization
+type languageStrings struct {
 	Section       string `json:"section"`
 	CRN           string `json:"crn"`
 	Credits       string `json:"credits"`
@@ -82,6 +82,9 @@ type AaronStrings struct {
 	Grade         string `json:"grade"`
 	Description   string `json:"description"`
 	Close         string `json:"close"`
+	Courses       string `json:"courses"`
+	Calendar      string `json:"calendar"`
+	Grades        string `json:"grades"`
 }
 
 // Meeting represents the times and locations a course will gather (e.g. Monday at 1:47 PM).
@@ -150,7 +153,7 @@ type Person struct {
 func en(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	data := AaronStrings{
+	data := languageStrings{
 		"Section",
 		"CRN",
 		"Credits",
@@ -160,8 +163,56 @@ func en(w http.ResponseWriter, r *http.Request) {
 		"Grade",
 		"Description",
 		"Close",
+		"Courses",
+		"Calendar",
+		"Grades",
 	}
 
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		panic(err)
+	}
+}
+
+func enUS(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	data := languageStrings{
+		"Section",
+		"CRN",
+		"Credits",
+		"Course Details",
+		"Course Title",
+		"Department",
+		"Grade",
+		"Description",
+		"Close",
+		"Courses",
+		"Calendar",
+		"Grades",
+	}
+
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		panic(err)
+	}
+}
+
+func ar(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	data :=
+		languageStrings{
+			"الجزء",
+			"CRN",
+			"قروض",
+			"تفاصيل الدورة",
+			"عنوان الدورة",
+			"قسم",
+			"درجة",
+			"وصف",
+			"أغلق",
+			"الدورات",
+			"التقويم",
+			"درجات",
+		}
 	if err := json.NewEncoder(w).Encode(data); err != nil {
 		panic(err)
 	}
@@ -170,7 +221,7 @@ func en(w http.ResponseWriter, r *http.Request) {
 func fr(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	data := AaronStrings{
+	data := languageStrings{
 		"Section",
 		"CRN",
 		"Crédits",
@@ -180,6 +231,9 @@ func fr(w http.ResponseWriter, r *http.Request) {
 		"Qualité",
 		"La description",
 		"Conclure",
+		"Cours",
+		"Calendrier",
+		"Les notes",
 	}
 
 	if err := json.NewEncoder(w).Encode(data); err != nil {
@@ -187,10 +241,10 @@ func fr(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func sp(w http.ResponseWriter, r *http.Request) {
+func es(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	data := AaronStrings{
+	data := languageStrings{
 		"Sección",
 		"CRN",
 		"Créditos",
@@ -200,6 +254,9 @@ func sp(w http.ResponseWriter, r *http.Request) {
 		"Grado",
 		"Descripción",
 		"Conclur",
+		"Cursos",
+		"Calendario",
+		"Grados",
 	}
 
 	if err := json.NewEncoder(w).Encode(data); err != nil {
@@ -210,7 +267,7 @@ func sp(w http.ResponseWriter, r *http.Request) {
 func de(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
-	data := AaronStrings{
+	data := languageStrings{
 		"Abschnitt",
 		"CRN",
 		"Gutschriften",
@@ -220,6 +277,9 @@ func de(w http.ResponseWriter, r *http.Request) {
 		"Klasse",
 		"Beshreibung",
 		"Schließsen",
+		"Kurse",
+		"Kalender",
+		"Noten",
 	}
 
 	if err := json.NewEncoder(w).Encode(data); err != nil {
@@ -437,13 +497,14 @@ func init() {
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/locales/en/{ns}", en)
+	r.HandleFunc("/locales/en-US/{ns}", enUS)
 	r.HandleFunc("/locales/fr/{ns}", fr)
-	r.HandleFunc("/locales/gr/{ns}", de)
-	r.HandleFunc("/locales/sp/{ns}", sp)
+	r.HandleFunc("/locales/de/{ns}", de)
+	r.HandleFunc("/locales/es/{ns}", es)
 	r.HandleFunc("/api/person", person)
 	r.HandleFunc("/api/mydetails", mydetails)
 	r.HandleFunc("/api/courses", courses)
 	r.HandleFunc("/api/terms", terms)
 	http.Handle("/", r)
-	http.ListenAndServe(":8080", nil)
+	http.ListenAndServe(":8082", nil)
 }
