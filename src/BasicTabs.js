@@ -7,6 +7,7 @@ import { withStyles, createStyleSheet } from "material-ui/styles"
 import Paper from "material-ui/Paper"
 import Tabs, { Tab } from "material-ui/Tabs"
 import Courses from "./Courses"
+import Grades from "./Grades"
 
 const TabContainer = props => (
   <div style={{ padding: 20 }}>
@@ -71,7 +72,10 @@ class BasicTabs extends Component {
           <TabContainer>
             <div tabIndex="0"><p tabIndex="0">Hello Aaron</p></div>
           </TabContainer>}
-        {this.state.index === 2 && <TabContainer>{"Item Three"}</TabContainer>}
+        {this.state.index === 2 &&
+          <TabContainer>
+            <Grades tabIndex="0" courses={this.props.courses} />
+          </TabContainer>}
       </Paper>
     )
   }
