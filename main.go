@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"os"
 
+	mux "github.com/gorilla/mux"
+
 	_ "github.com/lib/pq"
 )
 
@@ -67,6 +69,19 @@ type Course struct {
 	Meetings                      []Meeting    `json:"meetings"`
 	Instructors                   []Instructor `json:"instructors"`
 	Grade                         Grade        `json:"grade"`
+}
+
+// AaronStrings represents internationalization
+type AaronStrings struct {
+	Section       string `json:"section"`
+	CRN           string `json:"crn"`
+	Credits       string `json:"credits"`
+	CourseDetails string `json:"courseDetails"`
+	CourseTitle   string `json:"courseTitle"`
+	Department    string `json:"department"`
+	Grade         string `json:"grade"`
+	Description   string `json:"description"`
+	Close         string `json:"close"`
 }
 
 // Meeting represents the times and locations a course will gather (e.g. Monday at 1:47 PM).
@@ -130,6 +145,86 @@ type Person struct {
 	PhoneNumber   string `json:"phoneNumber"`
 	Pidm          string `json:"pidm"`
 	PrefFirstName string `json:"prefFirstName"`
+}
+
+func en(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	data := AaronStrings{
+		"Section",
+		"CRN",
+		"Credits",
+		"Course Details",
+		"Course Title",
+		"Department",
+		"Grade",
+		"Description",
+		"Close",
+	}
+
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		panic(err)
+	}
+}
+
+func fr(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	data := AaronStrings{
+		"Section",
+		"CRN",
+		"Crédits",
+		"Course Détails",
+		"Titre de cours",
+		"Départment",
+		"Qualité",
+		"La description",
+		"Conclure",
+	}
+
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		panic(err)
+	}
+}
+
+func sp(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	data := AaronStrings{
+		"Sección",
+		"CRN",
+		"Créditos",
+		"Detalles del courso",
+		"Título del curso",
+		"Departmento",
+		"Grado",
+		"Descripción",
+		"Conclur",
+	}
+
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		panic(err)
+	}
+}
+
+func de(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	data := AaronStrings{
+		"Abschnitt",
+		"CRN",
+		"Gutschriften",
+		"Kursdetails",
+		"Kursname",
+		"Abteilung",
+		"Klasse",
+		"Beshreibung",
+		"Schließsen",
+	}
+
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		panic(err)
+	}
 }
 
 func person(w http.ResponseWriter, r *http.Request) {
@@ -340,9 +435,15 @@ func init() {
 }
 
 func main() {
-	http.HandleFunc("/api/person", person)
-	http.HandleFunc("/api/mydetails", mydetails)
-	http.HandleFunc("/api/courses", courses)
-	http.HandleFunc("/api/terms", terms)
-	http.ListenAndServe(":8082", nil)
+	r := mux.NewRouter()
+	r.HandleFunc("/locales/en/{ns}", en)
+	r.HandleFunc("/locales/fr/{ns}", fr)
+	r.HandleFunc("/locales/gr/{ns}", de)
+	r.HandleFunc("/locales/sp/{ns}", sp)
+	r.HandleFunc("/api/person", person)
+	r.HandleFunc("/api/mydetails", mydetails)
+	r.HandleFunc("/api/courses", courses)
+	r.HandleFunc("/api/terms", terms)
+	http.Handle("/", r)
+	http.ListenAndServe(":8080", nil)
 }
