@@ -2887,8 +2887,8 @@ i18next-localstorage-cache@^1.1.1:
   resolved "https://registry.yarnpkg.com/i18next-localstorage-cache/-/i18next-localstorage-cache-1.1.1.tgz#575256cc35e8cb2d88148f754766fdd2d24bb1b7"
 
 i18next-xhr-backend@^1.3.0, i18next-xhr-backend@^1.4.1:
-  version "1.4.1"
-  resolved "https://registry.yarnpkg.com/i18next-xhr-backend/-/i18next-xhr-backend-1.4.1.tgz#ade99356065f51742da9e4bc79c7bb4905a4b91d"
+  version "1.4.2"
+  resolved "https://registry.yarnpkg.com/i18next-xhr-backend/-/i18next-xhr-backend-1.4.2.tgz#7aa766292c46ca83ff6477bb55074b363a646a62"
 
 i18next@^8.4.0:
   version "8.4.0"
@@ -3983,11 +3983,7 @@ miller-rabin@^4.0.0:
     bn.js "^4.0.0"
     brorand "^1.0.1"
 
-"mime-db@>= 1.27.0 < 2":
-  version "1.28.0"
-  resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.28.0.tgz#fedd349be06d2865b7fc57d837c6de4f17d7ac3c"
-
-mime-db@~1.27.0:
+"mime-db@>= 1.27.0 < 2", mime-db@~1.27.0:
   version "1.27.0"
   resolved "https://registry.yarnpkg.com/mime-db/-/mime-db-1.27.0.tgz#820f572296bbd20ec25ed55e5b5de869e5436eb1"
 

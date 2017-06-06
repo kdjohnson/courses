@@ -42,13 +42,6 @@ const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
 }))
 
 class ExpandableCourse extends Component {
-  checkExpandableMeetings = () => {
-    if (this.props.course.meetings.length > 2) {
-      return <Meetings meetings={this.props.course.meetings} />
-    } else {
-      return <ExpandableMeetings meetings={this.props.course.meetings} />
-    }
-  }
   render() {
     const { t } = this.props
     const classes = this.props.classes
@@ -105,7 +98,7 @@ class ExpandableCourse extends Component {
                 {t("credits", {}) + ": " + this.props.course.credit}
               </Typography>
               <div style={{ marginTop: "1em" }}>
-                {this.checkExpandableMeetings()}
+                <Meetings meetings={this.props.course.meetings} />
               </div>
               <div style={{ marginTop: "1em" }}>
                 <Instructors teachers={this.props.course.instructors} />

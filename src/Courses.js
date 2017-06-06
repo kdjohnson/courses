@@ -69,8 +69,8 @@ class Courses extends Component {
     let elements = []
     for (let i = 0, total = this.props.courses.length; i < total; i++) {
       if (
-        this.props.courses[i].meetings.length >= 2 ||
-        this.props.courses[i].instructors.length >= 2
+        this.props.courses[i].meetings.length > 1 ||
+        this.props.courses[i].instructors.length > 1
       ) {
         elements.push(
           <ExpandableCourse
