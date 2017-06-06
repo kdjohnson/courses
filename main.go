@@ -501,7 +501,7 @@ func main() {
 	r.HandleFunc("/api/mydetails", mydetails)
 	r.HandleFunc("/api/courses", courses)
 	r.HandleFunc("/api/terms", terms)
-  r.HandleFunc("/api/credits", credits)
+	r.HandleFunc("/api/credits", credits)
 	http.Handle("/", r)
 	http.ListenAndServe(":8082", nil)
 }
