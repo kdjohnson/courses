@@ -150,136 +150,102 @@ type Person struct {
 	PrefFirstName string `json:"prefFirstName"`
 }
 
-func en(w http.ResponseWriter, r *http.Request) {
+func lang(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
-
-	data := languageStrings{
-		"Section",
-		"CRN",
-		"Credits",
-		"Course Details",
-		"Course Title",
-		"Department",
-		"Grade",
-		"Description",
-		"Close",
-		"Courses",
-		"Calendar",
-		"Grades",
-	}
-
-	if err := json.NewEncoder(w).Encode(data); err != nil {
-		panic(err)
-	}
-}
-
-func enUS(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-
-	data := languageStrings{
-		"Section",
-		"CRN",
-		"Credits",
-		"Course Details",
-		"Course Title",
-		"Department",
-		"Grade",
-		"Description",
-		"Close",
-		"Courses",
-		"Calendar",
-		"Grades",
-	}
-
-	if err := json.NewEncoder(w).Encode(data); err != nil {
-		panic(err)
-	}
-}
-
-func ar(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-	data :=
-		languageStrings{
-			"الجزء",
+	vars := mux.Vars(r)
+	var data languageStrings
+	switch vars["lng"] {
+	case "ar":
+		data =
+			languageStrings{
+				"الجزء",
+				"CRN",
+				"قروض",
+				"تفاصيل الدورة",
+				"عنوان الدورة",
+				"قسم",
+				"درجة",
+				"وصف",
+				"أغلق",
+				"الدورات",
+				"التقويم",
+				"درجات",
+			}
+	case "de":
+		data = languageStrings{
+			"Abschnitt",
 			"CRN",
-			"قروض",
-			"تفاصيل الدورة",
-			"عنوان الدورة",
-			"قسم",
-			"درجة",
-			"وصف",
-			"أغلق",
-			"الدورات",
-			"التقويم",
-			"درجات",
+			"Gutschriften",
+			"Kursdetails",
+			"Kursname",
+			"Abteilung",
+			"Klasse",
+			"Beshreibung",
+			"Schließsen",
+			"Kurse",
+			"Kalender",
+			"Noten",
 		}
-	if err := json.NewEncoder(w).Encode(data); err != nil {
-		panic(err)
-	}
-}
-
-func fr(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-
-	data := languageStrings{
-		"Section",
-		"CRN",
-		"Crédits",
-		"Course Détails",
-		"Titre de cours",
-		"Départment",
-		"Qualité",
-		"La description",
-		"Conclure",
-		"Cours",
-		"Calendrier",
-		"Les notes",
-	}
-
-	if err := json.NewEncoder(w).Encode(data); err != nil {
-		panic(err)
-	}
-}
-
-func es(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-
-	data := languageStrings{
-		"Sección",
-		"CRN",
-		"Créditos",
-		"Detalles del courso",
-		"Título del curso",
-		"Departmento",
-		"Grado",
-		"Descripción",
-		"Conclur",
-		"Cursos",
-		"Calendario",
-		"Grados",
-	}
-
-	if err := json.NewEncoder(w).Encode(data); err != nil {
-		panic(err)
-	}
-}
-
-func de(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-
-	data := languageStrings{
-		"Abschnitt",
-		"CRN",
-		"Gutschriften",
-		"Kursdetails",
-		"Kursname",
-		"Abteilung",
-		"Klasse",
-		"Beshreibung",
-		"Schließsen",
-		"Kurse",
-		"Kalender",
-		"Noten",
+	case "en":
+		data = languageStrings{
+			"Section",
+			"CRN",
+			"Credits",
+			"Course Details",
+			"Course Title",
+			"Department",
+			"Grade",
+			"Description",
+			"Close",
+			"Courses",
+			"Calendar",
+			"Grades",
+		}
+	case "en-US":
+		data = languageStrings{
+			"Section",
+			"CRN",
+			"Credits",
+			"Course Details",
+			"Course Title",
+			"Department",
+			"Grade",
+			"Description",
+			"Close",
+			"Courses",
+			"Calendar",
+			"Grades",
+		}
+	case "sp":
+		data = languageStrings{
+			"Sección",
+			"CRN",
+			"Créditos",
+			"Detalles del courso",
+			"Título del curso",
+			"Departmento",
+			"Grado",
+			"Descripción",
+			"Conclur",
+			"Cursos",
+			"Calendario",
+			"Grados",
+		}
+	case "fr":
+		data = languageStrings{
+			"Section",
+			"CRN",
+			"Crédits",
+			"Course Détails",
+			"Titre de cours",
+			"Départment",
+			"Qualité",
+			"La description",
+			"Conclure",
+			"Cours",
+			"Calendrier",
+			"Les notes",
+		}
 	}
 
 	if err := json.NewEncoder(w).Encode(data); err != nil {
@@ -496,11 +462,7 @@ func init() {
 
 func main() {
 	r := mux.NewRouter()
-	r.HandleFunc("/locales/en/{ns}", en)
-	r.HandleFunc("/locales/en-US/{ns}", enUS)
-	r.HandleFunc("/locales/fr/{ns}", fr)
-	r.HandleFunc("/locales/de/{ns}", de)
-	r.HandleFunc("/locales/es/{ns}", es)
+	r.HandleFunc("/locales/{lng}/{ns}", lang)
 	r.HandleFunc("/api/person", person)
 	r.HandleFunc("/api/mydetails", mydetails)
 	r.HandleFunc("/api/courses", courses)

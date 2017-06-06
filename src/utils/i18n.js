@@ -10,12 +10,9 @@ i18n
   .use(LanguageDetector)
   .init({
     fallbackLng: "en",
-    // wait: true, // globally set to wait for loaded translations in translate hoc
-
     // have a common namespace used around the full app
     ns: ["view"],
     defaultNS: "view",
-    //lng: "en-US",
 
     debug: true,
     load: "all",
