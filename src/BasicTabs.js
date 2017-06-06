@@ -8,6 +8,8 @@ import Paper from "material-ui/Paper"
 import Tabs, { Tab } from "material-ui/Tabs"
 import Courses from "./Courses"
 import Grades from "./Grades"
+import { translate, Interpolate } from "react-i18next"
+import i18n from "./utils/i18n"
 
 const TabContainer = props => (
   <div style={{ padding: 20 }}>
@@ -44,6 +46,7 @@ class BasicTabs extends Component {
 
   render() {
     const classes = this.props.classes
+    const { t } = this.props
 
     return (
       <Paper className={classes.root}>
@@ -53,9 +56,9 @@ class BasicTabs extends Component {
             onChange={this.handleChange}
             indicatorClassName={classes.tabs}
           >
-            <Tab label="Courses" tabIndex="0" />
-            <Tab label="Calendar" tabIndex="0" />
-            <Tab label="Grades" tabIndex="0" />
+            <Tab label={t("courses", {})} tabIndex="0" />
+            <Tab label={t("calendar", {})} tabIndex="0" />
+            <Tab label={t("grades", {})} tabIndex="0" />
           </Tabs>
         </div>
         {this.state.index === 0 &&
@@ -85,4 +88,4 @@ BasicTabs.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(BasicTabs)
+export default withStyles(styleSheet) (translate("view", { wait: true })(BasicTabs))

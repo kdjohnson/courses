@@ -9,6 +9,8 @@ import Button from "material-ui/Button"
 import Slide from "material-ui/transitions/Slide"
 import Typography from "material-ui/Typography"
 import { withStyles, createStyleSheet } from "material-ui/styles"
+import { translate, Interpolate } from "react-i18next"
+import i18n from "./utils/i18n"
 
 const styleSheet = createStyleSheet("CourseDetails", theme => ({
   dialogHeader: {
@@ -43,6 +45,7 @@ class CourseDetails extends Component {
 
   render() {
     const classes = this.props.classes
+    const { t } = this.props
     if (this.props.courses === null) return <div />
     else {
       return (
@@ -54,7 +57,7 @@ class CourseDetails extends Component {
             id={"openbutton" + this.props.course.crn}
             aria-label="more course information"
           >
-            course details
+          {t("courseDetails", {})}
           </Button>
 
           <Dialog
@@ -83,7 +86,7 @@ class CourseDetails extends Component {
               <List>
                 <ListItem tabIndex="0">
                   <ListItemText
-                    primary="Course Title"
+                    primary={t("courseTitle", {})}
                     secondary={
                       <p className={classes.list}>
                         {this.props.course.courseTitle}
@@ -94,7 +97,7 @@ class CourseDetails extends Component {
 
                 <ListItem tabIndex="0">
                   <ListItemText
-                    primary="CRN"
+                    primary={t("crn", {})}
                     secondary={
                       <p className={classes.list}>{this.props.course.crn}</p>
                     }
@@ -103,7 +106,7 @@ class CourseDetails extends Component {
 
                 <ListItem tabIndex="0">
                   <ListItemText
-                    primary="Department"
+                    primary={t("department", {})}
                     secondary={
                       <p className={classes.list}>
                         {this.props.course.departmentDescription}
@@ -114,7 +117,7 @@ class CourseDetails extends Component {
 
                 <ListItem tabIndex="0">
                   <ListItemText
-                    primary="Grade"
+                    primary={t("grade", {})}
                     secondary={
                       <p className={classes.list}>
                         {this.props.course.grade.grade}
@@ -125,7 +128,7 @@ class CourseDetails extends Component {
 
                 <ListItem tabIndex="0">
                   <ListItemText
-                    primary="Description"
+                    primary={t("description", {})}
                     secondary={
                       <p className={classes.list}>
                         {this.props.course.courseDescription}
@@ -143,7 +146,7 @@ class CourseDetails extends Component {
                   raised
                   accent
                 >
-                  Close
+                  {t("close", {})}
                 </Button>
               </DialogActions>
             </DialogContent>
@@ -154,4 +157,4 @@ class CourseDetails extends Component {
     }
   }
 }
-export default withStyles(styleSheet)(CourseDetails)
+export default withStyles(styleSheet) (translate("view", { wait: true })(CourseDetails))
