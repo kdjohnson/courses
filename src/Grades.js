@@ -10,6 +10,8 @@ import Card, { CardHeader, CardContent, CardMedia } from "material-ui/Card"
 import Typography from "material-ui/Typography"
 import { getCredits } from "./fetchData"
 import PropTypes from "prop-types"
+import { translate, Interpolate } from "react-i18next"
+import i18n from "./utils/i18n"
 
 const styleSheet = createStyleSheet("Grades", theme => ({
   cardDiv: {
@@ -61,6 +63,7 @@ class Grades extends Component {
 
   render() {
     const classes = this.props.classes
+    const { t } = this.props
     if (
       this.props.courses == null ||
       this.props.courses == undefined ||
@@ -80,7 +83,7 @@ class Grades extends Component {
               className={classes.classHeaderSpan}
               style={{ fontSize: "20px" }}
             >
-              Grades and Credits
+              {t("gac", {})} 
             </Typography>
           }
         />
@@ -89,10 +92,10 @@ class Grades extends Component {
             <TableHead>
               <TableRow className={classes.tableHeader}>
                 <TableCell className={classes.tableCell} scope="col">
-                  Level
+                  {t("level", {})} 
                 </TableCell>
                 <TableCell className={classes.tableCell} scope="col">
-                  Credits
+                  {t("credits", {})} 
                 </TableCell>
                 <TableCell className={classes.tableCell} scope="col">
                   GPA
@@ -111,13 +114,13 @@ class Grades extends Component {
             <TableHead>
               <TableRow className={classes.tableHeader}>
                 <TableCell className={classes.tableCell} scope="col">
-                  Course
+                  {t("course", {})} 
                 </TableCell>
                 <TableCell className={classes.tableCell} scope="col">
-                  Credits
+                  {t("credits", {})} 
                 </TableCell>
                 <TableCell className={classes.tableCell} scope="col">
-                  Grades
+                  {t("grades", {})} 
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -156,4 +159,4 @@ Grades.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(Grades)
+export default withStyles(styleSheet) (translate("view", { wait: true })(Grades))
