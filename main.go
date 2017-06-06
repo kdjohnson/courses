@@ -28,6 +28,9 @@ const (
 
 	//Grade table creation.
 	gradeSQL = "create table if not exists grades(id serial primary key, credit text, grade text, crn text)"
+
+	//Overall credit and grade table creation.
+	gpaSQL = "create table if not exists gpa(id serial primary key, level text, credits text, gpa text)"
 )
 
 // Configurations for the database
@@ -102,6 +105,14 @@ type Grade struct {
 	Crn    string `json:"crn"`
 }
 
+//GPA represents the overall credits and grades a student has
+type GPA struct {
+	ID      int
+	Level   string `json:"level"`
+	Credits string `json:"credits"`
+	GPA     string `json:"gpa"`
+}
+
 // Student represents the academic information about a student
 type Student struct {
 	ClassStanding        string `json:"classStanding"`
@@ -167,6 +178,24 @@ func mydetails(w http.ResponseWriter, r *http.Request) {
 		Student []Student `json:"studentDetails"`
 	}{
 		students,
+	}
+
+	if err := json.NewEncoder(w).Encode(student); err != nil {
+		panic(err)
+	}
+}
+
+func credits(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	var credits []GPA
+	data := GPA{2, "Undergraduate", "88", "3.2"}
+	credits = append(credits, data)
+
+	student := struct {
+		GPA []GPA `json:"gpa"`
+	}{
+		credits,
 	}
 
 	if err := json.NewEncoder(w).Encode(student); err != nil {
@@ -337,6 +366,11 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+
+	_, err = db.Query(gpaSQL)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func main() {
@@ -344,5 +378,6 @@ func main() {
 	http.HandleFunc("/api/mydetails", mydetails)
 	http.HandleFunc("/api/courses", courses)
 	http.HandleFunc("/api/terms", terms)
+	http.HandleFunc("/api/credits", credits)
 	http.ListenAndServe(":8082", nil)
 }

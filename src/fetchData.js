@@ -21,3 +21,13 @@ export const getCourses = async code => {
     return err
   }
 }
+
+export const getCredits = async () => {
+  try {
+    const response = await fetch("http://localhost:8082/api/credits")
+    const terms = await response.json()
+    return terms.gpa
+  } catch (err) {
+    return err
+  }
+}
