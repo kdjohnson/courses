@@ -83,7 +83,7 @@ class Grades extends Component {
               className={classes.classHeaderSpan}
               style={{ fontSize: "20px" }}
             >
-              {t("Grades and Credits", {})} 
+              {t("gac", {})} 
             </Typography>
           }
         />
@@ -92,13 +92,13 @@ class Grades extends Component {
             <TableHead>
               <TableRow className={classes.tableHeader}>
                 <TableCell className={classes.tableCell} scope="col">
-                  {t("Level", {})} 
+                  {t("level", {})} 
                 </TableCell>
                 <TableCell className={classes.tableCell} scope="col">
-                  {t("Credits", {})} 
+                  {t("credits", {})} 
                 </TableCell>
                 <TableCell className={classes.tableCell} scope="col">
-                  {t("GPA", {})} 
+                  GPA
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -114,13 +114,13 @@ class Grades extends Component {
             <TableHead>
               <TableRow className={classes.tableHeader}>
                 <TableCell className={classes.tableCell} scope="col">
-                  {t("Course", {})} 
+                  {t("course", {})} 
                 </TableCell>
                 <TableCell className={classes.tableCell} scope="col">
-                  {t("Credits", {})} 
+                  {t("credits", {})} 
                 </TableCell>
                 <TableCell className={classes.tableCell} scope="col">
-                  {t("Grades", {})} 
+                  {t("grades", {})} 
                 </TableCell>
               </TableRow>
             </TableHead>
