@@ -88,6 +88,9 @@ type languageStrings struct {
 	Courses       string `json:"courses"`
 	Calendar      string `json:"calendar"`
 	Grades        string `json:"grades"`
+	Course        string `json:"course"`
+	Level         string `json:"level"`
+	GaC           string `json:"gac"`
 }
 
 // Meeting represents the times and locations a course will gather (e.g. Monday at 1:47 PM).
@@ -181,6 +184,9 @@ func lang(w http.ResponseWriter, r *http.Request) {
 				"الدورات",
 				"التقويم",
 				"درجات",
+				"دورة",
+				"مستوى",
+				"الدرجات والاعتمادات",
 			}
 	case "de":
 		data = languageStrings{
@@ -196,6 +202,9 @@ func lang(w http.ResponseWriter, r *http.Request) {
 			"Kurse",
 			"Kalender",
 			"Noten",
+			"Kurs",
+			"Ebene",
+			"Noten und Kredite",
 		}
 	case "en":
 		data = languageStrings{
@@ -211,6 +220,9 @@ func lang(w http.ResponseWriter, r *http.Request) {
 			"Courses",
 			"Calendar",
 			"Grades",
+			"Course",
+			"Level",
+			"Grades and Credits",
 		}
 	case "en-US":
 		data = languageStrings{
@@ -226,6 +238,9 @@ func lang(w http.ResponseWriter, r *http.Request) {
 			"Courses",
 			"Calendar",
 			"Grades",
+			"Course",
+			"Level",
+			"Grades and Credits",
 		}
 	case "sp":
 		data = languageStrings{
@@ -241,6 +256,9 @@ func lang(w http.ResponseWriter, r *http.Request) {
 			"Cursos",
 			"Calendario",
 			"Grados",
+			"Curso",
+			"Nivel",
+			"Grados y Créditos",
 		}
 	case "fr":
 		data = languageStrings{
@@ -256,6 +274,9 @@ func lang(w http.ResponseWriter, r *http.Request) {
 			"Cours",
 			"Calendrier",
 			"Les notes",
+			"Cour",
+			"niveau",
+			"Notes et crédits",
 		}
 	}
 
@@ -501,7 +522,7 @@ func main() {
 	r.HandleFunc("/api/mydetails", mydetails)
 	r.HandleFunc("/api/courses", courses)
 	r.HandleFunc("/api/terms", terms)
-  r.HandleFunc("/api/credits", credits)
+	r.HandleFunc("/api/credits", credits)
 	http.Handle("/", r)
 	http.ListenAndServe(":8082", nil)
 }
