@@ -9,6 +9,8 @@ import createTypography from "material-ui/styles/typography"
 import "typeface-oxygen"
 import "typeface-arimo"
 import "raleway-webfont"
+import { I18nextProvider } from "react-i18next"
+import i18n from "./utils/i18n"
 
 const oakland = {
   50: "#f1eee9",
@@ -60,7 +62,7 @@ const theme = createMuiTheme({
 })
 
 ReactDOM.render(
-  <MuiThemeProvider theme={theme}><App theme={theme} /></MuiThemeProvider>,
+ <I18nextProvider i18n={i18n}><MuiThemeProvider theme={theme}><App theme={theme} /></MuiThemeProvider></I18nextProvider>,
   document.getElementById("root")
 )
 registerServiceWorker()

@@ -7,6 +7,8 @@ import (
 	"net/http"
 	"os"
 
+	mux "github.com/gorilla/mux"
+
 	_ "github.com/lib/pq"
 )
 
@@ -67,6 +69,22 @@ type Course struct {
 	Meetings                      []Meeting    `json:"meetings"`
 	Instructors                   []Instructor `json:"instructors"`
 	Grade                         Grade        `json:"grade"`
+}
+
+// lanStrings represents internationalization
+type languageStrings struct {
+	Section       string `json:"section"`
+	CRN           string `json:"crn"`
+	Credits       string `json:"credits"`
+	CourseDetails string `json:"courseDetails"`
+	CourseTitle   string `json:"courseTitle"`
+	Department    string `json:"department"`
+	Grade         string `json:"grade"`
+	Description   string `json:"description"`
+	Close         string `json:"close"`
+	Courses       string `json:"courses"`
+	Calendar      string `json:"calendar"`
+	Grades        string `json:"grades"`
 }
 
 // Meeting represents the times and locations a course will gather (e.g. Monday at 1:47 PM).
@@ -130,6 +148,109 @@ type Person struct {
 	PhoneNumber   string `json:"phoneNumber"`
 	Pidm          string `json:"pidm"`
 	PrefFirstName string `json:"prefFirstName"`
+}
+
+func lang(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	vars := mux.Vars(r)
+	var data languageStrings
+	switch vars["lng"] {
+	case "ar":
+		data =
+			languageStrings{
+				"الجزء",
+				"CRN",
+				"قروض",
+				"تفاصيل الدورة",
+				"عنوان الدورة",
+				"قسم",
+				"درجة",
+				"وصف",
+				"أغلق",
+				"الدورات",
+				"التقويم",
+				"درجات",
+			}
+	case "de":
+		data = languageStrings{
+			"Abschnitt",
+			"CRN",
+			"Gutschriften",
+			"Kursdetails",
+			"Kursname",
+			"Abteilung",
+			"Klasse",
+			"Beshreibung",
+			"Schließsen",
+			"Kurse",
+			"Kalender",
+			"Noten",
+		}
+	case "en":
+		data = languageStrings{
+			"Section",
+			"CRN",
+			"Credits",
+			"Course Details",
+			"Course Title",
+			"Department",
+			"Grade",
+			"Description",
+			"Close",
+			"Courses",
+			"Calendar",
+			"Grades",
+		}
+	case "en-US":
+		data = languageStrings{
+			"Section",
+			"CRN",
+			"Credits",
+			"Course Details",
+			"Course Title",
+			"Department",
+			"Grade",
+			"Description",
+			"Close",
+			"Courses",
+			"Calendar",
+			"Grades",
+		}
+	case "sp":
+		data = languageStrings{
+			"Sección",
+			"CRN",
+			"Créditos",
+			"Detalles del courso",
+			"Título del curso",
+			"Departmento",
+			"Grado",
+			"Descripción",
+			"Conclur",
+			"Cursos",
+			"Calendario",
+			"Grados",
+		}
+	case "fr":
+		data = languageStrings{
+			"Section",
+			"CRN",
+			"Crédits",
+			"Course Détails",
+			"Titre de cours",
+			"Départment",
+			"Qualité",
+			"La description",
+			"Conclure",
+			"Cours",
+			"Calendrier",
+			"Les notes",
+		}
+	}
+
+	if err := json.NewEncoder(w).Encode(data); err != nil {
+		panic(err)
+	}
 }
 
 func person(w http.ResponseWriter, r *http.Request) {
@@ -340,9 +461,12 @@ func init() {
 }
 
 func main() {
-	http.HandleFunc("/api/person", person)
-	http.HandleFunc("/api/mydetails", mydetails)
-	http.HandleFunc("/api/courses", courses)
-	http.HandleFunc("/api/terms", terms)
+	r := mux.NewRouter()
+	r.HandleFunc("/locales/{lng}/{ns}", lang)
+	r.HandleFunc("/api/person", person)
+	r.HandleFunc("/api/mydetails", mydetails)
+	r.HandleFunc("/api/courses", courses)
+	r.HandleFunc("/api/terms", terms)
+	http.Handle("/", r)
 	http.ListenAndServe(":8082", nil)
 }

@@ -7,6 +7,8 @@ import Instructors from "./Instructors"
 import Meetings from "./Meetings"
 import ExpandableMeetings from "./ExpandableMeetings"
 import CourseDetails from "./CourseDetails"
+import { translate, Interpolate } from "react-i18next"
+import i18n from "./utils/i18n"
 
 const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
   card: {
@@ -48,6 +50,7 @@ class ExpandableCourse extends Component {
     }
   }
   render() {
+    const { t } = this.props
     const classes = this.props.classes
     return (
       <div>
@@ -83,7 +86,7 @@ class ExpandableCourse extends Component {
                 className={classes.courseTitle}
                 tabIndex="0"
               >
-                {"Section: " + this.props.course.section}
+                  {t("section", {}) + ": " + this.props.course.section}
               </Typography>
               <Typography
                 type="headline"
@@ -91,7 +94,7 @@ class ExpandableCourse extends Component {
                 className={classes.courseTitle}
                 tabIndex="0"
               >
-                {" CRN: " + this.props.course.crn}
+                {t("crn", {}) + ": " + this.props.course.crn}
               </Typography>
               <Typography
                 type="headline"
@@ -99,7 +102,7 @@ class ExpandableCourse extends Component {
                 className={classes.courseTitle}
                 tabIndex="0"
               >
-                {"Credits: " + this.props.course.credit}
+                {t("credits", {}) + ": " + this.props.course.credit}
               </Typography>
               <div style={{ marginTop: "1em" }}>
                 {this.checkExpandableMeetings()}
@@ -122,4 +125,4 @@ ExpandableCourse.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(ExpandableCourse)
+export default withStyles(styleSheet) (translate("view", { wait: true })(ExpandableCourse))
