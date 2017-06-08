@@ -7,7 +7,7 @@ import (
 	"net/http"
 	"os"
 
-	mux "github.com/gorilla/mux"
+	"github.com/gorilla/mux"
 
 	_ "github.com/lib/pq"
 )
