@@ -10,7 +10,7 @@ import Slide from "material-ui/transitions/Slide"
 import Typography from "material-ui/Typography"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import { translate, Interpolate } from "react-i18next"
-import i18n from "./utils/i18n"
+import i18n from "./../utils/i18n"
 
 const styleSheet = createStyleSheet("CourseDetails", theme => ({
   dialogHeader: {
@@ -57,7 +57,7 @@ class CourseDetails extends Component {
             id={"openbutton" + this.props.course.crn}
             aria-label="more course information"
           >
-          {t("courseDetails", {})}
+            {t("courseDetails", {})}
           </Button>
 
           <Dialog
@@ -69,7 +69,6 @@ class CourseDetails extends Component {
             onRequestClose={this.handleClose}
             transition={<Slide direction="down" />}
           >
-
             <DialogTitle
               className={classes.dialogHeader}
               disableTypography={true}
@@ -77,7 +76,6 @@ class CourseDetails extends Component {
               <Typography type="title" tabIndex="0" className={classes.title}>
                 {this.props.course.courseTitle}
               </Typography>
-
             </DialogTitle>
             <DialogContent
               className={classes.dialogBackground}
@@ -99,7 +97,9 @@ class CourseDetails extends Component {
                   <ListItemText
                     primary={t("crn", {})}
                     secondary={
-                      <p className={classes.list}>{this.props.course.crn}</p>
+                      <p className={classes.list}>
+                        {this.props.course.crn}
+                      </p>
                     }
                   />
                 </ListItem>
@@ -151,10 +151,11 @@ class CourseDetails extends Component {
               </DialogActions>
             </DialogContent>
           </Dialog>
-
         </div>
       )
     }
   }
 }
-export default withStyles(styleSheet) (translate("view", { wait: true })(CourseDetails))
+export default withStyles(styleSheet)(
+  translate("view", { wait: true })(CourseDetails)
+)
