@@ -16,6 +16,11 @@ const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
     backgroundColor: "#fafafa"
   },
 
+  cardMobile: {
+    width: "264px",
+    backgroundColor: "#fafafa"
+  },
+
   courseTitleH1: {
     fontSize: 16,
     fontWeight: 800,
@@ -53,7 +58,9 @@ class ExpandableCourse extends Component {
     return (
       <div>
         <div style={{ marginTop: "1em" }}>
-          <Card className={classes.card}>
+          <Card
+            className={this.props.mobile ? classes.cardMobile : classes.card}
+          >
             <CardHeader
               className={classes.classHeader}
               title={

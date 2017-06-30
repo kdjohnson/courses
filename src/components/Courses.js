@@ -23,6 +23,11 @@ const styleSheet = createStyleSheet("Courses", theme => ({
     backgroundColor: "#fafafa"
   },
 
+  cardMobile: {
+    width: "264px",
+    backgroundColor: "#fafafa"
+  },
+
   courseTitle: {
     fontSize: 16,
     color: theme.palette.text.primary
@@ -48,26 +53,6 @@ const styleSheet = createStyleSheet("Courses", theme => ({
 }))
 
 class Courses extends Component {
-  componentDidMount() {
-    window.addEventListener("resize", this.handleResize)
-  }
-
-  handleResize = () => {
-    if (window.innerWidth <= 790) {
-      this.setState({
-        mobile: true
-      })
-    } else {
-      this.setState({
-        mobile: false
-      })
-    }
-  }
-
-  state = {
-    mobile: false
-  }
-
   getCourses = () => {
     const classes = this.props.classes
     const { t } = this.props
@@ -81,6 +66,7 @@ class Courses extends Component {
           <ExpandableCourse
             course={this.props.courses[i]}
             key={"expandable" + Math.random()}
+            mobile={this.props.mobile}
           />
         )
       } else {
@@ -88,7 +74,9 @@ class Courses extends Component {
           <div key={this.props.courses[i].crn + i + Math.random()}>
             <div style={{ marginTop: "1em" }}>
               <Card
-                className={classes.card}
+                className={
+                  this.props.mobile ? classes.cardMobile : classes.card
+                }
                 key={this.props.courses[i].crn + i + Math.random()}
               >
                 <CardHeader
@@ -153,27 +141,16 @@ class Courses extends Component {
   }
 
   render() {
+    console.log(this.props.mobile)
     if (this.props.courses === null) {
       return <div />
-    } else if (!this.state.mobile) {
+    } else {
       return (
         <div
           style={{
             display: "flex",
             justifyContent: "space-between",
             flexFlow: "wrap"
-          }}
-        >
-          {this.getCourses()}
-        </div>
-      )
-    } else {
-      return (
-        <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column"
           }}
         >
           {this.getCourses()}

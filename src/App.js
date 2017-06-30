@@ -27,6 +27,10 @@ class App extends Component {
 
   componentDidMount() {
     window.addEventListener("resize", this.updateWidth)
+    if (document.getElementById("root").clientWidth < 796) {
+      this.setState({ mobile: true })
+    }
+
     getTerms()
       .then(terms => {
         for (let i = 0, total = terms.length; i < total; i++) {
