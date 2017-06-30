@@ -8,7 +8,7 @@ import Meetings from "./Meetings"
 import ExpandableMeetings from "./ExpandableMeetings"
 import CourseDetails from "./CourseDetails"
 import { translate, Interpolate } from "react-i18next"
-import i18n from "./utils/i18n"
+import i18n from "./../utils/i18n"
 
 const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
   card: {
@@ -79,7 +79,7 @@ class ExpandableCourse extends Component {
                 className={classes.courseTitle}
                 tabIndex="0"
               >
-                  {t("section", {}) + ": " + this.props.course.section}
+                {t("section", {}) + ": " + this.props.course.section}
               </Typography>
               <Typography
                 type="headline"
@@ -118,4 +118,6 @@ ExpandableCourse.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet) (translate("view", { wait: true })(ExpandableCourse))
+export default withStyles(styleSheet)(
+  translate("view", { wait: true })(ExpandableCourse)
+)

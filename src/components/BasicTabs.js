@@ -9,13 +9,12 @@ import Tabs, { Tab } from "material-ui/Tabs"
 import Courses from "./Courses"
 import Grades from "./Grades"
 import { translate, Interpolate } from "react-i18next"
-import i18n from "./utils/i18n"
+import i18n from "./../utils/i18n"
 
-const TabContainer = props => (
+const TabContainer = props =>
   <div style={{ padding: 20 }}>
     {props.children}
   </div>
-)
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired
@@ -73,7 +72,9 @@ class BasicTabs extends Component {
           </TabContainer>}
         {this.state.index === 1 &&
           <TabContainer>
-            <div tabIndex="0"><p tabIndex="0">Hello Aaron</p></div>
+            <div tabIndex="0">
+              <p tabIndex="0">Hello Aaron</p>
+            </div>
           </TabContainer>}
         {this.state.index === 2 &&
           <TabContainer>
@@ -88,4 +89,6 @@ BasicTabs.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet) (translate("view", { wait: true })(BasicTabs))
+export default withStyles(styleSheet)(
+  translate("view", { wait: true })(BasicTabs)
+)

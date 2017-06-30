@@ -8,10 +8,10 @@ import Table, {
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import Card, { CardHeader, CardContent, CardMedia } from "material-ui/Card"
 import Typography from "material-ui/Typography"
-import { getCredits } from "./fetchData"
+import { getCredits } from "./../api/api"
 import PropTypes from "prop-types"
 import { translate, Interpolate } from "react-i18next"
-import i18n from "./utils/i18n"
+import i18n from "./../utils/i18n"
 
 const styleSheet = createStyleSheet("Grades", theme => ({
   cardDiv: {
@@ -83,7 +83,7 @@ class Grades extends Component {
               className={classes.classHeaderSpan}
               style={{ fontSize: "20px" }}
             >
-              {t("gac", {})} 
+              {t("gac", {})}
             </Typography>
           }
         />
@@ -92,10 +92,10 @@ class Grades extends Component {
             <TableHead>
               <TableRow className={classes.tableHeader}>
                 <TableCell className={classes.tableCell} scope="col">
-                  {t("level", {})} 
+                  {t("level", {})}
                 </TableCell>
                 <TableCell className={classes.tableCell} scope="col">
-                  {t("credits", {})} 
+                  {t("credits", {})}
                 </TableCell>
                 <TableCell className={classes.tableCell} scope="col">
                   GPA
@@ -104,9 +104,15 @@ class Grades extends Component {
             </TableHead>
             <TableBody>
               <TableRow>
-                <TableCell>{this.state.creditsObj[0].level}</TableCell>
-                <TableCell>{this.state.creditsObj[0].credits}</TableCell>
-                <TableCell>{this.state.creditsObj[0].gpa}</TableCell>
+                <TableCell>
+                  {this.state.creditsObj[0].level}
+                </TableCell>
+                <TableCell>
+                  {this.state.creditsObj[0].credits}
+                </TableCell>
+                <TableCell>
+                  {this.state.creditsObj[0].gpa}
+                </TableCell>
               </TableRow>
             </TableBody>
           </Table>
@@ -114,13 +120,13 @@ class Grades extends Component {
             <TableHead>
               <TableRow className={classes.tableHeader}>
                 <TableCell className={classes.tableCell} scope="col">
-                  {t("course", {})} 
+                  {t("course", {})}
                 </TableCell>
                 <TableCell className={classes.tableCell} scope="col">
-                  {t("credits", {})} 
+                  {t("credits", {})}
                 </TableCell>
                 <TableCell className={classes.tableCell} scope="col">
-                  {t("grades", {})} 
+                  {t("grades", {})}
                 </TableCell>
               </TableRow>
             </TableHead>
@@ -146,9 +152,15 @@ const GradeRow = obj => {
 
     tableArray.push(
       <TableRow>
-        <TableCell>{course}</TableCell>
-        <TableCell>{credits}</TableCell>
-        <TableCell>{grade}</TableCell>
+        <TableCell>
+          {course}
+        </TableCell>
+        <TableCell>
+          {credits}
+        </TableCell>
+        <TableCell>
+          {grade}
+        </TableCell>
       </TableRow>
     )
   }
@@ -159,4 +171,4 @@ Grades.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet) (translate("view", { wait: true })(Grades))
+export default withStyles(styleSheet)(translate("view", { wait: true })(Grades))

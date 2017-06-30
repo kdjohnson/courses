@@ -1,8 +1,8 @@
 import React, { Component } from "react"
 import "./App.css"
-import BasicTabs from "./BasicTabs"
-import TermsMenu from "./TermsMenu"
-import { getTerms, getCourses } from "./fetchData"
+import BasicTabs from "./components/BasicTabs"
+import TermsMenu from "./components/TermsMenu"
+import { getTerms, getCourses } from "./api/api"
 
 class App extends Component {
   state = {
