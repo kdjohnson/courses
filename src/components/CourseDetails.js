@@ -13,6 +13,10 @@ import { translate, Interpolate } from "react-i18next"
 import i18n from "./../utils/i18n"
 
 const styleSheet = createStyleSheet("CourseDetails", theme => ({
+  button: {
+    fontWeight: "bolder"
+  },
+
   dialogHeader: {
     backgroundColor: theme.palette.primary[400]
   },
@@ -51,8 +55,8 @@ class CourseDetails extends Component {
       return (
         <div aria-labelledby={"openbutton" + this.props.course.crn}>
           <Button
-            raised
-            accent
+            className={classes.button}
+            color="accent"
             onClick={this.handleOpen}
             id={"openbutton" + this.props.course.crn}
             aria-label="more course information"
@@ -83,68 +87,17 @@ class CourseDetails extends Component {
             >
               <List>
                 <ListItem tabIndex="0">
-                  <ListItemText
-                    primary={t("courseTitle", {})}
-                    secondary={
-                      <p className={classes.list}>
-                        {this.props.course.courseTitle}
-                      </p>
-                    }
-                  />
-                </ListItem>
-
-                <ListItem tabIndex="0">
-                  <ListItemText
-                    primary={t("crn", {})}
-                    secondary={
-                      <p className={classes.list}>
-                        {this.props.course.crn}
-                      </p>
-                    }
-                  />
-                </ListItem>
-
-                <ListItem tabIndex="0">
-                  <ListItemText
-                    primary={t("department", {})}
-                    secondary={
-                      <p className={classes.list}>
-                        {this.props.course.departmentDescription}
-                      </p>
-                    }
-                  />
-                </ListItem>
-
-                <ListItem tabIndex="0">
-                  <ListItemText
-                    primary={t("grade", {})}
-                    secondary={
-                      <p className={classes.list}>
-                        {this.props.course.grade.grade}
-                      </p>
-                    }
-                  />
-                </ListItem>
-
-                <ListItem tabIndex="0">
-                  <ListItemText
-                    primary={t("description", {})}
-                    secondary={
-                      <p className={classes.list}>
-                        {this.props.course.courseDescription}
-                      </p>
-                    }
-                  />
+                  <ListItemText primary={this.props.course.courseDescription} />
                 </ListItem>
               </List>
 
               <DialogActions>
                 <Button
+                  className={classes.button}
                   onClick={this.handleClose}
                   aria-label="close course information"
                   tabIndex="0"
-                  raised
-                  accent
+                  color="accent"
                 >
                   {t("close", {})}
                 </Button>

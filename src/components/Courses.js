@@ -32,6 +32,11 @@ const styleSheet = createStyleSheet("Courses", theme => ({
     backgroundColor: theme.palette.primary[400]
   },
 
+  classHeaderSpanDiv: {
+    display: "flex",
+    flexDirection: "column"
+  },
+
   classHeaderSpan: {
     fontWeight: 600,
     color: "rgba(0, 0, 0, 0.75)"
@@ -100,46 +105,26 @@ class Courses extends Component {
                   }
                   key={this.props.courses[i].crn + i + Math.random()}
                   subheader={
-                    <span tabIndex="0" className={classes.classHeaderSpan}>
-                      {this.props.courses[i].subjectCode +
-                        "-" +
-                        this.props.courses[i].subjectNumber +
-                        "-" +
-                        this.props.courses[i].section}
-                    </span>
+                    <div className={classes.classHeaderSpanDiv}>
+                      <span tabIndex="0" className={classes.classHeaderSpan}>
+                        {this.props.courses[i].subjectCode +
+                          "-" +
+                          this.props.courses[i].subjectNumber +
+                          "-" +
+                          this.props.courses[i].section +
+                          "-" +
+                          this.props.courses[i].crn}
+                      </span>
+                      <span tabIndex="0" className={classes.classHeaderSpan}>
+                        {t("credits", {}) + ": " + this.props.courses[i].credit}
+                      </span>
+                    </div>
                   }
                 />
                 <CardContent
                   className={classes.content}
                   key={this.props.courses[i].crn + i + Math.random()}
                 >
-                  <Typography
-                    type="headline"
-                    component="h2"
-                    className={classes.courseTitle}
-                    tabIndex="0"
-                    key={this.props.courses[i].crn + i + Math.random()}
-                  >
-                    {t("section", {}) + ": " + this.props.courses[i].section}
-                  </Typography>
-                  <Typography
-                    type="headline"
-                    component="h2"
-                    className={classes.courseTitle}
-                    tabIndex="0"
-                    key={this.props.courses[i].crn + i + Math.random()}
-                  >
-                    {t("crn", {}) + ": " + this.props.courses[i].crn}
-                  </Typography>
-                  <Typography
-                    type="headline"
-                    component="h2"
-                    className={classes.courseTitle}
-                    tabIndex="0"
-                    key={this.props.courses[i].crn + i + Math.random()}
-                  >
-                    {t("credits", {}) + ": " + this.props.courses[i].credit}
-                  </Typography>
                   <div
                     style={{ marginTop: "1em" }}
                     key={this.props.courses[i].crn + i + Math.random()}

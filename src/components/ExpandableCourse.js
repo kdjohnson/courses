@@ -26,6 +26,11 @@ const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
     backgroundColor: theme.palette.primary[400]
   },
 
+  classHeaderSpanDiv: {
+    display: "flex",
+    flexDirection: "column"
+  },
+
   classHeaderSpan: {
     fontWeight: 600,
     color: "rgba(0, 0, 0, 0.75)"
@@ -63,40 +68,23 @@ class ExpandableCourse extends Component {
               }
               key={this.props.course.crn + 0 + 3}
               subheader={
-                <span tabIndex="0" className={classes.classHeaderSpan}>
-                  {this.props.course.subjectCode +
-                    "-" +
-                    this.props.course.subjectNumber +
-                    "-" +
-                    this.props.course.section}
-                </span>
+                <div className={classes.classHeaderSpanDiv}>
+                  <span tabIndex="0" className={classes.classHeaderSpan}>
+                    {this.props.course.subjectCode +
+                      "-" +
+                      this.props.course.subjectNumber +
+                      "-" +
+                      this.props.course.section +
+                      "-" +
+                      this.props.course.crn}
+                  </span>
+                  <span tabIndex="0" className={classes.classHeaderSpan}>
+                    {t("credits", {}) + ": " + this.props.course.credit}
+                  </span>
+                </div>
               }
             />
             <CardContent className={classes.content}>
-              <Typography
-                type="headline"
-                component="h2"
-                className={classes.courseTitle}
-                tabIndex="0"
-              >
-                {t("section", {}) + ": " + this.props.course.section}
-              </Typography>
-              <Typography
-                type="headline"
-                component="h2"
-                className={classes.courseTitle}
-                tabIndex="0"
-              >
-                {t("crn", {}) + ": " + this.props.course.crn}
-              </Typography>
-              <Typography
-                type="headline"
-                component="h2"
-                className={classes.courseTitle}
-                tabIndex="0"
-              >
-                {t("credits", {}) + ": " + this.props.course.credit}
-              </Typography>
               <div style={{ marginTop: "1em" }}>
                 <Meetings meetings={this.props.course.meetings} />
               </div>

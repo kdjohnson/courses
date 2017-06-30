@@ -67,6 +67,7 @@ class BasicTabs extends Component {
                 tabIndex="0"
                 currentTermCode={this.props.currentTermCode}
                 courses={this.props.courses}
+                mobile={this.props.mobile}
               />
             </div>
           </TabContainer>}

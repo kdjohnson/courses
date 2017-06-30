@@ -9,10 +9,24 @@ class App extends Component {
     terms: null,
     currentTermDescription: "",
     currentTermCode: "",
-    courses: []
+    courses: [],
+    width: document.getElementById("root").clientWidth,
+    mobile: false
+  }
+
+  updateWidth = () => {
+    this.setState({
+      width: document.getElementById("root").clientWidth
+    })
+    if (this.state.width < 796) {
+      this.setState({ mobile: true })
+    } else {
+      this.setState({ mobile: false })
+    }
   }
 
   componentDidMount() {
+    window.addEventListener("resize", this.updateWidth)
     getTerms()
       .then(terms => {
         for (let i = 0, total = terms.length; i < total; i++) {
@@ -44,7 +58,7 @@ class App extends Component {
       return <div />
     } else {
       return (
-        <div style={{ padding: "2em" }}>
+        <div>
           <TermsMenu
             terms={this.state.terms}
             currentTermDescription={this.state.currentTermDescription}
@@ -53,6 +67,7 @@ class App extends Component {
           <BasicTabs
             currentTermCode={this.state.currentTermCode}
             courses={this.state.courses}
+            mobile={this.state.mobile}
           />
         </div>
       )

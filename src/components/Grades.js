@@ -38,7 +38,8 @@ const styleSheet = createStyleSheet("Grades", theme => ({
   },
 
   content: {
-    paddingTop: 0
+    paddingTop: 0,
+    overflowX: "scroll"
   },
   tableHeader: {
     color: "rgba(0, 0, 0, 1)",
