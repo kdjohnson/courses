@@ -17,7 +17,6 @@ export const getCourses = async code => {
     const courses = await response.json()
     return courses.courses
   } catch (err) {
-    console.error(err)
     return err
   }
 }
