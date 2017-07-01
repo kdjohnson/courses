@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import "./App.css"
-import BasicTabs from "./components/BasicTabs"
+import CoursesTabs from "./components/CoursesTabs"
 import TermsMenu from "./components/TermsMenu"
 import { getTerms, getCourses } from "./api/api"
 
@@ -57,7 +57,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.theme)
     if (this.state.terms === null) {
       return <div />
     } else {
@@ -68,7 +67,7 @@ class App extends Component {
             currentTermDescription={this.state.currentTermDescription}
             updateTerm={this.updateTerm}
           />
-          <BasicTabs
+          <CoursesTabs
             currentTermCode={this.state.currentTermCode}
             courses={this.state.courses}
             mobile={this.state.mobile}

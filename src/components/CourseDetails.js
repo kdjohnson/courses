@@ -59,9 +59,9 @@ class CourseDetails extends Component {
             color="accent"
             onClick={this.handleOpen}
             id={"openbutton" + this.props.course.crn}
-            aria-label="more course information"
+            aria-label="course description"
           >
-            {t("courseDetails", {})}
+            {t("description", {})}
           </Button>
 
           <Dialog

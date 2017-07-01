@@ -5,19 +5,21 @@ import Card, { CardHeader, CardActions, CardContent } from "material-ui/Card"
 import Typography from "material-ui/Typography"
 import Instructors from "./Instructors"
 import Meetings from "./Meetings"
-import ExpandableMeetings from "./ExpandableMeetings"
 import CourseDetails from "./CourseDetails"
 import { translate, Interpolate } from "react-i18next"
 import i18n from "./../utils/i18n"
 
 const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
+  courseContainer: {
+    width: "100%"
+  },
+
   card: {
     width: 345,
     backgroundColor: "#fafafa"
   },
 
   cardMobile: {
-    width: "264px",
     backgroundColor: "#fafafa"
   },
 
@@ -28,6 +30,7 @@ const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
   },
 
   classHeader: {
+    height: 65,
     backgroundColor: theme.palette.primary[400]
   },
 
@@ -56,7 +59,7 @@ class ExpandableCourse extends Component {
     const { t } = this.props
     const classes = this.props.classes
     return (
-      <div>
+      <div className={this.props.mobile ? classes.courseContainer : ""}>
         <div style={{ marginTop: "1em" }}>
           <Card
             className={this.props.mobile ? classes.cardMobile : classes.card}

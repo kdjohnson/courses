@@ -15,7 +15,10 @@ const styleSheet = createStyleSheet("Instructors", theme => ({
     borderLeftStyle: "solid",
     borderLeftColor: theme.palette.accent[400],
     borderLeftWidth: "0.3em",
-    paddingLeft: "1em"
+    paddingLeft: "1em",
+    fontSize: "14px",
+    fontWeight: 400,
+    fontFamily: "Arimo"
   },
   link: {
     marginBottom: 10

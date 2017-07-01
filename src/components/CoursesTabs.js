@@ -34,7 +34,7 @@ const styleSheet = createStyleSheet("BasicTabs", theme => ({
   }
 }))
 
-class BasicTabs extends Component {
+class CoursesTabs extends Component {
   state = {
     index: 0
   }
@@ -86,10 +86,10 @@ class BasicTabs extends Component {
   }
 }
 
-BasicTabs.propTypes = {
+CoursesTabs.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styleSheet)(
-  translate("view", { wait: true })(BasicTabs)
+  translate("view", { wait: true })(CoursesTabs)
 )

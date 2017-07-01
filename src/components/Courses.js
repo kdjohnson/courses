@@ -13,18 +13,34 @@ import { translate, Interpolate } from "react-i18next"
 import i18n from "./../utils/i18n"
 
 const styleSheet = createStyleSheet("Courses", theme => ({
+  courseContainer: {
+    width: "100%"
+  },
+
+  coursesDiv: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexFlow: "wrap"
+  },
+
+  coursesDivMobile: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column"
+  },
+
   cardDiv: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around"
   },
+
   card: {
     width: 345,
     backgroundColor: "#fafafa"
   },
 
   cardMobile: {
-    width: "264px",
     backgroundColor: "#fafafa"
   },
 
@@ -34,6 +50,7 @@ const styleSheet = createStyleSheet("Courses", theme => ({
   },
 
   classHeader: {
+    height: 65,
     backgroundColor: theme.palette.primary[400]
   },
 
@@ -71,7 +88,10 @@ class Courses extends Component {
         )
       } else {
         elements.push(
-          <div key={this.props.courses[i].crn + i + Math.random()}>
+          <div
+            className={this.props.mobile ? classes.courseContainer : ""}
+            key={this.props.courses[i].crn + i + Math.random()}
+          >
             <div style={{ marginTop: "1em" }}>
               <Card
                 className={
@@ -141,17 +161,15 @@ class Courses extends Component {
   }
 
   render() {
-    console.log(this.props.mobile)
+    const classes = this.props.classes
     if (this.props.courses === null) {
       return <div />
     } else {
       return (
         <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            flexFlow: "wrap"
-          }}
+          className={
+            this.props.mobile ? classes.coursesDivMobile : classes.coursesDiv
+          }
         >
           {this.getCourses()}
         </div>

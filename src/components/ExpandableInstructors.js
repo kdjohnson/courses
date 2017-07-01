@@ -19,25 +19,34 @@ const styleSheet = createStyleSheet("ExpandableInstructors", theme => ({
     borderLeftStyle: "solid",
     borderLeftColor: theme.palette.accent[400],
     borderLeftWidth: "0.3em",
-    paddingLeft: "1em"
+    paddingLeft: "1em",
+    fontSize: "14px",
+    fontWeight: 400,
+    fontFamily: "Arimo"
   },
+
   link: {
     marginBottom: 10
   },
+
   teacher: {
     fontSize: 16,
     color: theme.palette.text.primary,
     marginBottom: "0.5em"
   },
+
   expand: {
+    marginTop: "-0.5em",
     transform: "rotate(0deg)",
     transition: theme.transitions.create("transform", {
       duration: theme.transitions.duration.shortest
     })
   },
+
   expandOpen: {
     transform: "rotate(180deg)"
   },
+
   flexGrow: { flex: "1 1 auto" },
   meet: {
     color: "rgba(0, 0, 0, 0.54)"

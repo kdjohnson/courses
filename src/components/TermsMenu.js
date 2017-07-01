@@ -52,9 +52,8 @@ class TermsMenu extends Component {
       return (
         <div style={{ marginTop: "2em" }}>
           <Button
-            accent
+            color="accent"
             raised
-            aria-owns="terms-menu"
             aria-haspopup="true"
             onClick={this.handleClick}
           >
