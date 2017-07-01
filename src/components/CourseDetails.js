@@ -9,6 +9,7 @@ import Button from "material-ui/Button"
 import Slide from "material-ui/transitions/Slide"
 import Typography from "material-ui/Typography"
 import { withStyles, createStyleSheet } from "material-ui/styles"
+import PropTypes from "prop-types"
 import { translate, Interpolate } from "react-i18next"
 import i18n from "./../utils/i18n"
 
@@ -50,8 +51,9 @@ class CourseDetails extends Component {
   render() {
     const classes = this.props.classes
     const { t } = this.props
-    if (this.props.courses === null) return <div />
-    else {
+    if (Object.is(this.props.courses, null)) {
+      return <div />
+    } else {
       return (
         <div aria-labelledby={"openbutton" + this.props.course.crn}>
           <Button
@@ -109,6 +111,11 @@ class CourseDetails extends Component {
     }
   }
 }
+
+CourseDetails.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
 export default withStyles(styleSheet)(
   translate("view", { wait: true })(CourseDetails)
 )

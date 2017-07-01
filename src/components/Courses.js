@@ -162,7 +162,7 @@ class Courses extends Component {
 
   render() {
     const classes = this.props.classes
-    if (this.props.courses === null) {
+    if (Object.is(this.props.courses, null)) {
       return <div />
     } else {
       return (

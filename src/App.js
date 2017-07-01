@@ -34,7 +34,7 @@ class App extends Component {
     getTerms()
       .then(terms => {
         for (let i = 0, total = terms.length; i < total; i++) {
-          if (terms[i].current === "true") {
+          if (Object.is(terms[i].current, "true")) {
             this.setState({
               currentTermDescription: terms[i].description,
               currentTermCode: terms[i].code
@@ -57,7 +57,7 @@ class App extends Component {
   }
 
   render() {
-    if (this.state.terms === null) {
+    if (Object.is(this.state.terms, null)) {
       return <div />
     } else {
       return (
@@ -66,6 +66,7 @@ class App extends Component {
             terms={this.state.terms}
             currentTermDescription={this.state.currentTermDescription}
             updateTerm={this.updateTerm}
+            mobile={this.state.mobile}
           />
           <CoursesTabs
             currentTermCode={this.state.currentTermCode}
