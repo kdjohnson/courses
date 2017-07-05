@@ -54,40 +54,51 @@ class ExpandableMeetings extends Component {
     const classes = this.props.classes
     for (let i = 1, total = this.props.meetings.length; i < total; i++) {
       elements.push(
-        <div
-          key={this.props.meetings[i].endDate + i + Math.random()}
-          className={classes.expandedDiv}
-        >
+        <div className={classes.expandedDiv}>
           <a
             type="body2"
             tabIndex="0"
             target="_blank"
             href="https://oakland.edu"
             rel="noopener noreferrer"
-            key={this.props.meetings[i].endDate + i + Math.random()}
           >
             {this.props.meetings[i].buildingRoom +
               " [" +
               this.props.meetings[i].campus +
               " ] "}
           </a>
-          <Typography
-            type="body2"
-            className={classes.meet}
-            tabIndex="0"
-            key={this.props.meetings[i].endDate + i + Math.random()}
-          >
+          <Typography type="body2" className={classes.meet} tabIndex="0">
             {this.props.meetings[i].courseType}
           </Typography>
           <Typography
             type="body2"
             className={classes.meet}
             tabIndex="0"
-            key={this.props.meetings[i].endDate + i + Math.random()}
+            aria-label={
+              this.props.meetings[i].startDay +
+              "-0" +
+              this.props.meetings[i].startMonth +
+              "-" +
+              this.props.meetings[i].startYear +
+              " to " +
+              this.props.meetings[i].endDay +
+              "-0" +
+              this.props.meetings[i].endMonth +
+              "-" +
+              this.props.meetings[i].endYear
+            }
           >
-            {this.props.meetings[i].startTime +
+            {this.props.meetings[i].startDay +
+              "/" +
+              this.props.meetings[i].startMonth +
+              "/" +
+              this.props.meetings[i].startYear +
               " - " +
-              this.props.meetings[i].endTime}
+              this.props.meetings[i].endDay +
+              "/" +
+              this.props.meetings[i].endMonth +
+              "/" +
+              this.props.meetings[i].endYear}
           </Typography>
         </div>
       )

@@ -22,7 +22,7 @@ const (
 	courseSQL = "create table if not exists courses(id serial primary key, crn text, waitlistpos text, registrationstatus text, registrationdescription text, departmentcode text, departmentdescription text, coursetitle text, coursedescription text, termcode text, subjectcode text, subjectnumber text, credit text, section text)"
 
 	//Meeting table creation.
-	meetingSQL = "create table if not exists meetings(id serial primary key, crn text, startdate text, enddate text, starttime text, endtime text, coursetype text, coursetypecode text, buildingroom text, campus text, meetday text)"
+	meetingSQL = "create table if not exists meetings(id serial primary key, crn text, startday text, startmonth text, startyear text, endday text, endmonth text, endyear text, starttime text, endtime text, coursetype text, coursetypecode text, buildingroom text, campus text, meetday text)"
 
 	//meetingSQL = "create table if not exists meeting(id serial primary key, crn text, startdate text, enddate text, starttime text, endtime text, coursetype text, coursetypecode text, buildingroom text, campus text, meetdays text, starthour text, startminutes text, startmonth text, startyear text, startdayofmonth text, startdayofweek text, startweekofmonth text, endhour text, endminutes text, endmonth text, endyear text, enddayofmonth text, enddayofweek text, endweekofmonth text)"
 	//Instructor table creation.
@@ -97,8 +97,12 @@ type languageStrings struct {
 type Meeting struct {
 	ID             int
 	Crn            string `json:"crn"`
-	StartDate      string `json:"startDate"`
-	EndDate        string `json:"endDate"`
+	StartDay       string `json:"startDay"`
+	StartMonth     string `json:"startMonth"`
+	StartYear      string `json:"startYear"`
+	EndDay         string `json:"endDay"`
+	EndMonth       string `json:"endMonth"`
+	EndYear        string `json:"endYear"`
 	StartTime      string `json:"startTime"`
 	EndTime        string `json:"endTime"`
 	CourseType     string `json:"courseType"`
@@ -285,48 +289,6 @@ func lang(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
-func person(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-
-	data := Person{
-		"318 Meadow Brook Rd, Rochester, MI 48309",
-		"grizz@oakland.edu",
-		"G00000000",
-		"Grizz OU",
-		"(248) 370-2100",
-		"111111",
-		"Grizz",
-	}
-
-	person := struct {
-		Person Person `json:"person"`
-	}{
-		data,
-	}
-
-	if err := json.NewEncoder(w).Encode(person); err != nil {
-		panic(err)
-	}
-}
-
-func mydetails(w http.ResponseWriter, r *http.Request) {
-	w.Header().Set("Access-Control-Allow-Origin", "*")
-
-	var students []Student
-	data := Student{"Senior", "computer science", "Bach of Sci", "School CS", "Undergrad", "", "", "", "", "", "", "", "", "", ""}
-	students = append(students, data)
-
-	student := struct {
-		Student []Student `json:"studentDetails"`
-	}{
-		students,
-	}
-
-	if err := json.NewEncoder(w).Encode(student); err != nil {
-		panic(err)
-	}
-}
-
 func credits(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
@@ -400,7 +362,7 @@ func courses(w http.ResponseWriter, r *http.Request) {
 
 			for meetingRows.Next() {
 				var m Meeting
-				if err := meetingRows.Scan(&m.ID, &m.Crn, &m.StartDate, &m.EndDate, &m.StartTime, &m.EndTime, &m.CourseType, &m.CourseTypeCode, &m.BuildingRoom, &m.Campus, &m.MeetDays); err != nil {
+				if err := meetingRows.Scan(&m.ID, &m.Crn, &m.StartDay, &m.StartMonth, &m.StartYear, &m.EndDay, &m.EndMonth, &m.EndYear, &m.StartTime, &m.EndTime, &m.CourseType, &m.CourseTypeCode, &m.BuildingRoom, &m.Campus, &m.MeetDays); err != nil {
 					fmt.Println("error on meetings")
 					panic(err)
 				} else {
@@ -518,8 +480,6 @@ func init() {
 func main() {
 	r := mux.NewRouter()
 	r.HandleFunc("/locales/{lng}/{ns}", lang)
-	r.HandleFunc("/api/person", person)
-	r.HandleFunc("/api/mydetails", mydetails)
 	r.HandleFunc("/api/courses", courses)
 	r.HandleFunc("/api/terms", terms)
 	r.HandleFunc("/api/credits", credits)
