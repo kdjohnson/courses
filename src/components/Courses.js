@@ -49,9 +49,19 @@ const styleSheet = createStyleSheet("Courses", theme => ({
     color: theme.palette.text.primary
   },
 
+  infoContainer: {
+    marginLeft: "2em"
+  },
+
   classHeader: {
     height: 65,
     backgroundColor: theme.palette.primary[400]
+  },
+
+  classHeaderMobile: {
+    height: 65,
+    backgroundColor: theme.palette.primary[400],
+    textAlign: "center"
   },
 
   classHeaderSpanDiv: {
@@ -66,6 +76,17 @@ const styleSheet = createStyleSheet("Courses", theme => ({
 
   content: {
     paddingTop: 0
+  },
+
+  contentMobile: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+
+  actions: {
+    display: "flex",
+    justifyContent: "center"
   }
 }))
 
@@ -89,7 +110,7 @@ class Courses extends Component {
       } else {
         elements.push(
           <div
-            className={this.props.mobile ? classes.courseContainer : ""}
+            className={this.props.mobile ? classes.courseContainer : null}
             key={this.props.courses[i].crn + i + Math.random()}
           >
             <div style={{ marginTop: "1em" }}>
@@ -100,7 +121,11 @@ class Courses extends Component {
                 key={this.props.courses[i].crn + i + Math.random()}
               >
                 <CardHeader
-                  className={classes.classHeader}
+                  className={
+                    this.props.mobile
+                      ? classes.classHeaderMobile
+                      : classes.classHeader
+                  }
                   title={
                     <Typography
                       tabIndex="0"
@@ -130,23 +155,32 @@ class Courses extends Component {
                   }
                 />
                 <CardContent
-                  className={classes.content}
+                  className={
+                    this.props.mobile ? classes.contentMobile : classes.content
+                  }
                   key={this.props.courses[i].crn + i + Math.random()}
                 >
                   <div
-                    style={{ marginTop: "1em" }}
-                    key={this.props.courses[i].crn + i + Math.random()}
+                    className={this.props.mobile ? classes.infoContainer : null}
                   >
-                    <Meetings meetings={this.props.courses[i].meetings} />
-                  </div>
-                  <div
-                    style={{ marginTop: "1em" }}
-                    key={this.props.courses[i].crn + i + Math.random()}
-                  >
-                    <Instructors teachers={this.props.courses[i].instructors} />
+                    <div
+                      style={{ marginTop: "1em" }}
+                      key={this.props.courses[i].crn + i + Math.random()}
+                    >
+                      <Meetings meetings={this.props.courses[i].meetings} />
+                    </div>
+                    <div
+                      style={{ marginTop: "1em" }}
+                      key={this.props.courses[i].crn + i + Math.random()}
+                    >
+                      <Instructors
+                        teachers={this.props.courses[i].instructors}
+                      />
+                    </div>
                   </div>
                 </CardContent>
                 <CardActions
+                  className={this.props.mobile ? classes.actions : null}
                   key={this.props.courses[i].crn + i + Math.random()}
                 >
                   <CourseDetails course={this.props.courses[i]} />

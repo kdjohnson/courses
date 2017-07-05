@@ -26,7 +26,8 @@ const styleSheet = createStyleSheet("CourseDetails", theme => ({
     color: "rgba(0, 0, 0, 0.68)"
   },
 
-  dialogBackground: {
+  dialogContent: {
+    backgroundColor: "#fafafa",
     background: "#E8EAEE"
   },
 
@@ -69,7 +70,7 @@ class CourseDetails extends Component {
           <Dialog
             role="dialog"
             id="dialogbox"
-            aria-label="my courses information"
+            aria-label="course description"
             tabIndex="0"
             open={this.state.open}
             onRequestClose={this.handleClose}
@@ -84,7 +85,7 @@ class CourseDetails extends Component {
               </Typography>
             </DialogTitle>
             <DialogContent
-              className={classes.dialogBackground}
+              className={classes.dialogContent}
               aria-labelledby="dialogbox"
             >
               <List>

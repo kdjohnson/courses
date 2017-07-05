@@ -34,6 +34,12 @@ const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
     backgroundColor: theme.palette.primary[400]
   },
 
+  classHeaderMobile: {
+    height: 65,
+    backgroundColor: theme.palette.primary[400],
+    textAlign: "center"
+  },
+
   classHeaderSpanDiv: {
     display: "flex",
     flexDirection: "column"
@@ -51,6 +57,21 @@ const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
 
   content: {
     paddingTop: 0
+  },
+
+  contentMobile: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+
+  actions: {
+    display: "flex",
+    justifyContent: "center"
+  },
+
+  infoContainer: {
+    marginLeft: "2em"
   }
 }))
 
@@ -59,13 +80,17 @@ class ExpandableCourse extends Component {
     const { t } = this.props
     const classes = this.props.classes
     return (
-      <div className={this.props.mobile ? classes.courseContainer : ""}>
+      <div className={this.props.mobile ? classes.courseContainer : null}>
         <div style={{ marginTop: "1em" }}>
           <Card
             className={this.props.mobile ? classes.cardMobile : classes.card}
           >
             <CardHeader
-              className={classes.classHeader}
+              className={
+                this.props.mobile
+                  ? classes.classHeaderMobile
+                  : classes.classHeader
+              }
               title={
                 <Typography
                   tabIndex="0"
@@ -94,15 +119,21 @@ class ExpandableCourse extends Component {
                 </div>
               }
             />
-            <CardContent className={classes.content}>
-              <div style={{ marginTop: "1em" }}>
-                <Meetings meetings={this.props.course.meetings} />
-              </div>
-              <div style={{ marginTop: "1em" }}>
-                <Instructors teachers={this.props.course.instructors} />
+            <CardContent
+              className={
+                this.props.mobile ? classes.contentMobile : classes.content
+              }
+            >
+              <div className={this.props.mobile ? classes.infoContainer : null}>
+                <div style={{ marginTop: "1em" }}>
+                  <Meetings meetings={this.props.course.meetings} />
+                </div>
+                <div style={{ marginTop: "1em" }}>
+                  <Instructors teachers={this.props.course.instructors} />
+                </div>
               </div>
             </CardContent>
-            <CardActions>
+            <CardActions className={this.props.mobile ? classes.actions : null}>
               <CourseDetails course={this.props.course} />
             </CardActions>
           </Card>
