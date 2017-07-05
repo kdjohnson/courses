@@ -3,6 +3,15 @@
 import React, { Component } from "react"
 import Button from "material-ui/Button"
 import Menu, { MenuItem } from "material-ui/Menu"
+import PropTypes from "prop-types"
+import { withStyles, createStyleSheet } from "material-ui/styles"
+
+const styleSheet = createStyleSheet("TermsMenu", theme => ({
+  mobileTermDiv: {
+    display: "flex",
+    justifyContent: "center"
+  }
+}))
 
 class TermsMenu extends Component {
   componentDidMount() {
@@ -46,15 +55,15 @@ class TermsMenu extends Component {
   }
 
   render() {
+    const classes = this.props.classes
     if (Object.is(this.props.terms, null)) {
       return <div />
     } else {
       return (
-        <div style={{ marginTop: "2em" }}>
+        <div className={this.props.mobile ? classes.mobileTermDiv : ""}>
           <Button
-            accent
+            color="accent"
             raised
-            aria-owns="terms-menu"
             aria-haspopup="true"
             onClick={this.handleClick}
           >
@@ -74,4 +83,4 @@ class TermsMenu extends Component {
   }
 }
 
-export default TermsMenu
+export default withStyles(styleSheet)(TermsMenu)

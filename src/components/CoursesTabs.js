@@ -23,7 +23,7 @@ TabContainer.propTypes = {
 const styleSheet = createStyleSheet("BasicTabs", theme => ({
   root: {
     flexGrow: 1,
-    marginTop: 30
+    marginTop: "1em"
   },
   tabs: {
     height: "0.3em"
@@ -34,7 +34,7 @@ const styleSheet = createStyleSheet("BasicTabs", theme => ({
   }
 }))
 
-class BasicTabs extends Component {
+class CoursesTabs extends Component {
   state = {
     index: 0
   }
@@ -60,23 +60,24 @@ class BasicTabs extends Component {
             <Tab label={t("grades", {})} tabIndex="0" />
           </Tabs>
         </div>
-        {this.state.index === 0 &&
+        {Object.is(this.state.index, 0) &&
           <TabContainer>
             <div>
               <Courses
                 tabIndex="0"
                 currentTermCode={this.props.currentTermCode}
                 courses={this.props.courses}
+                mobile={this.props.mobile}
               />
             </div>
           </TabContainer>}
-        {this.state.index === 1 &&
+        {Object.is(this.state.index, 1) &&
           <TabContainer>
             <div tabIndex="0">
               <p tabIndex="0">Hello Aaron</p>
             </div>
           </TabContainer>}
-        {this.state.index === 2 &&
+        {Object.is(this.state.index, 2) &&
           <TabContainer>
             <Grades tabIndex="0" courses={this.props.courses} />
           </TabContainer>}
@@ -85,10 +86,10 @@ class BasicTabs extends Component {
   }
 }
 
-BasicTabs.propTypes = {
+CoursesTabs.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styleSheet)(
-  translate("view", { wait: true })(BasicTabs)
+  translate("view", { wait: true })(CoursesTabs)
 )

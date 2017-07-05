@@ -13,13 +13,34 @@ import { translate, Interpolate } from "react-i18next"
 import i18n from "./../utils/i18n"
 
 const styleSheet = createStyleSheet("Courses", theme => ({
+  courseContainer: {
+    width: "100%"
+  },
+
+  coursesDiv: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexFlow: "wrap"
+  },
+
+  coursesDivMobile: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column"
+  },
+
   cardDiv: {
     display: "flex",
     flexDirection: "row",
     justifyContent: "space-around"
   },
+
   card: {
     width: 345,
+    backgroundColor: "#fafafa"
+  },
+
+  cardMobile: {
     backgroundColor: "#fafafa"
   },
 
@@ -28,8 +49,24 @@ const styleSheet = createStyleSheet("Courses", theme => ({
     color: theme.palette.text.primary
   },
 
+  infoContainer: {
+    marginLeft: "2em"
+  },
+
   classHeader: {
+    height: 65,
     backgroundColor: theme.palette.primary[400]
+  },
+
+  classHeaderMobile: {
+    height: 65,
+    backgroundColor: theme.palette.primary[400],
+    textAlign: "center"
+  },
+
+  classHeaderSpanDiv: {
+    display: "flex",
+    flexDirection: "column"
   },
 
   classHeaderSpan: {
@@ -39,30 +76,21 @@ const styleSheet = createStyleSheet("Courses", theme => ({
 
   content: {
     paddingTop: 0
+  },
+
+  contentMobile: {
+    display: "flex",
+    flexDirection: "column",
+    alignItems: "center"
+  },
+
+  actions: {
+    display: "flex",
+    justifyContent: "center"
   }
 }))
 
 class Courses extends Component {
-  componentDidMount() {
-    window.addEventListener("resize", this.handleResize)
-  }
-
-  handleResize = () => {
-    if (window.innerWidth <= 790) {
-      this.setState({
-        mobile: true
-      })
-    } else {
-      this.setState({
-        mobile: false
-      })
-    }
-  }
-
-  state = {
-    mobile: false
-  }
-
   getCourses = () => {
     const classes = this.props.classes
     const { t } = this.props
@@ -76,18 +104,28 @@ class Courses extends Component {
           <ExpandableCourse
             course={this.props.courses[i]}
             key={"expandable" + Math.random()}
+            mobile={this.props.mobile}
           />
         )
       } else {
         elements.push(
-          <div key={this.props.courses[i].crn + i + Math.random()}>
+          <div
+            className={this.props.mobile ? classes.courseContainer : null}
+            key={this.props.courses[i].crn + i + Math.random()}
+          >
             <div style={{ marginTop: "1em" }}>
               <Card
-                className={classes.card}
+                className={
+                  this.props.mobile ? classes.cardMobile : classes.card
+                }
                 key={this.props.courses[i].crn + i + Math.random()}
               >
                 <CardHeader
-                  className={classes.classHeader}
+                  className={
+                    this.props.mobile
+                      ? classes.classHeaderMobile
+                      : classes.classHeader
+                  }
                   title={
                     <Typography
                       tabIndex="0"
@@ -100,60 +138,49 @@ class Courses extends Component {
                   }
                   key={this.props.courses[i].crn + i + Math.random()}
                   subheader={
-                    <span tabIndex="0" className={classes.classHeaderSpan}>
-                      {this.props.courses[i].subjectCode +
-                        "-" +
-                        this.props.courses[i].subjectNumber +
-                        "-" +
-                        this.props.courses[i].section}
-                    </span>
+                    <div className={classes.classHeaderSpanDiv}>
+                      <span tabIndex="0" className={classes.classHeaderSpan}>
+                        {this.props.courses[i].subjectCode +
+                          "-" +
+                          this.props.courses[i].subjectNumber +
+                          "-" +
+                          this.props.courses[i].section +
+                          "-" +
+                          this.props.courses[i].crn}
+                      </span>
+                      <span tabIndex="0" className={classes.classHeaderSpan}>
+                        {t("credits", {}) + ": " + this.props.courses[i].credit}
+                      </span>
+                    </div>
                   }
                 />
                 <CardContent
-                  className={classes.content}
+                  className={
+                    this.props.mobile ? classes.contentMobile : classes.content
+                  }
                   key={this.props.courses[i].crn + i + Math.random()}
                 >
-                  <Typography
-                    type="headline"
-                    component="h2"
-                    className={classes.courseTitle}
-                    tabIndex="0"
-                    key={this.props.courses[i].crn + i + Math.random()}
-                  >
-                    {t("section", {}) + ": " + this.props.courses[i].section}
-                  </Typography>
-                  <Typography
-                    type="headline"
-                    component="h2"
-                    className={classes.courseTitle}
-                    tabIndex="0"
-                    key={this.props.courses[i].crn + i + Math.random()}
-                  >
-                    {t("crn", {}) + ": " + this.props.courses[i].crn}
-                  </Typography>
-                  <Typography
-                    type="headline"
-                    component="h2"
-                    className={classes.courseTitle}
-                    tabIndex="0"
-                    key={this.props.courses[i].crn + i + Math.random()}
-                  >
-                    {t("credits", {}) + ": " + this.props.courses[i].credit}
-                  </Typography>
                   <div
-                    style={{ marginTop: "1em" }}
-                    key={this.props.courses[i].crn + i + Math.random()}
+                    className={this.props.mobile ? classes.infoContainer : null}
                   >
-                    <Meetings meetings={this.props.courses[i].meetings} />
-                  </div>
-                  <div
-                    style={{ marginTop: "1em" }}
-                    key={this.props.courses[i].crn + i + Math.random()}
-                  >
-                    <Instructors teachers={this.props.courses[i].instructors} />
+                    <div
+                      style={{ marginTop: "1em" }}
+                      key={this.props.courses[i].crn + i + Math.random()}
+                    >
+                      <Meetings meetings={this.props.courses[i].meetings} />
+                    </div>
+                    <div
+                      style={{ marginTop: "1em" }}
+                      key={this.props.courses[i].crn + i + Math.random()}
+                    >
+                      <Instructors
+                        teachers={this.props.courses[i].instructors}
+                      />
+                    </div>
                   </div>
                 </CardContent>
                 <CardActions
+                  className={this.props.mobile ? classes.actions : null}
                   key={this.props.courses[i].crn + i + Math.random()}
                 >
                   <CourseDetails course={this.props.courses[i]} />
@@ -168,28 +195,15 @@ class Courses extends Component {
   }
 
   render() {
-    if (this.props.courses === null) {
+    const classes = this.props.classes
+    if (Object.is(this.props.courses, null)) {
       return <div />
-    } else if (!this.state.mobile) {
-      return (
-        <div
-          style={{
-            display: "flex",
-            justifyContent: "space-between",
-            flexFlow: "wrap"
-          }}
-        >
-          {this.getCourses()}
-        </div>
-      )
     } else {
       return (
         <div
-          style={{
-            display: "flex",
-            alignItems: "center",
-            flexDirection: "column"
-          }}
+          className={
+            this.props.mobile ? classes.coursesDivMobile : classes.coursesDiv
+          }
         >
           {this.getCourses()}
         </div>

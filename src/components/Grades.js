@@ -6,7 +6,7 @@ import Table, {
   TableRow
 } from "material-ui/Table"
 import { withStyles, createStyleSheet } from "material-ui/styles"
-import Card, { CardHeader, CardContent, CardMedia } from "material-ui/Card"
+import Card, { CardHeader, CardContent } from "material-ui/Card"
 import Typography from "material-ui/Typography"
 import { getCredits } from "./../api/api"
 import PropTypes from "prop-types"
@@ -38,7 +38,8 @@ const styleSheet = createStyleSheet("Grades", theme => ({
   },
 
   content: {
-    paddingTop: 0
+    paddingTop: 0,
+    overflowX: "scroll"
   },
   tableHeader: {
     color: "rgba(0, 0, 0, 1)",
@@ -64,107 +65,104 @@ class Grades extends Component {
   render() {
     const classes = this.props.classes
     const { t } = this.props
-    if (
-      this.props.courses == null ||
-      this.props.courses == undefined ||
-      this.state.creditsObj == null ||
-      this.state.creditsObj == undefined
-    ) {
+    try {
+      return (
+        <Card className={classes.card}>
+          <CardHeader
+            className={classes.classHeader}
+            title={
+              <Typography
+                tabIndex="0"
+                component="h1"
+                className={classes.classHeaderSpan}
+                style={{ fontSize: "20px" }}
+              >
+                {t("gac", {})}
+              </Typography>
+            }
+          />
+          <CardContent className={classes.content}>
+            <Table>
+              <TableHead>
+                <TableRow className={classes.tableHeader}>
+                  <TableCell className={classes.tableCell} scope="col">
+                    {t("level", {})}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} scope="col">
+                    {t("credits", {})}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} scope="col">
+                    GPA
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <TableRow>
+                  <TableCell>
+                    {this.state.creditsObj[0].level}
+                  </TableCell>
+                  <TableCell>
+                    {this.state.creditsObj[0].credits}
+                  </TableCell>
+                  <TableCell>
+                    {this.state.creditsObj[0].gpa}
+                  </TableCell>
+                </TableRow>
+              </TableBody>
+            </Table>
+            <Table>
+              <TableHead>
+                <TableRow className={classes.tableHeader}>
+                  <TableCell className={classes.tableCell} scope="col">
+                    {t("course", {})}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} scope="col">
+                    {t("credits", {})}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} scope="col">
+                    {t("grades", {})}
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                {GradeRow(this.props.courses)}
+              </TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )
+    } catch (error) {
       return <div />
     }
-    return (
-      <Card className={classes.card}>
-        <CardHeader
-          className={classes.classHeader}
-          title={
-            <Typography
-              tabIndex="0"
-              component="h1"
-              className={classes.classHeaderSpan}
-              style={{ fontSize: "20px" }}
-            >
-              {t("gac", {})}
-            </Typography>
-          }
-        />
-        <CardContent className={classes.content}>
-          <Table>
-            <TableHead>
-              <TableRow className={classes.tableHeader}>
-                <TableCell className={classes.tableCell} scope="col">
-                  {t("level", {})}
-                </TableCell>
-                <TableCell className={classes.tableCell} scope="col">
-                  {t("credits", {})}
-                </TableCell>
-                <TableCell className={classes.tableCell} scope="col">
-                  GPA
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              <TableRow>
-                <TableCell>
-                  {this.state.creditsObj[0].level}
-                </TableCell>
-                <TableCell>
-                  {this.state.creditsObj[0].credits}
-                </TableCell>
-                <TableCell>
-                  {this.state.creditsObj[0].gpa}
-                </TableCell>
-              </TableRow>
-            </TableBody>
-          </Table>
-          <Table>
-            <TableHead>
-              <TableRow className={classes.tableHeader}>
-                <TableCell className={classes.tableCell} scope="col">
-                  {t("course", {})}
-                </TableCell>
-                <TableCell className={classes.tableCell} scope="col">
-                  {t("credits", {})}
-                </TableCell>
-                <TableCell className={classes.tableCell} scope="col">
-                  {t("grades", {})}
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>
-              {GradeRow(this.props.courses)}
-            </TableBody>
-          </Table>
-        </CardContent>
-      </Card>
-    )
   }
 }
 
-const GradeRow = obj => {
-  if (Object.is(null, obj) || Object.is(undefined, obj)) {
+const GradeRow = courses => {
+  try {
+    let tableArray = []
+    for (let i = 0; i < courses.length; i++) {
+      let course = courses[i].departmentCode + " - " + courses[i].subjectNumber
+      let credits = courses[i].grade.credit
+      let grade = courses[i].grade.grade
+
+      tableArray.push(
+        <TableRow key={i + Math.random()}>
+          <TableCell>
+            {course}
+          </TableCell>
+          <TableCell>
+            {credits}
+          </TableCell>
+          <TableCell>
+            {grade}
+          </TableCell>
+        </TableRow>
+      )
+    }
+    return tableArray
+  } catch (error) {
     return <TableRow />
   }
-  let tableArray = []
-  for (let i = 0; i < obj.length; i++) {
-    let course = obj[i].departmentCode + " - " + obj[i].subjectNumber
-    let credits = obj[i].grade.credit
-    let grade = obj[i].grade.grade
-
-    tableArray.push(
-      <TableRow>
-        <TableCell>
-          {course}
-        </TableCell>
-        <TableCell>
-          {credits}
-        </TableCell>
-        <TableCell>
-          {grade}
-        </TableCell>
-      </TableRow>
-    )
-  }
-  return tableArray
 }
 
 Grades.propTypes = {

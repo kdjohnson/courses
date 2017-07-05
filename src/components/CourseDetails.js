@@ -9,10 +9,15 @@ import Button from "material-ui/Button"
 import Slide from "material-ui/transitions/Slide"
 import Typography from "material-ui/Typography"
 import { withStyles, createStyleSheet } from "material-ui/styles"
+import PropTypes from "prop-types"
 import { translate, Interpolate } from "react-i18next"
 import i18n from "./../utils/i18n"
 
 const styleSheet = createStyleSheet("CourseDetails", theme => ({
+  button: {
+    fontWeight: "bolder"
+  },
+
   dialogHeader: {
     backgroundColor: theme.palette.primary[400]
   },
@@ -21,7 +26,8 @@ const styleSheet = createStyleSheet("CourseDetails", theme => ({
     color: "rgba(0, 0, 0, 0.68)"
   },
 
-  dialogBackground: {
+  dialogContent: {
+    backgroundColor: "#fafafa",
     background: "#E8EAEE"
   },
 
@@ -46,24 +52,25 @@ class CourseDetails extends Component {
   render() {
     const classes = this.props.classes
     const { t } = this.props
-    if (this.props.courses === null) return <div />
-    else {
+    if (Object.is(this.props.courses, null)) {
+      return <div />
+    } else {
       return (
         <div aria-labelledby={"openbutton" + this.props.course.crn}>
           <Button
-            raised
-            accent
+            className={classes.button}
+            color="accent"
             onClick={this.handleOpen}
             id={"openbutton" + this.props.course.crn}
-            aria-label="more course information"
+            aria-label="course description"
           >
-            {t("courseDetails", {})}
+            {t("description", {})}
           </Button>
 
           <Dialog
             role="dialog"
             id="dialogbox"
-            aria-label="my courses information"
+            aria-label="course description"
             tabIndex="0"
             open={this.state.open}
             onRequestClose={this.handleClose}
@@ -78,73 +85,22 @@ class CourseDetails extends Component {
               </Typography>
             </DialogTitle>
             <DialogContent
-              className={classes.dialogBackground}
+              className={classes.dialogContent}
               aria-labelledby="dialogbox"
             >
               <List>
                 <ListItem tabIndex="0">
-                  <ListItemText
-                    primary={t("courseTitle", {})}
-                    secondary={
-                      <p className={classes.list}>
-                        {this.props.course.courseTitle}
-                      </p>
-                    }
-                  />
-                </ListItem>
-
-                <ListItem tabIndex="0">
-                  <ListItemText
-                    primary={t("crn", {})}
-                    secondary={
-                      <p className={classes.list}>
-                        {this.props.course.crn}
-                      </p>
-                    }
-                  />
-                </ListItem>
-
-                <ListItem tabIndex="0">
-                  <ListItemText
-                    primary={t("department", {})}
-                    secondary={
-                      <p className={classes.list}>
-                        {this.props.course.departmentDescription}
-                      </p>
-                    }
-                  />
-                </ListItem>
-
-                <ListItem tabIndex="0">
-                  <ListItemText
-                    primary={t("grade", {})}
-                    secondary={
-                      <p className={classes.list}>
-                        {this.props.course.grade.grade}
-                      </p>
-                    }
-                  />
-                </ListItem>
-
-                <ListItem tabIndex="0">
-                  <ListItemText
-                    primary={t("description", {})}
-                    secondary={
-                      <p className={classes.list}>
-                        {this.props.course.courseDescription}
-                      </p>
-                    }
-                  />
+                  <ListItemText primary={this.props.course.courseDescription} />
                 </ListItem>
               </List>
 
               <DialogActions>
                 <Button
+                  className={classes.button}
                   onClick={this.handleClose}
                   aria-label="close course information"
                   tabIndex="0"
-                  raised
-                  accent
+                  color="accent"
                 >
                   {t("close", {})}
                 </Button>
@@ -156,6 +112,11 @@ class CourseDetails extends Component {
     }
   }
 }
+
+CourseDetails.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
 export default withStyles(styleSheet)(
   translate("view", { wait: true })(CourseDetails)
 )

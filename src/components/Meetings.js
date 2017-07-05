@@ -8,7 +8,10 @@ const styleSheet = createStyleSheet("Meetings", theme => ({
     color: theme.palette.text.primary
   },
   meetLink: {
-    color: "#3344dd"
+    color: "#3344dd",
+    fontSize: "14px",
+    fontWeight: 400,
+    fontFamily: "Arimo"
   }
 }))
 
@@ -21,7 +24,7 @@ class Meetings extends Component {
       return (
         <div key={this.props.meetings[0].endDate + Math.random()}>
           <a
-            type="body2"
+            className={classes.meetLink}
             tabIndex="0"
             target="_blank"
             href="https://oakland.edu"
@@ -39,7 +42,7 @@ class Meetings extends Component {
             tabIndex="0"
             key={this.props.meetings[0].endDate + Math.random()}
           >
-            {this.props.meetings[0].courseType}
+            {this.props.meetings[0].meetDays}
           </Typography>
           <Typography
             type="body2"
@@ -50,6 +53,24 @@ class Meetings extends Component {
             {this.props.meetings[0].startTime +
               " - " +
               this.props.meetings[0].endTime}
+          </Typography>
+          <Typography
+            type="body2"
+            className={classes.meet}
+            tabIndex="0"
+            key={this.props.meetings[0].endDate + Math.random()}
+          >
+            {this.props.meetings[0].startDate +
+              " - " +
+              this.props.meetings[0].endDate}
+          </Typography>
+          <Typography
+            type="body2"
+            className={classes.meet}
+            tabIndex="0"
+            key={this.props.meetings[0].endDate + Math.random()}
+          >
+            {this.props.meetings[0].courseType}
           </Typography>
         </div>
       )

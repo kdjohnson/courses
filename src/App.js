@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import "./App.css"
-import BasicTabs from "./components/BasicTabs"
+import CoursesTabs from "./components/CoursesTabs"
 import TermsMenu from "./components/TermsMenu"
 import { getTerms, getCourses } from "./api/api"
 
@@ -9,14 +9,32 @@ class App extends Component {
     terms: null,
     currentTermDescription: "",
     currentTermCode: "",
-    courses: []
+    courses: [],
+    width: document.getElementById("root").clientWidth,
+    mobile: false
+  }
+
+  updateWidth = () => {
+    this.setState({
+      width: document.getElementById("root").clientWidth
+    })
+    if (this.state.width < 796) {
+      this.setState({ mobile: true })
+    } else {
+      this.setState({ mobile: false })
+    }
   }
 
   componentDidMount() {
+    window.addEventListener("resize", this.updateWidth)
+    if (document.getElementById("root").clientWidth < 796) {
+      this.setState({ mobile: true })
+    }
+
     getTerms()
       .then(terms => {
         for (let i = 0, total = terms.length; i < total; i++) {
-          if (terms[i].current === "true") {
+          if (Object.is(terms[i].current, "true")) {
             this.setState({
               currentTermDescription: terms[i].description,
               currentTermCode: terms[i].code
@@ -39,20 +57,21 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.props.theme)
-    if (this.state.terms === null) {
+    if (Object.is(this.state.terms, null)) {
       return <div />
     } else {
       return (
-        <div style={{ padding: "2em" }}>
+        <div>
           <TermsMenu
             terms={this.state.terms}
             currentTermDescription={this.state.currentTermDescription}
             updateTerm={this.updateTerm}
+            mobile={this.state.mobile}
           />
-          <BasicTabs
+          <CoursesTabs
             currentTermCode={this.state.currentTermCode}
             courses={this.state.courses}
+            mobile={this.state.mobile}
           />
         </div>
       )
