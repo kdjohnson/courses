@@ -19,37 +19,26 @@ class Meetings extends Component {
   getMeetings = () => {
     const classes = this.props.classes
     if (Object.is(this.props.meetings, null)) {
-      return <div key={"emptyDiv" + 2} />
+      return <div key={"emptyDiv" + Math.random()} />
     } else {
       return (
-        <div key={this.props.meetings[0].endDate + Math.random()}>
+        <div>
           <a
             className={classes.meetLink}
             tabIndex="0"
             target="_blank"
             href="https://oakland.edu"
             rel="noopener noreferrer"
-            key={this.props.meetings[0].endDate + Math.random()}
           >
             {this.props.meetings[0].buildingRoom +
               " [" +
               this.props.meetings[0].campus +
               " ] "}
           </a>
-          <Typography
-            type="body2"
-            className={classes.meet}
-            tabIndex="0"
-            key={this.props.meetings[0].endDate + Math.random()}
-          >
+          <Typography type="body2" className={classes.meet} tabIndex="0">
             {this.props.meetings[0].meetDays}
           </Typography>
-          <Typography
-            type="body2"
-            className={classes.meet}
-            tabIndex="0"
-            key={this.props.meetings[0].endDate + Math.random()}
-          >
+          <Typography type="body2" className={classes.meet} tabIndex="0">
             {this.props.meetings[0].startTime +
               " - " +
               this.props.meetings[0].endTime}
@@ -58,18 +47,33 @@ class Meetings extends Component {
             type="body2"
             className={classes.meet}
             tabIndex="0"
-            key={this.props.meetings[0].endDate + Math.random()}
+            aria-label={
+              this.props.meetings[0].startDay +
+              "-0" +
+              this.props.meetings[0].startMonth +
+              "-" +
+              this.props.meetings[0].startYear +
+              " to " +
+              this.props.meetings[0].endDay +
+              "-0" +
+              this.props.meetings[0].endMonth +
+              "-" +
+              this.props.meetings[0].endYear
+            }
           >
-            {this.props.meetings[0].startDate +
+            {this.props.meetings[0].startDay +
+              "/" +
+              this.props.meetings[0].startMonth +
+              "/" +
+              this.props.meetings[0].startYear +
               " - " +
-              this.props.meetings[0].endDate}
+              this.props.meetings[0].endDay +
+              "/" +
+              this.props.meetings[0].endMonth +
+              "/" +
+              this.props.meetings[0].endYear}
           </Typography>
-          <Typography
-            type="body2"
-            className={classes.meet}
-            tabIndex="0"
-            key={this.props.meetings[0].endDate + Math.random()}
-          >
+          <Typography type="body2" className={classes.meet} tabIndex="0">
             {this.props.meetings[0].courseType}
           </Typography>
         </div>
