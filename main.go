@@ -24,8 +24,9 @@ const (
 	//Meeting table creation.
 	meetingSQL = "create table if not exists meetings(id serial primary key, crn text, startday text, startmonth text, startyear text, endday text, endmonth text, endyear text, starttime text, endtime text, coursetype text, coursetypecode text, buildingroom text, campus text, meetday text)"
 
-	//meetingSQL = "create table if not exists meeting(id serial primary key, crn text, startdate text, enddate text, starttime text, endtime text, coursetype text, coursetypecode text, buildingroom text, campus text, meetdays text, starthour text, startminutes text, startmonth text, startyear text, startdayofmonth text, startdayofweek text, startweekofmonth text, endhour text, endminutes text, endmonth text, endyear text, enddayofmonth text, enddayofweek text, endweekofmonth text)"
-	//Instructor table creation.
+	//Calendar meeting table creation
+	meetingCalendarSQL = "create table if not exists calmeetins(id serial primary key, day text, month text, year text, starttime text, endtime text, coursetype text, buildingroom text, campus text, coursename text, coursetitle text, color text)"
+
 	instructorSQL = "create table if not exists instructors(id serial primary key, crn text, firstname text, lastname text, office text, email text)"
 
 	//Grade table creation.
@@ -138,34 +139,58 @@ type GPA struct {
 	GPA     string `json:"gpa"`
 }
 
-// Student represents the academic information about a student
-type Student struct {
-	ClassStanding        string `json:"classStanding"`
-	Major1               string `json:"major1"`
-	DegreeType           string `json:"degreeType"`
-	College              string `json:"college"`
-	Level                string `json:"level"`
-	Major1concentration1 string `json:"major1concentration1"`
-	Major1concentration2 string `json:"major1concentration2"`
-	Major1concentration3 string `json:"major1concentration3"`
-	Major2               string `json:"major2"`
-	Major2Department     string `json:"major2Department"`
-	Major2concentration1 string `json:"major2concentration1"`
-	Major2concentration2 string `json:"major2concentration2"`
-	Major2concentration3 string `json:"major2concentration3"`
-	Minor1               string `json:"minor1"`
-	Minor2               string `json:"minor2"`
+type MeetingCalendar struct {
+	ID           int
+	Day          string `json:"day"`
+	Month        string `json:"month"`
+	Year         string `json:"year"`
+	StartTime    string `json:"starttime"`
+	EndTime      string `json:"endtime"`
+	BuildingRoom string `json:"buildingroom"`
+	Campus       string `json:"campus"`
+	CourseType   string `json:"coursetype"`
+	CourseName   string `json:"coursename"`
+	CourseTitle  string `json:"coursetitle"`
+	Color        string `json:"color"`
 }
 
-// Person represents the personal information about a student
-type Person struct {
-	Address       string `json:"address"`
-	Email         string `json:"email"`
-	Gid           string `json:"gid"`
-	LegalName     string `json:"legalName"`
-	PhoneNumber   string `json:"phoneNumber"`
-	Pidm          string `json:"pidm"`
-	PrefFirstName string `json:"prefFirstName"`
+type MeetingCalendarArray []MeetingCalendar
+
+func calendarMeeting(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+
+	var meetings MeetingCalendarArray
+
+	rows, err := db.Query("select * from calmeetins order by year, month, day, starttime")
+	if err != nil {
+		panic(err)
+	}
+	defer rows.Close()
+
+	for rows.Next() {
+		var t MeetingCalendar
+		if err := rows.Scan(&t.ID, &t.Day, &t.Month, &t.Year, &t.StartTime, &t.EndTime, &t.CourseType, &t.BuildingRoom, &t.Campus, &t.CourseName, &t.CourseTitle, &t.Color); err != nil {
+			fmt.Println("error on coruses")
+			panic(err)
+		}
+		meetings = append(meetings, t)
+	}
+
+	q := make(map[string]map[string]MeetingCalendarArray)
+
+	for _, m := range meetings {
+		qq, ok := q[m.Month]
+		if !ok {
+			qq = make(map[string]MeetingCalendarArray)
+			q[m.Month] = qq
+		}
+		q[m.Month][m.Day] = append(q[m.Month][m.Day], m)
+	}
+
+	if err := json.NewEncoder(w).Encode(q); err != nil {
+		panic(err)
+	}
+
 }
 
 func lang(w http.ResponseWriter, r *http.Request) {
@@ -475,6 +500,11 @@ func init() {
 	if err != nil {
 		panic(err)
 	}
+
+	_, err = db.Query(meetingCalendarSQL)
+	if err != nil {
+		panic(err)
+	}
 }
 
 func main() {
@@ -483,6 +513,7 @@ func main() {
 	r.HandleFunc("/api/courses", courses)
 	r.HandleFunc("/api/terms", terms)
 	r.HandleFunc("/api/credits", credits)
+	r.HandleFunc("/api/calendar", calendarMeeting)
 	http.Handle("/", r)
 	http.ListenAndServe(":8082", nil)
 }
