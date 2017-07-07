@@ -8,8 +8,7 @@ import Paper from "material-ui/Paper"
 import Tabs, { Tab } from "material-ui/Tabs"
 import Courses from "./Courses"
 import Grades from "./Grades"
-import { translate, Interpolate } from "react-i18next"
-import i18n from "./../utils/i18n"
+import { translate } from "react-i18next"
 
 const TabContainer = props =>
   <div style={{ padding: 20 }}>

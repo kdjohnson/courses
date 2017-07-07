@@ -10,8 +10,7 @@ import Card, { CardHeader, CardContent } from "material-ui/Card"
 import Typography from "material-ui/Typography"
 import { getCredits } from "./../api/api"
 import PropTypes from "prop-types"
-import { translate, Interpolate } from "react-i18next"
-import i18n from "./../utils/i18n"
+import { translate } from "react-i18next"
 
 const styleSheet = createStyleSheet("Grades", theme => ({
   cardDiv: {
