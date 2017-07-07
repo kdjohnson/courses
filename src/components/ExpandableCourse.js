@@ -6,8 +6,7 @@ import Typography from "material-ui/Typography"
 import Instructors from "./Instructors"
 import Meetings from "./Meetings"
 import CourseDetails from "./CourseDetails"
-import { translate, Interpolate } from "react-i18next"
-import i18n from "./../utils/i18n"
+import { translate } from "react-i18next"
 
 const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
   courseContainer: {

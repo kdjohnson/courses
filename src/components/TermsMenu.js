@@ -83,4 +83,8 @@ class TermsMenu extends Component {
   }
 }
 
+TermsMenu.propTypes = {
+  classes: PropTypes.object.isRequired
+}
+
 export default withStyles(styleSheet)(TermsMenu)

@@ -2,7 +2,6 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import Typography from "material-ui/Typography"
-import Divider from "material-ui/Divider"
 import ExpandableInstructors from "./ExpandableInstructors"
 
 const styleSheet = createStyleSheet("Instructors", theme => ({

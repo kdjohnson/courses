@@ -10,8 +10,7 @@ import Slide from "material-ui/transitions/Slide"
 import Typography from "material-ui/Typography"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import PropTypes from "prop-types"
-import { translate, Interpolate } from "react-i18next"
-import i18n from "./../utils/i18n"
+import { translate } from "react-i18next"
 
 const styleSheet = createStyleSheet("CourseDetails", theme => ({
   button: {
