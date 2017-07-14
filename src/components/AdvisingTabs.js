@@ -44,42 +44,38 @@ class AdvisingTabs extends Component {
   render() {
     const classes = this.props.classes
     const { t } = this.props
-
-    if (Object.is(this.props.courses, null)) {
-      return <div />
-    } else {
-      return (
-        <Paper className={classes.root}>
-          <div className={classes.appBar}>
-            <Tabs
-              index={this.state.index}
-              onChange={this.handleChange}
-              indicatorClassName={classes.tabs}
-            >
-              <Tab label={t("courses", {})} tabIndex="0" />
-              <Tab label={t("calendar", {})} tabIndex="0" />
-            </Tabs>
-          </div>
-          {Object.is(this.state.index, 0) &&
-            <TabContainer>
-              <div>
+    return (
+      <Paper className={classes.root}>
+        <div className={classes.appBar}>
+          <Tabs
+            index={this.state.index}
+            onChange={this.handleChange}
+            indicatorClassName={classes.tabs}
+          >
+            <Tab label={t("courses", {})} tabIndex="0" />
+            <Tab label={t("calendar", {})} tabIndex="0" />
+          </Tabs>
+        </div>
+        {Object.is(this.state.index, 0) &&
+          <TabContainer>
+            <div>
+              {!Object.is(this.props.courses, null) &&
                 <Advising
                   tabIndex="0"
                   currentTermCode={this.props.currentTermCode}
                   courses={this.props.courses}
                   mobile={this.props.mobile}
-                />
-              </div>
-            </TabContainer>}
-          {Object.is(this.state.index, 1) &&
-            <TabContainer>
-              <div tabIndex="0">
-                <p tabIndex="0">Hello Aaron</p>
-              </div>
-            </TabContainer>}
-        </Paper>
-      )
-    }
+                />}
+            </div>
+          </TabContainer>}
+        {Object.is(this.state.index, 1) &&
+          <TabContainer>
+            <div tabIndex="0">
+              <p tabIndex="0">Hello Aaron</p>
+            </div>
+          </TabContainer>}
+      </Paper>
+    )
   }
 }
 

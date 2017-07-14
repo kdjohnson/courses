@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import Typography from "material-ui/Typography"
 import Card, { CardHeader, CardContent } from "material-ui/Card"
-import { translate } from "react-i18next"
 import PropTypes from "prop-types"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import AdvisingMeetings from "./AdvisingMeetings"
@@ -23,7 +22,6 @@ class AdvisingCourses extends Component {
 
   getCourses() {
     let advisorCourses = []
-    const { t } = this.props
     const classes = this.props.classes
     for (let i = 0; i < this.props.courses.length; i++) {
       if (
@@ -86,11 +84,15 @@ class AdvisingCourses extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.getCourses()}
-      </div>
-    )
+    if (Object.is(this.props.courses, null)) {
+      return <div />
+    } else {
+      return (
+        <div>
+          {this.getCourses()}
+        </div>
+      )
+    }
   }
 }
 
@@ -98,6 +100,4 @@ AdvisingCourses.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(
-  translate("view", { wait: true })(AdvisingCourses)
-)
+export default withStyles(styleSheet)(AdvisingCourses)

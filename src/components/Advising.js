@@ -8,6 +8,7 @@ class Advising extends Component {
   state = {
     regs: {}
   }
+
   componentDidMount() {
     let set = new Set()
     for (let i = 0; i < this.props.courses.length; i++) {

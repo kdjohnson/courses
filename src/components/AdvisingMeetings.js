@@ -8,7 +8,6 @@ import Table, {
   TableRow
 } from "material-ui/Table"
 import Paper from "material-ui/Paper"
-import { translate } from "react-i18next"
 
 const styleSheet = createStyleSheet("AdvisingMeetings", theme => ({
   paper: {
@@ -21,7 +20,6 @@ const styleSheet = createStyleSheet("AdvisingMeetings", theme => ({
 class AdvisingMeetings extends Component {
   render() {
     const classes = this.props.classes
-    const { t } = this.props
     return (
       <Paper className={classes.paper}>
         <Table>
@@ -77,6 +75,4 @@ AdvisingMeetings.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(
-  translate("view", { wait: true })(AdvisingMeetings)
-)
+export default withStyles(styleSheet)(AdvisingMeetings)

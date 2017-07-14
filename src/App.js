@@ -13,7 +13,7 @@ class App extends Component {
     courses: null,
     width: document.getElementById("root").clientWidth,
     mobile: false,
-    advising: false
+    advising: true
   }
 
   updateWidth = () => {
@@ -32,7 +32,6 @@ class App extends Component {
     if (document.getElementById("root").clientWidth < 796) {
       this.setState({ mobile: true })
     }
-    this.setState({ advising: true })
 
     getTerms()
       .then(terms => {
@@ -59,11 +58,28 @@ class App extends Component {
     })
   }
 
-  render() {
+  getView = () => {
     if (Object.is(this.state.terms, null)) {
       return <div />
-    } else if (!Object.is(this.state.courses, null)) {
-      if (Object.is(this.state.advising, false)) {
+    } else if (!Object.is(this.state.courses, null) && !this.state.advising) {
+      return (
+        <div>
+          <TermsMenu
+            terms={this.state.terms}
+            currentTermDescription={this.state.currentTermDescription}
+            updateTerm={this.updateTerm}
+            mobile={this.state.mobile}
+          />
+          <CoursesTabs
+            currentTermCode={this.state.currentTermCode}
+            courses={this.state.courses}
+            mobile={this.state.mobile}
+            advising={this.state.advising}
+          />
+        </div>
+      )
+    } else {
+      if (!this.state.advising) {
         return (
           <div>
             <TermsMenu
@@ -93,14 +109,19 @@ class App extends Component {
               currentTermCode={this.state.currentTermCode}
               courses={this.state.courses}
               mobile={this.state.mobile}
-              advising={this.state.advising}
             />
           </div>
         )
       }
-    } else {
-      return <div />
     }
+  }
+
+  render() {
+    return (
+      <div>
+        {this.getView()}
+      </div>
+    )
   }
 }
 
