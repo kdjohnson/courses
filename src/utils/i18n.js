@@ -3,6 +3,8 @@ import Fetch from "i18next-fetch-backend"
 import Cache from "i18next-localstorage-cache"
 import LanguageDetector from "i18next-browser-languagedetector"
 
+const translateURL = "http://localhost:8082/locales/{{lng}}/{{ns}}.json"
+
 i18n.use(Fetch).use(Cache).use(LanguageDetector).init({
   fallbackLng: "en",
   // have a common namespace used around the full app
@@ -11,7 +13,7 @@ i18n.use(Fetch).use(Cache).use(LanguageDetector).init({
 
   load: "all",
   backend: {
-    loadPath: "http://localhost:8082/locales/{{lng}}/{{ns}}.json"
+    loadPath: translateURL 
   },
   interpolation: {
     formatSeparator: ",",

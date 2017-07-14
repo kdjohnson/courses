@@ -82,6 +82,7 @@ class CoursesTabs extends Component {
               tabIndex="0"
               courses={this.props.courses}
               mobile={this.props.mobile}
+              gradesURL={this.props.gradesURL}
             />
           </TabContainer>}
       </Paper>

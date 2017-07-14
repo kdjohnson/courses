@@ -65,6 +65,7 @@ class AdvisingTabs extends Component {
                   currentTermCode={this.props.currentTermCode}
                   courses={this.props.courses}
                   mobile={this.props.mobile}
+                  gradesURL={this.props.gradesURL}
                 />}
             </div>
           </TabContainer>}
