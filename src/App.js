@@ -13,7 +13,7 @@ class App extends Component {
     courses: null,
     width: document.getElementById("root").clientWidth,
     mobile: false,
-    advising: true
+    advising: false
   }
 
   updateWidth = () => {
@@ -74,7 +74,6 @@ class App extends Component {
             currentTermCode={this.state.currentTermCode}
             courses={this.state.courses}
             mobile={this.state.mobile}
-            advising={this.state.advising}
           />
         </div>
       )
@@ -92,7 +91,6 @@ class App extends Component {
               currentTermCode={this.state.currentTermCode}
               courses={this.state.courses}
               mobile={this.state.mobile}
-              advising={this.state.advising}
             />
           </div>
         )
