@@ -23,6 +23,9 @@ class Advising extends Component {
   }
 
   getAdvising = () => {
+    if (Object.is(this.props.courses, null)) {
+      return <div />
+    }
     return (
       <div>
         <RegistrationTypes
@@ -39,15 +42,11 @@ class Advising extends Component {
   }
 
   render() {
-    if (!Object.is(this.props.courses, null)) {
-      return (
-        <div>
-          {this.getAdvising()}
-        </div>
-      )
-    } else {
-      return <div />
-    }
+    return (
+      <div>
+        {this.getAdvising()}
+      </div>
+    )
   }
 }
 

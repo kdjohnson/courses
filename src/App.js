@@ -10,7 +10,7 @@ class App extends Component {
     terms: null,
     currentTermDescription: "",
     currentTermCode: "",
-    courses: [],
+    courses: null,
     width: document.getElementById("root").clientWidth,
     mobile: false,
     advising: false
