@@ -56,7 +56,7 @@ class Grades extends Component {
   }
 
   componentDidMount() {
-    getCredits().then(credits => {
+    getCredits(this.props.gradesURL).then(credits => {
       this.setState({ creditsObj: credits })
     })
   }

@@ -5,6 +5,12 @@ import AdvisingTabs from "./components/AdvisingTabs"
 import TermsMenu from "./components/TermsMenu"
 import { getTerms, getCourses } from "./api/api"
 
+const termsURL = "http://localhost:8082/api/terms"
+const coursesURL = "http://localhost:8082/api/courses"
+const calendarEventsURL = "http://localhost:8082/api/calendar"
+const gpaAndCreditsURL = "http://localhost:8082/api/credits"
+
+
 class App extends Component {
   state = {
     terms: null,
@@ -33,7 +39,7 @@ class App extends Component {
       this.setState({ mobile: true })
     }
 
-    getTerms()
+    getTerms(termsURL)
       .then(terms => {
         for (let i = 0, total = terms.length; i < total; i++) {
           if (Object.is(terms[i].current, "true")) {
@@ -46,14 +52,14 @@ class App extends Component {
         this.setState({ terms })
       })
       .then(() => {
-        getCourses(this.state.currentTermCode).then(courses => {
+        getCourses(this.state.currentTermCode, coursesURL).then(courses => {
           this.setState({ courses })
         })
       })
   }
 
   updateTerm = currentTermCode => {
-    getCourses(currentTermCode).then(courses => {
+    getCourses(currentTermCode, coursesURL).then(courses => {
       this.setState({ courses })
     })
   }
@@ -91,6 +97,7 @@ class App extends Component {
               currentTermCode={this.state.currentTermCode}
               courses={this.state.courses}
               mobile={this.state.mobile}
+              gradesURL={gpaAndCreditsURL}
             />
           </div>
         )
@@ -107,6 +114,7 @@ class App extends Component {
               currentTermCode={this.state.currentTermCode}
               courses={this.state.courses}
               mobile={this.state.mobile}
+              gradesURL={gpaAndCreditsURL}
             />
           </div>
         )

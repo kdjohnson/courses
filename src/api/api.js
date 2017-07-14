@@ -1,6 +1,6 @@
-export const getTerms = async () => {
+export const getTerms = async (url) => {
   try {
-    const response = await fetch("http://localhost:8082/api/terms")
+    const response = await fetch(url)
     const terms = await response.json()
     return terms.terms
   } catch (err) {
@@ -8,9 +8,9 @@ export const getTerms = async () => {
   }
 }
 
-export const getCourses = async code => {
+export const getCourses = async (code, url) => {
   try {
-    const response = await fetch("http://localhost:8082/api/courses", {
+    const response = await fetch(url, {
       body: JSON.stringify({ code: code }),
       method: "POST"
     })
@@ -21,9 +21,9 @@ export const getCourses = async code => {
   }
 }
 
-export const getCredits = async () => {
+export const getCredits = async (url) => {
   try {
-    const response = await fetch("http://localhost:8082/api/credits")
+    const response = await fetch(url)
     const terms = await response.json()
     return terms.gpa
   } catch (err) {
