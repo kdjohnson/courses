@@ -8,7 +8,7 @@ export const getTerms = async (url) => {
   }
 }
 
-export const getCourses = async code, url => {
+export const getCourses = async (code, url) => {
   try {
     const response = await fetch(url, {
       body: JSON.stringify({ code: code }),
