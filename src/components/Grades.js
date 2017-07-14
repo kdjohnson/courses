@@ -80,7 +80,7 @@ class Grades extends Component {
               </Typography>
             }
           />
-          <CardContent className={classes.content}>
+          <CardContent className={this.props.mobile ? classes.content : null}>
             <Table>
               <TableHead>
                 <TableRow className={classes.tableHeader}>
