@@ -78,7 +78,11 @@ class CoursesTabs extends Component {
           </TabContainer>}
         {Object.is(this.state.index, 2) &&
           <TabContainer>
-            <Grades tabIndex="0" courses={this.props.courses} />
+            <Grades
+              tabIndex="0"
+              courses={this.props.courses}
+              mobile={this.props.mobile}
+            />
           </TabContainer>}
       </Paper>
     )
