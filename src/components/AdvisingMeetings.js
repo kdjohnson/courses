@@ -41,10 +41,10 @@ class AdvisingMeetings extends Component {
                   <TableCell compact>
                     {meet.courseType}
                   </TableCell>
-                  <TableCell compact>
+                  <TableCell numeric>
                     {meet.startTime + "-" + meet.endTime}
                   </TableCell>
-                  <TableCell compact>
+                  <TableCell numeric>
                     {meet.startDay +
                       "/" +
                       meet.startMonth +
@@ -57,10 +57,10 @@ class AdvisingMeetings extends Component {
                       "/" +
                       meet.endYear}
                   </TableCell>
-                  <TableCell compact>
+                  <TableCell numeric>
                     {meet.meetDays}
                   </TableCell>
-                  <TableCell compact>
+                  <TableCell numeric>
                     {meet.buildingRoom}
                   </TableCell>
                 </TableRow>
