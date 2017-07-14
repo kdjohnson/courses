@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import "./App.css"
 import CoursesTabs from "./components/CoursesTabs"
+import AdvisingTabs from "./components/AdvisingTabs"
 import TermsMenu from "./components/TermsMenu"
 import { getTerms, getCourses } from "./api/api"
 
@@ -11,7 +12,8 @@ class App extends Component {
     currentTermCode: "",
     courses: [],
     width: document.getElementById("root").clientWidth,
-    mobile: false
+    mobile: false,
+    advising: false
   }
 
   updateWidth = () => {
@@ -30,6 +32,7 @@ class App extends Component {
     if (document.getElementById("root").clientWidth < 796) {
       this.setState({ mobile: true })
     }
+    this.setState({ advising: true })
 
     getTerms()
       .then(terms => {
@@ -59,22 +62,44 @@ class App extends Component {
   render() {
     if (Object.is(this.state.terms, null)) {
       return <div />
+    } else if (!Object.is(this.state.courses, null)) {
+      if (Object.is(this.state.advising, false)) {
+        return (
+          <div>
+            <TermsMenu
+              terms={this.state.terms}
+              currentTermDescription={this.state.currentTermDescription}
+              updateTerm={this.updateTerm}
+              mobile={this.state.mobile}
+            />
+            <CoursesTabs
+              currentTermCode={this.state.currentTermCode}
+              courses={this.state.courses}
+              mobile={this.state.mobile}
+              advising={this.state.advising}
+            />
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <TermsMenu
+              terms={this.state.terms}
+              currentTermDescription={this.state.currentTermDescription}
+              updateTerm={this.updateTerm}
+              mobile={this.state.mobile}
+            />
+            <AdvisingTabs
+              currentTermCode={this.state.currentTermCode}
+              courses={this.state.courses}
+              mobile={this.state.mobile}
+              advising={this.state.advising}
+            />
+          </div>
+        )
+      }
     } else {
-      return (
-        <div>
-          <TermsMenu
-            terms={this.state.terms}
-            currentTermDescription={this.state.currentTermDescription}
-            updateTerm={this.updateTerm}
-            mobile={this.state.mobile}
-          />
-          <CoursesTabs
-            currentTermCode={this.state.currentTermCode}
-            courses={this.state.courses}
-            mobile={this.state.mobile}
-          />
-        </div>
-      )
+      return <div />
     }
   }
 }
