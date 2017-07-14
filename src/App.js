@@ -1,6 +1,7 @@
 import React, { Component } from "react"
 import "./App.css"
 import CoursesTabs from "./components/CoursesTabs"
+import AdvisingTabs from "./components/AdvisingTabs"
 import TermsMenu from "./components/TermsMenu"
 import { getTerms, getCourses } from "./api/api"
 
@@ -9,9 +10,10 @@ class App extends Component {
     terms: null,
     currentTermDescription: "",
     currentTermCode: "",
-    courses: [],
+    courses: null,
     width: document.getElementById("root").clientWidth,
-    mobile: false
+    mobile: false,
+    advising: false
   }
 
   updateWidth = () => {
@@ -56,10 +58,10 @@ class App extends Component {
     })
   }
 
-  render() {
+  getView = () => {
     if (Object.is(this.state.terms, null)) {
       return <div />
-    } else {
+    } else if (!Object.is(this.state.courses, null) && !this.state.advising) {
       return (
         <div>
           <TermsMenu
@@ -75,7 +77,49 @@ class App extends Component {
           />
         </div>
       )
+    } else {
+      if (!this.state.advising) {
+        return (
+          <div>
+            <TermsMenu
+              terms={this.state.terms}
+              currentTermDescription={this.state.currentTermDescription}
+              updateTerm={this.updateTerm}
+              mobile={this.state.mobile}
+            />
+            <CoursesTabs
+              currentTermCode={this.state.currentTermCode}
+              courses={this.state.courses}
+              mobile={this.state.mobile}
+            />
+          </div>
+        )
+      } else {
+        return (
+          <div>
+            <TermsMenu
+              terms={this.state.terms}
+              currentTermDescription={this.state.currentTermDescription}
+              updateTerm={this.updateTerm}
+              mobile={this.state.mobile}
+            />
+            <AdvisingTabs
+              currentTermCode={this.state.currentTermCode}
+              courses={this.state.courses}
+              mobile={this.state.mobile}
+            />
+          </div>
+        )
+      }
     }
+  }
+
+  render() {
+    return (
+      <div>
+        {this.getView()}
+      </div>
+    )
   }
 }
 
