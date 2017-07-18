@@ -35,6 +35,10 @@ class TermsMenu extends Component {
     this.props.updateTerm(code)
   }
 
+  handleRequestClose = () => {
+    this.setState({ open: false })
+  }
+
   getTerms = () => {
     let elements = []
     for (let i = 0, total = this.props.terms.length; i < total; i++) {
@@ -70,7 +74,7 @@ class TermsMenu extends Component {
             {this.state.selected}
           </Button>
           <Menu
-            id="terms-menu"
+            id="courses-terms-menu"
             anchorEl={this.state.anchorEl}
             open={this.state.open}
             onRequestClose={this.handleRequestClose}

@@ -6,6 +6,7 @@ import Collapse from "material-ui/transitions/Collapse"
 import IconButton from "material-ui/IconButton"
 import ExpandMoreIcon from "material-ui-icons/ExpandMore"
 import { CardContent } from "material-ui/Card"
+import {getMapUrl} from "../utils/mapLinks"
 import classnames from "classnames"
 
 const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
@@ -59,7 +60,7 @@ class ExpandableMeetings extends Component {
             type="body2"
             tabIndex="0"
             target="_blank"
-            href="https://oakland.edu"
+            href={getMapUrl(this.props.meetings[i].buildingRoom, false)}
             rel="noopener noreferrer"
           >
             {this.props.meetings[i].buildingRoom +
@@ -67,6 +68,9 @@ class ExpandableMeetings extends Component {
               this.props.meetings[i].campus +
               " ] "}
           </a>
+          <Typography type="body2" className={classes.meet} tabIndex="0">
+            {`${this.props.meetings[0].meetDays} `}
+          </Typography>
           <Typography type="body2" className={classes.meet} tabIndex="0">
             {this.props.meetings[i].courseType}
           </Typography>
@@ -108,38 +112,80 @@ class ExpandableMeetings extends Component {
 
   getMeeting = () => {
     const classes = this.props.classes
+    const meeting = this.props.meetings[0]
     return (
-      <div key={this.props.meetings[0].endDate + Math.random()}>
+      <div key={meeting.endDate + Math.random()}>
         <a
           type="body2"
           tabIndex="0"
           target="_blank"
-          href="https://oakland.edu"
+          href={getMapUrl(meeting.buildingRoom, true)}
           rel="noopener noreferrer"
-          key={this.props.meetings[0].endDate + Math.random()}
+          key={meeting.endDate + Math.random()}
         >
-          {this.props.meetings[0].buildingRoom +
+          {meeting.buildingRoom +
             " [" +
-            this.props.meetings[0].campus +
+            meeting.campus +
             " ] "}
         </a>
-        <Typography
-          type="body2"
-          className={classes.meet}
-          tabIndex="0"
-          key={this.props.meetings[0].endDate + Math.random()}
-        >
-          {this.props.meetings[0].courseType}
+        <Typography type="body2" className={classes.meet} tabIndex="0">
+          {`${meeting.meetDays} `}
         </Typography>
         <Typography
           type="body2"
           className={classes.meet}
           tabIndex="0"
-          key={this.props.meetings[0].endDate + Math.random()}
+          key={meeting.endDate + Math.random()}
         >
-          {this.props.meetings[0].startTime +
+          {meeting.courseType}
+        </Typography>
+        <Typography
+          type="body2"
+          className={classes.meet}
+          tabIndex="0"
+          key={meeting.endDate + Math.random()}
+        >
+          {meeting.startTime +
             " - " +
-            this.props.meetings[0].endTime}
+            meeting.endTime}
+        </Typography>
+        <Typography
+          type="body2"
+          className={classes.meet}
+          tabIndex="0"
+          aria-label={
+            meeting.startDayOfMonth +
+            "-0" +
+            meeting.startMonth +
+            "-" +
+            meeting.startYear +
+            " to " +
+            meeting.endDayOfMonth +
+            "-0" +
+            meeting.endMonth +
+            "-" +
+            meeting.endYear
+          }
+        >
+          {meeting.startDayOfMonth +
+            "/" +
+            meeting.startMonth +
+            "/" +
+            meeting.startYear +
+            " - " +
+            meeting.endDayOfMonth +
+            "/" +
+            meeting.endMonth +
+            "/" +
+            meeting.endYear}
+        </Typography>
+        <Typography
+          type="body2"
+          className={classes.meet}
+          tabIndex="0"
+          key={meeting.endDate + Math.random()}
+        >
+          {meeting.courseType}
         </Typography>
       </div>
     )
