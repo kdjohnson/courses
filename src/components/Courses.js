@@ -53,12 +53,10 @@ const styleSheet = createStyleSheet("Courses", theme => ({
   },
 
   classHeader: {
-    height: 65,
     backgroundColor: theme.palette.primary[400]
   },
 
   classHeaderMobile: {
-    height: 65,
     backgroundColor: theme.palette.primary[400],
     textAlign: "center"
   },
