@@ -3,6 +3,7 @@ import PropTypes from "prop-types"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import Typography from "material-ui/Typography"
 import ExpandableInstructors from "./ExpandableInstructors"
+import { getMapUrl } from "../utils/mapLinks"
 
 const styleSheet = createStyleSheet("Instructors", theme => ({
   button: {
@@ -93,7 +94,7 @@ class Instructors extends Component {
             <a
               className={classes.link}
               target="_blank"
-              href="https://oakland.edu"
+              href={getMapUrl(this.props.teachers[0].office, true)}
               tabIndex="0"
               rel="noopener noreferrer"
               key={this.props.teachers[0].lastName + Math.random()}
