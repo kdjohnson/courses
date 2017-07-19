@@ -1,5 +1,4 @@
 import React, { Component } from "react"
-import "./App.css"
 import CoursesTabs from "./components/CoursesTabs"
 import AdvisingTabs from "./components/AdvisingTabs"
 import TermsMenu from "./components/TermsMenu"
@@ -80,6 +79,7 @@ class App extends Component {
             currentTermCode={this.state.currentTermCode}
             courses={this.state.courses}
             mobile={this.state.mobile}
+            gradesURL={gpaAndCreditsURL}
           />
         </div>
       )
