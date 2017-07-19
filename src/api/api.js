@@ -1,4 +1,4 @@
-export const getTerms = async (url) => {
+export const getTerms = async url => {
   try {
     const response = await fetch(url)
     const terms = await response.json()
@@ -21,11 +21,11 @@ export const getCourses = async (code, url) => {
   }
 }
 
-export const getCredits = async (url) => {
+export const getCredits = async url => {
   try {
     const response = await fetch(url)
-    const terms = await response.json()
-    return terms.gpa
+    const credits = await response.json()
+    return credits.gpa
   } catch (err) {
     return err
   }
