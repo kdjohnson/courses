@@ -14,15 +14,16 @@ class App extends Component {
     terms: null,
     currentTermDescription: "",
     currentTermCode: "",
+    currentTermBounds: "",
     courses: null,
-    width: document.getElementById("root").clientWidth,
+    width: document.getElementById(this.props.rootElement).clientWidth,
     mobile: false,
     advising: false
   }
 
   updateWidth = () => {
     this.setState({
-      width: document.getElementById("root").clientWidth
+      width: document.getElementById(this.props.rootElement).clientWidth
     })
     if (this.state.width < 796) {
       this.setState({ mobile: true })
@@ -33,7 +34,7 @@ class App extends Component {
 
   componentDidMount() {
     window.addEventListener("resize", this.updateWidth)
-    if (document.getElementById("root").clientWidth < 796) {
+    if (document.getElementById(this.props.rootElement).clientWidth < 796) {
       this.setState({ mobile: true })
     }
 
@@ -43,7 +44,8 @@ class App extends Component {
           if (Object.is(terms[i].current, "true")) {
             this.setState({
               currentTermDescription: terms[i].description,
-              currentTermCode: terms[i].code
+              currentTermCode: terms[i].code,
+              currentTermBounds: [terms[i].start, terms[i].end]
             })
           }
         }
@@ -79,6 +81,9 @@ class App extends Component {
             currentTermCode={this.state.currentTermCode}
             courses={this.state.courses}
             mobile={this.state.mobile}
+            rootElement={this.props.rootElement}
+            calendarURL={calendarEventsURL}
+            termBounds={this.state.currentTermBounds}
             gradesURL={gpaAndCreditsURL}
           />
         </div>
@@ -99,6 +104,9 @@ class App extends Component {
               courses={this.state.courses}
               mobile={this.state.mobile}
               gradesURL={gpaAndCreditsURL}
+              calendarURL={calendarEventsURL}
+              rootElement={this.props.rootElement}
+              termBounds={this.state.currentTermBounds}
             />
           </div>
         )
