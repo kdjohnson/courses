@@ -125,6 +125,9 @@ class App extends Component {
               courses={this.state.courses}
               mobile={this.state.mobile}
               gradesURL={gpaAndCreditsURL}
+              calendarURL={calendarEventsURL}
+              rootElement={this.props.rootElement}
+              termBounds={this.state.currentTermBounds}
             />
           </div>
         )
