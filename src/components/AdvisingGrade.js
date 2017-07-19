@@ -11,12 +11,21 @@ const styleSheet = createStyleSheet("AdvisingGrade", theme => ({
 
 class AdvisingGrade extends Component {
   getGrade = () => {
-    return (
-      <ListItem style={{ paddingLeft: 0 }}>
-        <ListItemText primary={this.props.grade.grade} />
-      </ListItem>
-    )
+    if (Object.is(this.props.grade, null)) {
+      return (
+        <ListItem style={{ paddingLeft: 0 }}>
+          <ListItemText primary="N/A" />
+        </ListItem>
+      )
+    } else {
+      return (
+        <ListItem style={{ paddingLeft: 0 }}>
+          <ListItemText primary={this.props.grade.grade} />
+        </ListItem>
+      )
+    }
   }
+
   render() {
     return (
       <List>
