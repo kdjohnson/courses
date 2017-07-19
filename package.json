@@ -10,13 +10,11 @@
     "i18next-xhr-backend": "^1.4.1",
     "material-ui": "next",
     "material-ui-icons": "^1.0.0-alpha.3",
-    "raleway-webfont": "^3.0.1",
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-i18next": "^4.1.0",
     "reactjs-calendar": "^0.1.9",
-    "typeface-arimo": "^0.0.22",
-    "typeface-oxygen": "^0.0.22"
+    "typeface-arimo": "^0.0.22"
   },
   "devDependencies": {
     "react-scripts": "1.0.1"
