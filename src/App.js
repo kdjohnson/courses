@@ -132,7 +132,6 @@ class App extends Component {
   }
 
   render() {
-    console.log(this.state.terms)
     return (
       <div>
         {this.getView()}
