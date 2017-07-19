@@ -45,7 +45,7 @@ class App extends Component {
             this.setState({
               currentTermDescription: terms[i].description,
               currentTermCode: terms[i].code,
-              currentTermBounds: [terms[i].start, terms[i].end]
+              currentTermBounds: [parseInt(terms[i].start, 10), parseInt(terms[i].end, 10)]
             })
           }
         }
