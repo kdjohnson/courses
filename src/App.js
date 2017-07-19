@@ -1,7 +1,7 @@
 import React, { Component } from "react"
 import CoursesTabs from "./components/CoursesTabs"
 import AdvisingTabs from "./components/AdvisingTabs"
-import TermsMenu from "./components/TermsMenu"
+import TermsDialog from "./components/TermsDialog"
 import { getTerms, getCourses } from "./api/api"
 
 const termsURL = "http://localhost:8082/api/terms"
@@ -68,7 +68,7 @@ class App extends Component {
     } else if (!Object.is(this.state.courses, null) && !this.state.advising) {
       return (
         <div>
-          <TermsMenu
+          <TermsDialog
             terms={this.state.terms}
             currentTermDescription={this.state.currentTermDescription}
             currentTermCode={this.state.currentTermCode}
@@ -87,7 +87,7 @@ class App extends Component {
       if (!this.state.advising) {
         return (
           <div>
-            <TermsMenu
+            <TermsDialog
               terms={this.state.terms}
               currentTermDescription={this.state.currentTermDescription}
               currentTermCode={this.state.currentTermCode}
@@ -105,7 +105,7 @@ class App extends Component {
       } else {
         return (
           <div>
-            <TermsMenu
+            <TermsDialog
               terms={this.state.terms}
               currentTermDescription={this.state.currentTermDescription}
               currentTermCode={this.state.currentTermCode}

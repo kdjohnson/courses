@@ -15,7 +15,7 @@ import PropTypes from "prop-types"
 import { translate } from "react-i18next"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 
-const styleSheet = createStyleSheet("TermsMenu", theme => ({
+const styleSheet = createStyleSheet("TermsDialog", theme => ({
   mobileTermDiv: {
     display: "flex",
     justifyContent: "center"
@@ -100,7 +100,7 @@ class ConfirmationDialog extends Component {
           <DialogActions>
             <Button
               onClick={this.handleOk}
-              aria-label="close course information"
+              aria-label={"Confirm selection"}
               tabIndex="0"
               color="accent"
             >
@@ -108,7 +108,7 @@ class ConfirmationDialog extends Component {
             </Button>
             <Button
               onClick={this.handleCancel}
-              aria-label="close course information"
+              aria-label="Cancel selection"
               tabIndex="0"
               color="accent"
             >
@@ -126,7 +126,7 @@ ConfirmationDialog.propTypes = {
   selectedValue: PropTypes.string
 }
 
-class TermsMenu extends Component {
+class TermsDialog extends Component {
   componentDidMount() {
     this.setState({
       selected: this.props.currentTermDescription,
@@ -193,10 +193,10 @@ class TermsMenu extends Component {
   }
 }
 
-TermsMenu.propTypes = {
+TermsDialog.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
 export default withStyles(styleSheet)(
-  translate("view", { wait: true })(TermsMenu)
+  translate("view", { wait: true })(TermsDialog)
 )
