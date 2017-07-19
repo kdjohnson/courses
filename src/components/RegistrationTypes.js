@@ -1,5 +1,6 @@
 import React, { Component } from "react"
-import { LabelSwitch } from "material-ui/Switch"
+import { FormControlLabel } from "material-ui/Form"
+import Switch from "material-ui/Switch"
 
 class RegistrationTypes extends Component {
   handleChange = (event, checked, type) => {
@@ -12,12 +13,16 @@ class RegistrationTypes extends Component {
     let switches = []
     Object.entries(this.props.regs).forEach(([type, value]) => {
       switches.push(
-        <LabelSwitch
+        <FormControlLabel
           key={type}
-          checked={this.props.regs[type]}
+          control={
+            <Switch
+              checked={this.props.regs[type]}
+              onChange={(event, checked, key) =>
+                this.handleChange(event, checked, type)}
+            />
+          }
           label={type}
-          onChange={(event, checked, key) =>
-            this.handleChange(event, checked, type)}
         />
       )
     })
