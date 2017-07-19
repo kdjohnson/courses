@@ -10,7 +10,6 @@ const coursesURL = "http://localhost:8082/api/courses"
 const calendarEventsURL = "http://localhost:8082/api/calendar"
 const gpaAndCreditsURL = "http://localhost:8082/api/credits"
 
-
 class App extends Component {
   state = {
     terms: null,
@@ -73,6 +72,7 @@ class App extends Component {
           <TermsMenu
             terms={this.state.terms}
             currentTermDescription={this.state.currentTermDescription}
+            currentTermCode={this.state.currentTermCode}
             updateTerm={this.updateTerm}
             mobile={this.state.mobile}
           />
@@ -90,6 +90,7 @@ class App extends Component {
             <TermsMenu
               terms={this.state.terms}
               currentTermDescription={this.state.currentTermDescription}
+              currentTermCode={this.state.currentTermCode}
               updateTerm={this.updateTerm}
               mobile={this.state.mobile}
             />
@@ -107,6 +108,7 @@ class App extends Component {
             <TermsMenu
               terms={this.state.terms}
               currentTermDescription={this.state.currentTermDescription}
+              currentTermCode={this.state.currentTermCode}
               updateTerm={this.updateTerm}
               mobile={this.state.mobile}
             />
