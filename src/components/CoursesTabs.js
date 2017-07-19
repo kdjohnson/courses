@@ -46,7 +46,7 @@ class CoursesTabs extends Component {
   render() {
     const classes = this.props.classes
     const { t } = this.props
-
+    console.log(this.props.termBounds)
     return (
       <Paper className={classes.root}>
         <div className={classes.appBar}>

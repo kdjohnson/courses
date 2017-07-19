@@ -84,6 +84,7 @@ class App extends Component {
             mobile={this.state.mobile}
             rootElement={this.props.rootElement}
             calendarURL={calendarEventsURL}
+            termBounds={this.state.currentTermBounds}
           />
         </div>
       )
@@ -105,7 +106,7 @@ class App extends Component {
               gradesURL={gpaAndCreditsURL}
               calendarURL={calendarEventsURL}
               rootElement={this.props.rootElement}
-              termBounds={[this.state.terms]}
+              termBounds={this.state.currentTermBounds}
             />
           </div>
         )
