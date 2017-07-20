@@ -64,7 +64,7 @@ class ConfirmationDialog extends Component {
         id="dialogbox"
         aria-label="course description"
         tabIndex="0"
-        open={this.state.open}
+        open={this.props.open}
         onRequestClose={this.handleClose}
         transition={<Slide direction="down" />}
         ignoreBackdropClick
