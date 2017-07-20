@@ -104,7 +104,7 @@ class Instructors extends Component {
             <a
               className={classes.link}
               target="_blank"
-              href="mailto:https://oakland.edu"
+              href={"mailto:" + this.props.teachers[0].email}
               tabIndex="0"
               rel="noopener noreferrer"
               key={this.props.teachers[0].lastName + Math.random()}
