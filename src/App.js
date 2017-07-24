@@ -6,7 +6,7 @@ import { getTerms, getCourses } from "./api/api"
 
 const termsURL = "http://localhost:8082/api/terms"
 const coursesURL = "http://localhost:8082/api/courses"
-const calendarEventsURL = "http://localhost:8082/api/calendar"
+const calendarEventsURL = {url: "http://localhost:8082/api/calendar", credentialsNeeded: false}
 const gpaAndCreditsURL = "http://localhost:8082/api/credits"
 
 class App extends Component {
