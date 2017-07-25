@@ -5486,8 +5486,8 @@ react-event-listener@^0.4.5:
     warning "^3.0.0"
 
 react-i18next@^4.1.0, react-i18next@^4.6.4:
-  version "4.6.4"
-  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-4.6.4.tgz#b13f6095c41154f722e5278f508024c9e7efd07f"
+  version "4.7.0"
+  resolved "https://registry.yarnpkg.com/react-i18next/-/react-i18next-4.7.0.tgz#1ba1ac72c7438ff0eba23d5c11616eb4d0b23e87"
   dependencies:
     hoist-non-react-statics "1.2.0"
 
@@ -5576,8 +5576,8 @@ react@^15.5.4:
     prop-types "^15.5.10"
 
 reactjs-calendar@^0.1.9:
-  version "0.1.21"
-  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.1.21.tgz#b92c378180bcd21e447bd0403b1bb2a4b0ed8831"
+  version "0.1.23"
+  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.1.23.tgz#19d80ee963d1a8c452c09a7b41922916e80f2c09"
   dependencies:
     version "^0.1.2"
     all "^0.0.0"
