@@ -11,7 +11,6 @@ const styleSheet = createStyleSheet("Instructors", theme => ({
   },
 
   links: {
-    color: "#3344dd",
     display: "flex",
     flexDirection: "column",
     borderLeftStyle: "solid",
@@ -38,6 +37,7 @@ const styleSheet = createStyleSheet("Instructors", theme => ({
   },
 
   link: {
+    color: "#3344dd",
     marginBottom: 10
   },
 
