@@ -101,29 +101,24 @@ class ExpandableInstructors extends Component {
     let elements = []
     for (let i = 1, total = this.props.teachers.length; i < total; i++) {
       elements.push(
-        <div key={this.props.teachers[0].lastName + Math.random() + 1}>
+        <div key={this.props.teachers[i].crn}>
           <Typography
             type="headline"
             component="h3"
             className={classes.teacher}
             tabIndex="0"
-            key={this.props.teachers[0].lastName + Math.random() + 2}
           >
             {this.props.teachers[i].firstName +
               " " +
               this.props.teachers[i].lastName}
           </Typography>
-          <div
-            className={classes.links}
-            key={this.props.teachers[0].lastName + Math.random() + 3}
-          >
+          <div className={classes.links}>
             <a
               className={classes.link}
               target="_blank"
               href="https://oakland.edu"
               rel="noopener noreferrer"
               tabIndex="0"
-              key={this.props.teachers[0].lastName + Math.random() + 4}
             >
               {this.props.teachers[i].office}
             </a>
@@ -132,7 +127,6 @@ class ExpandableInstructors extends Component {
               href="mailto:https://oakland.edu"
               tabIndex="0"
               rel="noopener noreferrer"
-              key={this.props.teachers[0].lastName + Math.random() + 5}
             >
               {this.props.teachers[i].email}
             </a>
