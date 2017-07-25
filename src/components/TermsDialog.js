@@ -16,7 +16,14 @@ import { translate } from "react-i18next"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 
 const styleSheet = createStyleSheet("TermsDialog", theme => ({
+  termDiv: {
+    paddingTop: "1em",
+    paddingLeft: "1em"
+  },
+
   mobileTermDiv: {
+    paddingTop: "1em",
+    paddingLeft: "1em",
     display: "flex",
     justifyContent: "center"
   }
@@ -169,7 +176,11 @@ class TermsDialog extends Component {
       return <div />
     } else {
       return (
-        <div className={this.props.mobile ? classes.mobileTermDiv : ""}>
+        <div
+          className={
+            this.props.mobile ? classes.mobileTermDiv : classes.termDiv
+          }
+        >
           <Button
             color="accent"
             raised

@@ -71,9 +71,12 @@ class Instructors extends Component {
     const classes = this.props.classes
     if (this.props.teachers.length >= 2) {
       return <ExpandableInstructors teachers={this.props.teachers} />
-    } else {
+    } else if (
+      Object.is(this.props.teachers, null) ||
+      Object.is(this.props.teachers[0], undefined)
+    ) {
       return (
-        <div key={this.props.teachers[0].lastName + Math.random()}>
+        <div>
           <Typography
             type="headline"
             component="h3"
@@ -81,7 +84,27 @@ class Instructors extends Component {
               this.props.mobile ? classes.teacherMobile : classes.teacher
             }
             tabIndex="0"
-            key={this.props.teachers[0].lastName + Math.random()}
+          >
+            {"N/A"}
+          </Typography>
+          <div
+            className={this.props.mobile ? classes.linksMobile : classes.links}
+          >
+            <Typography className={classes.link}>N/A</Typography>
+            <Typography className={classes.link}>N/A</Typography>
+          </div>
+        </div>
+      )
+    } else {
+      return (
+        <div>
+          <Typography
+            type="headline"
+            component="h3"
+            className={
+              this.props.mobile ? classes.teacherMobile : classes.teacher
+            }
+            tabIndex="0"
           >
             {this.props.teachers[0].firstName +
               " " +
@@ -89,7 +112,6 @@ class Instructors extends Component {
           </Typography>
           <div
             className={this.props.mobile ? classes.linksMobile : classes.links}
-            key={this.props.teachers[0].lastName + Math.random()}
           >
             <a
               className={classes.link}
@@ -97,7 +119,6 @@ class Instructors extends Component {
               href={getMapUrl(this.props.teachers[0].office, true)}
               tabIndex="0"
               rel="noopener noreferrer"
-              key={this.props.teachers[0].lastName + Math.random()}
             >
               {this.props.teachers[0].office}
             </a>
@@ -107,7 +128,6 @@ class Instructors extends Component {
               href={"mailto:" + this.props.teachers[0].email}
               tabIndex="0"
               rel="noopener noreferrer"
-              key={this.props.teachers[0].lastName + Math.random()}
             >
               {this.props.teachers[0].email}
             </a>
