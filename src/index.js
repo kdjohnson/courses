@@ -8,6 +8,9 @@ import createTypography from "material-ui/styles/typography"
 import "typeface-arimo"
 import { I18nextProvider } from "react-i18next"
 import i18n from "./utils/i18n"
+import { create } from "jss"
+import preset from "jss-preset-default"
+import { JssProvider } from "react-jss"
 
 const oakland = {
   50: "#f1eee9",
@@ -59,12 +62,15 @@ const theme = createMuiTheme({
 })
 
 const rootElement = "root"
+const jss = create(preset())
 
 ReactDOM.render(
   <I18nextProvider i18n={i18n}>
-    <MuiThemeProvider theme={theme}>
-      <App theme={theme} rootElement={rootElement}/>
-    </MuiThemeProvider>
+    <JssProvider jss={jss}>
+      <MuiThemeProvider theme={theme} jss={jss}>
+        <App rootElement={rootElement} />
+      </MuiThemeProvider>
+    </JssProvider>
   </I18nextProvider>,
   document.getElementById(rootElement)
 )
