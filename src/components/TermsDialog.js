@@ -17,13 +17,11 @@ import { withStyles, createStyleSheet } from "material-ui/styles"
 
 const styleSheet = createStyleSheet("TermsDialog", theme => ({
   termDiv: {
-    paddingTop: "1em",
-    paddingLeft: "1em"
+    paddingTop: "1em"
   },
 
   mobileTermDiv: {
     paddingTop: "1em",
-    paddingLeft: "1em",
     display: "flex",
     justifyContent: "center"
   }
