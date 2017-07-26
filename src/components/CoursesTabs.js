@@ -42,6 +42,10 @@ const styleSheet = createStyleSheet("BasicTabs", theme => ({
 
   flex: {
     flex: 1
+  },
+
+  button: {
+    color: "#FFFFFF"
   }
 }))
 
@@ -67,9 +71,33 @@ class CoursesTabs extends Component {
                 index={this.state.index}
                 onChange={this.handleChange}
               >
-                <Tab icon={<Assignment />} tabIndex="0" />
-                <Tab icon={<Event />} tabIndex="0" />
-                <Tab icon={<Poll />} tabIndex="0" />
+                <Tab
+                  aria-label={t("courses", {})}
+                  icon={
+                    <Assignment
+                      className={classes.button}
+                      alt="View your courses for the selected term"
+                    />
+                  }
+                  tabIndex="0"
+                />
+                <Tab
+                  aria-label={t("calendar", {})}
+                  icon={
+                    <Event
+                      className={classes.button}
+                      alt="View your calendar events"
+                    />
+                  }
+                  tabIndex="0"
+                />
+                <Tab
+                  aria-label={t("grades", {})}
+                  icon={
+                    <Poll className={classes.button} alt="View your grades" />
+                  }
+                  tabIndex="0"
+                />
               </Tabs>}
             {Object.is(this.props.mobile, false) &&
               <Tabs

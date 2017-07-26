@@ -180,6 +180,7 @@ class TermsDialog extends Component {
         <div>
           {Object.is(this.props.mobile, true) &&
             <IconButton
+              aria-label="change term"
               className={classes.button}
               tabIndex="0"
               aria-haspopup="true"
