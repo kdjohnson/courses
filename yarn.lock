@@ -2037,8 +2037,8 @@ elliptic@^6.0.0:
     minimalistic-crypto-utils "^1.0.0"
 
 emoji-regex@^6.1.0:
-  version "6.5.0"
-  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-6.5.0.tgz#c1699e17f34154f7922219ea712ea76a2619c77b"
+  version "6.5.1"
+  resolved "https://registry.yarnpkg.com/emoji-regex/-/emoji-regex-6.5.1.tgz#9baea929b155565c11ea41c6626eaa65cef992c2"
 
 emojis-list@^2.0.0:
   version "2.1.0"
@@ -5516,8 +5516,8 @@ react@^15.5.4:
     prop-types "^15.5.10"
 
 reactjs-calendar@^0.1.9:
-  version v0.1.23
-  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.1.23.tgz#19d80ee963d1a8c452c09a7b41922916e80f2c09"
+  version "0.1.37"
+  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.1.37.tgz#bdcd788900f9bcf1d114313e976b90b540989c3a"
   dependencies:
     version "^0.1.2"
     all "^0.0.0"
