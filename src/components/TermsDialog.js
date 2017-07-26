@@ -2,6 +2,7 @@
 
 import React, { Component } from "react"
 import Button from "material-ui/Button"
+import IconButton from "material-ui/IconButton"
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -14,16 +15,16 @@ import Typography from "material-ui/Typography"
 import PropTypes from "prop-types"
 import { translate } from "react-i18next"
 import { withStyles, createStyleSheet } from "material-ui/styles"
+import MoreHoriz from "material-ui-icons/MoreHoriz"
 
 const styleSheet = createStyleSheet("TermsDialog", theme => ({
-  termDiv: {
-    paddingTop: "1em"
+  text: {
+    color: "#FFFFFF"
   },
 
-  mobileTermDiv: {
-    paddingTop: "1em",
-    display: "flex",
-    justifyContent: "center"
+  button: {
+    marginRight: "1em",
+    color: "#FFFFFF"
   }
 }))
 
@@ -176,21 +177,25 @@ class TermsDialog extends Component {
       return <div />
     } else {
       return (
-        <div
-          className={
-            this.props.mobile ? classes.mobileTermDiv : classes.termDiv
-          }
-        >
-          <Button
-            color="accent"
-            raised
-            aria-haspopup="true"
-            onClick={this.handleClick}
-          >
-            <Typography type="button">
-              {this.state.selected}
-            </Typography>
-          </Button>
+        <div>
+          {Object.is(this.props.mobile, true) &&
+            <IconButton
+              className={classes.button}
+              tabIndex="0"
+              aria-haspopup="true"
+              onClick={this.handleClick}
+            >
+              <MoreHoriz />
+            </IconButton>}
+          {Object.is(this.props.mobile, false) &&
+            <Button
+              className={classes.button}
+              tabIndex="0"
+              aria-haspopup="true"
+              onClick={this.handleClick}
+            >
+              <Typography className={classes.text}>Change term</Typography>
+            </Button>}
           <ConfirmationDialog
             open={this.state.open}
             onRequestClose={this.handleRequestClose}
