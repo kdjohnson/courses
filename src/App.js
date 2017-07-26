@@ -2,12 +2,26 @@ import React, { Component } from "react"
 import CoursesTabs from "./components/CoursesTabs"
 import AdvisingTabs from "./components/AdvisingTabs"
 import TermsDialog from "./components/TermsDialog"
+import ErrorMessages from "./components/ErrorMessages"
 import { getTerms, getCourses } from "./api/api"
+import { withStyles, createStyleSheet } from "material-ui/styles"
+import { CircularProgress } from "material-ui/Progress"
 
 const termsURL = "http://localhost:8082/api/terms"
 const coursesURL = "http://localhost:8082/api/courses"
 const calendarEventsURL = "http://localhost:8082/api/calendar"
 const gpaAndCreditsURL = "http://localhost:8082/api/credits"
+
+const styleSheet = createStyleSheet("CircularIndeterminate", theme => ({
+  progress: {
+    margin: `0 ${theme.spacing.unit * 2}px`
+  },
+
+  loading: {
+    display: "flex",
+    justifyContent: "center"
+  }
+}))
 
 class App extends Component {
   state = {
@@ -18,7 +32,9 @@ class App extends Component {
     courses: null,
     width: document.getElementById(this.props.rootElement).clientWidth,
     mobile: false,
-    advising: false
+    advising: false,
+    error: false,
+    loading: true
   }
 
   updateWidth = () => {
@@ -40,20 +56,31 @@ class App extends Component {
 
     getTerms(termsURL)
       .then(terms => {
-        for (let i = 0, total = terms.length; i < total; i++) {
-          if (Object.is(terms[i].current, "true")) {
-            this.setState({
-              currentTermDescription: terms[i].description,
-              currentTermCode: terms[i].code,
-              currentTermBounds: [parseInt(terms[i].start, 10), parseInt(terms[i].end, 10)]
-            })
+        if (!(terms instanceof Error)) {
+          for (let i = 0, total = terms.length; i < total; i++) {
+            if (Object.is(terms[i].current, "true")) {
+              this.setState({
+                currentTermDescription: terms[i].description,
+                currentTermCode: terms[i].code,
+                currentTermBounds: [
+                  parseInt(terms[i].start, 10),
+                  parseInt(terms[i].end, 10)
+                ]
+              })
+            }
           }
+          this.setState({ terms, loading: false })
+        } else {
+          this.setState({ error: true })
         }
-        this.setState({ terms })
       })
       .then(() => {
         getCourses(this.state.currentTermCode, coursesURL).then(courses => {
-          this.setState({ courses })
+          if (!(courses instanceof Error)) {
+            this.setState({ courses })
+          } else {
+            this.setState({ error: true })
+          }
         })
       })
   }
@@ -65,8 +92,26 @@ class App extends Component {
   }
 
   getView = () => {
-    if (Object.is(this.state.terms, null)) {
-      return <div />
+    const classes = this.props.classes
+    if (Object.is(this.state.loading, true)) {
+      return (
+        <div className={classes.loading}>
+          <CircularProgress
+            color="accent"
+            className={classes.progress}
+            size={50}
+          />
+        </div>
+      )
+    } else if (
+      Object.is(this.state.error, true) ||
+      Object.is(this.state.terms, null)
+    ) {
+      return (
+        <div className={classes.loading}>
+          <ErrorMessages />
+        </div>
+      )
     } else if (!Object.is(this.state.courses, null) && !this.state.advising) {
       return (
         <div>
@@ -144,4 +189,4 @@ class App extends Component {
   }
 }
 
-export default App
+export default withStyles(styleSheet)(App)

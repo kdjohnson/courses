@@ -1,9 +1,15 @@
-import React, { Component } from "react";
-import Typography from "material-ui/Typography";
-import Card, { CardHeader, CardContent, CardMedia } from "material-ui/Card";
-import { withStyles, createStyleSheet } from "material-ui/styles";
-import PropTypes from "prop-types";
-import grizzHead from "../utils/grizzHead.png";
+import React, { Component } from "react"
+import Typography from "material-ui/Typography"
+import Card, {
+  CardHeader,
+  CardContent,
+  CardMedia,
+  CardActions
+} from "material-ui/Card"
+import { withStyles, createStyleSheet } from "material-ui/styles"
+import PropTypes from "prop-types"
+import grizzHead from "../img/grizzHead.png"
+import Button from "material-ui/Button"
 
 const styleSheet = createStyleSheet("ErrorMessages", theme => ({
   root: {
@@ -15,8 +21,7 @@ const styleSheet = createStyleSheet("ErrorMessages", theme => ({
     backgroundColor: "#fafafa ",
     borderLeftStyle: "solid",
     borderLeftWidth: "12px",
-    borderLeftColor: "#d32f2f",
-    borderRadius: "5px"
+    borderLeftColor: "#d32f2f"
   },
   media: {
     padding: "10px",
@@ -35,10 +40,11 @@ const styleSheet = createStyleSheet("ErrorMessages", theme => ({
   content: {
     paddingTop: 0
   }
-}));
+}))
+
 class ErrorMessages extends Component {
   render() {
-    const classes = this.props.classes;
+    const classes = this.props.classes
     return (
       <div className={classes.root}>
         <Card className={classes.card}>
@@ -54,7 +60,6 @@ class ErrorMessages extends Component {
             </CardMedia>
             <div className={classes.head}>
               <CardHeader title="We were unable to fetch data at this time" />
-
               <CardContent className={classes.content}>
                 <Typography type="subheading">
                   Please try again later
@@ -62,14 +67,44 @@ class ErrorMessages extends Component {
               </CardContent>
             </div>
           </div>
+          <CardActions>
+            <Button
+              color="accent"
+              href="https://wwwp.oakland.edu/registrar/important-dates/#tab-4"
+              target="_blank"
+            >
+              Final Exam Dates
+            </Button>
+            <Button
+              color="accent"
+              href="https://wwwp.oakland.edu/gpa-calculator/"
+              target="_blank"
+            >
+              GPA Calculator
+            </Button>
+            <Button
+              color="accent"
+              href="https://wwwp.oakland.edu/oira/distribution-of-grades/"
+              target="_blank"
+            >
+              Grade Distributions
+            </Button>
+            <Button
+              color="accent"
+              href="https://sail.oakland.edu/PROD/bwskotrn.P_ViewTermTran"
+              target="_blank"
+            >
+              View Transcript
+            </Button>
+          </CardActions>
         </Card>
       </div>
-    );
+    )
   }
 }
 
 ErrorMessages.propTypes = {
   classes: PropTypes.object.isRequired
-};
+}
 
-export default withStyles(styleSheet)(ErrorMessages);
+export default withStyles(styleSheet)(ErrorMessages)
