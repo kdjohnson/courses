@@ -31,9 +31,7 @@ const styleSheet = createStyleSheet("CircularIndeterminate", theme => ({
 class App extends Component {
   state = {
     terms: null,
-    currentTermDescription: "",
-    currentTermCode: "",
-    currentTermBounds: "",
+    currentTermBounds: [],
     currrentTerm: null,
     courses: null,
     width: document.getElementById(this.props.rootElement).clientWidth,
@@ -66,9 +64,7 @@ class App extends Component {
           for (let i = 0, total = terms.length; i < total; i++) {
             if (Object.is(terms[i].current, "true")) {
               this.setState({
-                currentTermDescription: terms[i].description,
                 currentTerm: terms[i],
-                currentTermCode: terms[i].code,
                 currentTermBounds: [
                   parseInt(terms[i].start, 10),
                   parseInt(terms[i].end, 10)
@@ -128,13 +124,13 @@ class App extends Component {
         <div>
           <TermsDialog
             terms={this.state.terms}
-            currentTermDescription={this.state.currentTermDescription}
-            currentTermCode={this.state.currentTermCode}
+            currentTermDescription={this.state.currentTerm.description}
+            currentTermCode={this.state.currentTerm.code}
             updateTerm={this.updateTerm}
             mobile={this.state.mobile}
           />
           <CoursesTabs
-            currentTermCode={this.state.currentTermCode}
+            currentTermCode={this.state.currentTerm.code}
             courses={this.state.courses}
             mobile={this.state.mobile}
             rootElement={this.props.rootElement}
@@ -150,13 +146,13 @@ class App extends Component {
           <div>
             <TermsDialog
               terms={this.state.terms}
-              currentTermDescription={this.state.currentTermDescription}
-              currentTermCode={this.state.currentTermCode}
+              currentTermDescription={this.state.currentTerm.description}
+              currentTermCode={this.state.currentTerm.code}
               updateTerm={this.updateTerm}
               mobile={this.state.mobile}
             />
             <CoursesTabs
-              currentTermCode={this.state.currentTermCode}
+              currentTermCode={this.state.currentTerm.code}
               courses={this.state.courses}
               mobile={this.state.mobile}
               gradesURL={gpaAndCreditsURL}
@@ -171,13 +167,13 @@ class App extends Component {
           <div>
             <TermsDialog
               terms={this.state.terms}
-              currentTermDescription={this.state.currentTermDescription}
-              currentTermCode={this.state.currentTermCode}
+              currentTermDescription={this.state.currentTerm.description}
+              currentTermCode={this.state.currentTerm.code}
               updateTerm={this.updateTerm}
               mobile={this.state.mobile}
             />
             <AdvisingTabs
-              currentTermCode={this.state.currentTermCode}
+              currentTermCode={this.state.currentTerm.code}
               courses={this.state.courses}
               mobile={this.state.mobile}
               gradesURL={gpaAndCreditsURL}
