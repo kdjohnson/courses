@@ -1,7 +1,6 @@
 import React, { Component } from "react"
 import CoursesTabs from "./components/CoursesTabs"
 import AdvisingTabs from "./components/AdvisingTabs"
-import TermsDialog from "./components/TermsDialog"
 import ErrorMessages from "./components/ErrorMessages"
 import { getTerms, getCourses } from "./api/api"
 import { withStyles, createStyleSheet } from "material-ui/styles"
@@ -122,21 +121,17 @@ class App extends Component {
     } else if (!Object.is(this.state.courses, null) && !this.state.advising) {
       return (
         <div>
-          <TermsDialog
-            terms={this.state.terms}
-            currentTermDescription={this.state.currentTerm.description}
-            currentTermCode={this.state.currentTerm.code}
-            updateTerm={this.updateTerm}
-            mobile={this.state.mobile}
-          />
           <CoursesTabs
-            currentTermCode={this.state.currentTerm.code}
             courses={this.state.courses}
             mobile={this.state.mobile}
             rootElement={this.props.rootElement}
             calendarURL={calendarEventsURL}
             termBounds={this.state.currentTermBounds}
             gradesURL={gpaAndCreditsURL}
+            terms={this.state.terms}
+            currentTermDescription={this.state.currentTerm.description}
+            currentTermCode={this.state.currentTerm.code}
+            updateTerm={this.updateTerm}
           />
         </div>
       )
@@ -144,42 +139,34 @@ class App extends Component {
       if (!this.state.advising) {
         return (
           <div>
-            <TermsDialog
-              terms={this.state.terms}
-              currentTermDescription={this.state.currentTerm.description}
-              currentTermCode={this.state.currentTerm.code}
-              updateTerm={this.updateTerm}
-              mobile={this.state.mobile}
-            />
             <CoursesTabs
-              currentTermCode={this.state.currentTerm.code}
               courses={this.state.courses}
               mobile={this.state.mobile}
               gradesURL={gpaAndCreditsURL}
               calendarURL={calendarEventsURL}
               rootElement={this.props.rootElement}
               termBounds={this.state.currentTermBounds}
+              terms={this.state.terms}
+              currentTermDescription={this.state.currentTerm.description}
+              currentTermCode={this.state.currentTerm.code}
+              updateTerm={this.updateTerm}
             />
           </div>
         )
       } else {
         return (
           <div>
-            <TermsDialog
-              terms={this.state.terms}
-              currentTermDescription={this.state.currentTerm.description}
-              currentTermCode={this.state.currentTerm.code}
-              updateTerm={this.updateTerm}
-              mobile={this.state.mobile}
-            />
             <AdvisingTabs
-              currentTermCode={this.state.currentTerm.code}
               courses={this.state.courses}
               mobile={this.state.mobile}
               gradesURL={gpaAndCreditsURL}
               calendarURL={calendarEventsURL}
               rootElement={this.props.rootElement}
               termBounds={this.state.currentTermBounds}
+              terms={this.state.terms}
+              currentTermDescription={this.state.currentTerm.description}
+              currentTermCode={this.state.currentTerm.code}
+              updateTerm={this.updateTerm}
             />
           </div>
         )
