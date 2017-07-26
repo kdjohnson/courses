@@ -59,8 +59,16 @@ class App extends Component {
   }
 
   updateTerm = currentTermCode => {
+
+    let termBounds
+    for (let i of this.state.terms){
+      if (i.code === currentTermCode){
+        termBounds = [parseInt(i.start, 10), parseInt(i.end, 10)]
+      }
+    }
+
     getCourses(currentTermCode, coursesURL).then(courses => {
-      this.setState({ courses })
+      this.setState({ courses, currentTermBounds: termBounds })
     })
   }
 
