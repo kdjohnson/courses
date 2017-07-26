@@ -9,7 +9,12 @@ import { CircularProgress } from "material-ui/Progress"
 
 const termsURL = "http://localhost:8082/api/terms"
 const coursesURL = "http://localhost:8082/api/courses"
-const calendarEventsURL = {url: "http://localhost:8082/api/calendar", credentialsNeeded: false}
+
+const calendarEventsURL = {
+  url: "http://localhost:8082/api/calendar",
+  credentialsNeeded: false
+}
+
 const gpaAndCreditsURL = "http://localhost:8082/api/credits"
 
 const styleSheet = createStyleSheet("CircularIndeterminate", theme => ({
@@ -29,6 +34,7 @@ class App extends Component {
     currentTermDescription: "",
     currentTermCode: "",
     currentTermBounds: "",
+    currrentTerm: null,
     courses: null,
     width: document.getElementById(this.props.rootElement).clientWidth,
     mobile: false,
@@ -61,6 +67,7 @@ class App extends Component {
             if (Object.is(terms[i].current, "true")) {
               this.setState({
                 currentTermDescription: terms[i].description,
+                currentTerm: terms[i],
                 currentTermCode: terms[i].code,
                 currentTermBounds: [
                   parseInt(terms[i].start, 10),
@@ -75,7 +82,7 @@ class App extends Component {
         }
       })
       .then(() => {
-        getCourses(this.state.currentTermCode, coursesURL).then(courses => {
+        getCourses(this.state.currentTerm, coursesURL).then(courses => {
           if (!(courses instanceof Error)) {
             this.setState({ courses })
           } else {
@@ -85,9 +92,13 @@ class App extends Component {
       })
   }
 
-  updateTerm = currentTermCode => {
-    getCourses(currentTermCode, coursesURL).then(courses => {
-      this.setState({ courses })
+  updateTerm = currentTerm => {
+    const termBounds = [
+      parseInt(currentTerm.start, 10),
+      parseInt(currentTerm.end, 10)
+    ]
+    getCourses(currentTerm, coursesURL).then(courses => {
+      this.setState({ courses, currentTermBounds: termBounds })
     })
   }
 
