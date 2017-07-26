@@ -8,10 +8,12 @@ export const getTerms = async url => {
   }
 }
 
-export const getCourses = async (code, url) => {
+export const getCourses = async (term, url) => {
+  console.log("getCourese")
+  console.log(term)
   try {
     const response = await fetch(url, {
-      body: JSON.stringify({ code: code }),
+      body: JSON.stringify({ code: term.code }),
       method: "POST"
     })
     const courses = await response.json()

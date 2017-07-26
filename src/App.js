@@ -6,7 +6,12 @@ import { getTerms, getCourses } from "./api/api"
 
 const termsURL = "http://localhost:8082/api/terms"
 const coursesURL = "http://localhost:8082/api/courses"
-const calendarEventsURL = {url: "http://localhost:8082/api/calendar", credentialsNeeded: false}
+
+const calendarEventsURL = {
+  url: "http://localhost:8082/api/calendar",
+  credentialsNeeded: false
+}
+
 const gpaAndCreditsURL = "http://localhost:8082/api/credits"
 
 class App extends Component {
@@ -15,6 +20,7 @@ class App extends Component {
     currentTermDescription: "",
     currentTermCode: "",
     currentTermBounds: "",
+    currrentTerm: null,
     courses: null,
     width: document.getElementById(this.props.rootElement).clientWidth,
     mobile: false,
@@ -45,29 +51,29 @@ class App extends Component {
             this.setState({
               currentTermDescription: terms[i].description,
               currentTermCode: terms[i].code,
-              currentTermBounds: [parseInt(terms[i].start, 10), parseInt(terms[i].end, 10)]
+              currentTerm: terms[i],
+              currentTermBounds: [
+                parseInt(terms[i].start, 10),
+                parseInt(terms[i].end, 10)
+              ]
             })
           }
         }
         this.setState({ terms })
       })
       .then(() => {
-        getCourses(this.state.currentTermCode, coursesURL).then(courses => {
+        getCourses(this.state.currentTerm, coursesURL).then(courses => {
           this.setState({ courses })
         })
       })
   }
 
-  updateTerm = currentTermCode => {
-
-    let termBounds
-    for (let i of this.state.terms){
-      if (i.code === currentTermCode){
-        termBounds = [parseInt(i.start, 10), parseInt(i.end, 10)]
-      }
-    }
-
-    getCourses(currentTermCode, coursesURL).then(courses => {
+  updateTerm = currentTerm => {
+    const termBounds = [
+      parseInt(currentTerm.start, 10),
+      parseInt(currentTerm.end, 10)
+    ]
+    getCourses(currentTerm, coursesURL).then(courses => {
       this.setState({ courses, currentTermBounds: termBounds })
     })
   }

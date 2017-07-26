@@ -157,6 +157,7 @@ class TermsDialog extends Component {
   button = undefined
 
   handleRequestClose = value => {
+    let newTerm = null
     for (const term of this.props.terms) {
       if (Object.is(term.code, value)) {
         this.setState({
@@ -164,9 +165,10 @@ class TermsDialog extends Component {
           selectedValue: value,
           open: false
         })
+        newTerm = term
       }
     }
-    this.props.updateTerm(value)
+    this.props.updateTerm(newTerm)
   }
 
   render() {
