@@ -12,10 +12,9 @@ const booksFab = {
 
 export const getBookButton = (books) => {
     return(
-        <div>
+        <div style={booksFab}>
             <Button 
             fab color="accent" 
-            style={booksFab} 
             onClick={handleBuyBooks}
             title="Buy Books"
             aria-label="Buy Books"

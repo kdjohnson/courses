@@ -126,6 +126,7 @@ class CoursesTabs extends Component {
                 currentTermCode={this.props.currentTermCode}
                 courses={this.props.courses}
                 mobile={this.props.mobile}
+                books={this.props.books}
               />
             </div>
           </TabContainer>}
