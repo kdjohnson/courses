@@ -5,8 +5,6 @@ import ErrorMessages from "./components/ErrorMessages"
 import { getTerms, getCourses } from "./api/api"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import { CircularProgress } from "material-ui/Progress"
-import Button from 'material-ui/Button';
-import AttachMoney from 'material-ui-icons/AttachMoney';
 
 const termsURL = "http://localhost:8082/api/terms"
 const coursesURL = "http://localhost:8082/api/courses"
@@ -26,15 +24,8 @@ const styleSheet = createStyleSheet("CircularIndeterminate", theme => ({
   loading: {
     display: "flex",
     justifyContent: "center"
-  },
-
-  booksFab: {
-    position: 'absolute',
-    right: 0, 
-    bottom: 0, 
-    margin: 12, 
-    marginRight: 28
   }
+
 }))
 
 class App extends Component {
@@ -103,7 +94,7 @@ class App extends Component {
       parseInt(currentTerm.end, 10)
     ]
     getCourses(currentTerm, coursesURL).then(courses => {
-      this.setState({ courses, currentTermBounds: termBounds })
+      this.setState({ courses: courses.courses, currentTermBounds: termBounds })
     })
   }
 
@@ -186,30 +177,6 @@ class App extends Component {
     }
   }
 
-  handleBuyBooks = () =>{
-    document.getElementById("courses-portlet-react-form-submit").click()
-  }
-
-  getBookButton = () => {
-    const classes = this.props.classes
-    if (Object.is(this.state.courses, null)){
-      return
-    }else{
-      return(
-        <Button 
-          fab color="accent" 
-          className={classes.booksFab} 
-          onClick={this.handleBuyBooks}
-          title="Buy Books"
-          aria-label="Buy Books"
-          tabIndex="0"
-        >
-          <AttachMoney/>
-        </Button>
-      )
-    }
-
-  }
 
   render() {
     const classes = this.props.classes
@@ -217,26 +184,6 @@ class App extends Component {
     return (
       <div style={{position: 'relative'}}>
         {this.getView()}
-        {this.getBookButton()}
-        <form
-          name="BNForm"
-          method="post"
-          target="_blank"
-          rel="noopener noreferrer"
-          action="http://oakland.bncollege.com/webapp/wcs/stores/servlet/TBListView"
-          hidden
-        >
-          <input type="hidden" name="storeId" value="13551" />
-          <input type="hidden" name="catalogId" value="10001" />
-          <input type="hidden" name="langId" value="-1" />
-          <input type="hidden" name="termMapping" value="N" />
-          <input type="hidden" name="courseXml" value={Object.is(courses, null) ? "" : courses.bookXML} />
-          <button
-            className="courses-portlet-react-form-submit"
-            id="courses-portlet-react-form-submit"
-            type="submit"
-          />
-          </form>
       </div>
     )
   }
