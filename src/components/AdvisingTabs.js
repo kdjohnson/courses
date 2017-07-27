@@ -8,6 +8,12 @@ import Paper from "material-ui/Paper"
 import Tabs, { Tab } from "material-ui/Tabs"
 import { translate } from "react-i18next"
 import Advising from "./Advising"
+import Calendar from "reactjs-calendar"
+import AppBar from "material-ui/AppBar"
+import Toolbar from "material-ui/Toolbar"
+import Assignment from "material-ui-icons/Assignment"
+import Event from "material-ui-icons/Event"
+import TermsDialog from "./TermsDialog"
 
 const TabContainer = props =>
   <div style={{ padding: 20 }}>
@@ -20,15 +26,24 @@ TabContainer.propTypes = {
 
 const styleSheet = createStyleSheet("BasicTabs", theme => ({
   root: {
-    flexGrow: 1,
-    marginTop: "1em"
+    minHeight: 0
   },
-  tabs: {
-    height: "0.3em"
+
+  inner: {
+    marginTop: 30,
+    width: "100%"
   },
   appBar: {
     backgroundColor: theme.palette.primary[500],
     color: theme.palette.getContrastText(theme.palette.primary[500])
+  },
+
+  flex: {
+    flex: 1
+  },
+
+  button: {
+    color: "#FFFFFF"
   }
 }))
 
@@ -45,17 +60,50 @@ class AdvisingTabs extends Component {
     const classes = this.props.classes
     const { t } = this.props
     return (
-      <Paper className={classes.root}>
-        <div className={classes.appBar}>
-          <Tabs
-            index={this.state.index}
-            onChange={this.handleChange}
-            indicatorClassName={classes.tabs}
-          >
-            <Tab label={t("courses", {})} tabIndex="0" />
-            <Tab label={t("calendar", {})} tabIndex="0" />
-          </Tabs>
-        </div>
+      <Paper className={classes.inner}>
+        <AppBar position="static">
+          <Toolbar disableGutters={true} className={classes.root}>
+            {Object.is(this.props.mobile, true) &&
+              <Tabs
+                className={classes.flex}
+                index={this.state.index}
+                onChange={this.handleChange}
+              >
+                <Tab
+                  aria-label={t("courses", {})}
+                  icon={
+                    <Assignment
+                      className={classes.button}
+                      alt="View your courses for the selected term"
+                    />
+                  }
+                  tabIndex="0"
+                />
+                <Tab
+                  aria-label={t("calendar", {})}
+                  icon={<Event className={classes.button} />}
+                  alt="View your calendar events"
+                  tabIndex="0"
+                />
+              </Tabs>}
+            {Object.is(this.props.mobile, false) &&
+              <Tabs
+                className={classes.flex}
+                index={this.state.index}
+                onChange={this.handleChange}
+              >
+                <Tab label={t("courses", {})} tabIndex="0" />
+                <Tab label={t("calendar", {})} tabIndex="0" />
+              </Tabs>}
+            <TermsDialog
+              terms={this.props.terms}
+              currentTermDescription={this.props.currentTermDescription}
+              currentTermCode={this.props.currentTermCode}
+              updateTerm={this.props.updateTerm}
+              mobile={this.props.mobile}
+            />
+          </Toolbar>
+        </AppBar>
         {Object.is(this.state.index, 0) &&
           <TabContainer>
             <div>
@@ -71,9 +119,11 @@ class AdvisingTabs extends Component {
           </TabContainer>}
         {Object.is(this.state.index, 1) &&
           <TabContainer>
-            <div tabIndex="0">
-              <p tabIndex="0">Hello Aaron</p>
-            </div>
+            <Calendar
+              eventsURLObj={this.props.calendarURL}
+              termBounds={this.props.termBounds}
+              rootID={this.props.rootElement}
+            />
           </TabContainer>}
       </Paper>
     )
