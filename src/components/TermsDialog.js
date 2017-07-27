@@ -71,7 +71,7 @@ class ConfirmationDialog extends Component {
   }
 
   render() {
-    const { selectedValue, t, terms, ...other } = this.props
+    const { selectedValue, t, terms, classes, ...other } = this.props
     return (
       <Dialog
         role="dialog"
