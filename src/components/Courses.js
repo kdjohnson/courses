@@ -9,6 +9,7 @@ import Instructors from "./Instructors"
 import ExpandableCourse from "./ExpandableCourse"
 import Meetings from "./Meetings"
 import CourseDetails from "./CourseDetails"
+import { getBookButton } from "./BuyBooks"
 import { translate } from "react-i18next"
 
 const styleSheet = createStyleSheet("Courses", theme => ({
@@ -203,6 +204,7 @@ class Courses extends Component {
           }
         >
           {this.getCourses()}
+          {getBookButton(this.props.courses.bookXML)}
         </div>
       )
     }

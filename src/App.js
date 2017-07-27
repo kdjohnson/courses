@@ -17,6 +17,10 @@ const calendarEventsURL = {
 const gpaAndCreditsURL = "http://localhost:8082/api/credits"
 
 const styleSheet = createStyleSheet("CircularIndeterminate", theme => ({
+  root: {
+    position: "relative"
+  },
+
   progress: {
     margin: `0 ${theme.spacing.unit * 2}px`
   },
@@ -25,6 +29,7 @@ const styleSheet = createStyleSheet("CircularIndeterminate", theme => ({
     display: "flex",
     justifyContent: "center"
   }
+
 }))
 
 class App extends Component {
@@ -79,7 +84,7 @@ class App extends Component {
       .then(() => {
         getCourses(this.state.currentTerm, coursesURL).then(courses => {
           if (!(courses instanceof Error)) {
-            this.setState({ courses })
+            this.setState({ courses: courses.courses })
           } else {
             this.setState({ error: true })
           }
@@ -93,7 +98,7 @@ class App extends Component {
       parseInt(currentTerm.end, 10)
     ]
     getCourses(currentTerm, coursesURL).then(courses => {
-      this.setState({ courses, currentTermBounds: termBounds })
+      this.setState({ courses: courses.courses, currentTermBounds: termBounds })
     })
   }
 
@@ -176,9 +181,12 @@ class App extends Component {
     }
   }
 
+
   render() {
+    const classes = this.props.classes
+    const courses = this.state.courses
     return (
-      <div>
+      <div className={classes.root}>
         {this.getView()}
       </div>
     )
