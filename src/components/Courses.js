@@ -204,7 +204,7 @@ class Courses extends Component {
           }
         >
           {this.getCourses()}
-          {getBookButton(this.props.courses.bookXML)}
+          {getBookButton(this.props.books)}
         </div>
       )
     }

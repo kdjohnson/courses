@@ -41,6 +41,7 @@ class App extends Component {
     width: document.getElementById(this.props.rootElement).clientWidth,
     mobile: false,
     advising: false,
+    books: null,
     error: false,
     loading: true
   }
@@ -84,7 +85,7 @@ class App extends Component {
       .then(() => {
         getCourses(this.state.currentTerm, coursesURL).then(courses => {
           if (!(courses instanceof Error)) {
-            this.setState({ courses: courses.courses })
+            this.setState({ courses: courses.courses, books: courses.books })
           } else {
             this.setState({ error: true })
           }
@@ -139,6 +140,7 @@ class App extends Component {
             currentTermDescription={this.state.currentTerm.description}
             currentTermCode={this.state.currentTerm.code}
             updateTerm={this.updateTerm}
+            books={this.state.books}
           />
         </div>
       )
@@ -157,6 +159,7 @@ class App extends Component {
               currentTermDescription={this.state.currentTerm.description}
               currentTermCode={this.state.currentTerm.code}
               updateTerm={this.updateTerm}
+              books={this.state.books}
             />
           </div>
         )
