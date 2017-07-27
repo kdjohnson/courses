@@ -25,6 +25,14 @@ const styleSheet = createStyleSheet("TermsDialog", theme => ({
   button: {
     marginRight: "1em",
     color: "#FFFFFF"
+  },
+
+  header: {
+    backgroundColor: theme.palette.primary[400]
+  },
+
+  title: {
+    fontWeight: 600
   }
 }))
 
@@ -79,8 +87,15 @@ class ConfirmationDialog extends Component {
         onEntering={this.handleEntering}
         {...other}
       >
-        <DialogTitle disableTypography={true}>
-          <Typography type="title" tabIndex="0">
+        <DialogTitle
+          disableTypography={true}
+          className={this.props.classes.header}
+        >
+          <Typography
+            type="title"
+            tabIndex="0"
+            className={this.props.classes.title}
+          >
             Terms
           </Typography>
         </DialogTitle>
@@ -198,6 +213,7 @@ class TermsDialog extends Component {
               <Typography className={classes.text}>Change term</Typography>
             </Button>}
           <ConfirmationDialog
+            classes={classes}
             open={this.state.open}
             onRequestClose={this.handleRequestClose}
             selectedValue={this.state.selectedValue}

@@ -111,7 +111,9 @@ class App extends Component {
       )
     } else if (
       Object.is(this.state.error, true) ||
-      Object.is(this.state.terms, null)
+      Object.is(this.state.terms, null) ||
+      Object.is(this.state.currentTerm, null) ||
+      Object.is(this.state.currentTerm, undefined)
     ) {
       return (
         <div className={classes.loading}>
