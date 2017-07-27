@@ -35,7 +35,7 @@ class App extends Component {
     courses: null,
     width: document.getElementById(this.props.rootElement).clientWidth,
     mobile: false,
-    advising: true,
+    advising: false,
     error: false,
     loading: true
   }
