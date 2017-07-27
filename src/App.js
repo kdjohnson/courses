@@ -17,6 +17,10 @@ const calendarEventsURL = {
 const gpaAndCreditsURL = "http://localhost:8082/api/credits"
 
 const styleSheet = createStyleSheet("CircularIndeterminate", theme => ({
+  root: {
+    position: "relative"
+  },
+
   progress: {
     margin: `0 ${theme.spacing.unit * 2}px`
   },
@@ -182,7 +186,7 @@ class App extends Component {
     const classes = this.props.classes
     const courses = this.state.courses
     return (
-      <div style={{position: 'relative'}}>
+      <div className={classes.root}>
         {this.getView()}
       </div>
     )
