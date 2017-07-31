@@ -6,7 +6,6 @@ import Typography from "material-ui/Typography"
 import Instructors from "./Instructors"
 import Meetings from "./Meetings"
 import CourseDetails from "./CourseDetails"
-import {getMapUrl} from "../utils/mapLinks"
 import { translate } from "react-i18next"
 
 const styleSheet = createStyleSheet("ExpandableCourse", theme => ({

@@ -8,7 +8,6 @@ import Card, {
 } from "material-ui/Card"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import PropTypes from "prop-types"
-import grizzHead from "../img/grizzHead.png"
 import Error from "material-ui-icons/Error"
 import Button from "material-ui/Button"
 
