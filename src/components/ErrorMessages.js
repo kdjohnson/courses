@@ -15,7 +15,7 @@ import Button from "material-ui/Button"
 const styleSheet = createStyleSheet("ErrorMessages", theme => ({
   root: {
     position: "relative",
-    maxWidth: "650px",
+    width: "100%",
     textAlign: "ltr"
   },
 
