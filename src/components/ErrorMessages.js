@@ -76,7 +76,7 @@ class ErrorMessages extends Component {
           <CardActions>
             <Button
               color="accent"
-              href="https://wwwp.oakland.edu/registrar/important-dates/#tab-4"
+              href="https://wwwp.oakland.edu/registrar/important-dates/#tab-5"
               target="_blank"
             >
               Final Exam Dates
