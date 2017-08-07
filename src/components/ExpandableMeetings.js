@@ -66,7 +66,7 @@ class ExpandableMeetings extends Component {
             {this.props.meetings[i].buildingRoom +
               " [" +
               this.props.meetings[i].campus +
-              " ] "}
+              "]"}
           </a>
           <Typography type="body2" className={classes.meet} tabIndex="0">
             {`${this.props.meetings[i].meetDays} `}
