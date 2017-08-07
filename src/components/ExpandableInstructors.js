@@ -7,6 +7,7 @@ import IconButton from "material-ui/IconButton"
 import ExpandMoreIcon from "material-ui-icons/ExpandMore"
 import { CardContent } from "material-ui/Card"
 import classnames from "classnames"
+import { getMapUrl } from "../utils/mapLinks"
 
 const styleSheet = createStyleSheet("ExpandableInstructors", theme => ({
   button: {
@@ -76,7 +77,7 @@ class ExpandableInstructors extends Component {
           <a
             className={classes.link}
             target="_blank"
-            href="https://oakland.edu"
+            href={getMapUrl(this.props.teachers[0].office, true)}
             tabIndex="0"
             rel="noopener noreferrer"
           >
@@ -116,7 +117,7 @@ class ExpandableInstructors extends Component {
             <a
               className={classes.link}
               target="_blank"
-              href="https://oakland.edu"
+              href={getMapUrl(this.props.teachers[i].office, true)}
               rel="noopener noreferrer"
               tabIndex="0"
             >
@@ -124,7 +125,7 @@ class ExpandableInstructors extends Component {
             </a>
             <a
               target="_blank"
-              href="mailto:https://oakland.edu"
+              href={"mailto:" + this.props.teachers[i].email}
               tabIndex="0"
               rel="noopener noreferrer"
             >
