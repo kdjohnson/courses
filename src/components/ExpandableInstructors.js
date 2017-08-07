@@ -101,7 +101,7 @@ class ExpandableInstructors extends Component {
     let elements = []
     for (let i = 1, total = this.props.teachers.length; i < total; i++) {
       elements.push(
-        <div>
+        <div key={"instructor-" + i}>
           <Typography
             type="headline"
             component="h3"
