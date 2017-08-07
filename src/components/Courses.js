@@ -126,7 +126,10 @@ class Courses extends Component {
                 }
                 key={this.props.courses[i].crn + i + Math.random()}
               >
-                <CourseHeader course={this.props.courses[i]} />
+                <CourseHeader
+                  mobile={this.props.mobile}
+                  course={this.props.courses[i]}
+                />
                 <CardContent
                   className={
                     this.props.mobile ? classes.contentMobile : classes.content

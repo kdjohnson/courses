@@ -73,7 +73,10 @@ class WaitlistCourse extends Component {
           <Card
             className={this.props.mobile ? classes.cardMobile : classes.card}
           >
-            <CourseHeader course={this.props.course} />
+            <CourseHeader
+              mobile={this.props.mobile}
+              course={this.props.course}
+            />
             <CardContent
               className={
                 this.props.mobile ? classes.contentMobile : classes.content
