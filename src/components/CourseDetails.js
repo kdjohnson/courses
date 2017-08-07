@@ -11,6 +11,7 @@ import Typography from "material-ui/Typography"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import PropTypes from "prop-types"
 import { translate } from "react-i18next"
+import { amber } from "material-ui/colors"
 
 const styleSheet = createStyleSheet("CourseDetails", theme => ({
   button: {
@@ -19,6 +20,10 @@ const styleSheet = createStyleSheet("CourseDetails", theme => ({
 
   dialogHeader: {
     backgroundColor: theme.palette.primary[400]
+  },
+
+  dialogHeaderWaitList: {
+    backgroundColor: amber[200]
   },
 
   list: {
@@ -76,7 +81,11 @@ class CourseDetails extends Component {
             transition={<Slide direction="down" />}
           >
             <DialogTitle
-              className={classes.dialogHeader}
+              className={
+                Object.is(this.props.course.waitList, "0")
+                  ? classes.dialogHeader
+                  : classes.dialogHeaderWaitList
+              }
               disableTypography={true}
             >
               <Typography type="title" tabIndex="0" className={classes.title}>

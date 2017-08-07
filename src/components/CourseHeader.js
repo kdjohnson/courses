@@ -49,6 +49,16 @@ const styleSheet = createStyleSheet("CourseHeader", theme => ({
   courseTitle: {
     fontSize: 16,
     color: theme.palette.text.primary
+  },
+
+  subHeaderDiv: {
+    display: "flex"
+  },
+
+  waitlist: {
+    marginLeft: "1em",
+    fontWeight: 600,
+    color: "rgba(0, 0, 0, 0.75)"
   }
 }))
 
@@ -121,12 +131,14 @@ class CourseHeader extends Component {
                   "-" +
                   this.props.course.crn}
               </span>
-              <span tabIndex="0" className={classes.classHeaderSpanWaitList}>
-                {t("credits", {}) + ": " + this.props.course.credit}
-              </span>
-              <span tabIndex="0" className={classes.classHeaderSpanWaitList}>
-                {t("waitlist", {}) + ": " + this.props.course.waitList}
-              </span>
+              <div className={classes.subHeaderDiv}>
+                <span tabIndex="0" className={classes.classHeaderSpanWaitList}>
+                  {t("credits", {}) + ": " + this.props.course.credit}
+                </span>
+                <span tabIndex="0" className={classes.waitlist}>
+                  {t("waitlist", {}) + ": " + this.props.course.waitList}
+                </span>
+              </div>
             </div>
           }
         />
