@@ -3,14 +3,15 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { withStyles, createStyleSheet } from "material-ui/styles"
-import Card, { CardHeader, CardActions, CardContent } from "material-ui/Card"
-import Typography from "material-ui/Typography"
+import Card, { CardActions, CardContent } from "material-ui/Card"
 import Instructors from "./Instructors"
 import ExpandableCourse from "./ExpandableCourse"
 import Meetings from "./Meetings"
 import CourseDetails from "./CourseDetails"
 import { getBookButton } from "./BuyBooks"
 import { translate } from "react-i18next"
+import WaitlistCourse from "./WaitlistCourse"
+import CourseHeader from "./CourseHeader"
 
 const styleSheet = createStyleSheet("Courses", theme => ({
   courseContainer: {
@@ -91,7 +92,6 @@ const styleSheet = createStyleSheet("Courses", theme => ({
 class Courses extends Component {
   getCourses = () => {
     const classes = this.props.classes
-    const { t } = this.props
     let elements = []
     for (let i = 0, total = this.props.courses.length; i < total; i++) {
       if (
@@ -102,6 +102,14 @@ class Courses extends Component {
           <ExpandableCourse
             course={this.props.courses[i]}
             key={"expandable" + Math.random()}
+            mobile={this.props.mobile}
+          />
+        )
+      } else if (!Object.is(this.props.courses[i].waitList, "0")) {
+        elements.push(
+          <WaitlistCourse
+            course={this.props.courses[i]}
+            key={"waitlist" + Math.random()}
             mobile={this.props.mobile}
           />
         )
@@ -118,39 +126,9 @@ class Courses extends Component {
                 }
                 key={this.props.courses[i].crn + i + Math.random()}
               >
-                <CardHeader
-                  className={
-                    this.props.mobile
-                      ? classes.classHeaderMobile
-                      : classes.classHeader
-                  }
-                  title={
-                    <Typography
-                      tabIndex="0"
-                      component="h1"
-                      className={classes.classHeaderSpan}
-                      style={{ fontSize: "20px" }}
-                    >
-                      {this.props.courses[i].courseTitle}
-                    </Typography>
-                  }
-                  key={this.props.courses[i].crn + i + Math.random()}
-                  subheader={
-                    <div className={classes.classHeaderSpanDiv}>
-                      <span tabIndex="0" className={classes.classHeaderSpan}>
-                        {this.props.courses[i].subjectCode +
-                          "-" +
-                          this.props.courses[i].subjectNumber +
-                          "-" +
-                          this.props.courses[i].section +
-                          "-" +
-                          this.props.courses[i].crn}
-                      </span>
-                      <span tabIndex="0" className={classes.classHeaderSpan}>
-                        {t("credits", {}) + ": " + this.props.courses[i].credit}
-                      </span>
-                    </div>
-                  }
+                <CourseHeader
+                  mobile={this.props.mobile}
+                  course={this.props.courses[i]}
                 />
                 <CardContent
                   className={

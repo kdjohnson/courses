@@ -7,9 +7,27 @@ import Meetings from "./Meetings"
 import CourseDetails from "./CourseDetails"
 import CourseHeader from "./CourseHeader"
 
-const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
+const styleSheet = createStyleSheet("WaitlistCourse", theme => ({
   courseContainer: {
     width: "100%"
+  },
+
+  coursesDiv: {
+    display: "flex",
+    justifyContent: "space-between",
+    flexFlow: "wrap"
+  },
+
+  coursesDivMobile: {
+    display: "flex",
+    alignItems: "center",
+    flexDirection: "column"
+  },
+
+  cardDiv: {
+    display: "flex",
+    flexDirection: "row",
+    justifyContent: "space-around"
   },
 
   card: {
@@ -21,34 +39,13 @@ const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
     backgroundColor: "#fafafa"
   },
 
-  courseTitleH1: {
-    fontSize: 16,
-    fontWeight: 800,
-    color: theme.palette.text.secondary
-  },
-
-  classHeader: {
-    backgroundColor: theme.palette.primary[400]
-  },
-
-  classHeaderMobile: {
-    backgroundColor: theme.palette.primary[400],
-    textAlign: "center"
-  },
-
-  classHeaderSpanDiv: {
-    display: "flex",
-    flexDirection: "column"
-  },
-
-  classHeaderSpan: {
-    fontWeight: 600,
-    color: "rgba(0, 0, 0, 0.75)"
-  },
-
   courseTitle: {
     fontSize: 16,
     color: theme.palette.text.primary
+  },
+
+  infoContainer: {
+    marginLeft: "2em"
   },
 
   content: {
@@ -64,14 +61,10 @@ const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
   actions: {
     display: "flex",
     justifyContent: "center"
-  },
-
-  infoContainer: {
-    marginLeft: "2em"
   }
 }))
 
-class ExpandableCourse extends Component {
+class WaitlistCourse extends Component {
   render() {
     const classes = this.props.classes
     return (
@@ -108,8 +101,8 @@ class ExpandableCourse extends Component {
   }
 }
 
-ExpandableCourse.propTypes = {
+WaitlistCourse.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(ExpandableCourse)
+export default withStyles(styleSheet)(WaitlistCourse)

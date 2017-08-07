@@ -58,7 +58,7 @@ type Term struct {
 type Course struct {
 	ID                            int
 	Crn                           string       `json:"crn"`
-	WaitlistPos                   string       `json:"waitlistPost"`
+	WaitlistPos                   string       `json:"waitList"`
 	RegistrationStatus            string       `json:"registrationStatus"`
 	RegistrationStatusDescription string       `json:"registrationStatusDescription"`
 	DepartmentCode                string       `json:"departmentCode"`
@@ -92,6 +92,7 @@ type languageStrings struct {
 	Course        string `json:"course"`
 	Level         string `json:"level"`
 	GaC           string `json:"gac"`
+	Waitlist      string `json:"waitlist"`
 }
 
 // Meeting represents the times and locations a course will gather (e.g. Monday at 1:47 PM).
@@ -187,7 +188,7 @@ func calendarMeeting(w http.ResponseWriter, r *http.Request) {
 		q[m.Month][m.Day] = append(q[m.Month][m.Day], m)
 	}
 
-  newMap := make(map[string]map[string]map[string]MeetingCalendarArray)
+	newMap := make(map[string]map[string]map[string]MeetingCalendarArray)
 
 	newMap["events"] = q
 
@@ -220,6 +221,7 @@ func lang(w http.ResponseWriter, r *http.Request) {
 				"دورة",
 				"مستوى",
 				"الدرجات والاعتمادات",
+				"",
 			}
 	case "de":
 		data = languageStrings{
@@ -238,6 +240,7 @@ func lang(w http.ResponseWriter, r *http.Request) {
 			"Kurs",
 			"Ebene",
 			"Noten und Kredite",
+			"Warteliste Position",
 		}
 	case "en":
 		data = languageStrings{
@@ -256,6 +259,7 @@ func lang(w http.ResponseWriter, r *http.Request) {
 			"Course",
 			"Level",
 			"Grades and Credits",
+			"Waitlist Position",
 		}
 	case "en-US":
 		data = languageStrings{
@@ -274,6 +278,7 @@ func lang(w http.ResponseWriter, r *http.Request) {
 			"Course",
 			"Level",
 			"Grades and Credits",
+			"Waitlist Position",
 		}
 	case "sp":
 		data = languageStrings{
@@ -292,6 +297,7 @@ func lang(w http.ResponseWriter, r *http.Request) {
 			"Curso",
 			"Nivel",
 			"Grados y Créditos",
+			"Posición de lista de espera",
 		}
 	case "fr":
 		data = languageStrings{
@@ -310,6 +316,7 @@ func lang(w http.ResponseWriter, r *http.Request) {
 			"Cour",
 			"niveau",
 			"Notes et crédits",
+			"Position de la liste d'attente",
 		}
 	}
 
