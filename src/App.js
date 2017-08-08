@@ -143,6 +143,7 @@ class App extends Component {
             currentTermDescription={this.state.currentTerm.description}
             currentTermCode={this.state.currentTerm.code}
             updateTerm={this.updateTerm}
+            currentTerm={this.state.currentTerm}
             books={this.state.books}
           />
         </div>
@@ -161,6 +162,7 @@ class App extends Component {
               terms={this.state.terms}
               currentTermDescription={this.state.currentTerm.description}
               currentTermCode={this.state.currentTerm.code}
+              currentTerm={this.state.currentTerm}
               updateTerm={this.updateTerm}
               books={this.state.books}
             />
@@ -180,6 +182,7 @@ class App extends Component {
               currentTermDescription={this.state.currentTerm.description}
               currentTermCode={this.state.currentTerm.code}
               updateTerm={this.updateTerm}
+              currentTerm={this.state.currentTerm}
             />
           </div>
         )
