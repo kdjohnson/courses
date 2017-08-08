@@ -9,7 +9,7 @@ import { CircularProgress } from "material-ui/Progress"
 const termsURL = "http://localhost:8082/api/terms"
 const coursesURL = "http://localhost:8082/api/courses"
 
-const calendarEventsURL = {
+const calendarObj = {
   url: "http://localhost:8082/api/calendar",
   credentialsNeeded: false
 }
@@ -39,6 +39,7 @@ class App extends Component {
     courses: null,
     width: document.getElementById(this.props.rootElement).clientWidth,
     mobile: false,
+    calendarObj: calendarObj,
     advising: false,
     books: null,
     error: false,
@@ -90,6 +91,7 @@ class App extends Component {
           }
         })
       })
+      this.setState({ calendarObj: Object.assign(calendarObj, this.state.currentTerm) })
   }
 
   updateTerm = currentTerm => {
@@ -101,7 +103,8 @@ class App extends Component {
       this.setState({
         courses: courses.courses,
         currentTermBounds: termBounds,
-        books: courses.bookXML
+        books: courses.bookXML,
+        currentTerm
       })
     })
   }
@@ -136,7 +139,7 @@ class App extends Component {
             courses={this.state.courses}
             mobile={this.state.mobile}
             rootElement={this.props.rootElement}
-            calendarURL={calendarEventsURL}
+            calendarURL={this.state.calendarObj}
             termBounds={this.state.currentTermBounds}
             gradesURL={gpaAndCreditsURL}
             terms={this.state.terms}
@@ -156,7 +159,7 @@ class App extends Component {
               courses={this.state.courses}
               mobile={this.state.mobile}
               gradesURL={gpaAndCreditsURL}
-              calendarURL={calendarEventsURL}
+              calendarURL={this.state.calendarObj}
               rootElement={this.props.rootElement}
               termBounds={this.state.currentTermBounds}
               terms={this.state.terms}
@@ -175,7 +178,7 @@ class App extends Component {
               courses={this.state.courses}
               mobile={this.state.mobile}
               gradesURL={gpaAndCreditsURL}
-              calendarURL={calendarEventsURL}
+              calendarURL={this.state.calendarObj}
               rootElement={this.props.rootElement}
               termBounds={this.state.currentTermBounds}
               terms={this.state.terms}
