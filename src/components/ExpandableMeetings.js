@@ -132,7 +132,7 @@ class ExpandableMeetings extends Component {
           rel="noopener noreferrer"
           key={meeting.endDate + Math.random()}
         >
-          {meeting.buildingRoom + " [" + meeting.campus + " ] "}
+          {meeting.buildingRoom + " [" + meeting.campus + "]"}
         </a>
         <Typography type="body2" className={classes.meet} tabIndex="0">
           {`${meeting.meetDays} `}
