@@ -73,7 +73,8 @@ class App extends Component {
                 currentTermBounds: [
                   parseInt(terms[i].start, 10),
                   parseInt(terms[i].end, 10)
-                ]
+                ],
+                calendarObj: Object.assign(calendarObj, terms[i])
               })
             }
           }
@@ -91,7 +92,6 @@ class App extends Component {
           }
         })
       })
-      this.setState({ calendarObj: Object.assign(calendarObj, this.state.currentTerm) })
   }
 
   updateTerm = currentTerm => {
@@ -104,6 +104,7 @@ class App extends Component {
         courses: courses.courses,
         currentTermBounds: termBounds,
         books: courses.bookXML,
+        calendarObj: Object.assign(this.state.calendarObj, currentTerm),
         currentTerm
       })
     })
