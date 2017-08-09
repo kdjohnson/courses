@@ -16,8 +16,6 @@ import TermsDialog from "./TermsDialog"
 import Assignment from "material-ui-icons/Assignment"
 import Event from "material-ui-icons/Event"
 import Spellcheck from "material-ui-icons/Spellcheck"
-import Button from "material-ui/Button"
-import Typography from "material-ui/Typography"
 
 const TabContainer = props =>
   <div style={{ padding: 20 }}>

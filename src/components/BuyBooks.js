@@ -1,7 +1,5 @@
 import React from "react"
 import Button from "material-ui/Button"
-import AttachMoney from "material-ui-icons/AttachMoney"
-import Typography from "material-ui/Typography"
 
 const mobileStyle = {
   display: "flex",
