@@ -6,7 +6,7 @@ import Collapse from "material-ui/transitions/Collapse"
 import IconButton from "material-ui/IconButton"
 import ExpandMoreIcon from "material-ui-icons/ExpandMore"
 import { CardContent } from "material-ui/Card"
-import {getMapUrl} from "../utils/mapLinks"
+import { getMapUrl } from "../utils/mapLinks"
 import classnames from "classnames"
 
 const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
@@ -24,7 +24,7 @@ const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
   flexGrow: { flex: "1 1 auto" },
 
   meet: {
-    color: theme.palette.text.primary
+    color: "#3344dd"
   },
 
   iconButtonDiv: {
@@ -33,7 +33,6 @@ const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
   },
 
   expandedDiv: {
-    color: "#3344dd",
     display: "flex",
     flexDirection: "column",
     borderLeftStyle: "solid",
@@ -71,9 +70,6 @@ class ExpandableMeetings extends Component {
           <Typography type="body2" className={classes.meet} tabIndex="0">
             {`${this.props.meetings[i].meetDays} `}
           </Typography>
-          <Typography type="body2" className={classes.meet} tabIndex="0">
-            {this.props.meetings[i].courseType}
-          </Typography>
           <Typography
             type="body2"
             className={classes.meet}
@@ -89,30 +85,33 @@ class ExpandableMeetings extends Component {
             className={classes.meet}
             tabIndex="0"
             aria-label={
-              this.props.meetings[i].startDay +
-              "-0" +
               this.props.meetings[i].startMonth +
+              "-" +
+              this.props.meetings[i].startDay +
               "-" +
               this.props.meetings[i].startYear +
               " to " +
-              this.props.meetings[i].endDay +
-              "-0" +
               this.props.meetings[i].endMonth +
+              "-" +
+              this.props.meetings[i].endDay +
               "-" +
               this.props.meetings[i].endYear
             }
           >
-            {this.props.meetings[i].startDay +
+            {this.props.meetings[i].startMonth +
               "/" +
-              this.props.meetings[i].startMonth +
+              this.props.meetings[i].startDay +
               "/" +
               this.props.meetings[i].startYear +
               " - " +
-              this.props.meetings[i].endDay +
-              "/" +
               this.props.meetings[i].endMonth +
               "/" +
+              this.props.meetings[i].endDay +
+              "/" +
               this.props.meetings[i].endYear}
+          </Typography>
+          <Typography type="body2" className={classes.meet} tabIndex="0">
+            {this.props.meetings[i].courseType}
           </Typography>
         </div>
       )
@@ -133,10 +132,7 @@ class ExpandableMeetings extends Component {
           rel="noopener noreferrer"
           key={meeting.endDate + Math.random()}
         >
-          {meeting.buildingRoom +
-            " [" +
-            meeting.campus +
-            " ] "}
+          {meeting.buildingRoom + " [" + meeting.campus + " ] "}
         </a>
         <Typography type="body2" className={classes.meet} tabIndex="0">
           {`${meeting.meetDays} `}
@@ -155,9 +151,7 @@ class ExpandableMeetings extends Component {
           tabIndex="0"
           key={meeting.endDate + Math.random()}
         >
-          {meeting.startTime +
-            " - " +
-            meeting.endTime}
+          {meeting.startTime + " - " + meeting.endTime}
         </Typography>
         <Typography
           type="body2"

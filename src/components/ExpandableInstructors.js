@@ -124,6 +124,7 @@ class ExpandableInstructors extends Component {
               {this.props.teachers[i].office}
             </a>
             <a
+              className={classes.link}
               target="_blank"
               href={"mailto:" + this.props.teachers[i].email}
               tabIndex="0"

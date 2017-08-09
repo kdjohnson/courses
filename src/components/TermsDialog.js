@@ -193,25 +193,14 @@ class TermsDialog extends Component {
     } else {
       return (
         <div>
-          {Object.is(this.props.mobile, true) &&
-            <IconButton
-              aria-label="change term"
-              className={classes.button}
-              tabIndex="0"
-              aria-haspopup="true"
-              onClick={this.handleClick}
-            >
-              <MoreHoriz />
-            </IconButton>}
-          {Object.is(this.props.mobile, false) &&
-            <Button
-              className={classes.button}
-              tabIndex="0"
-              aria-haspopup="true"
-              onClick={this.handleClick}
-            >
-              <Typography className={classes.text}>Change term</Typography>
-            </Button>}
+          <Button
+            className={classes.button}
+            tabIndex="0"
+            aria-haspopup="true"
+            onClick={this.handleClick}
+          >
+            <Typography className={classes.text}>terms</Typography>
+          </Button>
           <ConfirmationDialog
             classes={classes}
             open={this.state.open}

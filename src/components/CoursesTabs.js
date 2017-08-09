@@ -15,7 +15,9 @@ import Toolbar from "material-ui/Toolbar"
 import TermsDialog from "./TermsDialog"
 import Assignment from "material-ui-icons/Assignment"
 import Event from "material-ui-icons/Event"
-import Poll from "material-ui-icons/Poll"
+import Spellcheck from "material-ui-icons/Spellcheck"
+import Button from "material-ui/Button"
+import Typography from "material-ui/Typography"
 
 const TabContainer = props =>
   <div style={{ padding: 20 }}>
@@ -73,6 +75,7 @@ class CoursesTabs extends Component {
               >
                 <Tab
                   aria-label={t("courses", {})}
+                  title="Courses"
                   icon={
                     <Assignment
                       className={classes.button}
@@ -83,6 +86,7 @@ class CoursesTabs extends Component {
                 />
                 <Tab
                   aria-label={t("calendar", {})}
+                  title="Calendar"
                   icon={
                     <Event
                       className={classes.button}
@@ -93,8 +97,12 @@ class CoursesTabs extends Component {
                 />
                 <Tab
                   aria-label={t("grades", {})}
+                  title="Grades"
                   icon={
-                    <Poll className={classes.button} alt="View your grades" />
+                    <Spellcheck
+                      className={classes.button}
+                      alt="View your grades"
+                    />
                   }
                   tabIndex="0"
                 />
@@ -124,6 +132,7 @@ class CoursesTabs extends Component {
               <Courses
                 tabIndex="0"
                 currentTermCode={this.props.currentTermCode}
+                currentTermDescription={this.props.currentTerm.description}
                 courses={this.props.courses}
                 mobile={this.props.mobile}
                 books={this.props.books}
