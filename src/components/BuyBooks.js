@@ -1,27 +1,22 @@
 import React from "react"
 import Button from "material-ui/Button"
-import AttachMoney from "material-ui-icons/AttachMoney"
 
-const booksFab = {
-  position: "absolute",
-  right: 0,
-  bottom: 0,
-  margin: 12,
-  marginRight: 28
+const mobileStyle = {
+  display: "flex",
+  justifyContent: "center"
 }
 
-export const getBookButton = books => {
+export const getBookButton = (books, term, mobile) => {
   return (
-    <div style={booksFab}>
+    <div style={mobile ? mobileStyle : null}>
       <Button
-        fab
         color="accent"
-        onClick={handleBuyBooks}
         title="Buy Books"
-        aria-label="Buy Books"
+        raised
         tabIndex="0"
+        onClick={handleBuyBooks}
       >
-        <AttachMoney />
+        View books for {term}
       </Button>
       <form
         name="BNForm"

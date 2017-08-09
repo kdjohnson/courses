@@ -2,7 +2,6 @@
 
 import React, { Component } from "react"
 import Button from "material-ui/Button"
-import IconButton from "material-ui/IconButton"
 import Dialog, {
   DialogActions,
   DialogContent,
@@ -15,7 +14,6 @@ import Typography from "material-ui/Typography"
 import PropTypes from "prop-types"
 import { translate } from "react-i18next"
 import { withStyles, createStyleSheet } from "material-ui/styles"
-import MoreHoriz from "material-ui-icons/MoreHoriz"
 
 const styleSheet = createStyleSheet("TermsDialog", theme => ({
   text: {
@@ -193,25 +191,14 @@ class TermsDialog extends Component {
     } else {
       return (
         <div>
-          {Object.is(this.props.mobile, true) &&
-            <IconButton
-              aria-label="change term"
-              className={classes.button}
-              tabIndex="0"
-              aria-haspopup="true"
-              onClick={this.handleClick}
-            >
-              <MoreHoriz />
-            </IconButton>}
-          {Object.is(this.props.mobile, false) &&
-            <Button
-              className={classes.button}
-              tabIndex="0"
-              aria-haspopup="true"
-              onClick={this.handleClick}
-            >
-              <Typography className={classes.text}>Change term</Typography>
-            </Button>}
+          <Button
+            className={classes.button}
+            tabIndex="0"
+            aria-haspopup="true"
+            onClick={this.handleClick}
+          >
+            <Typography className={classes.text}>terms</Typography>
+          </Button>
           <ConfirmationDialog
             classes={classes}
             open={this.state.open}

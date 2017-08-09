@@ -176,13 +176,19 @@ class Courses extends Component {
       return <div />
     } else {
       return (
-        <div
-          className={
-            this.props.mobile ? classes.coursesDivMobile : classes.coursesDiv
-          }
-        >
-          {this.getCourses()}
-          {getBookButton(this.props.books)}
+        <div>
+          {getBookButton(
+            this.props.books,
+            this.props.currentTermDescription,
+            this.props.mobile
+          )}
+          <div
+            className={
+              this.props.mobile ? classes.coursesDivMobile : classes.coursesDiv
+            }
+          >
+            {this.getCourses()}
+          </div>
         </div>
       )
     }

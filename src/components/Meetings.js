@@ -53,30 +53,33 @@ class Meetings extends Component {
               className={classes.meet}
               tabIndex="0"
               aria-label={
-                this.props.meetings[0].startDay +
-                "-0" +
                 this.props.meetings[0].startMonth +
+                "-" +
+                this.props.meetings[0].startDay +
                 "-" +
                 this.props.meetings[0].startYear +
                 " to " +
-                this.props.meetings[0].endDay +
-                "-0" +
                 this.props.meetings[0].endMonth +
+                "-" +
+                this.props.meetings[0].endDay +
                 "-" +
                 this.props.meetings[0].endYear
               }
             >
-              {this.props.meetings[0].startDay +
+              {this.props.meetings[0].startMonth +
                 "/" +
-                this.props.meetings[0].startMonth +
+                this.props.meetings[0].startDay +
                 "/" +
                 this.props.meetings[0].startYear +
                 " - " +
-                this.props.meetings[0].endDay +
-                "/" +
                 this.props.meetings[0].endMonth +
                 "/" +
+                this.props.meetings[0].endDay +
+                "/" +
                 this.props.meetings[0].endYear}
+            </Typography>
+            <Typography type="body2" className={classes.meet} tabIndex="0">
+              {this.props.meetings[0].courseType}
             </Typography>
           </div>
         )
