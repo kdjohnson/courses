@@ -104,10 +104,10 @@ class App extends Component {
         courses: courses.courses,
         currentTermBounds: termBounds,
         books: courses.bookXML,
+        calendarObj: Object.assign(this.state.calendarObj, currentTerm),
         currentTerm
       })
     })
-    this.setState({ calendarObj: Object.assign(this.state.calendarObj, currentTerm) })
   }
 
   getView = () => {
