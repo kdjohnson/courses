@@ -31,6 +31,12 @@ const styleSheet = createStyleSheet("BasicTabs", theme => ({
     minHeight: 0
   },
 
+  tab: {
+    "@media (min-width: 1024px)": {
+      minWidth: 72
+    }
+  },
+
   inner: {
     marginTop: 30,
     width: "100%"
@@ -74,6 +80,7 @@ class CoursesTabs extends Component {
                 <Tab
                   aria-label={t("courses", {})}
                   title="Courses"
+                  className={classes.tab}
                   icon={
                     <Assignment
                       className={classes.button}
@@ -85,6 +92,7 @@ class CoursesTabs extends Component {
                 <Tab
                   aria-label={t("calendar", {})}
                   title="Calendar"
+                  className={classes.tab}
                   icon={
                     <Event
                       className={classes.button}
@@ -96,6 +104,7 @@ class CoursesTabs extends Component {
                 <Tab
                   aria-label={t("grades", {})}
                   title="Grades"
+                  className={classes.tab}
                   icon={
                     <Spellcheck
                       className={classes.button}
