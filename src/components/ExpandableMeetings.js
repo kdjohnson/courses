@@ -143,14 +143,6 @@ class ExpandableMeetings extends Component {
           tabIndex="0"
           key={meeting.endDate + Math.random()}
         >
-          {meeting.courseType}
-        </Typography>
-        <Typography
-          type="body2"
-          className={classes.meet}
-          tabIndex="0"
-          key={meeting.endDate + Math.random()}
-        >
           {meeting.startTime + " - " + meeting.endTime}
         </Typography>
         <Typography
