@@ -80,7 +80,7 @@ class App extends Component {
           }
           this.setState({ terms, loading: false })
         } else {
-          this.setState({ error: true })
+          this.setState({ error: true, loading: false })
         }
       })
       .then(() => {

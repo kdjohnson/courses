@@ -55,6 +55,12 @@ const styleSheet = createStyleSheet("CourseHeader", theme => ({
     display: "flex"
   },
 
+  subHeaderDivMobile: {
+    display: "flex",
+    flexDirection: "column-reverse",
+    justifyContent: "center"
+  },
+
   waitlist: {
     marginLeft: "1em",
     fontWeight: 600,
@@ -131,7 +137,13 @@ class CourseHeader extends Component {
                   "-" +
                   this.props.course.crn}
               </span>
-              <div className={classes.subHeaderDiv}>
+              <div
+                className={
+                  this.props.mobile
+                    ? classes.subHeaderDivMobile
+                    : classes.subHeaderDiv
+                }
+              >
                 <span tabIndex="0" className={classes.classHeaderSpanWaitList}>
                   {t("credits", {}) + ": " + this.props.course.credit}
                 </span>
