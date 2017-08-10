@@ -132,12 +132,11 @@ class ExpandableMeetings extends Component {
     return (
       <div key={meeting.endDate + Math.random()}>
         <a
-          type="body2"
+          className={classes.meetLink}
           tabIndex="0"
           target="_blank"
-          href={getMapUrl(meeting.buildingRoom, true)}
+          href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
           rel="noopener noreferrer"
-          key={meeting.endDate + Math.random()}
         >
           {meeting.buildingRoom + " [" + meeting.campus + "]"}
         </a>
