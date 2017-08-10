@@ -23,10 +23,6 @@ const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
 
   flexGrow: { flex: "1 1 auto" },
 
-  meet: {
-    color: "#3344dd"
-  },
-
   iconButtonDiv: {
     display: "flex",
     justifyContent: "space-between"
@@ -39,6 +35,17 @@ const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
     borderLeftColor: theme.palette.accent[400],
     borderLeftWidth: "0.3em",
     paddingLeft: "1em"
+  },
+
+  meet: {
+    color: theme.palette.text.primary
+  },
+
+  meetLink: {
+    color: "#3344dd",
+    fontSize: "14px",
+    fontWeight: 400,
+    fontFamily: "Arimo"
   }
 }))
 
@@ -56,10 +63,10 @@ class ExpandableMeetings extends Component {
       elements.push(
         <div className={classes.expandedDiv}>
           <a
-            type="body2"
+            className={classes.meetLink}
             tabIndex="0"
             target="_blank"
-            href={getMapUrl(this.props.meetings[i].buildingRoom, false)}
+            href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
             rel="noopener noreferrer"
           >
             {this.props.meetings[i].buildingRoom +
@@ -125,12 +132,11 @@ class ExpandableMeetings extends Component {
     return (
       <div key={meeting.endDate + Math.random()}>
         <a
-          type="body2"
+          className={classes.meetLink}
           tabIndex="0"
           target="_blank"
-          href={getMapUrl(meeting.buildingRoom, true)}
+          href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
           rel="noopener noreferrer"
-          key={meeting.endDate + Math.random()}
         >
           {meeting.buildingRoom + " [" + meeting.campus + "]"}
         </a>
