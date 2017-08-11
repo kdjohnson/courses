@@ -22,6 +22,26 @@ class Meetings extends Component {
     const classes = this.props.classes
     if (Object.is(this.props.meetings, null)) {
       return <div key={"emptyDiv" + Math.random()} />
+    } else if (this.props.meetings.length === 0) {
+      return (
+        <div>
+          <Typography type="body2" className={classes.meet} tabIndex="0">
+            N/A
+          </Typography>
+          <Typography type="body2" className={classes.meet} tabIndex="0">
+            N/A
+          </Typography>
+          <Typography type="body2" className={classes.meet} tabIndex="0">
+            N/A
+          </Typography>
+          <Typography type="body2" className={classes.meet} tabIndex="0">
+            N/A
+          </Typography>
+          <Typography type="body2" className={classes.meet} tabIndex="0">
+            N/A
+          </Typography>
+        </div>
+      )
     } else {
       if (this.props.meetings.length >= 2) {
         return <ExpandableMeetings meetings={this.props.meetings} />
