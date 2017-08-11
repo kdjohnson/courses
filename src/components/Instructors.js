@@ -81,12 +81,21 @@ class Instructors extends Component {
     ) {
       return (
         <div>
-          <Typography type="headline" component="h3" tabIndex="0">
+          <Typography
+            className={
+              this.props.mobile ? classes.teacherMobile : classes.teacher
+            }
+            type="headline"
+            component="h3"
+            tabIndex="0"
+          >
             N/A
           </Typography>
-          <div>
-            <Typography>N/A</Typography>
-            <Typography>N/A</Typography>
+          <div
+            className={this.props.mobile ? classes.linksMobile : classes.links}
+          >
+            <Typography className={classes.noLink}>N/A</Typography>
+            <Typography className={classes.noLink}>N/A</Typography>
           </div>
         </div>
       )
