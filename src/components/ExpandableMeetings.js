@@ -6,7 +6,7 @@ import Collapse from "material-ui/transitions/Collapse"
 import IconButton from "material-ui/IconButton"
 import ExpandMoreIcon from "material-ui-icons/ExpandMore"
 import { CardContent } from "material-ui/Card"
-import { getMapUrl } from "../utils/mapLinks"
+import { getMapUrl, displayLink } from "../utils/mapLinks"
 import classnames from "classnames"
 
 const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
@@ -29,6 +29,7 @@ const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
   },
 
   expandedDiv: {
+    marginTop: "1em",
     display: "flex",
     flexDirection: "column",
     borderLeftStyle: "solid",
@@ -62,18 +63,26 @@ class ExpandableMeetings extends Component {
     for (let i = 1, total = this.props.meetings.length; i < total; i++) {
       elements.push(
         <div className={classes.expandedDiv}>
-          <a
-            className={classes.meetLink}
-            tabIndex="0"
-            target="_blank"
-            href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
-            rel="noopener noreferrer"
-          >
-            {this.props.meetings[i].buildingRoom +
-              " [" +
-              this.props.meetings[i].campus +
-              "]"}
-          </a>
+          {displayLink(this.props.meetings[i].campus) &&
+            <a
+              className={classes.meetLink}
+              tabIndex="0"
+              target="_blank"
+              href={getMapUrl(this.props.meetings[i].buildingRoom, false)}
+              rel="noopener noreferrer"
+            >
+              {this.props.meetings[i].buildingRoom +
+                " [" +
+                this.props.meetings[i].campus +
+                "]"}
+            </a>}
+          {!displayLink(this.props.meetings[i].campus) &&
+            <Typography type="body2" className={classes.meet} tabIndex="0">
+              {this.props.meetings[i].buildingRoom +
+                " [" +
+                this.props.meetings[i].campus +
+                "]"}
+            </Typography>}
           <Typography type="body2" className={classes.meet} tabIndex="0">
             {`${this.props.meetings[i].meetDays} `}
           </Typography>
@@ -131,15 +140,26 @@ class ExpandableMeetings extends Component {
     const meeting = this.props.meetings[0]
     return (
       <div key={meeting.endDate + Math.random()}>
-        <a
-          className={classes.meetLink}
-          tabIndex="0"
-          target="_blank"
-          href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
-          rel="noopener noreferrer"
-        >
-          {meeting.buildingRoom + " [" + meeting.campus + "]"}
-        </a>
+        {displayLink(this.props.meetings[0].campus) &&
+          <a
+            className={classes.meetLink}
+            tabIndex="0"
+            target="_blank"
+            href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
+            rel="noopener noreferrer"
+          >
+            {this.props.meetings[0].buildingRoom +
+              " [" +
+              this.props.meetings[0].campus +
+              "]"}
+          </a>}
+        {!displayLink(this.props.meetings[0].campus) &&
+          <Typography type="body2" className={classes.meet} tabIndex="0">
+            {this.props.meetings[0].buildingRoom +
+              " [" +
+              this.props.meetings[0].campus +
+              "]"}
+          </Typography>}
         <Typography type="body2" className={classes.meet} tabIndex="0">
           {`${meeting.meetDays} `}
         </Typography>
@@ -156,28 +176,28 @@ class ExpandableMeetings extends Component {
           className={classes.meet}
           tabIndex="0"
           aria-label={
-            meeting.startDayOfMonth +
-            "-0" +
             meeting.startMonth +
+            "-" +
+            meeting.startDay +
             "-" +
             meeting.startYear +
             " to " +
-            meeting.endDayOfMonth +
-            "-0" +
             meeting.endMonth +
+            "-0" +
+            meeting.endDay +
             "-" +
             meeting.endYear
           }
         >
-          {meeting.startDayOfMonth +
+          {meeting.startMonth +
             "/" +
-            meeting.startMonth +
+            meeting.startDay +
             "/" +
             meeting.startYear +
             " - " +
-            meeting.endDayOfMonth +
-            "/" +
             meeting.endMonth +
+            "/" +
+            meeting.endDay +
             "/" +
             meeting.endYear}
         </Typography>

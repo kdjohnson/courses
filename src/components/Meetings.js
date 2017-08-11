@@ -2,7 +2,7 @@ import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { withStyles, createStyleSheet } from "material-ui/styles"
 import Typography from "material-ui/Typography"
-import { getMapUrl } from "../utils/mapLinks"
+import { getMapUrl, displayLink } from "../utils/mapLinks"
 import ExpandableMeetings from "./ExpandableMeetings"
 
 const styleSheet = createStyleSheet("Meetings", theme => ({
@@ -48,18 +48,26 @@ class Meetings extends Component {
       } else {
         return (
           <div>
-            <a
-              className={classes.meetLink}
-              tabIndex="0"
-              target="_blank"
-              href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
-              rel="noopener noreferrer"
-            >
-              {this.props.meetings[0].buildingRoom +
-                " [" +
-                this.props.meetings[0].campus +
-                "]"}
-            </a>
+            {displayLink(this.props.meetings[0].campus) &&
+              <a
+                className={classes.meetLink}
+                tabIndex="0"
+                target="_blank"
+                href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
+                rel="noopener noreferrer"
+              >
+                {this.props.meetings[0].buildingRoom +
+                  " [" +
+                  this.props.meetings[0].campus +
+                  "]"}
+              </a>}
+            {!displayLink(this.props.meetings[0].campus) &&
+              <Typography type="body2" className={classes.meet} tabIndex="0">
+                {this.props.meetings[0].buildingRoom +
+                  " [" +
+                  this.props.meetings[0].campus +
+                  "]"}
+              </Typography>}
             <Typography type="body2" className={classes.meet} tabIndex="0">
               {`${this.props.meetings[0].meetDays} `}
             </Typography>
