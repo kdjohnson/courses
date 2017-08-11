@@ -63,7 +63,10 @@ class ExpandableMeetings extends Component {
     for (let i = 1, total = this.props.meetings.length; i < total; i++) {
       elements.push(
         <div className={classes.expandedDiv}>
-          {displayLink(this.props.meetings[i].campus) &&
+          {displayLink(
+            this.props.meetings[i].buildingroom,
+            this.props.meetings[i].campus
+          ) &&
             <a
               className={classes.meetLink}
               tabIndex="0"
@@ -76,7 +79,10 @@ class ExpandableMeetings extends Component {
                 this.props.meetings[i].campus +
                 "]"}
             </a>}
-          {!displayLink(this.props.meetings[i].campus) &&
+          {!displayLink(
+            this.props.meetings[i].buildingroom,
+            this.props.meetings[i].campus
+          ) &&
             <Typography type="body2" className={classes.meet} tabIndex="0">
               {this.props.meetings[i].buildingRoom +
                 " [" +
@@ -140,7 +146,10 @@ class ExpandableMeetings extends Component {
     const meeting = this.props.meetings[0]
     return (
       <div key={meeting.endDate + Math.random()}>
-        {displayLink(this.props.meetings[0].campus) &&
+        {displayLink(
+          this.props.meetings[0].buildingroom,
+          this.props.meetings[0].campus
+        ) &&
           <a
             className={classes.meetLink}
             tabIndex="0"
@@ -153,7 +162,10 @@ class ExpandableMeetings extends Component {
               this.props.meetings[0].campus +
               "]"}
           </a>}
-        {!displayLink(this.props.meetings[0].campus) &&
+        {!displayLink(
+          this.props.meetings[0].buildingroom,
+          this.props.meetings[0].campus
+        ) &&
           <Typography type="body2" className={classes.meet} tabIndex="0">
             {this.props.meetings[0].buildingRoom +
               " [" +

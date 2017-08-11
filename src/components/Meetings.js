@@ -48,7 +48,10 @@ class Meetings extends Component {
       } else {
         return (
           <div>
-            {displayLink(this.props.meetings[0].campus) &&
+            {displayLink(
+              this.props.meetings[0].buildingroom,
+              this.props.meetings[0].campus
+            ) &&
               <a
                 className={classes.meetLink}
                 tabIndex="0"
@@ -61,7 +64,10 @@ class Meetings extends Component {
                   this.props.meetings[0].campus +
                   "]"}
               </a>}
-            {!displayLink(this.props.meetings[0].campus) &&
+            {!displayLink(
+              this.props.meetings[0].buildingroom,
+              this.props.meetings[0].campus
+            ) &&
               <Typography type="body2" className={classes.meet} tabIndex="0">
                 {this.props.meetings[0].buildingRoom +
                   " [" +

@@ -1,8 +1,9 @@
-export const displayLink = campus => {
+export const displayLink = (room, campus) => {
   if (
     Object.is(campus, "Internet") ||
     Object.is(campus, "Off-Campus - Domestic") ||
-    Object.is(campus, "Macomb")
+    Object.is(campus, "Macomb") ||
+    Object.is(room.trim(), "N/A")
   ) {
     return false
   } else {
