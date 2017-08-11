@@ -3,6 +3,7 @@ export const displayLink = (room, campus) => {
     Object.is(campus, "Internet") ||
     Object.is(campus, "Off-Campus - Domestic") ||
     Object.is(campus, "Macomb") ||
+    Object.is(campus, "Mt. Clemens") ||
     Object.is(room.trim(), "N/A")
   ) {
     return false
