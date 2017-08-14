@@ -47,6 +47,14 @@ const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
     fontSize: "14px",
     fontWeight: 400,
     fontFamily: "Arimo"
+  },
+
+  meetNoLink: {
+    color: theme.palette.text.primary,
+    lineHeight: 1.42857143,
+    fontSize: "14px",
+    fontWeight: 400,
+    fontFamily: "Arimo"
   }
 }))
 
@@ -83,7 +91,11 @@ class ExpandableMeetings extends Component {
             this.props.meetings[i].buildingRoom,
             this.props.meetings[i].campus
           ) &&
-            <Typography type="body2" className={classes.meet} tabIndex="0">
+            <Typography
+              type="body2"
+              className={classes.meetNoLink}
+              tabIndex="0"
+            >
               {this.props.meetings[i].buildingRoom +
                 " [" +
                 this.props.meetings[i].campus +
@@ -166,7 +178,7 @@ class ExpandableMeetings extends Component {
           this.props.meetings[0].buildingRoom,
           this.props.meetings[0].campus
         ) &&
-          <Typography type="body2" className={classes.meet} tabIndex="0">
+          <Typography type="body2" className={classes.meetNoLink} tabIndex="0">
             {this.props.meetings[0].buildingRoom +
               " [" +
               this.props.meetings[0].campus +
