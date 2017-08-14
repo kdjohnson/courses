@@ -124,11 +124,23 @@ class Instructors extends Component {
                 href={getMapUrl(this.props.teachers[0].office, true)}
                 tabIndex="0"
                 rel="noopener noreferrer"
+                aria-label={
+                  this.props.teachers[0].firstName +
+                  " office is " +
+                  this.props.teachers[0].office
+                }
               >
                 {this.props.teachers[0].office}
               </a>}
             {Object.is(this.props.teachers[0].office, "N/A") &&
-              <Typography className={classes.noLink}>
+              <Typography
+                className={classes.noLink}
+                aria-label={
+                  "Speak with " +
+                  this.props.teachers[0].firstName +
+                  " for office information"
+                }
+              >
                 {this.props.teachers[0].office}
               </Typography>}
             {!Object.is(this.props.teachers[0].email, "N/A") &&
