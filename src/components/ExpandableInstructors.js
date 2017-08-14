@@ -30,6 +30,10 @@ const styleSheet = createStyleSheet("ExpandableInstructors", theme => ({
     marginBottom: 10
   },
 
+  noLink: {
+    marginBottom: 10
+  },
+
   teacher: {
     fontSize: 16,
     color: theme.palette.text.primary,
@@ -74,24 +78,34 @@ class ExpandableInstructors extends Component {
             this.props.teachers[0].lastName}
         </Typography>
         <div className={classes.links}>
-          <a
-            className={classes.link}
-            target="_blank"
-            href={getMapUrl(this.props.teachers[0].office, true)}
-            tabIndex="0"
-            rel="noopener noreferrer"
-          >
-            {this.props.teachers[0].office}
-          </a>
-          <a
-            target="_blank"
-            href={"mailto:" + this.props.teachers[0].email}
-            tabIndex="0"
-            rel="noopener noreferrer"
-            className={classes.link}
-          >
-            {this.props.teachers[0].email}
-          </a>
+          {!Object.is(this.props.teachers[0].office, "N/A") &&
+            <a
+              className={classes.link}
+              target="_blank"
+              href={getMapUrl(this.props.teachers[0].office, true)}
+              tabIndex="0"
+              rel="noopener noreferrer"
+            >
+              {this.props.teachers[0].office}
+            </a>}
+          {Object.is(this.props.teachers[0].office, "N/A") &&
+            <Typography className={classes.noLink}>
+              {this.props.teachers[0].office}
+            </Typography>}
+          {!Object.is(this.props.teachers[0].email, "N/A") &&
+            <a
+              className={classes.link}
+              target="_blank"
+              href={"mailto:" + this.props.teachers[0].email}
+              tabIndex="0"
+              rel="noopener noreferrer"
+            >
+              {this.props.teachers[0].email}
+            </a>}
+          {Object.is(this.props.teachers[0].email, "N/A") &&
+            <Typography className={classes.noLink}>
+              {this.props.teachers[0].email}
+            </Typography>}
         </div>
       </div>
     )
@@ -114,24 +128,34 @@ class ExpandableInstructors extends Component {
               this.props.teachers[i].lastName}
           </Typography>
           <div className={classes.links}>
-            <a
-              className={classes.link}
-              target="_blank"
-              href={getMapUrl(this.props.teachers[i].office, true)}
-              rel="noopener noreferrer"
-              tabIndex="0"
-            >
-              {this.props.teachers[i].office}
-            </a>
-            <a
-              className={classes.link}
-              target="_blank"
-              href={"mailto:" + this.props.teachers[i].email}
-              tabIndex="0"
-              rel="noopener noreferrer"
-            >
-              {this.props.teachers[i].email}
-            </a>
+            {!Object.is(this.props.teachers[i].office, "N/A") &&
+              <a
+                className={classes.link}
+                target="_blank"
+                href={getMapUrl(this.props.teachers[i].office, true)}
+                tabIndex="0"
+                rel="noopener noreferrer"
+              >
+                {this.props.teachers[i].office}
+              </a>}
+            {Object.is(this.props.teachers[i].office, "N/A") &&
+              <Typography className={classes.noLink}>
+                {this.props.teachers[i].office}
+              </Typography>}
+            {!Object.is(this.props.teachers[i].email, "N/A") &&
+              <a
+                className={classes.link}
+                target="_blank"
+                href={"mailto:" + this.props.teachers[0].email}
+                tabIndex="0"
+                rel="noopener noreferrer"
+              >
+                {this.props.teachers[i].email}
+              </a>}
+            {Object.is(this.props.teachers[i].email, "N/A") &&
+              <Typography className={classes.noLink}>
+                {this.props.teachers[i].email}
+              </Typography>}
           </div>
         </div>
       )

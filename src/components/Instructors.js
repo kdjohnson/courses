@@ -41,6 +41,10 @@ const styleSheet = createStyleSheet("Instructors", theme => ({
     marginBottom: 10
   },
 
+  noLink: {
+    marginBottom: 10
+  },
+
   teacher: {
     fontSize: 16,
     color: theme.palette.text.primary,
@@ -78,20 +82,20 @@ class Instructors extends Component {
       return (
         <div>
           <Typography
-            type="headline"
-            component="h3"
             className={
               this.props.mobile ? classes.teacherMobile : classes.teacher
             }
+            type="headline"
+            component="h3"
             tabIndex="0"
           >
-            {"N/A"}
+            N/A
           </Typography>
           <div
             className={this.props.mobile ? classes.linksMobile : classes.links}
           >
-            <Typography className={classes.link}>N/A</Typography>
-            <Typography className={classes.link}>N/A</Typography>
+            <Typography className={classes.noLink}>N/A</Typography>
+            <Typography className={classes.noLink}>N/A</Typography>
           </div>
         </div>
       )
@@ -113,24 +117,34 @@ class Instructors extends Component {
           <div
             className={this.props.mobile ? classes.linksMobile : classes.links}
           >
-            <a
-              className={classes.link}
-              target="_blank"
-              href={getMapUrl(this.props.teachers[0].office, true)}
-              tabIndex="0"
-              rel="noopener noreferrer"
-            >
-              {this.props.teachers[0].office}
-            </a>
-            <a
-              className={classes.link}
-              target="_blank"
-              href={"mailto:" + this.props.teachers[0].email}
-              tabIndex="0"
-              rel="noopener noreferrer"
-            >
-              {this.props.teachers[0].email}
-            </a>
+            {!Object.is(this.props.teachers[0].office, "N/A") &&
+              <a
+                className={classes.link}
+                target="_blank"
+                href={getMapUrl(this.props.teachers[0].office, true)}
+                tabIndex="0"
+                rel="noopener noreferrer"
+              >
+                {this.props.teachers[0].office}
+              </a>}
+            {Object.is(this.props.teachers[0].office, "N/A") &&
+              <Typography className={classes.noLink}>
+                {this.props.teachers[0].office}
+              </Typography>}
+            {!Object.is(this.props.teachers[0].email, "N/A") &&
+              <a
+                className={classes.link}
+                target="_blank"
+                href={"mailto:" + this.props.teachers[0].email}
+                tabIndex="0"
+                rel="noopener noreferrer"
+              >
+                {this.props.teachers[0].email}
+              </a>}
+            {Object.is(this.props.teachers[0].email, "N/A") &&
+              <Typography className={classes.noLink}>
+                {this.props.teachers[0].email}
+              </Typography>}
           </div>
         </div>
       )
