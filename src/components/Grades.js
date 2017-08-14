@@ -64,17 +64,17 @@ class Grades extends Component {
 
   getOverallCredits = (creditsObj) => {
     let rows = []
-    for (let x of creditsObj){
+    for (let cr of creditsObj){
       rows.push(
         <TableRow>
           <TableCell>
-            {x.level}
+            {cr.level}
           </TableCell>
           <TableCell>
-            {x.credits}
+            {cr.credits}
           </TableCell>
           <TableCell>
-            {x.gpa}
+            {cr.gpa}
           </TableCell>
         </TableRow>
       )
