@@ -147,7 +147,7 @@ class ExpandableMeetings extends Component {
     return (
       <div key={meeting.endDate + Math.random()}>
         {displayLink(
-          this.props.meetings[0].buildingroom,
+          this.props.meetings[0].buildingRoom,
           this.props.meetings[0].campus
         ) &&
           <a
@@ -163,7 +163,7 @@ class ExpandableMeetings extends Component {
               "]"}
           </a>}
         {!displayLink(
-          this.props.meetings[0].buildingroom,
+          this.props.meetings[0].buildingRoom,
           this.props.meetings[0].campus
         ) &&
           <Typography type="body2" className={classes.meet} tabIndex="0">
