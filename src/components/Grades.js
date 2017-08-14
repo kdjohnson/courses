@@ -61,6 +61,28 @@ class Grades extends Component {
     })
   }
 
+
+  getOverallCredits = (creditsObj) => {
+    let rows = []
+    for (let x of creditsObj){
+      rows.push(
+        <TableRow>
+          <TableCell>
+            {x.level}
+          </TableCell>
+          <TableCell>
+            {x.credits}
+          </TableCell>
+          <TableCell>
+            {x.gpa}
+          </TableCell>
+        </TableRow>
+      )
+    }
+    return rows
+  }
+
+
   render() {
     const classes = this.props.classes
     const { t } = this.props
@@ -96,17 +118,7 @@ class Grades extends Component {
                 </TableRow>
               </TableHead>
               <TableBody>
-                <TableRow>
-                  <TableCell>
-                    {this.state.creditsObj[0].level}
-                  </TableCell>
-                  <TableCell>
-                    {this.state.creditsObj[0].credits}
-                  </TableCell>
-                  <TableCell>
-                    {this.state.creditsObj[0].gpa}
-                  </TableCell>
-                </TableRow>
+                {this.getOverallCredits(this.state.creditsObj)}
               </TableBody>
             </Table>
             <Table>
