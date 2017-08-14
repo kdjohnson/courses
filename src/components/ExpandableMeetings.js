@@ -64,7 +64,7 @@ class ExpandableMeetings extends Component {
       elements.push(
         <div className={classes.expandedDiv}>
           {displayLink(
-            this.props.meetings[i].buildingroom,
+            this.props.meetings[i].buildingRoom,
             this.props.meetings[i].campus
           ) &&
             <a
@@ -80,7 +80,7 @@ class ExpandableMeetings extends Component {
                 "]"}
             </a>}
           {!displayLink(
-            this.props.meetings[i].buildingroom,
+            this.props.meetings[i].buildingRoom,
             this.props.meetings[i].campus
           ) &&
             <Typography type="body2" className={classes.meet} tabIndex="0">
