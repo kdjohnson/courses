@@ -1013,8 +1013,8 @@ babel-types@^6.18.0, babel-types@^6.19.0, babel-types@^6.23.0, babel-types@^6.24
     to-fast-properties "^1.0.1"
 
 babylon@^6.11.0, babylon@^6.17.0, babylon@^6.17.2, babylon@^6.17.4:
-  version "6.17.4"
-  resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.17.4.tgz#3e8b7402b88d22c3423e137a1577883b15ff869a"
+  version "6.18.0"
+  resolved "https://registry.yarnpkg.com/babylon/-/babylon-6.18.0.tgz#af2f3b88fa6f5c1e4c634d1a0f8eac4f55b395e3"
 
 balanced-match@^0.4.2:
   version "0.4.2"
@@ -5603,8 +5603,8 @@ react@^15.5.4:
     prop-types "^15.5.10"
 
 reactjs-calendar@^0.1.9:
-  version "0.1.126"
-  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.1.126.tgz#ede259dfe03e6329866c4d9b6cf0d271e6b2aaab"
+  version "0.1.137"
+  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.1.137.tgz#2c7019bd756b3dd11dce752def695b16d6a75f22"
   dependencies:
     version "^0.1.2"
     all "^0.0.0"
