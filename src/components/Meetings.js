@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import Typography from "material-ui/Typography"
 import { getMapUrl, displayLink } from "../utils/mapLinks"
 import ExpandableMeetings from "./ExpandableMeetings"
 
-const styleSheet = createStyleSheet("Meetings", theme => ({
+const styles = theme => ({
   meet: {
     color: theme.palette.text.primary
   },
@@ -23,7 +23,7 @@ const styleSheet = createStyleSheet("Meetings", theme => ({
     fontWeight: 400,
     fontFamily: "Arimo"
   }
-}))
+})
 
 class Meetings extends Component {
   getMeetings = () => {
@@ -146,4 +146,4 @@ Meetings.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(Meetings)
+export default withStyles(styles, { name: "Meetings" })(Meetings)

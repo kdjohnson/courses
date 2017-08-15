@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import Typography from "material-ui/Typography"
 import ExpandableInstructors from "./ExpandableInstructors"
 import { getMapUrl } from "../utils/mapLinks"
 
-const styleSheet = createStyleSheet("Instructors", theme => ({
+const styles = theme => ({
   button: {
     paddingLeft: 0
   },
@@ -55,7 +55,7 @@ const styleSheet = createStyleSheet("Instructors", theme => ({
     fontSize: 16,
     color: theme.palette.text.primary
   }
-}))
+})
 
 class Instructors extends Component {
   state = {
@@ -176,4 +176,4 @@ Instructors.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(Instructors)
+export default withStyles(styles, { name: "Instructors" })(Instructors)

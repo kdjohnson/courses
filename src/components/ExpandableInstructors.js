@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import Typography from "material-ui/Typography"
 import Collapse from "material-ui/transitions/Collapse"
 import IconButton from "material-ui/IconButton"
@@ -9,7 +9,7 @@ import { CardContent } from "material-ui/Card"
 import classnames from "classnames"
 import { getMapUrl } from "../utils/mapLinks"
 
-const styleSheet = createStyleSheet("ExpandableInstructors", theme => ({
+const styles = theme => ({
   button: {
     paddingLeft: 0
   },
@@ -56,7 +56,7 @@ const styleSheet = createStyleSheet("ExpandableInstructors", theme => ({
   meet: {
     color: "rgba(0, 0, 0, 0.54)"
   }
-}))
+})
 
 class ExpandableInstructors extends Component {
   state = { expanded: false }
@@ -186,6 +186,7 @@ class ExpandableInstructors extends Component {
     }
     return elements
   }
+
   render() {
     const classes = this.props.classes
     return (
@@ -225,4 +226,6 @@ ExpandableInstructors.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(ExpandableInstructors)
+export default withStyles(styles, { name: "ExpandableInstructors" })(
+  ExpandableInstructors
+)

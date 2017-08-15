@@ -2,17 +2,17 @@
 
 import React from "react"
 import PropTypes from "prop-types"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import IconButton from "material-ui/IconButton"
 import DeleteIcon from "material-ui-icons/Delete"
 import AlarmIcon from "material-ui-icons/Alarm"
 import AddShoppingCartIcon from "material-ui-icons/AddShoppingCart"
 
-const styleSheet = createStyleSheet("IconButtons", theme => ({
+const styles = theme => ({
   button: {
     margin: theme.spacing.unit
   }
-}))
+})
 
 function IconButtons(props) {
   const classes = props.classes
@@ -29,4 +29,4 @@ IconButtons.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(IconButtons)
+export default withStyles(styles, { name: "IconButton" })(IconButtons)

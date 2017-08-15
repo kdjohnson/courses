@@ -1,12 +1,12 @@
 import React, { Component } from "react"
 import { translate } from "react-i18next"
 import { CardHeader } from "material-ui/Card"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import PropTypes from "prop-types"
 import Typography from "material-ui/Typography"
 import { amber } from "material-ui/colors"
 
-const styleSheet = createStyleSheet("CourseHeader", theme => ({
+const styles = theme => ({
   courseTitleH1: {
     fontSize: 16,
     fontWeight: 800,
@@ -66,7 +66,7 @@ const styleSheet = createStyleSheet("CourseHeader", theme => ({
     fontWeight: 600,
     color: "rgba(0, 0, 0, 0.75)"
   }
-}))
+})
 
 class CourseHeader extends Component {
   getHeader() {
@@ -170,6 +170,6 @@ CourseHeader.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(
+export default withStyles(styles, { name: "CourseHeader" })(
   translate("view", { wait: true })(CourseHeader)
 )

@@ -1,6 +1,6 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import Typography from "material-ui/Typography"
 import Collapse from "material-ui/transitions/Collapse"
 import IconButton from "material-ui/IconButton"
@@ -9,7 +9,7 @@ import { CardContent } from "material-ui/Card"
 import { getMapUrl, displayLink } from "../utils/mapLinks"
 import classnames from "classnames"
 
-const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
+const styles = theme => ({
   card: { maxWidth: 400 },
   expand: {
     transform: "rotate(0deg)",
@@ -56,7 +56,7 @@ const styleSheet = createStyleSheet("ExpandableMeetings", theme => ({
     fontWeight: 400,
     fontFamily: "Arimo"
   }
-}))
+})
 
 class ExpandableMeetings extends Component {
   state = { expanded: false }
@@ -274,4 +274,6 @@ ExpandableMeetings.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(ExpandableMeetings)
+export default withStyles(styles, { name: "ExpandableMeetings" })(
+  ExpandableMeetings
+)
