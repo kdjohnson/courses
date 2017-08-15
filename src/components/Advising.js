@@ -3,6 +3,15 @@
 import React, { Component } from "react"
 import RegistrationTypes from "./RegistrationTypes"
 import AdvisingCourses from "./AdvisingCourses"
+import Typography from "material-ui/Typography"
+import { withStyles } from "material-ui/styles"
+
+const styles = theme => ({
+  term: {
+    marginBottom: "1em",
+    fontWeight: "bolder"
+  }
+})
 
 class Advising extends Component {
   state = {
@@ -24,11 +33,15 @@ class Advising extends Component {
   }
 
   getAdvising = () => {
+    const classes = this.props.classes
     if (Object.is(this.props.courses, null)) {
       return <div />
     }
     return (
       <div>
+        <Typography type="title" className={classes.term}>
+          {this.props.currentTermDescription}
+        </Typography>
         <RegistrationTypes
           updateRegs={this.updateRegs}
           regs={this.state.regs}
@@ -51,4 +64,4 @@ class Advising extends Component {
   }
 }
 
-export default Advising
+export default withStyles(styles, { name: "Advising" })(Advising)

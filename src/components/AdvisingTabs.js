@@ -14,6 +14,7 @@ import Toolbar from "material-ui/Toolbar"
 import Assignment from "material-ui-icons/Assignment"
 import Event from "material-ui-icons/Event"
 import TermsDialog from "./TermsDialog"
+import AdvisingGrades from "./AdvisingGrades"
 
 const TabContainer = props =>
   <div style={{ padding: 20 }}>
@@ -94,6 +95,7 @@ class AdvisingTabs extends Component {
               >
                 <Tab label={t("courses", {})} tabIndex="0" />
                 <Tab label={t("calendar", {})} tabIndex="0" />
+                <Tab label={t("grades", {})} tabIndex="0" />
               </Tabs>}
             <TermsDialog
               terms={this.props.terms}
@@ -111,6 +113,7 @@ class AdvisingTabs extends Component {
                 <Advising
                   tabIndex="0"
                   currentTermCode={this.props.currentTermCode}
+                  currentTermDescription={this.props.currentTermDescription}
                   courses={this.props.courses}
                   mobile={this.props.mobile}
                   gradesURL={this.props.gradesURL}
@@ -124,6 +127,10 @@ class AdvisingTabs extends Component {
               termBounds={this.props.termBounds}
               rootID={this.props.rootElement}
             />
+          </TabContainer>}
+        {Object.is(this.state.value, 2) &&
+          <TabContainer>
+            <AdvisingGrades gradesURL={this.props.gradesURL} />
           </TabContainer>}
       </Paper>
     )
