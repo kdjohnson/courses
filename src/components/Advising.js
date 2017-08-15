@@ -5,7 +5,6 @@ import RegistrationTypes from "./RegistrationTypes"
 import AdvisingCourses from "./AdvisingCourses"
 import Typography from "material-ui/Typography"
 import { withStyles } from "material-ui/styles"
-import { getCredits } from "./../api/api"
 
 const styles = theme => ({
   term: {
@@ -20,10 +19,6 @@ class Advising extends Component {
   }
 
   componentDidMount() {
-    getCredits(this.props.gradesURL).then(credits => {
-      console.log(credits)
-      this.setState({ creditsObj: credits })
-    })
     let set = new Set()
     for (let i = 0; i < this.props.courses.length; i++) {
       set.add(this.props.courses[i].registrationStatusDescription)
