@@ -40,7 +40,7 @@ class App extends Component {
     width: document.getElementById(this.props.rootElement).clientWidth,
     mobile: false,
     calendarObj: calendarObj,
-    advising: true,
+    advising: false,
     books: null,
     error: false,
     loading: true
