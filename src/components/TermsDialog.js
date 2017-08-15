@@ -13,9 +13,9 @@ import Slide from "material-ui/transitions/Slide"
 import Typography from "material-ui/Typography"
 import PropTypes from "prop-types"
 import { translate } from "react-i18next"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 
-const styleSheet = createStyleSheet("TermsDialog", theme => ({
+const styles = theme => ({
   text: {
     color: "#FFFFFF"
   },
@@ -32,7 +32,7 @@ const styleSheet = createStyleSheet("TermsDialog", theme => ({
   title: {
     fontWeight: 600
   }
-}))
+})
 
 class ConfirmationDialog extends Component {
   state = {
@@ -217,6 +217,6 @@ TermsDialog.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(
+export default withStyles(styles, { name: "TermsDialog" })(
   translate("view", { wait: true })(TermsDialog)
 )

@@ -8,12 +8,12 @@ import Dialog, {
 import Button from "material-ui/Button"
 import Slide from "material-ui/transitions/Slide"
 import Typography from "material-ui/Typography"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import PropTypes from "prop-types"
 import { translate } from "react-i18next"
 import { amber } from "material-ui/colors"
 
-const styleSheet = createStyleSheet("CourseDetails", theme => ({
+const styles = theme => ({
   button: {
     fontWeight: "bolder"
   },
@@ -38,7 +38,7 @@ const styleSheet = createStyleSheet("CourseDetails", theme => ({
   title: {
     fontWeight: 600
   }
-}))
+})
 
 class CourseDetails extends Component {
   state = {
@@ -125,6 +125,6 @@ CourseDetails.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(
+export default withStyles(styles, { name: "CourseDetails" })(
   translate("view", { wait: true })(CourseDetails)
 )

@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import List, { ListItem, ListItemText } from "material-ui/List"
 import { translate } from "react-i18next"
-const styleSheet = createStyleSheet("AdvisingInstructors", theme => ({
+const styles = theme => ({
   root: {
     color: "tomato"
   }
-}))
+})
 
 class AdvisingInstructors extends Component {
   getInsturctors = () => {
@@ -43,6 +43,6 @@ AdvisingInstructors.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(
+export default withStyles(styles, { name: "AdvisingInstructors" })(
   translate("view", { wait: true })(AdvisingInstructors)
 )

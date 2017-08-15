@@ -2,16 +2,16 @@ import React, { Component } from "react"
 import Typography from "material-ui/Typography"
 import Card, { CardHeader, CardContent } from "material-ui/Card"
 import PropTypes from "prop-types"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import AdvisingMeetings from "./AdvisingMeetings"
 import AdvisingInstructors from "./AdvisingInstructors"
 import AdvisingGrade from "./AdvisingGrade"
 
-const styleSheet = createStyleSheet("AdvisingCourses", theme => ({
+const styles = theme => ({
   header: {
     backgroundColor: theme.palette.primary[400]
   }
-}))
+})
 
 class AdvisingCourses extends Component {
   handleChange = (event, checked, type) => {
@@ -100,4 +100,4 @@ AdvisingCourses.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(AdvisingCourses)
+export default withStyles(styles, { name: "AdvisingCourses" })(AdvisingCourses)

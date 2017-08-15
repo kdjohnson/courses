@@ -3,7 +3,7 @@ import CoursesTabs from "./components/CoursesTabs"
 import AdvisingTabs from "./components/AdvisingTabs"
 import ErrorMessages from "./components/ErrorMessages"
 import { getTerms, getCourses } from "./api/api"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import { CircularProgress } from "material-ui/Progress"
 
 const termsURL = "http://localhost:8082/api/terms"
@@ -16,7 +16,7 @@ const calendarObj = {
 
 const gpaAndCreditsURL = "http://localhost:8082/api/credits"
 
-const styleSheet = createStyleSheet("CircularIndeterminate", theme => ({
+const styles = theme => ({
   root: {
     position: "relative"
   },
@@ -29,7 +29,7 @@ const styleSheet = createStyleSheet("CircularIndeterminate", theme => ({
     display: "flex",
     justifyContent: "center"
   }
-}))
+})
 
 class App extends Component {
   state = {
@@ -40,7 +40,7 @@ class App extends Component {
     width: document.getElementById(this.props.rootElement).clientWidth,
     mobile: false,
     calendarObj: calendarObj,
-    advising: false,
+    advising: true,
     books: null,
     error: false,
     loading: true
@@ -204,4 +204,4 @@ class App extends Component {
   }
 }
 
-export default withStyles(styleSheet)(App)
+export default withStyles(styles, { name: "CourseContainer" })(App)

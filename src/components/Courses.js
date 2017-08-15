@@ -2,7 +2,7 @@
 
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import Card, { CardActions, CardContent } from "material-ui/Card"
 import Instructors from "./Instructors"
 import ExpandableCourse from "./ExpandableCourse"
@@ -13,7 +13,7 @@ import { translate } from "react-i18next"
 import WaitlistCourse from "./WaitlistCourse"
 import CourseHeader from "./CourseHeader"
 
-const styleSheet = createStyleSheet("Courses", theme => ({
+const styles = theme => ({
   courseContainer: {
     width: "100%"
   },
@@ -87,7 +87,7 @@ const styleSheet = createStyleSheet("Courses", theme => ({
     display: "flex",
     justifyContent: "center"
   }
-}))
+})
 
 class Courses extends Component {
   getCourses = () => {
@@ -199,6 +199,6 @@ Courses.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(
+export default withStyles(styles, { name: "Courses" })(
   translate("view", { wait: true })(Courses)
 )

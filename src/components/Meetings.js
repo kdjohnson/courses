@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import Typography from "material-ui/Typography"
 import { getMapUrl, displayLink } from "../utils/mapLinks"
 import ExpandableMeetings from "./ExpandableMeetings"
 
-const styleSheet = createStyleSheet("Meetings", theme => ({
+const styles = theme => ({
   meet: {
     color: theme.palette.text.primary
   },
@@ -14,8 +14,16 @@ const styleSheet = createStyleSheet("Meetings", theme => ({
     fontSize: "14px",
     fontWeight: 400,
     fontFamily: "Arimo"
+  },
+
+  meetNoLink: {
+    color: theme.palette.text.primary,
+    lineHeight: 1.42857143,
+    fontSize: "14px",
+    fontWeight: 400,
+    fontFamily: "Arimo"
   }
-}))
+})
 
 class Meetings extends Component {
   getMeetings = () => {
@@ -25,7 +33,7 @@ class Meetings extends Component {
     } else if (this.props.meetings.length === 0) {
       return (
         <div>
-          <Typography type="body2" className={classes.meet} tabIndex="0">
+          <Typography type="body2" className={classes.meetNoLink} tabIndex="0">
             N/A
           </Typography>
           <Typography type="body2" className={classes.meet} tabIndex="0">
@@ -68,7 +76,11 @@ class Meetings extends Component {
               this.props.meetings[0].buildingRoom,
               this.props.meetings[0].campus
             ) &&
-              <Typography type="body2" className={classes.meet} tabIndex="0">
+              <Typography
+                type="body2"
+                className={classes.meetNoLink}
+                tabIndex="0"
+              >
                 {this.props.meetings[0].buildingRoom +
                   " [" +
                   this.props.meetings[0].campus +
@@ -134,4 +146,4 @@ Meetings.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(Meetings)
+export default withStyles(styles, { name: "Meetings" })(Meetings)

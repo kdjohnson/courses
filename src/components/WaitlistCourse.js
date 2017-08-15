@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import Card, { CardActions, CardContent } from "material-ui/Card"
 import Instructors from "./Instructors"
 import Meetings from "./Meetings"
 import CourseDetails from "./CourseDetails"
 import CourseHeader from "./CourseHeader"
 
-const styleSheet = createStyleSheet("WaitlistCourse", theme => ({
+const styles = theme => ({
   courseContainer: {
     width: "100%"
   },
@@ -62,7 +62,7 @@ const styleSheet = createStyleSheet("WaitlistCourse", theme => ({
     display: "flex",
     justifyContent: "center"
   }
-}))
+})
 
 class WaitlistCourse extends Component {
   render() {
@@ -105,4 +105,4 @@ WaitlistCourse.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(WaitlistCourse)
+export default withStyles(styles, { name: "WaitlistCourse" })(WaitlistCourse)

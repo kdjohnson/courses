@@ -3,7 +3,7 @@
 
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import Paper from "material-ui/Paper"
 import Tabs, { Tab } from "material-ui/Tabs"
 import Courses from "./Courses"
@@ -26,7 +26,7 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired
 }
 
-const styleSheet = createStyleSheet("BasicTabs", theme => ({
+const styles = theme => ({
   root: {
     minHeight: 0
   },
@@ -53,15 +53,15 @@ const styleSheet = createStyleSheet("BasicTabs", theme => ({
   button: {
     color: "#FFFFFF"
   }
-}))
+})
 
 class CoursesTabs extends Component {
   state = {
-    index: 0
+    value: 0
   }
 
-  handleChange = (event, index) => {
-    this.setState({ index })
+  handleChange = (event, value) => {
+    this.setState({ value })
   }
 
   render() {
@@ -74,7 +74,7 @@ class CoursesTabs extends Component {
             {Object.is(this.props.mobile, true) &&
               <Tabs
                 className={classes.flex}
-                index={this.state.index}
+                value={this.state.value}
                 onChange={this.handleChange}
               >
                 <Tab
@@ -117,7 +117,7 @@ class CoursesTabs extends Component {
             {Object.is(this.props.mobile, false) &&
               <Tabs
                 className={classes.flex}
-                index={this.state.index}
+                value={this.state.value}
                 onChange={this.handleChange}
               >
                 <Tab label={t("courses", {})} tabIndex="0" />
@@ -133,7 +133,7 @@ class CoursesTabs extends Component {
             />
           </Toolbar>
         </AppBar>
-        {Object.is(this.state.index, 0) &&
+        {Object.is(this.state.value, 0) &&
           <TabContainer>
             <div>
               <Courses
@@ -146,7 +146,7 @@ class CoursesTabs extends Component {
               />
             </div>
           </TabContainer>}
-        {Object.is(this.state.index, 1) &&
+        {Object.is(this.state.value, 1) &&
           <TabContainer>
             <Calendar
               eventsURLObj={this.props.calendarURL}
@@ -155,7 +155,7 @@ class CoursesTabs extends Component {
               rootID={this.props.rootElement}
             />
           </TabContainer>}
-        {Object.is(this.state.index, 2) &&
+        {Object.is(this.state.value, 2) &&
           <TabContainer>
             <Grades
               tabIndex="0"
@@ -173,6 +173,6 @@ CoursesTabs.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(
+export default withStyles(styles, { name: "CourseTabs" })(
   translate("view", { wait: true })(CoursesTabs)
 )

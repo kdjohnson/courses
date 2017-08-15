@@ -1,13 +1,13 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import Card, { CardActions, CardContent } from "material-ui/Card"
 import Instructors from "./Instructors"
 import Meetings from "./Meetings"
 import CourseDetails from "./CourseDetails"
 import CourseHeader from "./CourseHeader"
 
-const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
+const styles = theme => ({
   courseContainer: {
     width: "100%"
   },
@@ -69,7 +69,7 @@ const styleSheet = createStyleSheet("ExpandableCourse", theme => ({
   infoContainer: {
     marginLeft: "2em"
   }
-}))
+})
 
 class ExpandableCourse extends Component {
   render() {
@@ -112,4 +112,6 @@ ExpandableCourse.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(ExpandableCourse)
+export default withStyles(styles, { name: "ExpandableCourse" })(
+  ExpandableCourse
+)

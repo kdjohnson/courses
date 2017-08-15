@@ -1,11 +1,11 @@
 import React, { Component } from "react"
 import Typography from "material-ui/Typography"
 import Card, { CardHeader, CardContent, CardMedia } from "material-ui/Card"
-import { withStyles, createStyleSheet } from "material-ui/styles"
+import { withStyles } from "material-ui/styles"
 import PropTypes from "prop-types"
 import Error from "material-ui-icons/Error"
 
-const styleSheet = createStyleSheet("ErrorMessages", theme => ({
+const styles = theme => ({
   root: {
     position: "relative",
     width: "90%"
@@ -35,7 +35,7 @@ const styleSheet = createStyleSheet("ErrorMessages", theme => ({
     width: 75,
     height: 100
   }
-}))
+})
 
 class ErrorMessages extends Component {
   render() {
@@ -62,4 +62,4 @@ ErrorMessages.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styleSheet)(ErrorMessages)
+export default withStyles(styles, { name: "ErroMessages" })(ErrorMessages)
