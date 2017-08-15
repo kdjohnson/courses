@@ -5603,8 +5603,8 @@ react@^15.5.4:
     prop-types "^15.5.10"
 
 reactjs-calendar@^0.1.9:
-  version "0.1.125"
-  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.1.125.tgz#cd0f47522272f065f3a6d236f251923765322c05"
+  version "0.1.126"
+  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.1.126.tgz#ede259dfe03e6329866c4d9b6cf0d271e6b2aaab"
   dependencies:
     version "^0.1.2"
     all "^0.0.0"
