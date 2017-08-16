@@ -347,6 +347,12 @@ func courses(w http.ResponseWriter, r *http.Request) {
 	w.Header().Set("Access-Control-Allow-Origin", "*")
 
 	var courses []Course
+	if r.Method == "GET" {
+		if err := json.NewEncoder(w).Encode(courses); err != nil {
+			panic(err)
+		}
+		return
+	}
 
 	s := struct {
 		Term string `json:"code"`
