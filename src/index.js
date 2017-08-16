@@ -1,7 +1,7 @@
 import React from "react"
 import ReactDOM from "react-dom"
 import App from "./App"
-import registerServiceWorker from "./registerServiceWorker"
+//import registerServiceWorker from "./registerServiceWorker"
 import { MuiThemeProvider, createMuiTheme } from "material-ui/styles"
 import createPalette from "material-ui/styles/palette"
 import createTypography from "material-ui/styles/typography"
@@ -74,4 +74,4 @@ ReactDOM.render(
   </I18nextProvider>,
   document.getElementById(rootElement)
 )
-registerServiceWorker()
+//registerServiceWorker()
