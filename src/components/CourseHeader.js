@@ -7,26 +7,12 @@ import Typography from "material-ui/Typography"
 import { amber } from "material-ui/colors"
 
 const styles = theme => ({
-  courseTitleH1: {
-    fontSize: 16,
-    fontWeight: 800,
-    color: theme.palette.text.secondary
-  },
-
   classHeader: {
-    backgroundColor: theme.palette.primary[400]
-  },
-
-  classHeaderMobile: {
     backgroundColor: theme.palette.primary[400],
     textAlign: "center"
   },
 
   classHeaderWaitList: {
-    backgroundColor: amber[200]
-  },
-
-  classHeaderMobileWaitList: {
     backgroundColor: amber[200],
     textAlign: "center"
   },
@@ -36,23 +22,15 @@ const styles = theme => ({
     flexDirection: "column"
   },
 
-  classHeaderSpan: {
-    fontWeight: 600,
-    color: "rgba(0, 0, 0, 0.75)"
-  },
-
   classHeaderSpanWaitList: {
     fontWeight: 600,
     color: "rgba(0, 0, 0, 0.75)"
   },
 
-  courseTitle: {
-    fontSize: 16,
-    color: theme.palette.text.primary
-  },
-
   subHeaderDiv: {
-    display: "flex"
+    display: "flex",
+    flexDirection: "column-reverse",
+    justifyContent: "center"
   },
 
   subHeaderDivMobile: {
@@ -61,10 +39,13 @@ const styles = theme => ({
     justifyContent: "center"
   },
 
-  waitlist: {
-    marginLeft: "1em",
-    fontWeight: 600,
-    color: "rgba(0, 0, 0, 0.75)"
+  courseTitle: {
+    fontWeight: "bolder"
+  },
+
+  courseInfo: {
+    fontWeight: "500",
+    color: "#000"
   }
 })
 
@@ -75,23 +56,19 @@ class CourseHeader extends Component {
     if (Object.is(this.props.course.waitList, "0")) {
       return (
         <CardHeader
-          className={
-            this.props.mobile ? classes.classHeaderMobile : classes.classHeader
-          }
+          className={classes.classHeader}
           title={
             <Typography
+              type="subheading"
               tabIndex="0"
-              component="h1"
-              className={classes.classHeaderSpan}
-              style={{ fontSize: "20px" }}
+              className={classes.courseTitle}
             >
               {this.props.course.courseTitle}
             </Typography>
           }
-          key={this.props.course.crn + 0 + 3}
           subheader={
             <div className={classes.classHeaderSpanDiv}>
-              <span tabIndex="0" className={classes.classHeaderSpan}>
+              <span tabIndex="0" className={classes.courseInfo}>
                 {this.props.course.subjectCode +
                   "-" +
                   this.props.course.subjectNumber +
@@ -100,7 +77,7 @@ class CourseHeader extends Component {
                   "-" +
                   this.props.course.crn}
               </span>
-              <span tabIndex="0" className={classes.classHeaderSpan}>
+              <span tabIndex="0" className={classes.courseInfo}>
                 {t("credits", {}) + ": " + this.props.course.credit}
               </span>
             </div>
@@ -110,25 +87,16 @@ class CourseHeader extends Component {
     } else {
       return (
         <CardHeader
-          className={
-            this.props.mobile
-              ? classes.classHeaderMobileWaitList
-              : classes.classHeaderWaitList
-          }
+          className={classes.classHeaderWaitList}
           title={
-            <Typography
-              tabIndex="0"
-              component="h1"
-              className={classes.classHeaderSpanWaitList}
-              style={{ fontSize: "20px" }}
-            >
+            <Typography tabIndex="0" className={classes.courseTitle}>
               {this.props.course.courseTitle}
             </Typography>
           }
           key={this.props.course.crn + 0 + 3}
           subheader={
             <div className={classes.classHeaderSpanDiv}>
-              <span tabIndex="0" className={classes.classHeaderSpanWaitList}>
+              <span tabIndex="0" className={classes.courseInfo}>
                 {this.props.course.subjectCode +
                   "-" +
                   this.props.course.subjectNumber +
@@ -137,17 +105,11 @@ class CourseHeader extends Component {
                   "-" +
                   this.props.course.crn}
               </span>
-              <div
-                className={
-                  this.props.mobile
-                    ? classes.subHeaderDivMobile
-                    : classes.subHeaderDiv
-                }
-              >
-                <span tabIndex="0" className={classes.classHeaderSpanWaitList}>
+              <div className={classes.subHeaderDiv}>
+                <span tabIndex="0" className={classes.courseInfo}>
                   {t("credits", {}) + ": " + this.props.course.credit}
                 </span>
-                <span tabIndex="0" className={classes.waitlist}>
+                <span tabIndex="0" className={classes.courseInfo}>
                   {t("waitlist", {}) + ": " + this.props.course.waitList}
                 </span>
               </div>
