@@ -15,75 +15,26 @@ import CourseHeader from "./CourseHeader"
 
 const styles = theme => ({
   courseContainer: {
-    width: "100%"
+    flex: "1 1 auto",
+    padding: "1em"
   },
 
   coursesDiv: {
     display: "flex",
-    justifyContent: "space-between",
     flexFlow: "wrap"
   },
 
   coursesDivMobile: {
     display: "flex",
-    alignItems: "center",
     flexDirection: "column"
-  },
-
-  cardDiv: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around"
   },
 
   card: {
-    width: 345,
     backgroundColor: "#fafafa"
-  },
-
-  cardMobile: {
-    backgroundColor: "#fafafa"
-  },
-
-  courseTitle: {
-    fontSize: 16,
-    color: theme.palette.text.primary
-  },
-
-  infoContainer: {
-    marginLeft: "2em"
-  },
-
-  classHeader: {
-    backgroundColor: theme.palette.primary[400]
-  },
-
-  classHeaderMobile: {
-    backgroundColor: theme.palette.primary[400],
-    textAlign: "center"
-  },
-
-  classHeaderSpanDiv: {
-    display: "flex",
-    flexDirection: "column"
-  },
-
-  classHeaderSpan: {
-    fontWeight: 600,
-    color: "rgba(0, 0, 0, 0.75)"
   },
 
   content: {
-    paddingTop: 0
-  },
-
-  contentMobile: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
-  },
-
-  actions: {
+    paddingTop: 0,
     display: "flex",
     justifyContent: "center"
   }
@@ -116,14 +67,12 @@ class Courses extends Component {
       } else {
         elements.push(
           <div
-            className={this.props.mobile ? classes.courseContainer : null}
+            className={classes.courseContainer}
             key={this.props.courses[i].crn + i + Math.random()}
           >
             <div style={{ marginTop: "1em" }}>
               <Card
-                className={
-                  this.props.mobile ? classes.cardMobile : classes.card
-                }
+                className={classes.card}
                 key={this.props.courses[i].crn + i + Math.random()}
               >
                 <CourseHeader
@@ -131,14 +80,10 @@ class Courses extends Component {
                   course={this.props.courses[i]}
                 />
                 <CardContent
-                  className={
-                    this.props.mobile ? classes.contentMobile : classes.content
-                  }
+                  className={classes.content}
                   key={this.props.courses[i].crn + i + Math.random()}
                 >
-                  <div
-                    className={this.props.mobile ? classes.infoContainer : null}
-                  >
+                  <div>
                     <div
                       style={{ marginTop: "1em" }}
                       key={this.props.courses[i].crn + i + Math.random()}
@@ -156,7 +101,6 @@ class Courses extends Component {
                   </div>
                 </CardContent>
                 <CardActions
-                  className={this.props.mobile ? classes.actions : null}
                   key={this.props.courses[i].crn + i + Math.random()}
                 >
                   <CourseDetails course={this.props.courses[i]} />
