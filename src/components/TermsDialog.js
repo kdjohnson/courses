@@ -104,7 +104,7 @@ class ConfirmationDialog extends Component {
             }}
             aria-label="terms"
             name="terms"
-            selectedValue={this.state.selectedValue}
+            value={this.state.selectedValue}
             onChange={this.handleChange}
           >
             {this.props.terms.map(term =>
