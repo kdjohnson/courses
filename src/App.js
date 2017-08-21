@@ -50,7 +50,7 @@ class App extends Component {
     this.setState({
       width: document.getElementById(this.props.rootElement).clientWidth
     })
-    if (this.state.width < 796) {
+    if (this.state.width < 650) {
       this.setState({ mobile: true })
     } else {
       this.setState({ mobile: false })
@@ -59,7 +59,7 @@ class App extends Component {
 
   componentDidMount() {
     window.addEventListener("resize", this.updateWidth)
-    if (document.getElementById(this.props.rootElement).clientWidth < 796) {
+    if (document.getElementById(this.props.rootElement).clientWidth < 650) {
       this.setState({ mobile: true })
     }
 
