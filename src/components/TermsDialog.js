@@ -116,25 +116,25 @@ class ConfirmationDialog extends Component {
               />
             )}
           </RadioGroup>
-          <DialogActions>
-            <Button
-              onClick={this.handleOk}
-              aria-label={"Confirm selection"}
-              tabIndex="0"
-              color="accent"
-            >
-              {this.props.t("ok", {})}
-            </Button>
-            <Button
-              onClick={this.handleCancel}
-              aria-label="Cancel selection"
-              tabIndex="0"
-              color="accent"
-            >
-              {this.props.t("cancel", {})}
-            </Button>
-          </DialogActions>
         </DialogContent>
+        <DialogActions>
+          <Button
+            onClick={this.handleOk}
+            aria-label={"Confirm selection"}
+            tabIndex="0"
+            color="accent"
+          >
+            {this.props.t("ok", {})}
+          </Button>
+          <Button
+            onClick={this.handleCancel}
+            aria-label="Cancel selection"
+            tabIndex="0"
+            color="accent"
+          >
+            {this.props.t("cancel", {})}
+          </Button>
+        </DialogActions>
       </Dialog>
     )
   }
