@@ -43,15 +43,15 @@ class AdvisingMeetings extends Component {
                     {meet.startTime + "-" + meet.endTime}
                   </TableCell>
                   <TableCell numeric>
-                    {meet.startDay +
+                    {meet.startMonth +
                       "/" +
-                      meet.startMonth +
+                      meet.startDay +
                       "/" +
                       meet.startYear +
                       "-" +
-                      meet.endDay +
-                      "/" +
                       meet.endMonth +
+                      "/" +
+                      meet.endDay +
                       "/" +
                       meet.endYear}
                   </TableCell>
