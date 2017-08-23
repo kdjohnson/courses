@@ -70,7 +70,6 @@ class ConfirmationDialog extends Component {
   }
 
   render() {
-    console.log(browser.name)
     const { selectedValue, t, terms, classes, ...other } = this.props
     return (
       <Dialog
@@ -84,7 +83,7 @@ class ConfirmationDialog extends Component {
         ignoreBackdropClick
         ignoreEscapeKeyUp
         maxWidth="xs"
-        fullScreen={browser.name === "ie" ? true : false}
+        fullScreen={browser.name === "ie" && terms.length >= 4 ? true : false}
         onEntering={this.handleEntering}
         {...other}
       >
