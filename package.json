@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "detect-browser": "^1.9.0",
     "i18next": "^8.4.0",
     "i18next-browser-languagedetector": "^1.0.1",
     "i18next-fetch-backend": "^0.0.1",
