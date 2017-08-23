@@ -5,6 +5,7 @@ import ErrorMessages from "./components/ErrorMessages"
 import { getTerms, getCourses } from "./api/api"
 import { withStyles } from "material-ui/styles"
 import { CircularProgress } from "material-ui/Progress"
+import "iterators-polyfill" // This is for supporting IE 😢
 
 const termsURL = "http://localhost:8082/api/terms"
 const coursesURL = "http://localhost:8082/api/courses"
