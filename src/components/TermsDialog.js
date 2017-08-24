@@ -14,7 +14,7 @@ import Typography from "material-ui/Typography"
 import PropTypes from "prop-types"
 import { translate } from "react-i18next"
 import { withStyles } from "material-ui/styles"
-const browser = require("detect-browser")
+import browser from "detect-browser"
 
 const styles = theme => ({
   text: {
@@ -69,6 +69,26 @@ class ConfirmationDialog extends Component {
     this.setState({ selectedValue: value })
   }
 
+  browserCheck = terms => {
+    switch (browser && browser.name) {
+      case "chrome":
+      case "firefox":
+      case "edge":
+      case "safari":
+        return false
+
+      case "ie":
+        if (terms.length >= 4) {
+          return true
+        } else {
+          return false
+        }
+
+      default:
+        return true
+    }
+  }
+
   render() {
     const { selectedValue, t, terms, classes, ...other } = this.props
     return (
@@ -83,7 +103,7 @@ class ConfirmationDialog extends Component {
         ignoreBackdropClick
         ignoreEscapeKeyUp
         maxWidth="xs"
-        fullScreen={browser.name === "ie" && terms.length >= 4 ? true : false}
+        fullScreen={Object.is(this.browserCheck(terms), true) ? true : false}
         onEntering={this.handleEntering}
         {...other}
       >
