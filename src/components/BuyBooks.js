@@ -23,7 +23,7 @@ export const getBookButton = (books, term, mobile) => {
         method="post"
         target="_blank"
         rel="noopener noreferrer"
-        action="http://oakland.bncollege.com/webapp/wcs/stores/servlet/TBListView"
+        action="https://securex.bncollege.com/webapp/wcs/stores/servlet/TBListView"
         hidden
       >
         <input type="hidden" name="storeId" value="13551" />
