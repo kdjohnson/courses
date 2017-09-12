@@ -56,26 +56,13 @@ class Meetings extends Component {
       } else {
         return (
           <div>
-            {displayLink(
-              this.props.meetings[0].buildingRoom,
-              this.props.meetings[0].campus
-            ) &&
-              <a
-                className={classes.meetLink}
-                tabIndex="0"
-                target="_blank"
-                href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
-                rel="noopener noreferrer"
-              >
-                {this.props.meetings[0].buildingRoom +
-                  " [" +
-                  this.props.meetings[0].campus +
-                  "]"}
-              </a>}
+            <Typography type="body2" className={classes.meet} tabIndex="0">
+              {this.props.meetings[0].courseType}
+            </Typography>
             {!displayLink(
               this.props.meetings[0].buildingRoom,
               this.props.meetings[0].campus
-            ) &&
+            ) && (
               <Typography
                 type="body2"
                 className={classes.meetNoLink}
@@ -85,7 +72,8 @@ class Meetings extends Component {
                   " [" +
                   this.props.meetings[0].campus +
                   "]"}
-              </Typography>}
+              </Typography>
+            )}
             <Typography type="body2" className={classes.meet} tabIndex="0">
               {`${this.props.meetings[0].meetDays} `}
             </Typography>
@@ -124,9 +112,24 @@ class Meetings extends Component {
                 "/" +
                 this.props.meetings[0].endYear}
             </Typography>
-            <Typography type="body2" className={classes.meet} tabIndex="0">
-              {this.props.meetings[0].courseType}
-            </Typography>
+            {displayLink(
+              this.props.meetings[0].buildingRoom,
+              this.props.meetings[0].campus
+            ) && (
+              <a
+                className={classes.meetLink}
+                tabIndex="0"
+                target="_blank"
+                href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
+                rel="noopener noreferrer"
+              >
+                {"Classroom: " +
+                  this.props.meetings[0].buildingRoom +
+                  " [" +
+                  this.props.meetings[0].campus +
+                  "]"}
+              </a>
+            )}
           </div>
         )
       }
@@ -134,11 +137,7 @@ class Meetings extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.getMeetings()}
-      </div>
-    )
+    return <div>{this.getMeetings()}</div>
   }
 }
 

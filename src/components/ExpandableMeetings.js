@@ -71,26 +71,13 @@ class ExpandableMeetings extends Component {
     for (let i = 1, total = this.props.meetings.length; i < total; i++) {
       elements.push(
         <div className={classes.expandedDiv}>
-          {displayLink(
-            this.props.meetings[i].buildingRoom,
-            this.props.meetings[i].campus
-          ) &&
-            <a
-              className={classes.meetLink}
-              tabIndex="0"
-              target="_blank"
-              href={getMapUrl(this.props.meetings[i].buildingRoom, false)}
-              rel="noopener noreferrer"
-            >
-              {this.props.meetings[i].buildingRoom +
-                " [" +
-                this.props.meetings[i].campus +
-                "]"}
-            </a>}
+          <Typography type="body2" className={classes.meet} tabIndex="0">
+            {this.props.meetings[i].courseType}
+          </Typography>
           {!displayLink(
             this.props.meetings[i].buildingRoom,
             this.props.meetings[i].campus
-          ) &&
+          ) && (
             <Typography
               type="body2"
               className={classes.meetNoLink}
@@ -100,7 +87,8 @@ class ExpandableMeetings extends Component {
                 " [" +
                 this.props.meetings[i].campus +
                 "]"}
-            </Typography>}
+            </Typography>
+          )}
           <Typography type="body2" className={classes.meet} tabIndex="0">
             {`${this.props.meetings[i].meetDays} `}
           </Typography>
@@ -144,9 +132,24 @@ class ExpandableMeetings extends Component {
               "/" +
               this.props.meetings[i].endYear}
           </Typography>
-          <Typography type="body2" className={classes.meet} tabIndex="0">
-            {this.props.meetings[i].courseType}
-          </Typography>
+          {displayLink(
+            this.props.meetings[i].buildingRoom,
+            this.props.meetings[i].campus
+          ) && (
+            <a
+              className={classes.meetLink}
+              tabIndex="0"
+              target="_blank"
+              href={getMapUrl(this.props.meetings[i].buildingRoom, false)}
+              rel="noopener noreferrer"
+            >
+              {"Classroom: " +
+                this.props.meetings[i].buildingRoom +
+                " [" +
+                this.props.meetings[i].campus +
+                "]"}
+            </a>
+          )}
         </div>
       )
     }
@@ -158,32 +161,25 @@ class ExpandableMeetings extends Component {
     const meeting = this.props.meetings[0]
     return (
       <div key={meeting.endDate + Math.random()}>
-        {displayLink(
-          this.props.meetings[0].buildingRoom,
-          this.props.meetings[0].campus
-        ) &&
-          <a
-            className={classes.meetLink}
-            tabIndex="0"
-            target="_blank"
-            href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
-            rel="noopener noreferrer"
-          >
-            {this.props.meetings[0].buildingRoom +
-              " [" +
-              this.props.meetings[0].campus +
-              "]"}
-          </a>}
+        <Typography
+          type="body2"
+          className={classes.meet}
+          tabIndex="0"
+          key={meeting.endDate + Math.random()}
+        >
+          {meeting.courseType}
+        </Typography>
         {!displayLink(
           this.props.meetings[0].buildingRoom,
           this.props.meetings[0].campus
-        ) &&
+        ) && (
           <Typography type="body2" className={classes.meetNoLink} tabIndex="0">
             {this.props.meetings[0].buildingRoom +
               " [" +
               this.props.meetings[0].campus +
               "]"}
-          </Typography>}
+          </Typography>
+        )}
         <Typography type="body2" className={classes.meet} tabIndex="0">
           {`${meeting.meetDays} `}
         </Typography>
@@ -225,14 +221,24 @@ class ExpandableMeetings extends Component {
             "/" +
             meeting.endYear}
         </Typography>
-        <Typography
-          type="body2"
-          className={classes.meet}
-          tabIndex="0"
-          key={meeting.endDate + Math.random()}
-        >
-          {meeting.courseType}
-        </Typography>
+        {displayLink(
+          this.props.meetings[0].buildingRoom,
+          this.props.meetings[0].campus
+        ) && (
+          <a
+            className={classes.meetLink}
+            tabIndex="0"
+            target="_blank"
+            href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
+            rel="noopener noreferrer"
+          >
+            {"Classroom: " +
+              this.props.meetings[0].buildingRoom +
+              " [" +
+              this.props.meetings[0].campus +
+              "]"}
+          </a>
+        )}
       </div>
     )
   }
@@ -261,9 +267,7 @@ class ExpandableMeetings extends Component {
           transitionDuration="auto"
           unmountOnExit
         >
-          <CardContent>
-            {this.getExpandedMeetings()}
-          </CardContent>
+          <CardContent>{this.getExpandedMeetings()}</CardContent>
         </Collapse>
       </div>
     )
