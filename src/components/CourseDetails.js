@@ -82,9 +82,11 @@ class CourseDetails extends Component {
           >
             <DialogTitle
               className={
-                Object.is(this.props.course.waitList, "0")
-                  ? classes.dialogHeader
-                  : classes.dialogHeaderWaitList
+                Object.is(this.props.course.waitList, "0") ? (
+                  classes.dialogHeader
+                ) : (
+                  classes.dialogHeaderWaitList
+                )
               }
               disableTypography={true}
             >

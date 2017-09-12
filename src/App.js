@@ -197,11 +197,7 @@ class App extends Component {
 
   render() {
     const classes = this.props.classes
-    return (
-      <div className={classes.root}>
-        {this.getView()}
-      </div>
-    )
+    return <div className={classes.root}>{this.getView()}</div>
   }
 }
 

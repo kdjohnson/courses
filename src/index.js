@@ -3,8 +3,7 @@ import ReactDOM from "react-dom"
 import App from "./App"
 //import registerServiceWorker from "./registerServiceWorker"
 import { MuiThemeProvider, createMuiTheme } from "material-ui/styles"
-import createPalette from "material-ui/styles/palette"
-import createTypography from "material-ui/styles/typography"
+import createTypography from "material-ui/Typography"
 import "typeface-arimo"
 import { I18nextProvider } from "react-i18next"
 import i18n from "./utils/i18n"
@@ -48,17 +47,17 @@ const oaklandAccent = {
   contrastDefaultColor: "light"
 }
 
-const palette = createPalette({
+const palette = {
   type: "light",
-  accent: oaklandAccent,
+  secondary: oaklandAccent,
   primary: oakland
-})
+}
 
 const theme = createMuiTheme({
   palette: palette,
-  typography: createTypography(palette, {
+  typography: {
     fontFamily: "Arimo"
-  })
+  }
 })
 
 const rootElement = "root"

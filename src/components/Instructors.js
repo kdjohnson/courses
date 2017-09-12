@@ -14,7 +14,7 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     borderLeftStyle: "solid",
-    borderLeftColor: theme.palette.accent[400],
+    borderLeftColor: theme.palette.secondary[400],
     borderLeftWidth: "0.3em",
     paddingLeft: "1em",
     fontSize: "14px",
@@ -117,7 +117,7 @@ class Instructors extends Component {
           <div
             className={this.props.mobile ? classes.linksMobile : classes.links}
           >
-            {!Object.is(this.props.teachers[0].office, "N/A") &&
+            {!Object.is(this.props.teachers[0].office, "N/A") && (
               <a
                 className={classes.link}
                 target="_blank"
@@ -131,8 +131,9 @@ class Instructors extends Component {
                 }
               >
                 {this.props.teachers[0].office}
-              </a>}
-            {Object.is(this.props.teachers[0].office, "N/A") &&
+              </a>
+            )}
+            {Object.is(this.props.teachers[0].office, "N/A") && (
               <Typography
                 className={classes.noLink}
                 aria-label={
@@ -142,8 +143,9 @@ class Instructors extends Component {
                 }
               >
                 {this.props.teachers[0].office}
-              </Typography>}
-            {!Object.is(this.props.teachers[0].email, "N/A") &&
+              </Typography>
+            )}
+            {!Object.is(this.props.teachers[0].email, "N/A") && (
               <a
                 className={classes.link}
                 target="_blank"
@@ -152,11 +154,13 @@ class Instructors extends Component {
                 rel="noopener noreferrer"
               >
                 {this.props.teachers[0].email}
-              </a>}
-            {Object.is(this.props.teachers[0].email, "N/A") &&
+              </a>
+            )}
+            {Object.is(this.props.teachers[0].email, "N/A") && (
               <Typography className={classes.noLink}>
                 {this.props.teachers[0].email}
-              </Typography>}
+              </Typography>
+            )}
           </div>
         </div>
       )
@@ -164,11 +168,7 @@ class Instructors extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.getInstructor()}
-      </div>
-    )
+    return <div>{this.getInstructor()}</div>
   }
 }
 
