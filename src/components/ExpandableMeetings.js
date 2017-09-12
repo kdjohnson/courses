@@ -33,7 +33,7 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     borderLeftStyle: "solid",
-    borderLeftColor: theme.palette.accent[400],
+    borderLeftColor: theme.palette.secondary[400],
     borderLeftWidth: "0.3em",
     paddingLeft: "1em"
   },
@@ -74,7 +74,7 @@ class ExpandableMeetings extends Component {
           {displayLink(
             this.props.meetings[i].buildingRoom,
             this.props.meetings[i].campus
-          ) &&
+          ) && (
             <a
               className={classes.meetLink}
               tabIndex="0"
@@ -86,11 +86,12 @@ class ExpandableMeetings extends Component {
                 " [" +
                 this.props.meetings[i].campus +
                 "]"}
-            </a>}
+            </a>
+          )}
           {!displayLink(
             this.props.meetings[i].buildingRoom,
             this.props.meetings[i].campus
-          ) &&
+          ) && (
             <Typography
               type="body2"
               className={classes.meetNoLink}
@@ -100,7 +101,8 @@ class ExpandableMeetings extends Component {
                 " [" +
                 this.props.meetings[i].campus +
                 "]"}
-            </Typography>}
+            </Typography>
+          )}
           <Typography type="body2" className={classes.meet} tabIndex="0">
             {`${this.props.meetings[i].meetDays} `}
           </Typography>
@@ -161,7 +163,7 @@ class ExpandableMeetings extends Component {
         {displayLink(
           this.props.meetings[0].buildingRoom,
           this.props.meetings[0].campus
-        ) &&
+        ) && (
           <a
             className={classes.meetLink}
             tabIndex="0"
@@ -173,17 +175,19 @@ class ExpandableMeetings extends Component {
               " [" +
               this.props.meetings[0].campus +
               "]"}
-          </a>}
+          </a>
+        )}
         {!displayLink(
           this.props.meetings[0].buildingRoom,
           this.props.meetings[0].campus
-        ) &&
+        ) && (
           <Typography type="body2" className={classes.meetNoLink} tabIndex="0">
             {this.props.meetings[0].buildingRoom +
               " [" +
               this.props.meetings[0].campus +
               "]"}
-          </Typography>}
+          </Typography>
+        )}
         <Typography type="body2" className={classes.meet} tabIndex="0">
           {`${meeting.meetDays} `}
         </Typography>
@@ -261,9 +265,7 @@ class ExpandableMeetings extends Component {
           transitionDuration="auto"
           unmountOnExit
         >
-          <CardContent>
-            {this.getExpandedMeetings()}
-          </CardContent>
+          <CardContent>{this.getExpandedMeetings()}</CardContent>
         </Collapse>
       </div>
     )

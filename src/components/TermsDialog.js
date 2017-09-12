@@ -129,14 +129,14 @@ class ConfirmationDialog extends Component {
             value={this.state.selectedValue}
             onChange={this.handleChange}
           >
-            {this.props.terms.map(term =>
+            {this.props.terms.map(term => (
               <FormControlLabel
                 value={term.code}
                 key={term.code}
                 control={<Radio />}
                 label={term.description}
               />
-            )}
+            ))}
           </RadioGroup>
         </DialogContent>
         <DialogActions>

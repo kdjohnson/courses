@@ -17,7 +17,7 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     borderLeftStyle: "solid",
-    borderLeftColor: theme.palette.accent[400],
+    borderLeftColor: theme.palette.secondary[400],
     borderLeftWidth: "0.3em",
     paddingLeft: "1em",
     fontSize: "14px",
@@ -78,7 +78,7 @@ class ExpandableInstructors extends Component {
             this.props.teachers[0].lastName}
         </Typography>
         <div className={classes.links}>
-          {!Object.is(this.props.teachers[0].office, "N/A") &&
+          {!Object.is(this.props.teachers[0].office, "N/A") && (
             <a
               className={classes.link}
               target="_blank"
@@ -92,8 +92,9 @@ class ExpandableInstructors extends Component {
               }
             >
               {this.props.teachers[0].office}
-            </a>}
-          {Object.is(this.props.teachers[0].office, "N/A") &&
+            </a>
+          )}
+          {Object.is(this.props.teachers[0].office, "N/A") && (
             <Typography
               className={classes.noLink}
               aria-label={
@@ -103,8 +104,9 @@ class ExpandableInstructors extends Component {
               }
             >
               {this.props.teachers[0].office}
-            </Typography>}
-          {!Object.is(this.props.teachers[0].email, "N/A") &&
+            </Typography>
+          )}
+          {!Object.is(this.props.teachers[0].email, "N/A") && (
             <a
               className={classes.link}
               target="_blank"
@@ -113,11 +115,13 @@ class ExpandableInstructors extends Component {
               rel="noopener noreferrer"
             >
               {this.props.teachers[0].email}
-            </a>}
-          {Object.is(this.props.teachers[0].email, "N/A") &&
+            </a>
+          )}
+          {Object.is(this.props.teachers[0].email, "N/A") && (
             <Typography className={classes.noLink}>
               {this.props.teachers[0].email}
-            </Typography>}
+            </Typography>
+          )}
         </div>
       </div>
     )
@@ -140,7 +144,7 @@ class ExpandableInstructors extends Component {
               this.props.teachers[i].lastName}
           </Typography>
           <div className={classes.links}>
-            {!Object.is(this.props.teachers[i].office, "N/A") &&
+            {!Object.is(this.props.teachers[i].office, "N/A") && (
               <a
                 className={classes.link}
                 target="_blank"
@@ -154,8 +158,9 @@ class ExpandableInstructors extends Component {
                 }
               >
                 {this.props.teachers[i].office}
-              </a>}
-            {Object.is(this.props.teachers[i].office, "N/A") &&
+              </a>
+            )}
+            {Object.is(this.props.teachers[i].office, "N/A") && (
               <Typography
                 className={classes.noLink}
                 aria-label={
@@ -165,8 +170,9 @@ class ExpandableInstructors extends Component {
                 }
               >
                 {this.props.teachers[i].office}
-              </Typography>}
-            {!Object.is(this.props.teachers[i].email, "N/A") &&
+              </Typography>
+            )}
+            {!Object.is(this.props.teachers[i].email, "N/A") && (
               <a
                 className={classes.link}
                 target="_blank"
@@ -175,11 +181,13 @@ class ExpandableInstructors extends Component {
                 rel="noopener noreferrer"
               >
                 {this.props.teachers[i].email}
-              </a>}
-            {Object.is(this.props.teachers[i].email, "N/A") &&
+              </a>
+            )}
+            {Object.is(this.props.teachers[i].email, "N/A") && (
               <Typography className={classes.noLink}>
                 {this.props.teachers[i].email}
-              </Typography>}
+              </Typography>
+            )}
           </div>
         </div>
       )
@@ -195,9 +203,11 @@ class ExpandableInstructors extends Component {
           {this.getInstructor()}
           <IconButton
             aria-label={
-              this.state.expanded
-                ? "Close more instructors"
-                : "Open more instructors"
+              this.state.expanded ? (
+                "Close more instructors"
+              ) : (
+                "Open more instructors"
+              )
             }
             className={classnames(classes.expand, {
               [classes.expandOpen]: this.state.expanded
@@ -213,9 +223,7 @@ class ExpandableInstructors extends Component {
           transitionDuration="auto"
           unmountOnExit
         >
-          <CardContent>
-            {this.getExpandedInstructors()}
-          </CardContent>
+          <CardContent>{this.getExpandedInstructors()}</CardContent>
         </Collapse>
       </div>
     )
