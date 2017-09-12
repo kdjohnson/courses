@@ -23,7 +23,8 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build",
+    "build": "react-scripts build && yarn run build:clean",
+    "build:clean": "cd build/static/js/ && cp *.js ./main.js && cp *.map ./main.js.map && cp ../../service-worker.js .",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
   }
