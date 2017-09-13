@@ -13,6 +13,7 @@ const styles = theme => ({
   button: {
     paddingLeft: 0
   },
+
   links: {
     display: "flex",
     flexDirection: "column",
@@ -37,7 +38,8 @@ const styles = theme => ({
   teacher: {
     fontSize: 16,
     color: theme.palette.text.primary,
-    marginBottom: "0.5em"
+    marginBottom: "0.5em",
+    fontWeight: "bolder"
   },
 
   expand: {
