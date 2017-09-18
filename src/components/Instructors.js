@@ -146,13 +146,16 @@ class Instructors extends Component {
               </ListItemIcon>
               <ListItemText
                 secondary={
-                  <a
-                    href={"mailto:" + this.props.teachers[i].emial}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {this.props.teachers[i].email}
-                  </a>
+                  (!Object.is(this.props.teachers[i].email, "N/A") && (
+                    <a
+                      href={"mailto:" + this.props.teachers[i].email}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {this.props.teachers[i].email}
+                    </a>
+                  )) ||
+                  "N/A"
                 }
               />
             </ListItem>
@@ -162,13 +165,16 @@ class Instructors extends Component {
               </ListItemIcon>
               <ListItemText
                 secondary={
-                  <a
-                    href={getMapUrl(this.props.teachers[i].office, true)}
-                    rel="noopener noreferrer"
-                    target="_blank"
-                  >
-                    {this.props.teachers[i].office}
-                  </a>
+                  (!Object.is(this.props.teachers.office, "N/A") && (
+                    <a
+                      href={getMapUrl(this.props.teachers[i].office, true)}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {this.props.teachers[i].office}
+                    </a>
+                  )) ||
+                  "N/A"
                 }
               />
             </ListItem>
