@@ -70,7 +70,6 @@ class Instructors extends Component {
           {this.props.teachers.length < 2 && "Instructor"}
         </Button>
         <Dialog
-          role="dialog"
           open={this.state.open}
           id="instructor-dialog"
           tabIndex="0"
@@ -108,7 +107,13 @@ class Instructors extends Component {
         Object.is(this.props.teachers[0], undefined)
       ) {
         return (
-          <List subheader={<ListSubheader>"N/A"</ListSubheader>}>
+          <List
+            subheader={
+              <ListSubheader tabIndex="0" classes={classes.instructor}>
+                "N/A"
+              </ListSubheader>
+            }
+          >
             <ListItem>
               <ListItemIcon>
                 <Email />
@@ -127,7 +132,7 @@ class Instructors extends Component {
         list.push(
           <List
             subheader={
-              <ListSubheader className={classes.instructor}>
+              <ListSubheader tabIndex="0" className={classes.instructor}>
                 {this.props.teachers[i].firstName +
                   "  " +
                   this.props.teachers[i].lastName}
