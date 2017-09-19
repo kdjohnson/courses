@@ -16,7 +16,7 @@ import List, {
   ListSubheader
 } from "material-ui/List"
 import Email from "material-ui-icons/Email"
-import PersonPin from "material-ui-icons/PersonPin"
+import Home from "material-ui-icons/Home"
 import Slide from "material-ui/transitions/Slide"
 import { translate } from "react-i18next"
 
@@ -122,7 +122,7 @@ class Instructors extends Component {
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <PersonPin />
+                <Home />
               </ListItemIcon>
               <ListItemText secondary="N/A" />
             </ListItem>
@@ -161,7 +161,7 @@ class Instructors extends Component {
             </ListItem>
             <ListItem>
               <ListItemIcon>
-                <PersonPin />
+                <Home />
               </ListItemIcon>
               <ListItemText
                 secondary={
