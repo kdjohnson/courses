@@ -65,7 +65,7 @@ class Grades extends Component {
     let rows = []
     for (let cr of creditsObj) {
       rows.push(
-        <TableRow key={cr.level}>
+        <TableRow>
           <TableCell>{cr.level}</TableCell>
           <TableCell>{cr.credits}</TableCell>
           <TableCell>{cr.gpa}</TableCell>
