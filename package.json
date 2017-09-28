@@ -15,7 +15,7 @@
     "react": "^15.5.4",
     "react-dom": "^15.5.4",
     "react-i18next": "^4.1.0",
-    "reactjs-calendar": "0.2.7",
+    "reactjs-calendar": "0.2.13",
     "typeface-arimo": "^0.0.22"
   },
   "devDependencies": {
