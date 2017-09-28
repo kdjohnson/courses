@@ -1,174 +1,192 @@
 import React, { Component } from "react"
 import PropTypes from "prop-types"
 import { withStyles } from "material-ui/styles"
-import Typography from "material-ui/Typography"
-import ExpandableInstructors from "./ExpandableInstructors"
 import { getMapUrl } from "../utils/mapLinks"
+import Button from "material-ui/Button"
+import Typography from "material-ui/Typography"
+import Dialog, {
+  DialogTitle,
+  DialogContent,
+  DialogActions
+} from "material-ui/Dialog"
+import List, {
+  ListItem,
+  ListItemIcon,
+  ListItemText,
+  ListSubheader
+} from "material-ui/List"
+import MailOutline from "material-ui-icons/MailOutline"
+import Domain from "material-ui-icons/Domain"
+import Slide from "material-ui/transitions/Slide"
+import { translate } from "react-i18next"
 
 const styles = theme => ({
   button: {
-    paddingLeft: 0
+    fontWeight: "bolder"
   },
 
-  links: {
-    display: "flex",
-    flexDirection: "column",
-    borderLeftStyle: "solid",
-    borderLeftColor: theme.palette.secondary[400],
-    borderLeftWidth: "0.3em",
-    paddingLeft: "1em",
-    fontSize: "14px",
-    fontWeight: 400,
-    fontFamily: "Arimo"
-  },
-
-  linksMobile: {
-    color: "#3344dd",
-    display: "flex",
-    flexDirection: "column",
-    fontSize: "14px",
-    fontWeight: 400,
-    fontFamily: "Arimo"
-  },
-
-  divider: {
-    height: "2px",
-    marginBottom: "0.2em"
-  },
-
-  link: {
-    color: "#3344dd",
-    marginBottom: 10
-  },
-
-  noLink: {
-    marginBottom: 10
-  },
-
-  teacher: {
+  instructor: {
     fontSize: 16,
-    color: theme.palette.text.primary,
-    marginBottom: "0.5em"
-  },
-
-  teacherMobile: {
-    fontSize: 16,
+    fontWeight: "bolder",
     color: theme.palette.text.primary
+  },
+
+  dialogTitle: {
+    backgroundColor: theme.palette.primary[400]
+  },
+
+  title: {
+    fontWeight: 600
+  },
+
+  close: {
+    fontWeight: "bolder"
   }
 })
 
 class Instructors extends Component {
   state = {
-    anchorEl: undefined,
     open: false
-  }
-
-  handleClick = event => {
-    this.setState({ open: true, anchorEl: event.currentTarget })
   }
 
   handleRequestClose = () => {
     this.setState({ open: false })
   }
 
-  getInstructor() {
+  getInstructors() {
     const classes = this.props.classes
-    if (this.props.teachers.length >= 2) {
-      return <ExpandableInstructors teachers={this.props.teachers} />
-    } else if (
-      Object.is(this.props.teachers, null) ||
-      Object.is(this.props.teachers[0], undefined)
-    ) {
-      return (
-        <div>
-          <Typography
-            className={
-              this.props.mobile ? classes.teacherMobile : classes.teacher
+    const { t } = this.props
+    return (
+      <div>
+        <Button
+          onClick={() =>
+            this.setState({
+              open: true
+            })}
+          color="accent"
+          style={{ fontWeight: "bolder" }}
+        >
+          {this.props.teachers.length >= 2 && "Instructors"}
+          {this.props.teachers.length < 2 && "Instructor"}
+        </Button>
+        <Dialog
+          open={this.state.open}
+          id="instructor-dialog"
+          tabIndex="0"
+          aria-label="instructor information"
+          onRequestClose={this.handleRequestClose}
+          transition={<Slide direction="down" />}
+        >
+          <DialogTitle className={classes.dialogTitle} disableTypography={true}>
+            <Typography type="title" tabIndex="0" className={classes.title}>
+              {this.props.teachers.length >= 2 && "Instructors Information"}
+              {this.props.teachers.length < 2 && "Instructor Information"}
+            </Typography>
+          </DialogTitle>
+          <DialogContent>{this.getList()}</DialogContent>
+          <DialogActions>
+            <Button
+              onClick={this.handleRequestClose}
+              color="accent"
+              className={classes.close}
+            >
+              {t("close", {})}
+            </Button>
+          </DialogActions>
+        </Dialog>
+      </div>
+    )
+  }
+
+  getList = () => {
+    const classes = this.props.classes
+    let list = []
+    for (let i = 0, total = this.props.teachers.length; i < total; i++) {
+      if (
+        Object.is(this.props.teachers, null) ||
+        Object.is(this.props.teachers[0], undefined)
+      ) {
+        return (
+          <List
+            subheader={
+              <ListSubheader tabIndex="0" classes={classes.instructor}>
+                "N/A"
+              </ListSubheader>
             }
-            type="headline"
-            component="h3"
-            tabIndex="0"
           >
-            N/A
-          </Typography>
-          <div
-            className={this.props.mobile ? classes.linksMobile : classes.links}
-          >
-            <Typography className={classes.noLink}>N/A</Typography>
-            <Typography className={classes.noLink}>N/A</Typography>
-          </div>
-        </div>
-      )
-    } else {
-      return (
-        <div>
-          <Typography
-            type="headline"
-            component="h3"
-            className={
-              this.props.mobile ? classes.teacherMobile : classes.teacher
+            <ListItem>
+              <ListItemIcon>
+                <MailOutline />
+              </ListItemIcon>
+              <ListItemText secondary="N/A" />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <Domain />
+              </ListItemIcon>
+              <ListItemText secondary="N/A" />
+            </ListItem>
+          </List>
+        )
+      } else {
+        list.push(
+          <List
+            subheader={
+              <ListSubheader tabIndex="0" className={classes.instructor}>
+                {this.props.teachers[i].firstName +
+                  "  " +
+                  this.props.teachers[i].lastName}
+              </ListSubheader>
             }
-            tabIndex="0"
+            key={this.props.teachers[i].email}
           >
-            {this.props.teachers[0].firstName +
-              " " +
-              this.props.teachers[0].lastName}
-          </Typography>
-          <div
-            className={this.props.mobile ? classes.linksMobile : classes.links}
-          >
-            {!Object.is(this.props.teachers[0].office, "N/A") && (
-              <a
-                className={classes.link}
-                target="_blank"
-                href={getMapUrl(this.props.teachers[0].office, true)}
-                tabIndex="0"
-                rel="noopener noreferrer"
-                aria-label={
-                  this.props.teachers[0].firstName +
-                  " office is " +
-                  this.props.teachers[0].office
+            <ListItem>
+              <ListItemIcon>
+                <MailOutline />
+              </ListItemIcon>
+              <ListItemText
+                secondary={
+                  (!Object.is(this.props.teachers[i].email, "N/A") && (
+                    <a
+                      href={"mailto:" + this.props.teachers[i].email}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {this.props.teachers[i].email}
+                    </a>
+                  )) ||
+                  "N/A"
                 }
-              >
-                {this.props.teachers[0].office}
-              </a>
-            )}
-            {Object.is(this.props.teachers[0].office, "N/A") && (
-              <Typography
-                className={classes.noLink}
-                aria-label={
-                  "Speak with " +
-                  this.props.teachers[0].firstName +
-                  " for office information"
+              />
+            </ListItem>
+            <ListItem>
+              <ListItemIcon>
+                <Domain />
+              </ListItemIcon>
+              <ListItemText
+                secondary={
+                  (!Object.is(this.props.teachers.office, "N/A") && (
+                    <a
+                      href={getMapUrl(this.props.teachers[i].office, true)}
+                      rel="noopener noreferrer"
+                      target="_blank"
+                    >
+                      {this.props.teachers[i].office}
+                    </a>
+                  )) ||
+                  "N/A"
                 }
-              >
-                {this.props.teachers[0].office}
-              </Typography>
-            )}
-            {!Object.is(this.props.teachers[0].email, "N/A") && (
-              <a
-                className={classes.link}
-                target="_blank"
-                href={"mailto:" + this.props.teachers[0].email}
-                tabIndex="0"
-                rel="noopener noreferrer"
-              >
-                {this.props.teachers[0].email}
-              </a>
-            )}
-            {Object.is(this.props.teachers[0].email, "N/A") && (
-              <Typography className={classes.noLink}>
-                {this.props.teachers[0].email}
-              </Typography>
-            )}
-          </div>
-        </div>
-      )
+              />
+            </ListItem>
+          </List>
+        )
+      }
     }
+    return list
   }
 
   render() {
-    return <div>{this.getInstructor()}</div>
+    return <div>{this.getInstructors()}</div>
   }
 }
 
@@ -176,4 +194,6 @@ Instructors.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "Instructors" })(Instructors)
+export default withStyles(styles, { name: "Instructors" })(
+  translate("view", { wait: true })(Instructors)
+)

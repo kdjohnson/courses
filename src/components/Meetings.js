@@ -22,6 +22,13 @@ const styles = theme => ({
     fontSize: "14px",
     fontWeight: 400,
     fontFamily: "Arimo"
+  },
+
+  stuff: {
+    borderLeftStyle: "solid",
+    borderLeftColor: theme.palette.secondary[400],
+    borderLeftWidth: "0.3em",
+    paddingLeft: "1em"
   }
 })
 
@@ -55,11 +62,11 @@ class Meetings extends Component {
         return <ExpandableMeetings meetings={this.props.meetings} />
       } else {
         return (
-          <div>
+          <div className={classes.stuff}>
             {displayLink(
               this.props.meetings[0].buildingRoom,
               this.props.meetings[0].campus
-            ) &&
+            ) && (
               <a
                 className={classes.meetLink}
                 tabIndex="0"
@@ -71,11 +78,12 @@ class Meetings extends Component {
                   " [" +
                   this.props.meetings[0].campus +
                   "]"}
-              </a>}
+              </a>
+            )}
             {!displayLink(
               this.props.meetings[0].buildingRoom,
               this.props.meetings[0].campus
-            ) &&
+            ) && (
               <Typography
                 type="body2"
                 className={classes.meetNoLink}
@@ -85,7 +93,8 @@ class Meetings extends Component {
                   " [" +
                   this.props.meetings[0].campus +
                   "]"}
-              </Typography>}
+              </Typography>
+            )}
             <Typography type="body2" className={classes.meet} tabIndex="0">
               {`${this.props.meetings[0].meetDays} `}
             </Typography>
@@ -136,6 +145,12 @@ class Meetings extends Component {
   render() {
     return (
       <div>
+        <Typography
+          tabIndex="0"
+          style={{ fontWeight: "bolder", paddingBottom: "0.5em" }}
+        >
+          CLASS INFORMATION
+        </Typography>
         {this.getMeetings()}
       </div>
     )

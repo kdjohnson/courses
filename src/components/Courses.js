@@ -90,20 +90,14 @@ class Courses extends Component {
                     >
                       <Meetings meetings={this.props.courses[i].meetings} />
                     </div>
-                    <div
-                      style={{ marginTop: "1em" }}
-                      key={this.props.courses[i].crn + i + Math.random()}
-                    >
-                      <Instructors
-                        teachers={this.props.courses[i].instructors}
-                      />
-                    </div>
                   </div>
                 </CardContent>
                 <CardActions
                   key={this.props.courses[i].crn + i + Math.random()}
+                  style={{ justifyContent: "center" }}
                 >
                   <CourseDetails course={this.props.courses[i]} />
+                  <Instructors teachers={this.props.courses[i].instructors} />
                 </CardActions>
               </Card>
             </div>

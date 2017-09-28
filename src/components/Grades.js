@@ -66,15 +66,9 @@ class Grades extends Component {
     for (let cr of creditsObj) {
       rows.push(
         <TableRow>
-          <TableCell>
-            {cr.level}
-          </TableCell>
-          <TableCell>
-            {cr.credits}
-          </TableCell>
-          <TableCell>
-            {cr.gpa}
-          </TableCell>
+          <TableCell>{cr.level}</TableCell>
+          <TableCell>{cr.credits}</TableCell>
+          <TableCell>{cr.gpa}</TableCell>
         </TableRow>
       )
     }
@@ -133,9 +127,7 @@ class Grades extends Component {
                   </TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>
-                {GradeRow(this.props.courses)}
-              </TableBody>
+              <TableBody>{GradeRow(this.props.courses)}</TableBody>
             </Table>
           </CardContent>
         </Card>
@@ -156,15 +148,9 @@ const GradeRow = courses => {
 
       tableArray.push(
         <TableRow key={i + Math.random()}>
-          <TableCell>
-            {course}
-          </TableCell>
-          <TableCell>
-            {credits}
-          </TableCell>
-          <TableCell>
-            {grade}
-          </TableCell>
+          <TableCell>{course}</TableCell>
+          <TableCell>{credits}</TableCell>
+          <TableCell>{grade}</TableCell>
         </TableRow>
       )
     }

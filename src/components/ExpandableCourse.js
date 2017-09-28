@@ -40,13 +40,11 @@ class ExpandableCourse extends Component {
                 <div style={{ marginTop: "1em" }}>
                   <Meetings meetings={this.props.course.meetings} />
                 </div>
-                <div style={{ marginTop: "1em" }}>
-                  <Instructors teachers={this.props.course.instructors} />
-                </div>
               </div>
             </CardContent>
-            <CardActions>
+            <CardActions style={{ justifyContent: "center" }}>
               <CourseDetails course={this.props.course} />
+              <Instructors teachers={this.props.course.instructors} />
             </CardActions>
           </Card>
         </div>
