@@ -42,7 +42,7 @@ class ExpandableCourse extends Component {
                 </div>
               </div>
             </CardContent>
-            <CardActions style={{ justifyContent: "flex-end" }}>
+            <CardActions style={{ justifyContent: "center" }}>
               <CourseDetails course={this.props.course} />
               <Instructors teachers={this.props.course.instructors} />
             </CardActions>
