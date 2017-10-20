@@ -82,6 +82,7 @@ class ConfirmationDialog extends Component {
       case "firefox":
       case "edge":
       case "safari":
+      case "vivaldi":
         return false
 
       case "ie":
