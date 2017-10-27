@@ -12,7 +12,7 @@
     "iterators-polyfill": "^1.0.2",
     "material-ui": "next",
     "material-ui-icons": "^1.0.0-alpha.3",
-    "react": "^15.5.4",
+    "react": "^16.0.0",
     "react-dom": "^15.5.4",
     "react-i18next": "^4.1.0",
     "reactjs-calendar": "0.2.14",
