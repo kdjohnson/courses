@@ -1,27 +1,27 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
-import Card, { CardActions, CardContent } from "material-ui/Card"
-import Instructors from "./Instructors"
-import Meetings from "./Meetings"
-import CourseDetails from "./CourseDetails"
-import CourseHeader from "./CourseHeader"
+import React, {Component} from 'react'
+import PropTypes from 'prop-types'
+import {withStyles} from 'material-ui/styles'
+import Card, {CardActions, CardContent} from 'material-ui/Card'
+import Instructors from './Instructors'
+import Meetings from './Meetings'
+import CourseDetails from './CourseDetails'
+import CourseHeader from './CourseHeader'
 
 const styles = theme => ({
   courseContainer: {
-    flex: "1 1 auto",
-    padding: "1em"
+    flex: '1 1 auto',
+    padding: '1em',
   },
 
   card: {
-    backgroundColor: "#fafafa"
+    backgroundColor: '#fafafa',
   },
 
   content: {
     paddingTop: 0,
-    display: "flex",
-    justifyContent: "center"
-  }
+    display: 'flex',
+    justifyContent: 'center',
+  },
 })
 
 class ExpandableCourse extends Component {
@@ -29,7 +29,7 @@ class ExpandableCourse extends Component {
     const classes = this.props.classes
     return (
       <div className={classes.courseContainer}>
-        <div style={{ marginTop: "1em" }}>
+        <div style={{marginTop: '1em'}}>
           <Card className={classes.card}>
             <CourseHeader
               mobile={this.props.mobile}
@@ -37,12 +37,21 @@ class ExpandableCourse extends Component {
             />
             <CardContent className={classes.content}>
               <div>
-                <div style={{ marginTop: "1em" }}>
+                <div style={{marginTop: '1em'}}>
                   <Meetings meetings={this.props.course.meetings} />
                 </div>
               </div>
             </CardContent>
-            <CardActions style={{ justifyContent: "center" }}>
+            <CardActions
+              style={{
+                height: '52px',
+                display: 'flex',
+                padding: '2px 4px',
+                alignContent: 'center',
+                flexWrap: 'wrap',
+                justifyContent: 'center',
+                paddingBottom: '15px',
+              }}>
               <CourseDetails course={this.props.course} />
               <Instructors teachers={this.props.course.instructors} />
             </CardActions>
@@ -54,9 +63,7 @@ class ExpandableCourse extends Component {
 }
 
 ExpandableCourse.propTypes = {
-  classes: PropTypes.object.isRequired
+  classes: PropTypes.object.isRequired,
 }
 
-export default withStyles(styles, { name: "ExpandableCourse" })(
-  ExpandableCourse
-)
+export default withStyles(styles, {name: 'ExpandableCourse'})(ExpandableCourse)
