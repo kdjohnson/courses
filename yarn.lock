@@ -5664,9 +5664,9 @@ react@^15.5.4:
     object-assign "^4.1.0"
     prop-types "^15.5.10"
 
-reactjs-calendar@0.2.7:
-  version v0.2.7
-  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.2.7.tgz#db075f2aaeb4cccc0c4cf0d13d5d68e52e9fbaef"
+reactjs-calendar@0.2.14:
+  version "0.2.14"
+  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.2.14.tgz#1288fbc51c065aeca9554d91d8cf807ab5c3cb47"
   dependencies:
     version "^0.1.2"
     all "^0.0.0"
