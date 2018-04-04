@@ -41,7 +41,7 @@ const styles = theme => ({
 
   courseTitle: {
     fontSize: 16,
-    color: theme.palette.text.primary
+    color: theme.palette.primary.contrastText
   },
 
   infoContainer: {

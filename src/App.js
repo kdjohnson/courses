@@ -117,7 +117,7 @@ class App extends Component {
       return (
         <div className={classes.loading}>
           <CircularProgress
-            color="accent"
+            color="secondary"
             className={classes.progress}
             size={50}
           />

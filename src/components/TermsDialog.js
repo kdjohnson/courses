@@ -144,7 +144,7 @@ class ConfirmationDialog extends Component {
             onClick={this.handleOk}
             aria-label={"Confirm selection"}
             tabIndex="0"
-            color="accent"
+            color="secondary"
           >
             {this.props.t("ok", {})}
           </Button>
@@ -152,7 +152,7 @@ class ConfirmationDialog extends Component {
             onClick={this.handleCancel}
             aria-label="Cancel selection"
             tabIndex="0"
-            color="accent"
+            color="secondary"
           >
             {this.props.t("cancel", {})}
           </Button>

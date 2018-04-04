@@ -10,7 +10,7 @@ export const getBookButton = (books, term, mobile) => {
   return (
     <div style={mobile ? mobileStyle : null}>
       <Button
-        color="accent"
+        color="secondary"
         title="Buy Books"
         raised
         tabIndex="0"

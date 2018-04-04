@@ -33,13 +33,13 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     borderLeftStyle: "solid",
-    borderLeftColor: theme.palette.secondary[400],
+    borderLeftColor: theme.palette.secondary,
     borderLeftWidth: "0.3em",
     paddingLeft: "1em"
   },
 
   meet: {
-    color: theme.palette.text.primary
+    color: 'black'
   },
 
   meetLink: {
@@ -50,7 +50,7 @@ const styles = theme => ({
   },
 
   meetNoLink: {
-    color: theme.palette.text.primary,
+    color: 'black',
     lineHeight: 1.42857143,
     fontSize: "14px",
     fontWeight: 400,
