@@ -94,7 +94,7 @@ class Courses extends Component {
                 </CardContent>
                 <CardActions
                   key={this.props.courses[i].crn + i + Math.random()}
-                  style={{ justifyContent: "center" }}
+                  style={{ justifyContent: "center", flexWrap: "wrap" }}
                 >
                   <CourseDetails course={this.props.courses[i]} />
                   <Instructors teachers={this.props.courses[i].instructors} />
