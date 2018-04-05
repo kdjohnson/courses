@@ -8,7 +8,7 @@ import { amber } from "material-ui/colors"
 
 const styles = theme => ({
   classHeader: {
-    backgroundColor: theme.palette.primary[400],
+    backgroundColor: theme.palette.primary.light,
     textAlign: "center"
   },
 

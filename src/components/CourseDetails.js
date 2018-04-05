@@ -19,7 +19,7 @@ const styles = theme => ({
   },
 
   dialogHeader: {
-    backgroundColor: theme.palette.primary[400]
+    backgroundColor: theme.palette.primary.light
   },
 
   dialogHeaderWaitList: {

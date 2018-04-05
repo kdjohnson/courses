@@ -27,11 +27,12 @@ const styles = theme => ({
   },
 
   header: {
-    backgroundColor: theme.palette.primary[400]
+    backgroundColor: theme.palette.primary.main
   },
 
   title: {
-    fontWeight: 600
+    fontWeight: 600,
+    color: theme.palette.primary.contrastText
   }
 })
 
@@ -58,7 +59,9 @@ class ConfirmationDialog extends Component {
   radioGroup = null
 
   handleEntering = () => {
-    this.radioGroup.focus()
+    if (!Object.is(this.radioGroup, null)) {
+      this.radioGroup.focus()
+    }
   }
 
   handleCancel = () => {
@@ -105,8 +108,8 @@ class ConfirmationDialog extends Component {
         open={this.props.open}
         onClose={this.handleClose}
         transition={Transition}
-        ignoreBackdropClick
-        ignoreEscapeKeyUp
+        disableBackdropClick
+        disableEscapeKeyDown
         maxWidth="xs"
         fullScreen={Object.is(this.browserCheck(terms), true) ? true : false}
         onEntering={this.handleEntering}
@@ -126,7 +129,7 @@ class ConfirmationDialog extends Component {
         </DialogTitle>
         <DialogContent aria-labelledby="dialogbox">
           <RadioGroup
-            innerRef={node => {
+            ref={node => {
               this.radioGroup = node
             }}
             aria-label="terms"

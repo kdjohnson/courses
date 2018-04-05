@@ -26,7 +26,7 @@ const styles = theme => ({
 
   stuff: {
     borderLeftStyle: "solid",
-    borderLeftColor: theme.palette.secondary.default,
+    borderLeftColor: theme.palette.secondary.main,
     borderLeftWidth: "0.3em",
     paddingLeft: "1em"
   }

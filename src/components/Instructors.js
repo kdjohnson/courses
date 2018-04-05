@@ -32,7 +32,7 @@ const styles = theme => ({
   },
 
   dialogTitle: {
-    backgroundColor: theme.palette.primary[400]
+    backgroundColor: theme.palette.primary.light
   },
 
   title: {

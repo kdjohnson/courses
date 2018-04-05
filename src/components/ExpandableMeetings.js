@@ -33,7 +33,7 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     borderLeftStyle: "solid",
-    borderLeftColor: theme.palette.secondary,
+    borderLeftColor: theme.palette.primary.main,
     borderLeftWidth: "0.3em",
     paddingLeft: "1em"
   },
