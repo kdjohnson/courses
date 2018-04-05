@@ -40,6 +40,10 @@ const styles = theme => ({
   }
 })
 
+function Transition(props) {
+  return <Slide direction="down" {...props} />
+}
+
 class CourseDetails extends Component {
   state = {
     open: false
@@ -63,7 +67,7 @@ class CourseDetails extends Component {
         <div aria-labelledby={"openbutton" + this.props.course.crn}>
           <Button
             className={classes.button}
-            color="accent"
+            color="secondary"
             onClick={this.handleOpen}
             id={"openbutton" + this.props.course.crn}
             aria-label="course description"
@@ -77,8 +81,8 @@ class CourseDetails extends Component {
             aria-label="course description"
             tabIndex="0"
             open={this.state.open}
-            onRequestClose={this.handleClose}
-            transition={<Slide direction="down" />}
+            onClose={this.handleClose}
+            transition={Transition}
           >
             <DialogTitle
               className={
@@ -110,7 +114,7 @@ class CourseDetails extends Component {
                   onClick={this.handleClose}
                   aria-label="close course information"
                   tabIndex="0"
-                  color="accent"
+                  color="secondary"
                 >
                   {t("close", {})}
                 </Button>

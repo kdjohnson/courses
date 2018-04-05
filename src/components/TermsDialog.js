@@ -35,6 +35,10 @@ const styles = theme => ({
   }
 })
 
+function Transition(props) {
+  return <Slide direction="down" {...props} />
+}
+
 class ConfirmationDialog extends Component {
   state = {
     selectedValue: undefined
@@ -58,11 +62,11 @@ class ConfirmationDialog extends Component {
   }
 
   handleCancel = () => {
-    this.props.onRequestClose(this.props.selectedValue)
+    this.props.onClose(this.props.selectedValue)
   }
 
   handleOk = () => {
-    this.props.onRequestClose(this.state.selectedValue)
+    this.props.onClose(this.state.selectedValue)
   }
 
   handleChange = (event, value) => {
@@ -89,6 +93,7 @@ class ConfirmationDialog extends Component {
     }
   }
 
+
   render() {
     const { selectedValue, t, terms, classes, ...other } = this.props
     return (
@@ -98,8 +103,8 @@ class ConfirmationDialog extends Component {
         aria-label="course description"
         tabIndex="0"
         open={this.props.open}
-        onRequestClose={this.handleClose}
-        transition={<Slide direction="down" />}
+        onClose={this.handleClose}
+        transition={Transition}
         ignoreBackdropClick
         ignoreEscapeKeyUp
         maxWidth="xs"
@@ -163,7 +168,7 @@ class ConfirmationDialog extends Component {
 }
 
 ConfirmationDialog.propTypes = {
-  onRequestClose: PropTypes.func,
+  onClose: PropTypes.func,
   selectedValue: PropTypes.string
 }
 
@@ -224,7 +229,7 @@ class TermsDialog extends Component {
           <ConfirmationDialog
             classes={classes}
             open={this.state.open}
-            onRequestClose={this.handleRequestClose}
+            onClose={this.handleRequestClose}
             selectedValue={this.state.selectedValue}
             terms={this.props.terms}
             t={t}

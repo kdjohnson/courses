@@ -22,7 +22,7 @@ export default class AlertDialog extends Component {
         <Button onClick={() => this.setState({ open: true })}>
           Open alert dialog
         </Button>
-        <Dialog open={this.state.open} onRequestClose={this.handleRequestClose}>
+        <Dialog open={this.state.open} onClose={this.handleRequestClose}>
           <DialogTitle>{"Use Google's location service?"}</DialogTitle>
           <DialogContent>
             <DialogContentText>

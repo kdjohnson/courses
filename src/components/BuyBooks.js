@@ -12,7 +12,7 @@ export const getBookButton = (books, term, mobile) => {
       <Button
         color="secondary"
         title="Buy Books"
-        raised
+        variant="raised"
         tabIndex="0"
         onClick={handleBuyBooks}
       >

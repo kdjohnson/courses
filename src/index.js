@@ -10,7 +10,6 @@ import { create } from "jss"
 import preset from "jss-preset-default"
 import { JssProvider } from "react-jss"
 
-
 const theme = createMuiTheme({
   palette: {
     primary: {
