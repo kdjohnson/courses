@@ -33,7 +33,7 @@ const styles = theme => ({
     display: "flex",
     flexDirection: "column",
     borderLeftStyle: "solid",
-    borderLeftColor: theme.palette.primary.main,
+    borderLeftColor: theme.palette.secondary.main,
     borderLeftWidth: "0.3em",
     paddingLeft: "1em"
   },
@@ -70,7 +70,7 @@ class ExpandableMeetings extends Component {
     const classes = this.props.classes
     for (let i = 1, total = this.props.meetings.length; i < total; i++) {
       elements.push(
-        <div className={classes.expandedDiv}>
+        <div key={i} className={classes.expandedDiv}>
           {displayLink(
             this.props.meetings[i].buildingRoom,
             this.props.meetings[i].campus
@@ -233,7 +233,6 @@ class ExpandableMeetings extends Component {
           type="body2"
           className={classes.meet}
           tabIndex="0"
-          key={meeting.endDate + Math.random()}
         >
           {meeting.courseType}
         </Typography>
@@ -262,7 +261,6 @@ class ExpandableMeetings extends Component {
         <div className={classes.flexGrow} />
         <Collapse
           in={this.state.expanded}
-          transitionDuration="auto"
           unmountOnExit
         >
           <CardContent>{this.getExpandedMeetings()}</CardContent>
