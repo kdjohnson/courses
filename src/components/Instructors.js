@@ -32,7 +32,7 @@ const styles = theme => ({
   },
 
   dialogTitle: {
-    backgroundColor: theme.palette.primary[400]
+    backgroundColor: theme.palette.primary.light
   },
 
   title: {
@@ -43,6 +43,10 @@ const styles = theme => ({
     fontWeight: "bolder"
   }
 })
+
+function Transition(props) {
+  return <Slide direction="down" {...props} />
+}
 
 class Instructors extends Component {
   state = {
@@ -63,7 +67,7 @@ class Instructors extends Component {
             this.setState({
               open: true
             })}
-          color="accent"
+          color="secondary"
           style={{ fontWeight: "bolder" }}
         >
           {this.props.teachers.length >= 2 && "Instructors"}
@@ -74,8 +78,8 @@ class Instructors extends Component {
           id="instructor-dialog"
           tabIndex="0"
           aria-label="instructor information"
-          onRequestClose={this.handleRequestClose}
-          transition={<Slide direction="down" />}
+          onClose={this.handleRequestClose}
+          transition={Transition}
         >
           <DialogTitle className={classes.dialogTitle} disableTypography={true}>
             <Typography type="title" tabIndex="0" className={classes.title}>
@@ -87,7 +91,7 @@ class Instructors extends Component {
           <DialogActions>
             <Button
               onClick={this.handleRequestClose}
-              color="accent"
+              color="secondary"
               className={classes.close}
             >
               {t("close", {})}

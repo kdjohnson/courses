@@ -27,13 +27,18 @@ const styles = theme => ({
   },
 
   header: {
-    backgroundColor: theme.palette.primary[400]
+    backgroundColor: theme.palette.primary.main
   },
 
   title: {
-    fontWeight: 600
+    fontWeight: 600,
+    color: theme.palette.primary.contrastText
   }
 })
+
+function Transition(props) {
+  return <Slide direction="down" {...props} />
+}
 
 class ConfirmationDialog extends Component {
   state = {
@@ -54,15 +59,17 @@ class ConfirmationDialog extends Component {
   radioGroup = null
 
   handleEntering = () => {
-    this.radioGroup.focus()
+    if (!Object.is(this.radioGroup, null)) {
+      this.radioGroup.focus()
+    }
   }
 
   handleCancel = () => {
-    this.props.onRequestClose(this.props.selectedValue)
+    this.props.onClose(this.props.selectedValue)
   }
 
   handleOk = () => {
-    this.props.onRequestClose(this.state.selectedValue)
+    this.props.onClose(this.state.selectedValue)
   }
 
   handleChange = (event, value) => {
@@ -75,6 +82,7 @@ class ConfirmationDialog extends Component {
       case "firefox":
       case "edge":
       case "safari":
+      case "vivaldi":
         return false
 
       case "ie":
@@ -89,6 +97,7 @@ class ConfirmationDialog extends Component {
     }
   }
 
+
   render() {
     const { selectedValue, t, terms, classes, ...other } = this.props
     return (
@@ -98,10 +107,10 @@ class ConfirmationDialog extends Component {
         aria-label="course description"
         tabIndex="0"
         open={this.props.open}
-        onRequestClose={this.handleClose}
-        transition={<Slide direction="down" />}
-        ignoreBackdropClick
-        ignoreEscapeKeyUp
+        onClose={this.handleClose}
+        transition={Transition}
+        disableBackdropClick
+        disableEscapeKeyDown
         maxWidth="xs"
         fullScreen={Object.is(this.browserCheck(terms), true) ? true : false}
         onEntering={this.handleEntering}
@@ -121,7 +130,7 @@ class ConfirmationDialog extends Component {
         </DialogTitle>
         <DialogContent aria-labelledby="dialogbox">
           <RadioGroup
-            innerRef={node => {
+            ref={node => {
               this.radioGroup = node
             }}
             aria-label="terms"
@@ -144,7 +153,7 @@ class ConfirmationDialog extends Component {
             onClick={this.handleOk}
             aria-label={"Confirm selection"}
             tabIndex="0"
-            color="accent"
+            color="secondary"
           >
             {this.props.t("ok", {})}
           </Button>
@@ -152,7 +161,7 @@ class ConfirmationDialog extends Component {
             onClick={this.handleCancel}
             aria-label="Cancel selection"
             tabIndex="0"
-            color="accent"
+            color="secondary"
           >
             {this.props.t("cancel", {})}
           </Button>
@@ -163,7 +172,7 @@ class ConfirmationDialog extends Component {
 }
 
 ConfirmationDialog.propTypes = {
-  onRequestClose: PropTypes.func,
+  onClose: PropTypes.func,
   selectedValue: PropTypes.string
 }
 
@@ -224,7 +233,7 @@ class TermsDialog extends Component {
           <ConfirmationDialog
             classes={classes}
             open={this.state.open}
-            onRequestClose={this.handleRequestClose}
+            onClose={this.handleRequestClose}
             selectedValue={this.state.selectedValue}
             terms={this.props.terms}
             t={t}

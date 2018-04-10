@@ -28,7 +28,7 @@ const styles = theme => ({
   },
 
   classHeader: {
-    backgroundColor: theme.palette.primary[400]
+    backgroundColor: theme.palette.primary.light
   },
 
   classHeaderSpan: {
@@ -40,12 +40,10 @@ const styles = theme => ({
     paddingTop: 0,
     overflowX: "scroll"
   },
-  tableHeader: {
+  tableCell: {
     color: "rgba(0, 0, 0, 1)",
     fontWeight: 600,
-    fontSize: 14
-  },
-  tableCell: {
+    fontSize: 14,
     width: "33%"
   }
 })
@@ -63,9 +61,10 @@ class Grades extends Component {
 
   getOverallCredits = creditsObj => {
     let rows = []
+    let i = 0
     for (let cr of creditsObj) {
       rows.push(
-        <TableRow>
+        <TableRow key={i++}>
           <TableCell>{cr.level}</TableCell>
           <TableCell>{cr.credits}</TableCell>
           <TableCell>{cr.gpa}</TableCell>

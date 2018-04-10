@@ -35,8 +35,8 @@ const styles = theme => ({
     width: "100%"
   },
   appBar: {
-    backgroundColor: theme.palette.primary[500],
-    color: theme.palette.getContrastText(theme.palette.primary[500])
+    backgroundColor: theme.palette.primary.main,
+    color: theme.palette.primary.contrastText
   },
 
   flex: {

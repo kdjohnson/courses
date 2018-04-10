@@ -7,7 +7,7 @@ import ExpandableMeetings from "./ExpandableMeetings"
 
 const styles = theme => ({
   meet: {
-    color: theme.palette.text.primary
+    color: 'black'
   },
   meetLink: {
     color: "#3344dd",
@@ -17,7 +17,7 @@ const styles = theme => ({
   },
 
   meetNoLink: {
-    color: theme.palette.text.primary,
+    color: 'black',
     lineHeight: 1.42857143,
     fontSize: "14px",
     fontWeight: 400,
@@ -26,7 +26,7 @@ const styles = theme => ({
 
   stuff: {
     borderLeftStyle: "solid",
-    borderLeftColor: theme.palette.secondary[400],
+    borderLeftColor: theme.palette.secondary.main,
     borderLeftWidth: "0.3em",
     paddingLeft: "1em"
   }
