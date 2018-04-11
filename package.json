@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@material-ui/icons": "^1.0.0-beta.42",
     "detect-browser": "^1.9.0",
     "i18next": "^8.4.0",
     "i18next-browser-languagedetector": "^1.0.1",
@@ -12,10 +13,10 @@
     "iterators-polyfill": "^1.0.2",
     "jss": "^9.8.1",
     "material-ui": "next",
-    "material-ui-icons": "^1.0.0-beta.36",
     "react": "16.x",
     "react-dom": "16.x",
     "react-i18next": "^4.1.0",
+    "react-to-print": "^1.0.14",
     "reactjs-calendar": "0.2.14",
     "typeface-arimo": "^0.0.22"
   },

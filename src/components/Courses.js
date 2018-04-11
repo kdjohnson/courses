@@ -1,42 +1,59 @@
 // @flow weak
 
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
-import Card, { CardActions, CardContent } from "material-ui/Card"
-import Instructors from "./Instructors"
-import ExpandableCourse from "./ExpandableCourse"
-import Meetings from "./Meetings"
-import CourseDetails from "./CourseDetails"
-import { getBookButton } from "./BuyBooks"
-import { translate } from "react-i18next"
-import WaitlistCourse from "./WaitlistCourse"
-import CourseHeader from "./CourseHeader"
+import React, { Component } from 'react'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
+import Card, { CardActions, CardContent } from 'material-ui/Card'
+import Instructors from './Instructors'
+import ExpandableCourse from './ExpandableCourse'
+import Meetings from './Meetings'
+import CourseDetails from './CourseDetails'
+import { getBookButton } from './BuyBooks'
+import { translate } from 'react-i18next'
+import WaitlistCourse from './WaitlistCourse'
+import CourseHeader from './CourseHeader'
+import ReactToPrint from 'react-to-print'
+import PrintIcon from '@material-ui/icons/Print'
+import Button from 'material-ui/Button'
 
 const styles = theme => ({
   courseContainer: {
-    flex: "1 1 auto",
-    padding: "1em"
+    flex: '1 1 auto',
+    padding: '1em'
+  },
+
+  buttonsDiv: {
+    display: 'flex',
+    justifyContent: 'start',
+    alignItems: 'center'
+  },
+
+  button: {
+    margin: theme.spacing.unit
+  },
+
+  rightIcon: {
+    marginLeft: theme.spacing.unit
   },
 
   coursesDiv: {
-    display: "flex",
-    flexFlow: "wrap"
+    display: 'flex',
+    flexFlow: 'wrap'
   },
 
   coursesDivMobile: {
-    display: "flex",
-    flexDirection: "column"
+    display: 'flex',
+    flexDirection: 'column'
   },
 
   card: {
-    backgroundColor: "#fafafa"
+    backgroundColor: '#fafafa'
   },
 
   content: {
     paddingTop: 0,
-    display: "flex",
-    justifyContent: "center"
+    display: 'flex',
+    justifyContent: 'center'
   }
 })
 
@@ -52,15 +69,15 @@ class Courses extends Component {
         elements.push(
           <ExpandableCourse
             course={this.props.courses[i]}
-            key={"expandable" + Math.random()}
+            key={'expandable' + Math.random()}
             mobile={this.props.mobile}
           />
         )
-      } else if (!Object.is(this.props.courses[i].waitList, "0")) {
+      } else if (!Object.is(this.props.courses[i].waitList, '0')) {
         elements.push(
           <WaitlistCourse
             course={this.props.courses[i]}
-            key={"waitlist" + Math.random()}
+            key={'waitlist' + Math.random()}
             mobile={this.props.mobile}
           />
         )
@@ -70,7 +87,7 @@ class Courses extends Component {
             className={classes.courseContainer}
             key={this.props.courses[i].crn + i + Math.random()}
           >
-            <div style={{ marginTop: "1em" }}>
+            <div style={{ marginTop: '1em' }}>
               <Card
                 className={classes.card}
                 key={this.props.courses[i].crn + i + Math.random()}
@@ -85,7 +102,7 @@ class Courses extends Component {
                 >
                   <div>
                     <div
-                      style={{ marginTop: "1em" }}
+                      style={{ marginTop: '1em' }}
                       key={this.props.courses[i].crn + i + Math.random()}
                     >
                       <Meetings meetings={this.props.courses[i].meetings} />
@@ -94,7 +111,7 @@ class Courses extends Component {
                 </CardContent>
                 <CardActions
                   key={this.props.courses[i].crn + i + Math.random()}
-                  style={{ justifyContent: "center", flexWrap: "wrap" }}
+                  style={{ justifyContent: 'center', flexWrap: 'wrap' }}
                 >
                   <CourseDetails course={this.props.courses[i]} />
                   <Instructors teachers={this.props.courses[i].instructors} />
@@ -114,12 +131,29 @@ class Courses extends Component {
       return <div />
     } else {
       return (
-        <div>
-          {getBookButton(
-            this.props.books,
-            this.props.currentTermDescription,
-            this.props.mobile
-          )}
+        <div ref={el => (this.componentRef = el)}>
+          <div className={classes.buttonsDiv}>
+            <ReactToPrint
+              trigger={() => (
+                <Button
+                  className={classes.button}
+                  variant="raised"
+                  color="secondary"
+                >
+                  Print
+                  <PrintIcon className={classes.rightIcon} />
+                </Button>
+              )}
+              copyStyles={true}
+              content={() => this.componentRef}
+            />
+            {getBookButton(
+              this.props.books,
+              this.props.currentTermDescription,
+              this.props.mobile,
+              classes.rightIcon
+            )}
+          </div>
           <div
             className={
               this.props.mobile ? classes.coursesDivMobile : classes.coursesDiv
@@ -137,6 +171,6 @@ Courses.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "Courses" })(
-  translate("view", { wait: true })(Courses)
+export default withStyles(styles, { name: 'Courses' })(
+  translate('view', { wait: true })(Courses)
 )

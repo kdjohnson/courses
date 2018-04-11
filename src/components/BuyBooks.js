@@ -1,12 +1,13 @@
-import React from "react"
-import Button from "material-ui/Button"
+import React from 'react'
+import Button from 'material-ui/Button'
+import BookIcon from '@material-ui/icons/ImportContacts'
 
 const mobileStyle = {
-  display: "flex",
-  justifyContent: "center"
+  display: 'flex',
+  justifyContent: 'center'
 }
 
-export const getBookButton = (books, term, mobile) => {
+export const getBookButton = (books, term, mobile, rightIconStyle) => {
   return (
     <div style={mobile ? mobileStyle : null}>
       <Button
@@ -16,7 +17,8 @@ export const getBookButton = (books, term, mobile) => {
         tabIndex="0"
         onClick={handleBuyBooks}
       >
-        View books for {term}
+        Buy Books
+        <BookIcon className={rightIconStyle} />
       </Button>
       <form
         name="BNForm"
@@ -42,5 +44,5 @@ export const getBookButton = (books, term, mobile) => {
 }
 
 const handleBuyBooks = () => {
-  document.getElementById("courses-portlet-react-form-submit").click()
+  document.getElementById('courses-portlet-react-form-submit').click()
 }
