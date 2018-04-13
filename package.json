@@ -17,7 +17,7 @@
     "react-dom": "16.x",
     "react-i18next": "^4.1.0",
     "react-to-print": "^1.0.14",
-    "reactjs-calendar": "0.2.14",
+    "reactjs-calendar": "0.2.15",
     "typeface-arimo": "^0.0.22"
   },
   "devDependencies": {

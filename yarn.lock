@@ -4863,7 +4863,7 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-material-ui-icons@^1.0.0-alpha.3:
+material-ui-icons@^1.0.0-beta.36:
   version "1.0.0-beta.36"
   resolved "https://registry.yarnpkg.com/material-ui-icons/-/material-ui-icons-1.0.0-beta.36.tgz#86390a61f4c83f718eaba77ccce575834f2cf2a8"
   dependencies:
@@ -6411,9 +6411,9 @@ react@16.x, react@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-reactjs-calendar@0.2.14:
-  version "0.2.14"
-  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.2.14.tgz#1288fbc51c065aeca9554d91d8cf807ab5c3cb47"
+reactjs-calendar@@beta:
+  version "0.2.15"
+  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.2.15.tgz#155f78eb79e55bf12ef342475bd7e33b5f7f3a3b"
   dependencies:
     version "^0.1.2"
     all "^0.0.0"
@@ -6424,7 +6424,7 @@ reactjs-calendar@0.2.14:
     i18next-fetch-backend "^0.0.1"
     i18next-localstorage-cache "^1.1.1"
     material-ui next
-    material-ui-icons "^1.0.0-alpha.3"
+    material-ui-icons "^1.0.0-beta.36"
     package.json "^2.0.1"
     raleway-webfont "^3.0.1"
     react-a11y "^0.3.3"
