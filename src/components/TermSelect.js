@@ -7,7 +7,7 @@ import { withStyles } from 'material-ui/styles'
 import { MenuItem } from 'material-ui/Menu'
 import { FormControl } from 'material-ui/Form'
 import Select from 'material-ui/Select'
-import Input, { InputLabel } from 'material-ui/Input'
+import Input from 'material-ui/Input'
 
 const styles = theme => ({
   text: {
