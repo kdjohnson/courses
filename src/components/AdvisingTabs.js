@@ -13,7 +13,7 @@ import AppBar from "material-ui/AppBar"
 import Toolbar from "material-ui/Toolbar"
 import Assignment from "material-ui-icons/Assignment"
 import Event from "material-ui-icons/Event"
-import TermsDialog from "./TermsDialog"
+import TermSelect from "./TermSelect"
 import AdvisingGrades from "./AdvisingGrades"
 
 const TabContainer = props =>
@@ -97,7 +97,7 @@ class AdvisingTabs extends Component {
                 <Tab label={t("calendar", {})} tabIndex="0" />
                 <Tab label={t("grades", {})} tabIndex="0" />
               </Tabs>}
-            <TermsDialog
+            <TermSelect
               terms={this.props.terms}
               currentTermDescription={this.props.currentTermDescription}
               currentTermCode={this.props.currentTermCode}

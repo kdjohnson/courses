@@ -12,7 +12,7 @@ import Calendar from "reactjs-calendar"
 import { translate } from "react-i18next"
 import AppBar from "material-ui/AppBar"
 import Toolbar from "material-ui/Toolbar"
-import TermsDialog from "./TermsDialog"
+import TermSelect from "./TermSelect"
 import Assignment from "material-ui-icons/Assignment"
 import Event from "material-ui-icons/Event"
 import Spellcheck from "material-ui-icons/Spellcheck"
@@ -124,7 +124,7 @@ class CoursesTabs extends Component {
                 <Tab label={t("calendar", {})} tabIndex="0" />
                 <Tab label={t("grades", {})} tabIndex="0" />
               </Tabs>}
-            <TermsDialog
+            <TermSelect
               terms={this.props.terms}
               currentTermDescription={this.props.currentTermDescription}
               currentTermCode={this.props.currentTermCode}
