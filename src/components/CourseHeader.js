@@ -51,9 +51,8 @@ const styles = theme => ({
 
 class CourseHeader extends Component {
   getHeader() {
-    const classes = this.props.classes
-    const { t } = this.props
-    if (Object.is(this.props.course.waitList, "0")) {
+    const { classes, course, t } = this.props
+    if (Object.is(course.waitList, "0")) {
       return (
         <CardHeader
           className={classes.classHeader}
@@ -63,22 +62,22 @@ class CourseHeader extends Component {
               tabIndex="0"
               className={classes.courseTitle}
             >
-              {this.props.course.courseTitle}
+              {course.courseTitle}
             </Typography>
           }
           subheader={
             <div className={classes.classHeaderSpanDiv}>
               <span tabIndex="0" className={classes.courseInfo}>
-                {this.props.course.subjectCode +
+                {course.subjectCode +
                   "-" +
-                  this.props.course.subjectNumber +
+                  course.subjectNumber +
                   "-" +
-                  this.props.course.section +
+                  course.section +
                   "-" +
-                  this.props.course.crn}
+                  course.crn}
               </span>
               <span tabIndex="0" className={classes.courseInfo}>
-                {t("credits", {}) + ": " + this.props.course.credit}
+                {t("credits", {}) + ": " + course.credit}
               </span>
             </div>
           }
@@ -90,27 +89,27 @@ class CourseHeader extends Component {
           className={classes.classHeaderWaitList}
           title={
             <Typography tabIndex="0" className={classes.courseTitle}>
-              {this.props.course.courseTitle}
+              {course.courseTitle}
             </Typography>
           }
-          key={this.props.course.crn + 0 + 3}
+          key={course.crn + 0 + 3}
           subheader={
             <div className={classes.classHeaderSpanDiv}>
               <span tabIndex="0" className={classes.courseInfo}>
-                {this.props.course.subjectCode +
+                {course.subjectCode +
                   "-" +
-                  this.props.course.subjectNumber +
+                  course.subjectNumber +
                   "-" +
-                  this.props.course.section +
+                  course.section +
                   "-" +
-                  this.props.course.crn}
+                  course.crn}
               </span>
               <div className={classes.subHeaderDiv}>
                 <span tabIndex="0" className={classes.courseInfo}>
-                  {t("credits", {}) + ": " + this.props.course.credit}
+                  {t("credits", {}) + ": " + course.credit}
                 </span>
                 <span tabIndex="0" className={classes.courseInfo}>
-                  {t("waitlist", {}) + ": " + this.props.course.waitList}
+                  {t("waitlist", {}) + ": " + course.waitList}
                 </span>
               </div>
             </div>

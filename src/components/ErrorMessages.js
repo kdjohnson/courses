@@ -39,7 +39,7 @@ const styles = theme => ({
 
 class ErrorMessages extends Component {
   render() {
-    const classes = this.props.classes
+    const { classes } = this.props
     return (
       <div className={classes.root}>
         <Card className={classes.card}>

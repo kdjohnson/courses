@@ -66,33 +66,33 @@ const styles = theme => ({
 
 class WaitlistCourse extends Component {
   render() {
-    const classes = this.props.classes
+    const { classes, course, mobile } = this.props
     return (
-      <div className={this.props.mobile ? classes.courseContainer : null}>
+      <div className={mobile ? classes.courseContainer : null}>
         <div style={{ marginTop: "1em" }}>
           <Card
-            className={this.props.mobile ? classes.cardMobile : classes.card}
+            className={mobile ? classes.cardMobile : classes.card}
           >
             <CourseHeader
-              mobile={this.props.mobile}
-              course={this.props.course}
+              mobile={mobile}
+              course={course}
             />
             <CardContent
               className={
-                this.props.mobile ? classes.contentMobile : classes.content
+                mobile ? classes.contentMobile : classes.content
               }
             >
-              <div className={this.props.mobile ? classes.infoContainer : null}>
+              <div className={mobile ? classes.infoContainer : null}>
                 <div style={{ marginTop: "1em" }}>
-                  <Meetings meetings={this.props.course.meetings} />
+                  <Meetings meetings={course.meetings} />
                 </div>
                 <div style={{ marginTop: "1em" }}>
-                  <Instructors teachers={this.props.course.instructors} />
+                  <Instructors teachers={course.instructors} />
                 </div>
               </div>
             </CardContent>
-            <CardActions className={this.props.mobile ? classes.actions : null}>
-              <CourseDetails course={this.props.course} />
+            <CardActions className={mobile ? classes.actions : null}>
+              <CourseDetails course={course} />
             </CardActions>
           </Card>
         </div>

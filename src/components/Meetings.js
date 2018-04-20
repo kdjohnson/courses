@@ -34,10 +34,10 @@ const styles = theme => ({
 
 class Meetings extends Component {
   getMeetings = () => {
-    const classes = this.props.classes
-    if (Object.is(this.props.meetings, null)) {
+    const { classes, meetings } = this.props
+    if (Object.is(meetings, null)) {
       return <div key={"emptyDiv" + Math.random()} />
-    } else if (this.props.meetings.length === 0) {
+    } else if (meetings.length === 0) {
       return (
         <div>
           <Typography type="body2" className={classes.meetNoLink} tabIndex="0">
@@ -58,83 +58,83 @@ class Meetings extends Component {
         </div>
       )
     } else {
-      if (this.props.meetings.length >= 2) {
-        return <ExpandableMeetings meetings={this.props.meetings} />
+      if (meetings.length >= 2) {
+        return <ExpandableMeetings meetings={meetings} />
       } else {
         return (
           <div className={classes.stuff}>
             {displayLink(
-              this.props.meetings[0].buildingRoom,
-              this.props.meetings[0].campus
+              meetings[0].buildingRoom,
+              meetings[0].campus
             ) && (
               <a
                 className={classes.meetLink}
                 tabIndex="0"
                 target="_blank"
-                href={getMapUrl(this.props.meetings[0].buildingRoom, false)}
+                href={getMapUrl(meetings[0].buildingRoom, false)}
                 rel="noopener noreferrer"
               >
-                {this.props.meetings[0].buildingRoom +
+                {meetings[0].buildingRoom +
                   " [" +
-                  this.props.meetings[0].campus +
+                  meetings[0].campus +
                   "]"}
               </a>
             )}
             {!displayLink(
-              this.props.meetings[0].buildingRoom,
-              this.props.meetings[0].campus
+              meetings[0].buildingRoom,
+              meetings[0].campus
             ) && (
               <Typography
                 type="body2"
                 className={classes.meetNoLink}
                 tabIndex="0"
               >
-                {this.props.meetings[0].buildingRoom +
+                {meetings[0].buildingRoom +
                   " [" +
-                  this.props.meetings[0].campus +
+                  meetings[0].campus +
                   "]"}
               </Typography>
             )}
             <Typography type="body2" className={classes.meet} tabIndex="0">
-              {`${this.props.meetings[0].meetDays} `}
+              {`${meetings[0].meetDays} `}
             </Typography>
             <Typography type="body2" className={classes.meet} tabIndex="0">
-              {this.props.meetings[0].startTime +
+              {meetings[0].startTime +
                 " - " +
-                this.props.meetings[0].endTime}
+                meetings[0].endTime}
             </Typography>
             <Typography
               type="body2"
               className={classes.meet}
               tabIndex="0"
               aria-label={
-                this.props.meetings[0].startMonth +
+                meetings[0].startMonth +
                 "-" +
-                this.props.meetings[0].startDay +
+                meetings[0].startDay +
                 "-" +
-                this.props.meetings[0].startYear +
+                meetings[0].startYear +
                 " to " +
-                this.props.meetings[0].endMonth +
+                meetings[0].endMonth +
                 "-" +
-                this.props.meetings[0].endDay +
+                meetings[0].endDay +
                 "-" +
-                this.props.meetings[0].endYear
+                meetings[0].endYear
               }
             >
-              {this.props.meetings[0].startMonth +
+              {meetings[0].startMonth +
                 "/" +
-                this.props.meetings[0].startDay +
+                meetings[0].startDay +
                 "/" +
-                this.props.meetings[0].startYear +
+                meetings[0].startYear +
                 " - " +
-                this.props.meetings[0].endMonth +
+                meetings[0].endMonth +
                 "/" +
-                this.props.meetings[0].endDay +
+                meetings[0].endDay +
                 "/" +
-                this.props.meetings[0].endYear}
+                meetings[0].endYear}
             </Typography>
             <Typography type="body2" className={classes.meet} tabIndex="0">
-              {this.props.meetings[0].courseType}
+              {meetings[0].courseType}
             </Typography>
           </div>
         )

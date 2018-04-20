@@ -1,25 +1,22 @@
-import React, { Component } from "react"
-import CoursesTabs from "./components/CoursesTabs"
-import AdvisingTabs from "./components/AdvisingTabs"
-import ErrorMessages from "./components/ErrorMessages"
-import { getTerms, getCourses } from "./api/api"
-import { withStyles } from "material-ui/styles"
-import { CircularProgress } from "material-ui/Progress"
-import "iterators-polyfill" // This is for supporting IE 😢
-
-const termsURL = "http://localhost:8082/api/terms"
-const coursesURL = "http://localhost:8082/api/courses"
+import React, { Component } from 'react'
+import CoursesTabs from './components/CoursesTabs'
+import AdvisingTabs from './components/AdvisingTabs'
+import ErrorMessages from './components/ErrorMessages'
+import { withStyles } from 'material-ui/styles'
+import { CircularProgress } from 'material-ui/Progress'
+import 'iterators-polyfill' // This is for supporting IE 😢
+import { connect } from 'react-redux'
+import { fetch_terms } from './actions/termsActions'
+import { fetch_advising } from './actions/advisingActions'
 
 const calendarObj = {
-  url: "http://localhost:8082/api/calendar",
+  url: 'http://localhost:8082/api/calendar',
   credentialsNeeded: false
 }
 
-const gpaAndCreditsURL = "http://localhost:8082/api/credits"
-
 const styles = theme => ({
   root: {
-    position: "relative"
+    position: 'relative'
   },
 
   progress: {
@@ -27,24 +24,15 @@ const styles = theme => ({
   },
 
   loading: {
-    display: "flex",
-    justifyContent: "center"
+    display: 'flex',
+    justifyContent: 'center'
   }
 })
 
 class App extends Component {
   state = {
-    terms: null,
-    currentTermBounds: [],
-    currrentTerm: null,
-    courses: null,
     width: document.getElementById(this.props.rootElement).clientWidth,
     mobile: false,
-    calendarObj: calendarObj,
-    advising: false,
-    books: null,
-    error: false,
-    loading: true
   }
 
   updateWidth = () => {
@@ -59,61 +47,32 @@ class App extends Component {
   }
 
   componentDidMount() {
-    window.addEventListener("resize", this.updateWidth)
+    // eslint-disable-next-line
+    this.props.fetch_advising
+
+    // eslint-disable-next-line
+    this.props.fetch_terms
+
+    window.addEventListener('resize', this.updateWidth)
     if (document.getElementById(this.props.rootElement).clientWidth < 650) {
       this.setState({ mobile: true })
     }
-
-    getTerms(termsURL)
-      .then(terms => {
-        if (!(terms instanceof Error)) {
-          for (let i = 0, total = terms.length; i < total; i++) {
-            if (Object.is(terms[i].current, "true")) {
-              this.setState({
-                currentTerm: terms[i],
-                currentTermBounds: [
-                  parseInt(terms[i].start, 10),
-                  parseInt(terms[i].end, 10)
-                ],
-                calendarObj: Object.assign(calendarObj, terms[i])
-              })
-            }
-          }
-          this.setState({ terms, loading: false })
-        } else {
-          this.setState({ error: true, loading: false })
-        }
-      })
-      .then(() => {
-        getCourses(this.state.currentTerm, coursesURL).then(courses => {
-          if (!(courses instanceof Error)) {
-            this.setState({ courses: courses.courses, books: courses.bookXML })
-          } else {
-            this.setState({ error: true })
-          }
-        })
-      })
-  }
-
-  updateTerm = currentTerm => {
-    const termBounds = [
-      parseInt(currentTerm.start, 10),
-      parseInt(currentTerm.end, 10)
-    ]
-    getCourses(currentTerm, coursesURL).then(courses => {
-      this.setState({
-        courses: courses.courses,
-        currentTermBounds: termBounds,
-        books: courses.bookXML,
-        calendarObj: Object.assign(this.state.calendarObj, currentTerm),
-        currentTerm
-      })
-    })
   }
 
   getView = () => {
-    const classes = this.props.classes
-    if (Object.is(this.state.loading, true)) {
+    const {
+      advising,
+      advisingError,
+      classes,
+      rootElement,
+      terms_fetched,
+      terms_fetching,
+      termsError
+    } = this.props
+
+    const { mobile } = this.state
+
+    if (terms_fetching === true) {
       return (
         <div className={classes.loading}>
           <CircularProgress
@@ -123,75 +82,28 @@ class App extends Component {
           />
         </div>
       )
-    } else if (
-      Object.is(this.state.error, true) ||
-      Object.is(this.state.terms, null) ||
-      Object.is(this.state.currentTerm, null) ||
-      Object.is(this.state.currentTerm, undefined)
-    ) {
+    } else if (termsError === true || advisingError === true) {
       return (
         <div className={classes.loading}>
           <ErrorMessages />
         </div>
       )
-    } else if (!Object.is(this.state.courses, null) && !this.state.advising) {
+    } else if (advising === false && terms_fetched === true) {
       return (
         <div>
           <CoursesTabs
-            courses={this.state.courses}
-            mobile={this.state.mobile}
-            rootElement={this.props.rootElement}
-            calendarURL={this.state.calendarObj}
-            termBounds={this.state.currentTermBounds}
-            gradesURL={gpaAndCreditsURL}
-            terms={this.state.terms}
-            currentTermDescription={this.state.currentTerm.description}
-            currentTermCode={this.state.currentTerm.code}
-            updateTerm={this.updateTerm}
-            currentTerm={this.state.currentTerm}
-            books={this.state.books}
+            mobile={mobile}
+            rootElement={rootElement}
+            calendarURL={calendarObj}
           />
         </div>
       )
-    } else {
-      if (!this.state.advising) {
-        return (
-          <div>
-            <CoursesTabs
-              courses={this.state.courses}
-              mobile={this.state.mobile}
-              gradesURL={gpaAndCreditsURL}
-              calendarURL={this.state.calendarObj}
-              rootElement={this.props.rootElement}
-              termBounds={this.state.currentTermBounds}
-              terms={this.state.terms}
-              currentTermDescription={this.state.currentTerm.description}
-              currentTermCode={this.state.currentTerm.code}
-              currentTerm={this.state.currentTerm}
-              updateTerm={this.updateTerm}
-              books={this.state.books}
-            />
-          </div>
-        )
-      } else {
-        return (
-          <div>
-            <AdvisingTabs
-              courses={this.state.courses}
-              mobile={this.state.mobile}
-              gradesURL={gpaAndCreditsURL}
-              calendarURL={this.state.calendarObj}
-              rootElement={this.props.rootElement}
-              termBounds={this.state.currentTermBounds}
-              terms={this.state.terms}
-              currentTermDescription={this.state.currentTerm.description}
-              currentTermCode={this.state.currentTerm.code}
-              updateTerm={this.updateTerm}
-              currentTerm={this.state.currentTerm}
-            />
-          </div>
-        )
-      }
+    } else if (advising === true && terms_fetched === true) {
+      return (
+        <div>
+          <AdvisingTabs mobile={mobile} rootElement={rootElement} calendarURL={calendarObj}/>
+        </div>
+      )
     }
   }
 
@@ -201,4 +113,20 @@ class App extends Component {
   }
 }
 
-export default withStyles(styles, { name: "CourseContainer" })(App)
+const mapStateToProps = state => ({
+  advising: state.advising.advising,
+  term_bounds: state.terms.term_bounds,
+  terms_fetched: state.terms.fetched,
+  terms_fetching: state.terms.fetching
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetch_advising: dispatch(fetch_advising()),
+    fetch_terms: dispatch(fetch_terms())
+  }
+}
+
+export default withStyles(styles, { name: 'CourseContainer' })(
+  connect(mapStateToProps, mapDispatchToProps)(App)
+)

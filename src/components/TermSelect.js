@@ -8,6 +8,9 @@ import { MenuItem } from 'material-ui/Menu'
 import { FormControl } from 'material-ui/Form'
 import Select from 'material-ui/Select'
 import Input from 'material-ui/Input'
+import { connect } from 'react-redux'
+import { fetch_courses } from './../actions/coursesActions'
+import { set_current_term } from './../actions/termsActions'
 
 const styles = theme => ({
   text: {
@@ -73,16 +76,17 @@ const styles = theme => ({
 })
 
 class TermSelect extends Component {
-  componentDidMount() {
-    this.setState({
-      selected: this.props.currentTermDescription,
-      selectedValue: this.props.currentTermCode
-    })
-  }
   state = {
-    selected: this.props.currentTermDescription,
-    selectedValue: this.props.currentTermCode,
+    selected: '',
+    selectedValue: '',
     open: false
+  }
+  componentDidMount() {
+    const { current_term } = this.props
+    this.setState({
+      selected: current_term.description,
+      selectedValue: current_term.code
+    })
   }
 
   getTerms = () => {
@@ -98,8 +102,9 @@ class TermSelect extends Component {
   }
 
   handleChange = event => {
+    const { terms } = this.props
     let new_term = null
-    for (const term of this.props.terms) {
+    for (const term of terms) {
       if (Object.is(term.code, event.target.value)) {
         new_term = term
         this.setState({
@@ -110,13 +115,15 @@ class TermSelect extends Component {
         new_term = term
       }
     }
-    this.props.updateTerm(new_term)
+
+    this.props.set_current_term(new_term)
+    this.props.fetch_courses(new_term)
   }
 
   render() {
-    const classes = this.props.classes
+    const { classes, terms } = this.props
     const { selectedValue } = this.state
-    if (Object.is(this.props.terms, null)) {
+    if (Object.is(terms, null)) {
       return <div />
     } else {
       return (
@@ -129,8 +136,7 @@ class TermSelect extends Component {
                 autoWidth={true}
                 classes={{
                   select: classes.select,
-                  icon: classes.selectIcon,
-                  underline: classes.selectUnderline
+                  icon: classes.selectIcon
                 }}
                 input={
                   <Input
@@ -157,6 +163,20 @@ TermSelect.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
+const mapStateToProps = state => ({
+  current_term: state.terms.current_term,
+  terms: state.terms.terms
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetch_courses: new_term => dispatch(fetch_courses(new_term)),
+    set_current_term: new_term => dispatch(set_current_term(new_term))
+  }
+}
+
 export default withStyles(styles, { name: 'TermSelect' })(
-  translate('view', { wait: true })(TermSelect)
+  translate('view', { wait: true })(
+    connect(mapStateToProps, mapDispatchToProps)(TermSelect)
+  )
 )

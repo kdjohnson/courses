@@ -26,25 +26,25 @@ const styles = theme => ({
 
 class ExpandableCourse extends Component {
   render() {
-    const classes = this.props.classes
+    const { classes, course, mobile } = this.props
     return (
       <div className={classes.courseContainer}>
         <div style={{ marginTop: "1em" }}>
           <Card className={classes.card}>
             <CourseHeader
-              mobile={this.props.mobile}
-              course={this.props.course}
+              mobile={mobile}
+              course={course}
             />
             <CardContent className={classes.content}>
               <div>
                 <div style={{ marginTop: "1em" }}>
-                  <Meetings meetings={this.props.course.meetings} />
+                  <Meetings meetings={course.meetings} />
                 </div>
               </div>
             </CardContent>
             <CardActions style={{ justifyContent: "center", flexWrap: "wrap" }}>
-              <CourseDetails course={this.props.course} />
-              <Instructors teachers={this.props.course.instructors} />
+              <CourseDetails course={course} />
+              <Instructors teachers={course.instructors} />
             </CardActions>
           </Card>
         </div>

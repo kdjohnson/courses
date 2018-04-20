@@ -58,8 +58,7 @@ class Instructors extends Component {
   }
 
   getInstructors() {
-    const classes = this.props.classes
-    const { t } = this.props
+    const { classes, t, teachers } = this.props
     return (
       <div>
         <Button
@@ -70,8 +69,8 @@ class Instructors extends Component {
           color="secondary"
           style={{ fontWeight: "bolder" }}
         >
-          {this.props.teachers.length >= 2 && "Instructors"}
-          {this.props.teachers.length < 2 && "Instructor"}
+          {teachers.length >= 2 && "Instructors"}
+          {teachers.length < 2 && "Instructor"}
         </Button>
         <Dialog
           open={this.state.open}
@@ -83,8 +82,8 @@ class Instructors extends Component {
         >
           <DialogTitle className={classes.dialogTitle} disableTypography={true}>
             <Typography type="title" tabIndex="0" className={classes.title}>
-              {this.props.teachers.length >= 2 && "Instructors Information"}
-              {this.props.teachers.length < 2 && "Instructor Information"}
+              {teachers.length >= 2 && "Instructors Information"}
+              {teachers.length < 2 && "Instructor Information"}
             </Typography>
           </DialogTitle>
           <DialogContent>{this.getList()}</DialogContent>
@@ -103,12 +102,12 @@ class Instructors extends Component {
   }
 
   getList = () => {
-    const classes = this.props.classes
+    const { classes, teachers } = this.props
     let list = []
-    for (let i = 0, total = this.props.teachers.length; i < total; i++) {
+    for (let i = 0, total = teachers.length; i < total; i++) {
       if (
-        Object.is(this.props.teachers, null) ||
-        Object.is(this.props.teachers[0], undefined)
+        Object.is(teachers, null) ||
+        Object.is(teachers[0], undefined)
       ) {
         return (
           <List
@@ -137,12 +136,12 @@ class Instructors extends Component {
           <List
             subheader={
               <ListSubheader tabIndex="0" className={classes.instructor}>
-                {this.props.teachers[i].firstName +
+                {teachers[i].firstName +
                   "  " +
-                  this.props.teachers[i].lastName}
+                  teachers[i].lastName}
               </ListSubheader>
             }
-            key={this.props.teachers[i].email}
+            key={teachers[i].email}
           >
             <ListItem>
               <ListItemIcon>
@@ -150,13 +149,13 @@ class Instructors extends Component {
               </ListItemIcon>
               <ListItemText
                 secondary={
-                  (!Object.is(this.props.teachers[i].email, "N/A") && (
+                  (!Object.is(teachers[i].email, "N/A") && (
                     <a
-                      href={"mailto:" + this.props.teachers[i].email}
+                      href={"mailto:" + teachers[i].email}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
-                      {this.props.teachers[i].email}
+                      {teachers[i].email}
                     </a>
                   )) ||
                   "N/A"
@@ -169,13 +168,13 @@ class Instructors extends Component {
               </ListItemIcon>
               <ListItemText
                 secondary={
-                  (!Object.is(this.props.teachers.office, "N/A") && (
+                  (!Object.is(teachers.office, "N/A") && (
                     <a
-                      href={getMapUrl(this.props.teachers[i].office, true)}
+                      href={getMapUrl(teachers[i].office, true)}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
-                      {this.props.teachers[i].office}
+                      {teachers[i].office}
                     </a>
                   )) ||
                   "N/A"

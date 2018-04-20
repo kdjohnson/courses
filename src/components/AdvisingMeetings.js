@@ -19,7 +19,7 @@ const styles = theme => ({
 
 class AdvisingMeetings extends Component {
   render() {
-    const classes = this.props.classes
+    const { classes, meetings } = this.props
     return (
       <Paper className={classes.paper}>
         <Table>
@@ -33,10 +33,10 @@ class AdvisingMeetings extends Component {
             </TableRow>
           </TableHead>
           <TableBody>
-            {this.props.meetings.map(meet => {
+            {meetings.map(meet => {
               return (
                 <TableRow key={meet.crn + Math.random()}>
-                  <TableCell compact>
+                  <TableCell>
                     {meet.courseType}
                   </TableCell>
                   <TableCell numeric>

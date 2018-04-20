@@ -10,14 +10,15 @@ class RegistrationTypes extends Component {
   }
 
   getSwitches() {
+    const { regs } = this.props
     let switches = []
-    Object.entries(this.props.regs).forEach(([type, value]) => {
+    Object.entries(regs).forEach(([type, value]) => {
       switches.push(
         <FormControlLabel
           key={type}
           control={
             <Switch
-              checked={this.props.regs[type]}
+              checked={regs[type]}
               onChange={(event, checked, key) =>
                 this.handleChange(event, checked, type)}
             />

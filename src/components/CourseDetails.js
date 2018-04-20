@@ -58,18 +58,17 @@ class CourseDetails extends Component {
   }
 
   render() {
-    const classes = this.props.classes
-    const { t } = this.props
-    if (Object.is(this.props.courses, null)) {
+    const { classes, course, courses, t } = this.props
+    if (Object.is(courses, null)) {
       return <div />
     } else {
       return (
-        <div aria-labelledby={"openbutton" + this.props.course.crn}>
+        <div aria-labelledby={"openbutton" + course.crn}>
           <Button
             className={classes.button}
             color="secondary"
             onClick={this.handleOpen}
-            id={"openbutton" + this.props.course.crn}
+            id={"openbutton" + course.crn}
             aria-label="course description"
           >
             {t("description", {})}
@@ -86,7 +85,7 @@ class CourseDetails extends Component {
           >
             <DialogTitle
               className={
-                Object.is(this.props.course.waitList, "0") ? (
+                Object.is(course.waitList, "0") ? (
                   classes.dialogHeader
                 ) : (
                   classes.dialogHeaderWaitList
@@ -95,7 +94,7 @@ class CourseDetails extends Component {
               disableTypography={true}
             >
               <Typography type="title" tabIndex="0" className={classes.title}>
-                {this.props.course.courseTitle}
+                {course.courseTitle}
               </Typography>
             </DialogTitle>
             <DialogContent
@@ -104,7 +103,7 @@ class CourseDetails extends Component {
             >
               <List>
                 <ListItem tabIndex="0">
-                  <ListItemText primary={this.props.course.courseDescription} />
+                  <ListItemText primary={course.courseDescription} />
                 </ListItem>
               </List>
 
