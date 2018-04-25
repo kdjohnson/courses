@@ -10,7 +10,8 @@ import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   courseContainer: {
-    width: '100%'
+    flex: '1 1 auto',
+    padding: '1em'
   },
 
   coursesDiv: {
@@ -32,11 +33,6 @@ const styles = theme => ({
   },
 
   card: {
-    width: 345,
-    backgroundColor: '#fafafa'
-  },
-
-  cardMobile: {
     backgroundColor: '#fafafa'
   },
 
@@ -50,7 +46,9 @@ const styles = theme => ({
   },
 
   content: {
-    paddingTop: 0
+    paddingTop: 0,
+    display: 'flex',
+    justifyContent: 'center'
   },
 
   contentMobile: {
@@ -69,24 +67,20 @@ class WaitlistCourse extends Component {
   render() {
     const { classes, course, mobile } = this.props
     return (
-      <div className={mobile ? classes.courseContainer : null}>
+      <div className={classes.courseContainer}>
         <div style={{ marginTop: '1em' }}>
-          <Card className={mobile ? classes.cardMobile : classes.card}>
+          <Card className={classes.card}>
             <CourseHeader mobile={mobile} course={course} />
-            <CardContent
-              className={mobile ? classes.contentMobile : classes.content}
-            >
-              <div className={mobile ? classes.infoContainer : null}>
+            <CardContent className={classes.content}>
+              <div>
                 <div style={{ marginTop: '1em' }}>
                   <Meetings meetings={course.meetings} />
                 </div>
-                <div style={{ marginTop: '1em' }}>
-                  <Instructors teachers={course.instructors} />
-                </div>
               </div>
             </CardContent>
-            <CardActions className={mobile ? classes.actions : null}>
+            <CardActions style={{ justifyContent: 'center', flexWrap: 'wrap' }}>
               <CourseDetails course={course} />
+              <Instructors teachers={course.instructors} />
             </CardActions>
           </Card>
         </div>
