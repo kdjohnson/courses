@@ -1,3 +1,4 @@
+import Card, { CardContent, CardHeader } from 'material-ui/Card'
 import React, { Component } from 'react'
 import Table, {
   TableBody,
@@ -5,13 +6,13 @@ import Table, {
   TableHead,
   TableRow
 } from 'material-ui/Table'
-import { withStyles } from 'material-ui/styles'
-import Card, { CardHeader, CardContent } from 'material-ui/Card'
-import Typography from 'material-ui/Typography'
+
 import PropTypes from 'prop-types'
-import { translate } from 'react-i18next'
+import Typography from 'material-ui/Typography'
 import { connect } from 'react-redux'
 import { fetch_credits } from './../actions/creditsActions'
+import { translate } from 'react-i18next'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   cardDiv: {

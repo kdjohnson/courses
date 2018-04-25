@@ -1,12 +1,14 @@
+import Card, { CardContent, CardHeader } from 'material-ui/Card'
 import React, { Component } from 'react'
-import Typography from 'material-ui/Typography'
-import Card, { CardHeader, CardContent } from 'material-ui/Card'
-import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
-import AdvisingMeetings from './AdvisingMeetings'
-import AdvisingInstructors from './AdvisingInstructors'
+
 import AdvisingGrade from './AdvisingGrade'
+import AdvisingInstructors from './AdvisingInstructors'
+import AdvisingMeetings from './AdvisingMeetings'
+import PropTypes from 'prop-types'
+import Typography from 'material-ui/Typography'
 import { connect } from 'react-redux'
+import { withStyles } from 'material-ui/styles'
+
 const styles = theme => ({
   header: {
     backgroundColor: theme.palette.primary.main

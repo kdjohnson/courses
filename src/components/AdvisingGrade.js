@@ -1,9 +1,10 @@
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
 import List, { ListItem, ListItemText } from 'material-ui/List'
-import { translate } from 'react-i18next'
+import React, { Component } from 'react'
+
+import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
+import { translate } from 'react-i18next'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   item: {

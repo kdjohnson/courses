@@ -2,21 +2,22 @@
 /* eslint-disable react/no-multi-comp */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
-import Paper from 'material-ui/Paper'
 import Tabs, { Tab } from 'material-ui/Tabs'
-import Courses from './Courses'
-import Grades from './Grades'
-import Calendar from 'reactjs-calendar'
-import { translate } from 'react-i18next'
+
 import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
-import TermSelect from './TermSelect'
 import Assignment from 'material-ui-icons/Assignment'
+import Calendar from 'reactjs-calendar'
+import Courses from './Courses'
 import Event from 'material-ui-icons/Event'
+import Grades from './Grades'
+import Paper from 'material-ui/Paper'
+import PropTypes from 'prop-types'
 import Spellcheck from 'material-ui-icons/Spellcheck'
+import TermSelect from './TermSelect'
+import Toolbar from 'material-ui/Toolbar'
 import { connect } from 'react-redux'
+import { translate } from 'react-i18next'
+import { withStyles } from 'material-ui/styles'
 
 const TabContainer = props => (
   <div style={{ padding: 20 }}>{props.children}</div>
@@ -42,7 +43,7 @@ const styles = theme => ({
     width: '100%'
   },
   appBar: {
-    backgroundColor: theme.palette.primary[500],
+    backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText
   },
 
@@ -174,7 +175,7 @@ CoursesTabs.propTypes = {
 const mapStateToProps = state => ({
   current_term: state.terms.current_term,
   terms_fetched: state.terms.fetched,
-  term_bounds: state.terms.term_bounds,
+  term_bounds: state.terms.term_bounds
 })
 
 export default withStyles(styles, { name: 'CourseTabs' })(

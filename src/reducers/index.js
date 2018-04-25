@@ -1,9 +1,8 @@
-import { combineReducers } from 'redux'
-
-import courses from './coursesReducer'
-import terms from './termsReducer'
 import advising from './advisingReducer'
+import { combineReducers } from 'redux'
+import courses from './coursesReducer'
 import credits from './creditsReducer'
+import terms from './termsReducer'
 
 export default combineReducers({
   terms,

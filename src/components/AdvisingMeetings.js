@@ -1,19 +1,20 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
+import React, { Component } from 'react'
 import Table, {
   TableBody,
   TableCell,
   TableHead,
   TableRow
-} from "material-ui/Table"
-import Paper from "material-ui/Paper"
+} from 'material-ui/Table'
+
+import Paper from 'material-ui/Paper'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   paper: {
-    width: "100%",
+    width: '100%',
     marginTop: theme.spacing.unit * 3,
-    overflowX: "auto"
+    overflowX: 'auto'
   }
 })
 
@@ -36,31 +37,25 @@ class AdvisingMeetings extends Component {
             {meetings.map(meet => {
               return (
                 <TableRow key={meet.crn + Math.random()}>
-                  <TableCell>
-                    {meet.courseType}
-                  </TableCell>
+                  <TableCell>{meet.courseType}</TableCell>
                   <TableCell numeric>
-                    {meet.startTime + "-" + meet.endTime}
+                    {meet.startTime + '-' + meet.endTime}
                   </TableCell>
                   <TableCell numeric>
                     {meet.startMonth +
-                      "/" +
+                      '/' +
                       meet.startDay +
-                      "/" +
+                      '/' +
                       meet.startYear +
-                      "-" +
+                      '-' +
                       meet.endMonth +
-                      "/" +
+                      '/' +
                       meet.endDay +
-                      "/" +
+                      '/' +
                       meet.endYear}
                   </TableCell>
-                  <TableCell numeric>
-                    {meet.meetDays}
-                  </TableCell>
-                  <TableCell numeric>
-                    {meet.buildingRoom}
-                  </TableCell>
+                  <TableCell numeric>{meet.meetDays}</TableCell>
+                  <TableCell numeric>{meet.buildingRoom}</TableCell>
                 </TableRow>
               )
             })}
@@ -75,6 +70,6 @@ AdvisingMeetings.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "AdvisingMeetings" })(
+export default withStyles(styles, { name: 'AdvisingMeetings' })(
   AdvisingMeetings
 )

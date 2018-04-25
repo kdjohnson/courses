@@ -1,13 +1,14 @@
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
-import Typography from 'material-ui/Typography'
-import Collapse from 'material-ui/transitions/Collapse'
-import IconButton from 'material-ui/IconButton'
-import ExpandMoreIcon from 'material-ui-icons/ExpandMore'
+import { displayLink, getMapUrl } from '../utils/mapLinks'
+
 import { CardContent } from 'material-ui/Card'
-import { getMapUrl, displayLink } from '../utils/mapLinks'
+import Collapse from 'material-ui/transitions/Collapse'
+import ExpandMoreIcon from 'material-ui-icons/ExpandMore'
+import IconButton from 'material-ui/IconButton'
+import PropTypes from 'prop-types'
+import Typography from 'material-ui/Typography'
 import classnames from 'classnames'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   card: { maxWidth: 400 },

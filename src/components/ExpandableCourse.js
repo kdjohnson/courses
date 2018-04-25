@@ -1,11 +1,12 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
 import Card, { CardActions, CardContent } from "material-ui/Card"
-import Instructors from "./Instructors"
-import Meetings from "./Meetings"
+import React, { Component } from "react"
+
 import CourseDetails from "./CourseDetails"
 import CourseHeader from "./CourseHeader"
+import Instructors from "./Instructors"
+import Meetings from "./Meetings"
+import PropTypes from "prop-types"
+import { withStyles } from "material-ui/styles"
 
 const styles = theme => ({
   courseContainer: {

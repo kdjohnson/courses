@@ -1,6 +1,7 @@
-import React, { Component } from "react"
-import { FormControlLabel } from "material-ui/Form"
-import Switch from "material-ui/Switch"
+import React, { Component } from 'react'
+
+import { FormControlLabel } from 'material-ui/Form'
+import Switch from 'material-ui/Switch'
 
 class RegistrationTypes extends Component {
   handleChange = (event, checked, type) => {
@@ -20,7 +21,8 @@ class RegistrationTypes extends Component {
             <Switch
               checked={regs[type]}
               onChange={(event, checked, key) =>
-                this.handleChange(event, checked, type)}
+                this.handleChange(event, checked, type)
+              }
             />
           }
           label={type}
@@ -32,11 +34,7 @@ class RegistrationTypes extends Component {
   }
 
   render() {
-    return (
-      <div>
-        {this.getSwitches()}
-      </div>
-    )
+    return <div>{this.getSwitches()}</div>
   }
 }
 

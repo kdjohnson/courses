@@ -2,21 +2,22 @@
 /* eslint-disable react/no-multi-comp */
 
 import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
-import Paper from 'material-ui/Paper'
 import Tabs, { Tab } from 'material-ui/Tabs'
-import { translate } from 'react-i18next'
+
 import Advising from './Advising'
-import Calendar from 'reactjs-calendar'
-import AppBar from 'material-ui/AppBar'
-import Toolbar from 'material-ui/Toolbar'
-import Assignment from 'material-ui-icons/Assignment'
-import Event from 'material-ui-icons/Event'
-import TermSelect from './TermSelect'
 import AdvisingGrades from './AdvisingGrades'
+import AppBar from 'material-ui/AppBar'
+import Assignment from 'material-ui-icons/Assignment'
+import Calendar from 'reactjs-calendar'
+import Event from 'material-ui-icons/Event'
+import Paper from 'material-ui/Paper'
+import PropTypes from 'prop-types'
+import TermSelect from './TermSelect'
+import Toolbar from 'material-ui/Toolbar'
 import { connect } from 'react-redux'
 import { fetch_courses } from './../actions/coursesActions'
+import { translate } from 'react-i18next'
+import { withStyles } from 'material-ui/styles'
 
 const TabContainer = props => (
   <div style={{ padding: 20 }}>{props.children}</div>
@@ -55,7 +56,7 @@ class AdvisingTabs extends Component {
     this.props.fetch_courses(current_term)
   }
   state = {
-    position: 0 
+    position: 0
   }
 
   handleChange = (event, position) => {
@@ -151,7 +152,7 @@ const mapStateToProps = state => ({
   courses: state.courses.courses,
   current_term: state.terms.current_term,
   term_bounds: state.terms.term_bounds,
-  courses_fetched: state.courses.fetched,
+  courses_fetched: state.courses.fetched
 })
 
 const mapDispatchToProps = dispatch => {

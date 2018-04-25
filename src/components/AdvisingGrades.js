@@ -5,11 +5,12 @@ import Table, {
   TableHead,
   TableRow
 } from 'material-ui/Table'
-import { withStyles } from 'material-ui/styles'
+
 import PropTypes from 'prop-types'
-import { translate } from 'react-i18next'
 import { connect } from 'react-redux'
 import { fetch_credits } from './../actions/creditsActions'
+import { translate } from 'react-i18next'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   tableHeader: {

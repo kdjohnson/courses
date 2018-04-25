@@ -1,58 +1,59 @@
-import React, { Component } from "react"
-import { translate } from "react-i18next"
-import { CardHeader } from "material-ui/Card"
-import { withStyles } from "material-ui/styles"
-import PropTypes from "prop-types"
-import Typography from "material-ui/Typography"
-import { amber } from "material-ui/colors"
+import React, { Component } from 'react'
+
+import { CardHeader } from 'material-ui/Card'
+import PropTypes from 'prop-types'
+import Typography from 'material-ui/Typography'
+import { amber } from 'material-ui/colors'
+import { translate } from 'react-i18next'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   classHeader: {
     backgroundColor: theme.palette.primary.light,
-    textAlign: "center"
+    textAlign: 'center'
   },
 
   classHeaderWaitList: {
     backgroundColor: amber[200],
-    textAlign: "center"
+    textAlign: 'center'
   },
 
   classHeaderSpanDiv: {
-    display: "flex",
-    flexDirection: "column"
+    display: 'flex',
+    flexDirection: 'column'
   },
 
   classHeaderSpanWaitList: {
     fontWeight: 600,
-    color: "rgba(0, 0, 0, 0.75)"
+    color: 'rgba(0, 0, 0, 0.75)'
   },
 
   subHeaderDiv: {
-    display: "flex",
-    flexDirection: "column-reverse",
-    justifyContent: "center"
+    display: 'flex',
+    flexDirection: 'column-reverse',
+    justifyContent: 'center'
   },
 
   subHeaderDivMobile: {
-    display: "flex",
-    flexDirection: "column-reverse",
-    justifyContent: "center"
+    display: 'flex',
+    flexDirection: 'column-reverse',
+    justifyContent: 'center'
   },
 
   courseTitle: {
-    fontWeight: "bolder"
+    fontWeight: 'bolder'
   },
 
   courseInfo: {
-    fontWeight: "500",
-    color: "#000"
+    fontWeight: '500',
+    color: '#000'
   }
 })
 
 class CourseHeader extends Component {
   getHeader() {
     const { classes, course, t } = this.props
-    if (Object.is(course.waitList, "0")) {
+    if (Object.is(course.waitList, '0')) {
       return (
         <CardHeader
           className={classes.classHeader}
@@ -69,15 +70,15 @@ class CourseHeader extends Component {
             <div className={classes.classHeaderSpanDiv}>
               <span tabIndex="0" className={classes.courseInfo}>
                 {course.subjectCode +
-                  "-" +
+                  '-' +
                   course.subjectNumber +
-                  "-" +
+                  '-' +
                   course.section +
-                  "-" +
+                  '-' +
                   course.crn}
               </span>
               <span tabIndex="0" className={classes.courseInfo}>
-                {t("credits", {}) + ": " + course.credit}
+                {t('credits', {}) + ': ' + course.credit}
               </span>
             </div>
           }
@@ -97,19 +98,19 @@ class CourseHeader extends Component {
             <div className={classes.classHeaderSpanDiv}>
               <span tabIndex="0" className={classes.courseInfo}>
                 {course.subjectCode +
-                  "-" +
+                  '-' +
                   course.subjectNumber +
-                  "-" +
+                  '-' +
                   course.section +
-                  "-" +
+                  '-' +
                   course.crn}
               </span>
               <div className={classes.subHeaderDiv}>
                 <span tabIndex="0" className={classes.courseInfo}>
-                  {t("credits", {}) + ": " + course.credit}
+                  {t('credits', {}) + ': ' + course.credit}
                 </span>
                 <span tabIndex="0" className={classes.courseInfo}>
-                  {t("waitlist", {}) + ": " + course.waitList}
+                  {t('waitlist', {}) + ': ' + course.waitList}
                 </span>
               </div>
             </div>
@@ -119,11 +120,7 @@ class CourseHeader extends Component {
     }
   }
   render() {
-    return (
-      <div>
-        {this.getHeader()}
-      </div>
-    )
+    return <div>{this.getHeader()}</div>
   }
 }
 
@@ -131,6 +128,6 @@ CourseHeader.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "CourseHeader" })(
-  translate("view", { wait: true })(CourseHeader)
+export default withStyles(styles, { name: 'CourseHeader' })(
+  translate('view', { wait: true })(CourseHeader)
 )

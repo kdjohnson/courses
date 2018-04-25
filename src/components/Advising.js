@@ -1,11 +1,12 @@
 // @flow weak
 
 import React, { Component } from 'react'
-import RegistrationTypes from './RegistrationTypes'
+
 import AdvisingCourses from './AdvisingCourses'
+import RegistrationTypes from './RegistrationTypes'
 import Typography from 'material-ui/Typography'
-import { withStyles } from 'material-ui/styles'
 import { connect } from 'react-redux'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   term: {

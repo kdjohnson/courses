@@ -1,42 +1,43 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
-import Card, { CardActions, CardContent } from "material-ui/Card"
-import Instructors from "./Instructors"
-import Meetings from "./Meetings"
-import CourseDetails from "./CourseDetails"
-import CourseHeader from "./CourseHeader"
+import Card, { CardActions, CardContent } from 'material-ui/Card'
+import React, { Component } from 'react'
+
+import CourseDetails from './CourseDetails'
+import CourseHeader from './CourseHeader'
+import Instructors from './Instructors'
+import Meetings from './Meetings'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   courseContainer: {
-    width: "100%"
+    width: '100%'
   },
 
   coursesDiv: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexFlow: "wrap"
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexFlow: 'wrap'
   },
 
   coursesDivMobile: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column"
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column'
   },
 
   cardDiv: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around"
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
 
   card: {
     width: 345,
-    backgroundColor: "#fafafa"
+    backgroundColor: '#fafafa'
   },
 
   cardMobile: {
-    backgroundColor: "#fafafa"
+    backgroundColor: '#fafafa'
   },
 
   courseTitle: {
@@ -45,7 +46,7 @@ const styles = theme => ({
   },
 
   infoContainer: {
-    marginLeft: "2em"
+    marginLeft: '2em'
   },
 
   content: {
@@ -53,14 +54,14 @@ const styles = theme => ({
   },
 
   contentMobile: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
 
   actions: {
-    display: "flex",
-    justifyContent: "center"
+    display: 'flex',
+    justifyContent: 'center'
   }
 })
 
@@ -69,24 +70,17 @@ class WaitlistCourse extends Component {
     const { classes, course, mobile } = this.props
     return (
       <div className={mobile ? classes.courseContainer : null}>
-        <div style={{ marginTop: "1em" }}>
-          <Card
-            className={mobile ? classes.cardMobile : classes.card}
-          >
-            <CourseHeader
-              mobile={mobile}
-              course={course}
-            />
+        <div style={{ marginTop: '1em' }}>
+          <Card className={mobile ? classes.cardMobile : classes.card}>
+            <CourseHeader mobile={mobile} course={course} />
             <CardContent
-              className={
-                mobile ? classes.contentMobile : classes.content
-              }
+              className={mobile ? classes.contentMobile : classes.content}
             >
               <div className={mobile ? classes.infoContainer : null}>
-                <div style={{ marginTop: "1em" }}>
+                <div style={{ marginTop: '1em' }}>
                   <Meetings meetings={course.meetings} />
                 </div>
-                <div style={{ marginTop: "1em" }}>
+                <div style={{ marginTop: '1em' }}>
                   <Instructors teachers={course.instructors} />
                 </div>
               </div>
@@ -105,4 +99,4 @@ WaitlistCourse.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "WaitlistCourse" })(WaitlistCourse)
+export default withStyles(styles, { name: 'WaitlistCourse' })(WaitlistCourse)

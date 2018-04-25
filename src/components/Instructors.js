@@ -1,33 +1,34 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
-import { getMapUrl } from "../utils/mapLinks"
-import Button from "material-ui/Button"
-import Typography from "material-ui/Typography"
 import Dialog, {
-  DialogTitle,
+  DialogActions,
   DialogContent,
-  DialogActions
-} from "material-ui/Dialog"
+  DialogTitle
+} from 'material-ui/Dialog'
 import List, {
   ListItem,
   ListItemIcon,
   ListItemText,
   ListSubheader
-} from "material-ui/List"
-import MailOutline from "material-ui-icons/MailOutline"
-import Domain from "material-ui-icons/Domain"
-import Slide from "material-ui/transitions/Slide"
-import { translate } from "react-i18next"
+} from 'material-ui/List'
+import React, { Component } from 'react'
+
+import Button from 'material-ui/Button'
+import Domain from 'material-ui-icons/Domain'
+import MailOutline from 'material-ui-icons/MailOutline'
+import PropTypes from 'prop-types'
+import Slide from 'material-ui/transitions/Slide'
+import Typography from 'material-ui/Typography'
+import { getMapUrl } from '../utils/mapLinks'
+import { translate } from 'react-i18next'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   button: {
-    fontWeight: "bolder"
+    fontWeight: 'bolder'
   },
 
   instructor: {
     fontSize: 16,
-    fontWeight: "bolder",
+    fontWeight: 'bolder',
     color: theme.palette.text.primary
   },
 
@@ -40,7 +41,7 @@ const styles = theme => ({
   },
 
   close: {
-    fontWeight: "bolder"
+    fontWeight: 'bolder'
   }
 })
 
@@ -65,12 +66,13 @@ class Instructors extends Component {
           onClick={() =>
             this.setState({
               open: true
-            })}
+            })
+          }
           color="secondary"
-          style={{ fontWeight: "bolder" }}
+          style={{ fontWeight: 'bolder' }}
         >
-          {teachers.length >= 2 && "Instructors"}
-          {teachers.length < 2 && "Instructor"}
+          {teachers.length >= 2 && 'Instructors'}
+          {teachers.length < 2 && 'Instructor'}
         </Button>
         <Dialog
           open={this.state.open}
@@ -82,8 +84,8 @@ class Instructors extends Component {
         >
           <DialogTitle className={classes.dialogTitle} disableTypography={true}>
             <Typography type="title" tabIndex="0" className={classes.title}>
-              {teachers.length >= 2 && "Instructors Information"}
-              {teachers.length < 2 && "Instructor Information"}
+              {teachers.length >= 2 && 'Instructors Information'}
+              {teachers.length < 2 && 'Instructor Information'}
             </Typography>
           </DialogTitle>
           <DialogContent>{this.getList()}</DialogContent>
@@ -93,7 +95,7 @@ class Instructors extends Component {
               color="secondary"
               className={classes.close}
             >
-              {t("close", {})}
+              {t('close', {})}
             </Button>
           </DialogActions>
         </Dialog>
@@ -105,10 +107,7 @@ class Instructors extends Component {
     const { classes, teachers } = this.props
     let list = []
     for (let i = 0, total = teachers.length; i < total; i++) {
-      if (
-        Object.is(teachers, null) ||
-        Object.is(teachers[0], undefined)
-      ) {
+      if (Object.is(teachers, null) || Object.is(teachers[0], undefined)) {
         return (
           <List
             subheader={
@@ -136,9 +135,7 @@ class Instructors extends Component {
           <List
             subheader={
               <ListSubheader tabIndex="0" className={classes.instructor}>
-                {teachers[i].firstName +
-                  "  " +
-                  teachers[i].lastName}
+                {teachers[i].firstName + '  ' + teachers[i].lastName}
               </ListSubheader>
             }
             key={teachers[i].email}
@@ -149,16 +146,16 @@ class Instructors extends Component {
               </ListItemIcon>
               <ListItemText
                 secondary={
-                  (!Object.is(teachers[i].email, "N/A") && (
+                  (!Object.is(teachers[i].email, 'N/A') && (
                     <a
-                      href={"mailto:" + teachers[i].email}
+                      href={'mailto:' + teachers[i].email}
                       rel="noopener noreferrer"
                       target="_blank"
                     >
                       {teachers[i].email}
                     </a>
                   )) ||
-                  "N/A"
+                  'N/A'
                 }
               />
             </ListItem>
@@ -168,7 +165,7 @@ class Instructors extends Component {
               </ListItemIcon>
               <ListItemText
                 secondary={
-                  (!Object.is(teachers.office, "N/A") && (
+                  (!Object.is(teachers.office, 'N/A') && (
                     <a
                       href={getMapUrl(teachers[i].office, true)}
                       rel="noopener noreferrer"
@@ -177,7 +174,7 @@ class Instructors extends Component {
                       {teachers[i].office}
                     </a>
                   )) ||
-                  "N/A"
+                  'N/A'
                 }
               />
             </ListItem>
@@ -197,6 +194,6 @@ Instructors.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "Instructors" })(
-  translate("view", { wait: true })(Instructors)
+export default withStyles(styles, { name: 'Instructors' })(
+  translate('view', { wait: true })(Instructors)
 )

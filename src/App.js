@@ -1,13 +1,15 @@
-import React, { Component } from 'react'
-import CoursesTabs from './components/CoursesTabs'
-import AdvisingTabs from './components/AdvisingTabs'
-import ErrorMessages from './components/ErrorMessages'
-import { withStyles } from 'material-ui/styles'
-import { CircularProgress } from 'material-ui/Progress'
 import 'iterators-polyfill' // This is for supporting IE 😢
+
+import React, { Component } from 'react'
+
+import AdvisingTabs from './components/AdvisingTabs'
+import { CircularProgress } from 'material-ui/Progress'
+import CoursesTabs from './components/CoursesTabs'
+import ErrorMessages from './components/ErrorMessages'
 import { connect } from 'react-redux'
-import { fetch_terms } from './actions/termsActions'
 import { fetch_advising } from './actions/advisingActions'
+import { fetch_terms } from './actions/termsActions'
+import { withStyles } from 'material-ui/styles'
 
 const calendarObj = {
   url: 'http://localhost:8082/api/calendar',
@@ -32,7 +34,7 @@ const styles = theme => ({
 class App extends Component {
   state = {
     width: document.getElementById(this.props.rootElement).clientWidth,
-    mobile: false,
+    mobile: false
   }
 
   updateWidth = () => {
@@ -101,7 +103,11 @@ class App extends Component {
     } else if (advising === true && terms_fetched === true) {
       return (
         <div>
-          <AdvisingTabs mobile={mobile} rootElement={rootElement} calendarURL={calendarObj}/>
+          <AdvisingTabs
+            mobile={mobile}
+            rootElement={rootElement}
+            calendarURL={calendarObj}
+          />
         </div>
       )
     }

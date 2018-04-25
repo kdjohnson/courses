@@ -1,17 +1,18 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import App from './App'
+import 'typeface-arimo'
+
 //import registerServiceWorker from "./registerServiceWorker"
 import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
-import 'typeface-arimo'
+
+import App from './App'
 import { I18nextProvider } from 'react-i18next'
-import i18n from './utils/i18n'
-import { create } from 'jss'
-import preset from 'jss-preset-default'
 import { JssProvider } from 'react-jss'
 import { Provider } from 'react-redux'
+import React from 'react'
+import ReactDOM from 'react-dom'
+import { create } from 'jss'
+import i18n from './utils/i18n'
+import preset from 'jss-preset-default'
 import store from './store'
-
 
 const theme = createMuiTheme({
   palette: {
