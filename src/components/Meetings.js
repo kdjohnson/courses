@@ -25,7 +25,7 @@ const styles = theme => ({
     fontFamily: 'Arimo'
   },
 
-  stuff: {
+  meetBorder: {
     borderLeftStyle: 'solid',
     borderLeftColor: theme.palette.secondary.main,
     borderLeftWidth: '0.3em',
@@ -63,7 +63,7 @@ class Meetings extends Component {
         return <ExpandableMeetings meetings={meetings} />
       } else {
         return (
-          <div className={classes.stuff}>
+          <div className={classes.meetBorder}>
             {displayLink(meetings[0].buildingRoom, meetings[0].campus) && (
               <a
                 className={classes.meetLink}

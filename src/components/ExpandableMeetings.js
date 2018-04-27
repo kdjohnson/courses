@@ -56,6 +56,13 @@ const styles = theme => ({
     fontSize: '14px',
     fontWeight: 400,
     fontFamily: 'Arimo'
+  },
+
+  meetBorder: {
+    borderLeftStyle: 'solid',
+    borderLeftColor: theme.palette.secondary.main,
+    borderLeftWidth: '0.3em',
+    paddingLeft: '1em'
   }
 })
 
@@ -146,7 +153,7 @@ class ExpandableMeetings extends Component {
     const { classes, meetings } = this.props
     const meeting = meetings[0]
     return (
-      <div key={meeting.endDate + Math.random()}>
+      <div key={meeting.endDate + Math.random()} className={classes.meetBorder}>
         {displayLink(meeting.buildingRoom, meeting.campus) && (
           <a
             className={classes.meetLink}
@@ -215,7 +222,7 @@ class ExpandableMeetings extends Component {
     const { classes } = this.props
     const { expanded } = this.state
     return (
-      <div>
+      <div style={{backgroundColor: 'tomato'}}>
         <div className={classes.iconButtonDiv}>
           {this.getMeeting()}
           <IconButton
