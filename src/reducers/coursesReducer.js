@@ -15,7 +15,7 @@ export default function reducer(
         fetching: false,
         fetched: true,
         courses: action.payload.courses,
-        books: action.payload.booksXML
+        books: action.payload.bookXML
       }
     }
 
