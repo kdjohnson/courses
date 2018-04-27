@@ -8,6 +8,12 @@
   dependencies:
     recompose "^0.26.0"
 
+"@material-ui/icons@^1.0.0-beta.43":
+  version "1.0.0-beta.43"
+  resolved "https://registry.yarnpkg.com/@material-ui/icons/-/icons-1.0.0-beta.43.tgz#38bba799a4e575de7eced4bd10a0afbd546e9b47"
+  dependencies:
+    recompose "^0.26.0"
+
 "@timer/detect-port@1.1.3":
   version "1.1.3"
   resolved "https://registry.yarnpkg.com/@timer/detect-port/-/detect-port-1.1.3.tgz#1383abd67f9a5d683df5276f8a92d60bdf9abb90"
@@ -25,6 +31,12 @@
 "@types/react-transition-group@^2.0.6":
   version "2.0.7"
   resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-2.0.7.tgz#2847292d54c5685d982ae5a3ecb6960946689d87"
+  dependencies:
+    "@types/react" "*"
+
+"@types/react-transition-group@^2.0.8":
+  version "2.0.9"
+  resolved "https://registry.yarnpkg.com/@types/react-transition-group/-/react-transition-group-2.0.9.tgz#ed6a71fb711e524345844defec2a861c1a222a03"
   dependencies:
     "@types/react" "*"
 
@@ -137,10 +149,6 @@ align-text@^0.1.1, align-text@^0.1.3:
     kind-of "^3.0.2"
     longest "^1.0.1"
     repeat-string "^1.5.2"
-
-all@^0.0.0:
-  version "0.0.0"
-  resolved "https://registry.yarnpkg.com/all/-/all-0.0.0.tgz#fb2aa75d4759d40e39ecbb118fabf0cc11ff554f"
 
 alphanum-sort@^1.0.1, alphanum-sort@^1.0.2:
   version "1.0.2"
@@ -4871,11 +4879,38 @@ map-visit@^1.0.0:
   dependencies:
     object-visit "^1.0.0"
 
-material-ui-icons@^1.0.0-beta.36:
-  version "1.0.0-beta.36"
-  resolved "https://registry.yarnpkg.com/material-ui-icons/-/material-ui-icons-1.0.0-beta.36.tgz#86390a61f4c83f718eaba77ccce575834f2cf2a8"
+material-ui@1.0.0-beta.42:
+  version "1.0.0-beta.42"
+  resolved "https://registry.yarnpkg.com/material-ui/-/material-ui-1.0.0-beta.42.tgz#a0dea15fd433d521b41912802041eee8b3f30589"
   dependencies:
+    "@types/jss" "^9.3.0"
+    "@types/react-transition-group" "^2.0.8"
+    babel-runtime "^6.26.0"
+    brcast "^3.0.1"
+    classnames "^2.2.5"
+    deepmerge "^2.0.1"
+    dom-helpers "^3.2.1"
+    hoist-non-react-statics "^2.5.0"
+    jss "^9.3.3"
+    jss-camel-case "^6.0.0"
+    jss-default-unit "^8.0.2"
+    jss-global "^3.0.0"
+    jss-nested "^6.0.1"
+    jss-props-sort "^6.0.0"
+    jss-vendor-prefixer "^7.0.0"
+    keycode "^2.1.9"
+    lodash "^4.2.0"
+    normalize-scroll-left "^0.1.2"
+    prop-types "^15.6.0"
+    react-event-listener "^0.5.1"
+    react-jss "^8.1.0"
+    react-lifecycles-compat "^2.0.0"
+    react-popper "^0.10.0"
+    react-scrollbar-size "^2.0.2"
+    react-transition-group "^2.2.1"
     recompose "^0.26.0"
+    scroll "^2.0.3"
+    warning "^3.0.0"
 
 material-ui@next:
   version "1.0.0-beta.40"
@@ -5692,7 +5727,7 @@ pluralize@^1.2.1:
   version "1.2.1"
   resolved "https://registry.yarnpkg.com/pluralize/-/pluralize-1.2.1.tgz#d1a21483fd22bb41e58a12fa3421823140897c45"
 
-popper.js@^1.12.9:
+popper.js@^1.12.9, popper.js@^1.14.1:
   version "1.14.3"
   resolved "https://registry.yarnpkg.com/popper.js/-/popper.js-1.14.3.tgz#1438f98d046acf7b4d78cd502bf418ac64d4f095"
 
@@ -6054,7 +6089,7 @@ promise@^7.1.1:
   dependencies:
     asap "~2.0.3"
 
-prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0:
+prop-types@^15.5.7, prop-types@^15.5.8, prop-types@^15.6.0, prop-types@^15.6.1:
   version "15.6.1"
   resolved "https://registry.yarnpkg.com/prop-types/-/prop-types-15.6.1.tgz#36644453564255ddda391191fb3a125cbdf654ca"
   dependencies:
@@ -6331,6 +6366,17 @@ react-lifecycles-compat@^1.0.2:
   version "1.1.4"
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-1.1.4.tgz#fc005c72849b7ed364de20a0f64ff58ebdc2009a"
 
+react-lifecycles-compat@^2.0.0:
+  version "2.0.2"
+  resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-2.0.2.tgz#00a23160eec17a43b94dd74f95d44a1a2c3c5ec1"
+
+react-popper@^0.10.0:
+  version "0.10.1"
+  resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.10.1.tgz#6a1f2595faffda77105bed4e89ecf22607a4c452"
+  dependencies:
+    popper.js "^1.14.1"
+    prop-types "^15.6.1"
+
 react-popper@^0.8.0:
   version "0.8.3"
   resolved "https://registry.yarnpkg.com/react-popper/-/react-popper-0.8.3.tgz#0f73333137c9fb0af6ec4074d2d0585a0a0461e1"
@@ -6404,13 +6450,6 @@ react-scrollbar-size@^2.0.2:
     react-event-listener "^0.5.1"
     stifle "^1.0.2"
 
-react-to-print@^1.0.14:
-  version "1.0.14"
-  resolved "https://registry.yarnpkg.com/react-to-print/-/react-to-print-1.0.14.tgz#556d70f1582c1618091301028a685138e9d2deb4"
-  dependencies:
-    prop-types "^15.6.0"
-    react "^16.2.0"
-
 react-transition-group@^2.2.1:
   version "2.3.0"
   resolved "https://registry.yarnpkg.com/react-transition-group/-/react-transition-group-2.3.0.tgz#8dd1af58f6af284b19fd057f512e74f20438ad31"
@@ -6421,7 +6460,7 @@ react-transition-group@^2.2.1:
     prop-types "^15.5.8"
     warning "^3.0.0"
 
-react@16.x, react@^16.2.0:
+react@16.x:
   version "16.3.1"
   resolved "https://registry.yarnpkg.com/react/-/react-16.3.1.tgz#4a2da433d471251c69b6033ada30e2ed1202cfd8"
   dependencies:
@@ -6430,20 +6469,19 @@ react@16.x, react@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
-reactjs-calendar@0.2.15:
-  version "0.2.15"
-  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.2.15.tgz#155f78eb79e55bf12ef342475bd7e33b5f7f3a3b"
+reactjs-calendar@0.2.17:
+  version "0.2.17"
+  resolved "https://registry.yarnpkg.com/reactjs-calendar/-/reactjs-calendar-0.2.17.tgz#d43830f532e965bf53a3ed75a072099fa4c94e7c"
   dependencies:
     version "^0.1.2"
-    all "^0.0.0"
+    "@material-ui/icons" "^1.0.0-beta.43"
     babel-polyfill "^6.23.0"
     babel-regenerator-runtime "^6.5.0"
     i18next "^8.4.3"
     i18next-browser-languagedetector "^2.0.0"
     i18next-fetch-backend "^0.0.1"
     i18next-localstorage-cache "^1.1.1"
-    material-ui next
-    material-ui-icons "^1.0.0-beta.36"
+    material-ui "1.0.0-beta.42"
     package.json "^2.0.1"
     raleway-webfont "^3.0.1"
     react-a11y "^0.3.3"

@@ -3,16 +3,13 @@
 import Card, { CardActions, CardContent } from 'material-ui/Card'
 import React, { Component } from 'react'
 
-import Button from 'material-ui/Button'
 import { CircularProgress } from 'material-ui/Progress'
 import CourseDetails from './CourseDetails'
 import CourseHeader from './CourseHeader'
 import ExpandableCourse from './ExpandableCourse'
 import Instructors from './Instructors'
 import Meetings from './Meetings'
-import PrintIcon from '@material-ui/icons/Print'
 import PropTypes from 'prop-types'
-import ReactToPrint from 'react-to-print'
 import Typography from 'material-ui/Typography'
 import WaitlistCourse from './WaitlistCourse'
 import { connect } from 'react-redux'
@@ -174,20 +171,6 @@ class Courses extends Component {
         return (
           <div ref={el => (this.componentRef = el)}>
             <div className={classes.buttonsDiv}>
-              <ReactToPrint
-                trigger={() => (
-                  <Button
-                    className={classes.button}
-                    variant="raised"
-                    color="secondary"
-                  >
-                    Print
-                    <PrintIcon className={classes.rightIcon} />
-                  </Button>
-                )}
-                copyStyles={true}
-                content={() => this.componentRef}
-              />
               {getBookButton(
                 books,
                 current_term.description,
