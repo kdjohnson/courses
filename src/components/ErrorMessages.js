@@ -1,7 +1,7 @@
 import Card, { CardContent, CardHeader, CardMedia } from "material-ui/Card"
 import React, { Component } from "react"
 
-import Error from "material-ui-icons/Error"
+import Error from "@material-ui/icons/Error"
 import PropTypes from "prop-types"
 import Typography from "material-ui/Typography"
 import { withStyles } from "material-ui/styles"

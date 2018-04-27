@@ -1,8 +1,8 @@
 // @flow weak
 
-import AddShoppingCartIcon from 'material-ui-icons/AddShoppingCart'
-import AlarmIcon from 'material-ui-icons/Alarm'
-import DeleteIcon from 'material-ui-icons/Delete'
+import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
+import AlarmIcon from '@material-ui/icons/Alarm'
+import DeleteIcon from '@material-ui/icons/Delete'
 import IconButton from 'material-ui/IconButton'
 import PropTypes from 'prop-types'
 import React from 'react'

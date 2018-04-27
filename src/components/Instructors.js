@@ -12,8 +12,8 @@ import List, {
 import React, { Component } from 'react'
 
 import Button from 'material-ui/Button'
-import Domain from 'material-ui-icons/Domain'
-import MailOutline from 'material-ui-icons/MailOutline'
+import Domain from '@material-ui/icons/Domain'
+import MailOutline from '@material-ui/icons/MailOutline'
 import PropTypes from 'prop-types'
 import Slide from 'material-ui/transitions/Slide'
 import Typography from 'material-ui/Typography'

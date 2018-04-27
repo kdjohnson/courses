@@ -3,7 +3,7 @@ import { displayLink, getMapUrl } from '../utils/mapLinks'
 
 import { CardContent } from 'material-ui/Card'
 import Collapse from 'material-ui/transitions/Collapse'
-import ExpandMoreIcon from 'material-ui-icons/ExpandMore'
+import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import IconButton from 'material-ui/IconButton'
 import PropTypes from 'prop-types'
 import Typography from 'material-ui/Typography'
