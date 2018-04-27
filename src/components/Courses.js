@@ -214,6 +214,7 @@ Courses.propTypes = {
 }
 
 const mapStateToProps = state => ({
+  books: state.courses.books,
   courses: state.courses.courses,
   courses_fetched: state.courses.fetched,
   courses_fetching: state.courses.fetching,
