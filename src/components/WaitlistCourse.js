@@ -1,42 +1,39 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
-import Card, { CardActions, CardContent } from "material-ui/Card"
-import Instructors from "./Instructors"
-import Meetings from "./Meetings"
-import CourseDetails from "./CourseDetails"
-import CourseHeader from "./CourseHeader"
+import Card, { CardActions, CardContent } from 'material-ui/Card'
+import React, { Component } from 'react'
+
+import CourseDetails from './CourseDetails'
+import CourseHeader from './CourseHeader'
+import Instructors from './Instructors'
+import Meetings from './Meetings'
+import PropTypes from 'prop-types'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   courseContainer: {
-    width: "100%"
+    flex: '1 1 auto',
+    padding: '1em'
   },
 
   coursesDiv: {
-    display: "flex",
-    justifyContent: "space-between",
-    flexFlow: "wrap"
+    display: 'flex',
+    justifyContent: 'space-between',
+    flexFlow: 'wrap'
   },
 
   coursesDivMobile: {
-    display: "flex",
-    alignItems: "center",
-    flexDirection: "column"
+    display: 'flex',
+    alignItems: 'center',
+    flexDirection: 'column'
   },
 
   cardDiv: {
-    display: "flex",
-    flexDirection: "row",
-    justifyContent: "space-around"
+    display: 'flex',
+    flexDirection: 'row',
+    justifyContent: 'space-around'
   },
 
   card: {
-    width: 345,
-    backgroundColor: "#fafafa"
-  },
-
-  cardMobile: {
-    backgroundColor: "#fafafa"
+    backgroundColor: '#fafafa'
   },
 
   courseTitle: {
@@ -45,54 +42,45 @@ const styles = theme => ({
   },
 
   infoContainer: {
-    marginLeft: "2em"
+    marginLeft: '2em'
   },
 
   content: {
-    paddingTop: 0
+    paddingTop: 0,
+    display: 'flex',
+    justifyContent: 'center'
   },
 
   contentMobile: {
-    display: "flex",
-    flexDirection: "column",
-    alignItems: "center"
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center'
   },
 
   actions: {
-    display: "flex",
-    justifyContent: "center"
+    display: 'flex',
+    justifyContent: 'center'
   }
 })
 
 class WaitlistCourse extends Component {
   render() {
-    const classes = this.props.classes
+    const { classes, course, mobile } = this.props
     return (
-      <div className={this.props.mobile ? classes.courseContainer : null}>
-        <div style={{ marginTop: "1em" }}>
-          <Card
-            className={this.props.mobile ? classes.cardMobile : classes.card}
-          >
-            <CourseHeader
-              mobile={this.props.mobile}
-              course={this.props.course}
-            />
-            <CardContent
-              className={
-                this.props.mobile ? classes.contentMobile : classes.content
-              }
-            >
-              <div className={this.props.mobile ? classes.infoContainer : null}>
-                <div style={{ marginTop: "1em" }}>
-                  <Meetings meetings={this.props.course.meetings} />
-                </div>
-                <div style={{ marginTop: "1em" }}>
-                  <Instructors teachers={this.props.course.instructors} />
+      <div className={classes.courseContainer}>
+        <div style={{ marginTop: '1em' }}>
+          <Card className={classes.card}>
+            <CourseHeader mobile={mobile} course={course} />
+            <CardContent className={classes.content}>
+              <div>
+                <div style={{ marginTop: '1em' }}>
+                  <Meetings meetings={course.meetings} />
                 </div>
               </div>
             </CardContent>
-            <CardActions className={this.props.mobile ? classes.actions : null}>
-              <CourseDetails course={this.props.course} />
+            <CardActions style={{ justifyContent: 'center', flexWrap: 'wrap' }}>
+              <CourseDetails course={course} />
+              <Instructors teachers={course.instructors} />
             </CardActions>
           </Card>
         </div>
@@ -105,4 +93,4 @@ WaitlistCourse.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "WaitlistCourse" })(WaitlistCourse)
+export default withStyles(styles, { name: 'WaitlistCourse' })(WaitlistCourse)

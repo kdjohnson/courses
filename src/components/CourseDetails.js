@@ -1,21 +1,22 @@
-import React, { Component } from "react"
-import List, { ListItem, ListItemText } from "material-ui/List"
 import Dialog, {
   DialogActions,
   DialogContent,
   DialogTitle
-} from "material-ui/Dialog"
-import Button from "material-ui/Button"
-import Slide from "material-ui/transitions/Slide"
-import Typography from "material-ui/Typography"
-import { withStyles } from "material-ui/styles"
-import PropTypes from "prop-types"
-import { translate } from "react-i18next"
-import { amber } from "material-ui/colors"
+} from 'material-ui/Dialog'
+import List, { ListItem, ListItemText } from 'material-ui/List'
+import React, { Component } from 'react'
+
+import Button from 'material-ui/Button'
+import PropTypes from 'prop-types'
+import Slide from 'material-ui/transitions/Slide'
+import Typography from 'material-ui/Typography'
+import { amber } from 'material-ui/colors'
+import { translate } from 'react-i18next'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   button: {
-    fontWeight: "bolder"
+    fontWeight: 'bolder'
   },
 
   dialogHeader: {
@@ -27,12 +28,12 @@ const styles = theme => ({
   },
 
   list: {
-    color: "rgba(0, 0, 0, 0.68)"
+    color: 'rgba(0, 0, 0, 0.68)'
   },
 
   dialogContent: {
-    backgroundColor: "#fafafa",
-    background: "#E8EAEE"
+    backgroundColor: '#fafafa',
+    background: '#E8EAEE'
   },
 
   title: {
@@ -58,21 +59,20 @@ class CourseDetails extends Component {
   }
 
   render() {
-    const classes = this.props.classes
-    const { t } = this.props
-    if (Object.is(this.props.courses, null)) {
+    const { classes, course, courses, t } = this.props
+    if (Object.is(courses, null)) {
       return <div />
     } else {
       return (
-        <div aria-labelledby={"openbutton" + this.props.course.crn}>
+        <div aria-labelledby={'openbutton' + course.crn}>
           <Button
             className={classes.button}
             color="secondary"
             onClick={this.handleOpen}
-            id={"openbutton" + this.props.course.crn}
+            id={'openbutton' + course.crn}
             aria-label="course description"
           >
-            {t("description", {})}
+            {t('description', {})}
           </Button>
 
           <Dialog
@@ -86,16 +86,14 @@ class CourseDetails extends Component {
           >
             <DialogTitle
               className={
-                Object.is(this.props.course.waitList, "0") ? (
-                  classes.dialogHeader
-                ) : (
-                  classes.dialogHeaderWaitList
-                )
+                Object.is(course.waitList, '0')
+                  ? classes.dialogHeader
+                  : classes.dialogHeaderWaitList
               }
               disableTypography={true}
             >
               <Typography type="title" tabIndex="0" className={classes.title}>
-                {this.props.course.courseTitle}
+                {course.courseTitle}
               </Typography>
             </DialogTitle>
             <DialogContent
@@ -104,7 +102,7 @@ class CourseDetails extends Component {
             >
               <List>
                 <ListItem tabIndex="0">
-                  <ListItemText primary={this.props.course.courseDescription} />
+                  <ListItemText primary={course.courseDescription} />
                 </ListItem>
               </List>
 
@@ -116,7 +114,7 @@ class CourseDetails extends Component {
                   tabIndex="0"
                   color="secondary"
                 >
-                  {t("close", {})}
+                  {t('close', {})}
                 </Button>
               </DialogActions>
             </DialogContent>
@@ -131,6 +129,6 @@ CourseDetails.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "CourseDetails" })(
-  translate("view", { wait: true })(CourseDetails)
+export default withStyles(styles, { name: 'CourseDetails' })(
+  translate('view', { wait: true })(CourseDetails)
 )

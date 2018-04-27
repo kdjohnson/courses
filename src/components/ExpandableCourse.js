@@ -1,11 +1,12 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
 import Card, { CardActions, CardContent } from "material-ui/Card"
-import Instructors from "./Instructors"
-import Meetings from "./Meetings"
+import React, { Component } from "react"
+
 import CourseDetails from "./CourseDetails"
 import CourseHeader from "./CourseHeader"
+import Instructors from "./Instructors"
+import Meetings from "./Meetings"
+import PropTypes from "prop-types"
+import { withStyles } from "material-ui/styles"
 
 const styles = theme => ({
   courseContainer: {
@@ -26,25 +27,25 @@ const styles = theme => ({
 
 class ExpandableCourse extends Component {
   render() {
-    const classes = this.props.classes
+    const { classes, course, mobile } = this.props
     return (
       <div className={classes.courseContainer}>
         <div style={{ marginTop: "1em" }}>
           <Card className={classes.card}>
             <CourseHeader
-              mobile={this.props.mobile}
-              course={this.props.course}
+              mobile={mobile}
+              course={course}
             />
             <CardContent className={classes.content}>
               <div>
                 <div style={{ marginTop: "1em" }}>
-                  <Meetings meetings={this.props.course.meetings} />
+                  <Meetings meetings={course.meetings} />
                 </div>
               </div>
             </CardContent>
             <CardActions style={{ justifyContent: "center", flexWrap: "wrap" }}>
-              <CourseDetails course={this.props.course} />
-              <Instructors teachers={this.props.course.instructors} />
+              <CourseDetails course={course} />
+              <Instructors teachers={course.instructors} />
             </CardActions>
           </Card>
         </div>

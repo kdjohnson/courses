@@ -1,13 +1,11 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
-import List, { ListItem, ListItemText } from "material-ui/List"
-import { translate } from "react-i18next"
-const styles = theme => ({
-  root: {
-    color: "tomato"
-  }
-})
+import List, { ListItem, ListItemText } from 'material-ui/List'
+import React, { Component } from 'react'
+
+import PropTypes from 'prop-types'
+import { translate } from 'react-i18next'
+import { withStyles } from 'material-ui/styles'
+
+const styles = theme => ({})
 
 class AdvisingInstructors extends Component {
   getInsturctors = () => {
@@ -21,7 +19,7 @@ class AdvisingInstructors extends Component {
           <ListItemText
             primary={
               this.props.instructors[i].firstName +
-              " " +
+              ' ' +
               this.props.instructors[i].lastName
             }
           />
@@ -31,11 +29,7 @@ class AdvisingInstructors extends Component {
     return teachers
   }
   render() {
-    return (
-      <List>
-        {" "}{this.getInsturctors()}
-      </List>
-    )
+    return <List> {this.getInsturctors()}</List>
   }
 }
 
@@ -43,6 +37,6 @@ AdvisingInstructors.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "AdvisingInstructors" })(
-  translate("view", { wait: true })(AdvisingInstructors)
+export default withStyles(styles, { name: 'AdvisingInstructors' })(
+  translate('view', { wait: true })(AdvisingInstructors)
 )

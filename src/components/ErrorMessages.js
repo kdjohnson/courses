@@ -1,9 +1,10 @@
+import Card, { CardContent, CardHeader, CardMedia } from "material-ui/Card"
 import React, { Component } from "react"
-import Typography from "material-ui/Typography"
-import Card, { CardHeader, CardContent, CardMedia } from "material-ui/Card"
-import { withStyles } from "material-ui/styles"
+
+import Error from "@material-ui/icons/Error"
 import PropTypes from "prop-types"
-import Error from "material-ui-icons/Error"
+import Typography from "material-ui/Typography"
+import { withStyles } from "material-ui/styles"
 
 const styles = theme => ({
   root: {
@@ -39,7 +40,7 @@ const styles = theme => ({
 
 class ErrorMessages extends Component {
   render() {
-    const classes = this.props.classes
+    const { classes } = this.props
     return (
       <div className={classes.root}>
         <Card className={classes.card}>

@@ -1,25 +1,27 @@
 // @flow weak
 /* eslint-disable react/no-multi-comp */
 
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
-import Paper from "material-ui/Paper"
-import Tabs, { Tab } from "material-ui/Tabs"
-import { translate } from "react-i18next"
-import Advising from "./Advising"
-import Calendar from "reactjs-calendar"
-import AppBar from "material-ui/AppBar"
-import Toolbar from "material-ui/Toolbar"
-import Assignment from "material-ui-icons/Assignment"
-import Event from "material-ui-icons/Event"
-import TermSelect from "./TermSelect"
-import AdvisingGrades from "./AdvisingGrades"
+import React, { Component } from 'react'
+import Tabs, { Tab } from 'material-ui/Tabs'
 
-const TabContainer = props =>
-  <div style={{ padding: 20 }}>
-    {props.children}
-  </div>
+import Advising from './Advising'
+import AdvisingGrades from './AdvisingGrades'
+import AppBar from 'material-ui/AppBar'
+import Assignment from '@material-ui/icons/Assignment'
+import Calendar from 'reactjs-calendar'
+import Event from '@material-ui/icons/Event'
+import Paper from 'material-ui/Paper'
+import PropTypes from 'prop-types'
+import TermSelect from './TermSelect'
+import Toolbar from 'material-ui/Toolbar'
+import { connect } from 'react-redux'
+import { fetch_courses } from './../actions/coursesActions'
+import { translate } from 'react-i18next'
+import { withStyles } from 'material-ui/styles'
+
+const TabContainer = props => (
+  <div style={{ padding: 20 }}>{props.children}</div>
+)
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired
@@ -32,7 +34,7 @@ const styles = theme => ({
 
   inner: {
     marginTop: 30,
-    width: "100%"
+    width: '100%'
   },
   appBar: {
     backgroundColor: theme.palette.primary.main,
@@ -44,34 +46,46 @@ const styles = theme => ({
   },
 
   button: {
-    color: "#FFFFFF"
+    color: '#FFFFFF'
   }
 })
 
 class AdvisingTabs extends Component {
+  componentDidMount() {
+    const { current_term } = this.props
+    this.props.fetch_courses(current_term)
+  }
   state = {
-    value: 0
+    position: 0
   }
 
-  handleChange = (event, value) => {
-    this.setState({ value })
+  handleChange = (event, position) => {
+    this.setState({ position })
   }
 
   render() {
-    const classes = this.props.classes
-    const { t } = this.props
+    const {
+      calendarURL,
+      classes,
+      courses_fetched,
+      mobile,
+      root_element,
+      t,
+      term_bounds
+    } = this.props
+    const { position } = this.state
     return (
       <Paper className={classes.inner}>
         <AppBar position="static">
           <Toolbar disableGutters={true} className={classes.root}>
-            {Object.is(this.props.mobile, true) &&
+            {mobile === true && (
               <Tabs
                 className={classes.flex}
-                value={this.state.value}
+                value={position}
                 onChange={this.handleChange}
               >
                 <Tab
-                  aria-label={t("courses", {})}
+                  aria-label={t('courses', {})}
                   icon={
                     <Assignment
                       className={classes.button}
@@ -81,57 +95,50 @@ class AdvisingTabs extends Component {
                   tabIndex="0"
                 />
                 <Tab
-                  aria-label={t("calendar", {})}
+                  aria-label={t('calendar', {})}
                   icon={<Event className={classes.button} />}
                   alt="View your calendar events"
                   tabIndex="0"
                 />
-              </Tabs>}
-            {Object.is(this.props.mobile, false) &&
+              </Tabs>
+            )}
+            {mobile === false && (
               <Tabs
                 className={classes.flex}
-                value={this.state.value}
+                value={position}
                 onChange={this.handleChange}
               >
-                <Tab label={t("courses", {})} tabIndex="0" />
-                <Tab label={t("calendar", {})} tabIndex="0" />
-                <Tab label={t("grades", {})} tabIndex="0" />
-              </Tabs>}
-            <TermSelect
-              terms={this.props.terms}
-              currentTermDescription={this.props.currentTermDescription}
-              currentTermCode={this.props.currentTermCode}
-              updateTerm={this.props.updateTerm}
-              mobile={this.props.mobile}
-            />
+                <Tab label={t('courses', {})} tabIndex="0" />
+                <Tab label={t('calendar', {})} tabIndex="0" />
+                <Tab label={t('grades', {})} tabIndex="0" />
+              </Tabs>
+            )}
+            <TermSelect mobile={mobile} />
           </Toolbar>
         </AppBar>
-        {Object.is(this.state.value, 0) &&
+        {position === 0 && (
           <TabContainer>
-            <div>
-              {!Object.is(this.props.courses, null) &&
-                <Advising
-                  tabIndex="0"
-                  currentTermCode={this.props.currentTermCode}
-                  currentTermDescription={this.props.currentTermDescription}
-                  courses={this.props.courses}
-                  mobile={this.props.mobile}
-                  gradesURL={this.props.gradesURL}
-                />}
-            </div>
-          </TabContainer>}
-        {Object.is(this.state.value, 1) &&
+            {courses_fetched && (
+              <div>
+                <Advising tabIndex="0" mobile={mobile} />
+              </div>
+            )}
+          </TabContainer>
+        )}
+        {position === 1 && (
           <TabContainer>
             <Calendar
-              eventsURLObj={this.props.calendarURL}
-              termBounds={this.props.termBounds}
-              rootID={this.props.rootElement}
+              eventsURLObj={calendarURL}
+              termBounds={term_bounds}
+              rootID={root_element}
             />
-          </TabContainer>}
-        {Object.is(this.state.value, 2) &&
+          </TabContainer>
+        )}
+        {position === 2 && (
           <TabContainer>
-            <AdvisingGrades gradesURL={this.props.gradesURL} />
-          </TabContainer>}
+            <AdvisingGrades />
+          </TabContainer>
+        )}
       </Paper>
     )
   }
@@ -141,6 +148,21 @@ AdvisingTabs.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "AdvisingTabs" })(
-  translate("view", { wait: true })(AdvisingTabs)
+const mapStateToProps = state => ({
+  courses: state.courses.courses,
+  current_term: state.terms.current_term,
+  term_bounds: state.terms.term_bounds,
+  courses_fetched: state.courses.fetched
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetch_courses: current_term => dispatch(fetch_courses(current_term))
+  }
+}
+
+export default withStyles(styles, { name: 'AdvisingTabs' })(
+  translate('view', { wait: true })(
+    connect(mapStateToProps, mapDispatchToProps)(AdvisingTabs)
+  )
 )

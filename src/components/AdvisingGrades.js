@@ -1,18 +1,20 @@
-import React, { Component } from "react"
+import React, { Component } from 'react'
 import Table, {
   TableBody,
   TableCell,
   TableHead,
   TableRow
-} from "material-ui/Table"
-import { withStyles } from "material-ui/styles"
-import { getCredits } from "./../api/api"
-import PropTypes from "prop-types"
-import { translate } from "react-i18next"
+} from 'material-ui/Table'
+
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { fetch_credits } from './../actions/creditsActions'
+import { translate } from 'react-i18next'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   tableHeader: {
-    color: "rgba(0, 0, 0, 1)",
+    color: 'rgba(0, 0, 0, 1)',
     fontWeight: 600,
     fontSize: 14
   }
@@ -24,9 +26,8 @@ class AdvisingGrades extends Component {
   }
 
   componentDidMount() {
-    getCredits(this.props.gradesURL).then(credits => {
-      this.setState({ creditsObj: credits })
-    })
+    // eslint-disable-next-line
+    this.props.fetch_credits
   }
 
   getRows = creditsObj => {
@@ -35,15 +36,9 @@ class AdvisingGrades extends Component {
     for (let cr of creditsObj) {
       rows.push(
         <TableRow key={i}>
-          <TableCell>
-            {cr.level}
-          </TableCell>
-          <TableCell>
-            {cr.credits}
-          </TableCell>
-          <TableCell>
-            {cr.gpa}
-          </TableCell>
+          <TableCell>{cr.level}</TableCell>
+          <TableCell>{cr.credits}</TableCell>
+          <TableCell>{cr.gpa}</TableCell>
         </TableRow>
       )
       i++
@@ -52,25 +47,19 @@ class AdvisingGrades extends Component {
   }
 
   render() {
-    if (!Object.is(this.state.creditsObj, null)) {
-      const { t } = this.props
-      const classes = this.props.classes
+    //const { creditsObj } = this.state
+    const { classes, credits, credits_fetched, t } = this.props
+    if (credits_fetched === true) {
       return (
         <Table>
           <TableHead>
             <TableRow className={classes.tableHeader}>
-              <TableCell scope="col">
-                {t("level", {})}
-              </TableCell>
-              <TableCell scope="col">
-                {t("credits", {})}
-              </TableCell>
+              <TableCell scope="col">{t('level', {})}</TableCell>
+              <TableCell scope="col">{t('credits', {})}</TableCell>
               <TableCell scope="col">GPA</TableCell>
             </TableRow>
           </TableHead>
-          <TableBody>
-            {this.getRows(this.state.creditsObj)}
-          </TableBody>
+          <TableBody>{this.getRows(credits)}</TableBody>
         </Table>
       )
     } else {
@@ -83,6 +72,19 @@ AdvisingGrades.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "AdvisingGrades" })(
-  translate("view", { wait: true })(AdvisingGrades)
+const mapStateToProps = state => ({
+  credits: state.credits.credits,
+  credits_fetched: state.credits.fetched
+})
+
+const mapDispatchToProps = dispatch => {
+  return {
+    fetch_credits: dispatch(fetch_credits())
+  }
+}
+
+export default withStyles(styles, { name: 'AdvisingGrades' })(
+  translate('view', { wait: true })(
+    connect(mapStateToProps, mapDispatchToProps)(AdvisingGrades)
+  )
 )

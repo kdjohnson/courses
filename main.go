@@ -466,6 +466,16 @@ func terms(w http.ResponseWriter, r *http.Request) {
 	}
 }
 
+func advising(w http.ResponseWriter, r *http.Request) {
+	w.Header().Set("Access-Control-Allow-Origin", "*")
+	m := make(map[string]bool)
+
+	m["status"] = false
+	if err := json.NewEncoder(w).Encode(m); err != nil {
+		panic(err)
+	}
+}
+
 func init() {
 	var c config
 	file, err := os.Open("database.json")
@@ -531,6 +541,7 @@ func main() {
 	r.HandleFunc("/api/terms", terms)
 	r.HandleFunc("/api/credits", credits)
 	r.HandleFunc("/api/calendar", calendarMeeting)
+	r.HandleFunc("/api/advising", advising)
 	http.Handle("/", r)
 	http.ListenAndServe(":8082", nil)
 }

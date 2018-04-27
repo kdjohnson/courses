@@ -16,8 +16,13 @@
     "react": "16.x",
     "react-dom": "16.x",
     "react-i18next": "^4.1.0",
+    "react-redux": "^5.0.7",
     "react-to-print": "^1.0.14",
     "reactjs-calendar": "0.2.15",
+    "redux": "^3.7.2",
+    "redux-devtools": "^3.4.1",
+    "redux-logger": "^3.0.6",
+    "redux-thunk": "^2.2.0",
     "typeface-arimo": "^0.0.22"
   },
   "devDependencies": {

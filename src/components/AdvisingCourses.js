@@ -1,15 +1,17 @@
-import React, { Component } from "react"
-import Typography from "material-ui/Typography"
-import Card, { CardHeader, CardContent } from "material-ui/Card"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
-import AdvisingMeetings from "./AdvisingMeetings"
-import AdvisingInstructors from "./AdvisingInstructors"
-import AdvisingGrade from "./AdvisingGrade"
+import Card, { CardContent, CardHeader } from 'material-ui/Card'
+import React, { Component } from 'react'
+
+import AdvisingGrade from './AdvisingGrade'
+import AdvisingInstructors from './AdvisingInstructors'
+import AdvisingMeetings from './AdvisingMeetings'
+import PropTypes from 'prop-types'
+import Typography from 'material-ui/Typography'
+import { connect } from 'react-redux'
+import { withStyles } from 'material-ui/styles'
 
 const styles = theme => ({
   header: {
-    backgroundColor: theme.palette.primary[400]
+    backgroundColor: theme.palette.primary.main
   }
 })
 
@@ -22,18 +24,13 @@ class AdvisingCourses extends Component {
 
   getCourses() {
     let advisorCourses = []
-    const classes = this.props.classes
-    for (let i = 0; i < this.props.courses.length; i++) {
-      if (
-        Object.is(
-          this.props.regs[this.props.courses[i].registrationStatusDescription],
-          true
-        )
-      ) {
+    const { classes, courses, regs } = this.props
+    for (let i = 0; i < courses.length; i++) {
+      if (Object.is(regs[courses[i].registrationStatusDescription], true)) {
         advisorCourses.push(
           <Card
-            key={this.props.courses[i].crn + i + Math.random()}
-            style={{ marginBottom: "1em" }}
+            key={courses[i].crn + i + Math.random()}
+            style={{ marginBottom: '1em' }}
           >
             <CardHeader
               className={classes.header}
@@ -41,40 +38,38 @@ class AdvisingCourses extends Component {
                 <Typography
                   tabIndex="0"
                   component="h1"
-                  style={{ fontSize: "20px" }}
+                  style={{ fontSize: '20px' }}
                 >
-                  {this.props.courses[i].subjectCode +
-                    "-" +
-                    this.props.courses[i].subjectNumber +
-                    ": " +
-                    this.props.courses[i].courseTitle +
-                    " [CRN: " +
-                    this.props.courses[i].crn +
-                    "]"}
+                  {courses[i].subjectCode +
+                    '-' +
+                    courses[i].subjectNumber +
+                    ': ' +
+                    courses[i].courseTitle +
+                    ' [CRN: ' +
+                    courses[i].crn +
+                    ']'}
                 </Typography>
               }
-              key={this.props.courses[i].crn + i + Math.random()}
+              key={courses[i].crn + i + Math.random()}
               subheader={
                 <Typography tabIndex="0">
-                  {"Credits: " + this.props.courses[i].credit}
+                  {'Credits: ' + courses[i].credit}
                 </Typography>
               }
             />
-            <CardContent key={this.props.courses[i].crn + i + Math.random()}>
-              <div style={{ display: "flex", justifyContent: "space-around" }}>
+            <CardContent key={courses[i].crn + i + Math.random()}>
+              <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <div>
                   <Typography type="title">Instructors</Typography>
-                  <AdvisingInstructors
-                    instructors={this.props.courses[i].instructors}
-                  />
+                  <AdvisingInstructors instructors={courses[i].instructors} />
                 </div>
                 <div>
                   <Typography type="title">Grade</Typography>
-                  <AdvisingGrade grade={this.props.courses[i].grade} />
+                  <AdvisingGrade grade={courses[i].grade} />
                 </div>
               </div>
               <Typography type="title">Meetings</Typography>
-              <AdvisingMeetings meetings={this.props.courses[i].meetings} />
+              <AdvisingMeetings meetings={courses[i].meetings} />
             </CardContent>
           </Card>
         )
@@ -84,14 +79,11 @@ class AdvisingCourses extends Component {
   }
 
   render() {
-    if (Object.is(this.props.courses, null)) {
+    const { courses } = this.props
+    if (Object.is(courses, null)) {
       return <div />
     } else {
-      return (
-        <div>
-          {this.getCourses()}
-        </div>
-      )
+      return <div>{this.getCourses()}</div>
     }
   }
 }
@@ -100,4 +92,12 @@ AdvisingCourses.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "AdvisingCourses" })(AdvisingCourses)
+const mapStateToProps = state => ({
+  courses: state.courses.courses,
+  courses_fetched: state.courses.fetched,
+  current_term: state.terms.current_term
+})
+
+export default withStyles(styles, { name: 'AdvisingCourses' })(
+  connect(mapStateToProps)(AdvisingCourses)
+)

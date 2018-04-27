@@ -1,37 +1,37 @@
-import React, { Component } from "react"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
-import List, { ListItem, ListItemText } from "material-ui/List"
-import { translate } from "react-i18next"
+import List, { ListItem, ListItemText } from 'material-ui/List'
+import React, { Component } from 'react'
+
+import PropTypes from 'prop-types'
+import { connect } from 'react-redux'
+import { translate } from 'react-i18next'
+import { withStyles } from 'material-ui/styles'
+
 const styles = theme => ({
-  root: {
-    color: "tomato"
+  item: {
+    paddingLeft: 0
   }
 })
 
 class AdvisingGrade extends Component {
   getGrade = () => {
-    if (Object.is(this.props.grade, null)) {
+    const { classes, credits } = this.props
+    if (Object.is(credits, null)) {
       return (
-        <ListItem style={{ paddingLeft: 0 }}>
+        <ListItem className={classes.item}>
           <ListItemText primary="N/A" />
         </ListItem>
       )
     } else {
       return (
-        <ListItem style={{ paddingLeft: 0 }}>
-          <ListItemText primary={this.props.grade.grade} />
+        <ListItem className={classes.item}>
+          <ListItemText primary={credits.grade} />
         </ListItem>
       )
     }
   }
 
   render() {
-    return (
-      <List>
-        {" "}{this.getGrade()}
-      </List>
-    )
+    return <List>{this.getGrade()}</List>
   }
 }
 
@@ -39,6 +39,10 @@ AdvisingGrade.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "AdvisingGrade" })(
-  translate("view", { wait: true })(AdvisingGrade)
+const mapStateToProps = state => ({
+  credits: state.credits.credits
+})
+
+export default withStyles(styles, { name: 'AdvisingGrade' })(
+  translate('view', { wait: true })(connect(mapStateToProps)(AdvisingGrade))
 )
