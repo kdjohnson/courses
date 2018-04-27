@@ -5,11 +5,7 @@ import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
 import { withStyles } from 'material-ui/styles'
 
-const styles = theme => ({
-  root: {
-    color: 'tomato'
-  }
-})
+const styles = theme => ({})
 
 class AdvisingInstructors extends Component {
   getInsturctors = () => {

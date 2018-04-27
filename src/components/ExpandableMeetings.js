@@ -222,7 +222,7 @@ class ExpandableMeetings extends Component {
     const { classes } = this.props
     const { expanded } = this.state
     return (
-      <div style={{backgroundColor: 'tomato'}}>
+      <div>
         <div className={classes.iconButtonDiv}>
           {this.getMeeting()}
           <IconButton
