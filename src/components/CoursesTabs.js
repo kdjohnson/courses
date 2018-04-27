@@ -68,14 +68,13 @@ class CoursesTabs extends Component {
   render() {
     const {
       books,
-      calendarURL,
+      calendar_url,
       classes,
-      gradesURL,
       mobile,
       t,
       terms_fetched,
       term_bounds,
-      rootElement
+      root_element
     } = this.props
     const { value } = this.state
     if (terms_fetched) {
@@ -151,15 +150,15 @@ class CoursesTabs extends Component {
           {value === 1 && (
             <TabContainer>
               <Calendar
-                eventsURLObj={calendarURL}
+                eventsURLObj={calendar_url}
                 termBounds={term_bounds}
-                rootID={rootElement}
+                rootID={root_element}
               />
             </TabContainer>
           )}
           {value === 2 && (
             <TabContainer>
-              <Grades tabIndex="0" mobile={mobile} gradesURL={gradesURL} />
+              <Grades tabIndex="0" mobile={mobile} />
             </TabContainer>
           )}
         </Paper>

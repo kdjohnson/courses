@@ -15,7 +15,7 @@ export const get_courses = async (term, url) => {
       method: 'POST'
     })
     const courses = await response.json()
-    return courses.courses
+    return courses
   } catch (err) {
     return err
   }

@@ -14,7 +14,8 @@ export default function reducer(
         ...state,
         fetching: false,
         fetched: true,
-        courses: action.payload
+        courses: action.payload.courses,
+        books: action.payload.booksXML
       }
     }
 

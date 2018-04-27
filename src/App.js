@@ -11,7 +11,7 @@ import { fetch_advising } from './actions/advisingActions'
 import { fetch_terms } from './actions/termsActions'
 import { withStyles } from 'material-ui/styles'
 
-const calendarObj = {
+const calendar_obj = {
   url: 'http://localhost:8082/api/calendar',
   credentialsNeeded: false
 }
@@ -33,13 +33,13 @@ const styles = theme => ({
 
 class App extends Component {
   state = {
-    width: document.getElementById(this.props.rootElement).clientWidth,
+    width: document.getElementById(this.props.root_element).clientWidth,
     mobile: false
   }
 
   updateWidth = () => {
     this.setState({
-      width: document.getElementById(this.props.rootElement).clientWidth
+      width: document.getElementById(this.props.root_element).clientWidth
     })
     if (this.state.width < 650) {
       this.setState({ mobile: true })
@@ -56,7 +56,7 @@ class App extends Component {
     this.props.fetch_terms
 
     window.addEventListener('resize', this.updateWidth)
-    if (document.getElementById(this.props.rootElement).clientWidth < 650) {
+    if (document.getElementById(this.props.root_element).clientWidth < 650) {
       this.setState({ mobile: true })
     }
   }
@@ -64,12 +64,12 @@ class App extends Component {
   getView = () => {
     const {
       advising,
-      advisingError,
+      advising_error,
       classes,
-      rootElement,
+      root_element,
       terms_fetched,
       terms_fetching,
-      termsError
+      terms_error
     } = this.props
 
     const { mobile } = this.state
@@ -84,7 +84,7 @@ class App extends Component {
           />
         </div>
       )
-    } else if (termsError === true || advisingError === true) {
+    } else if (terms_error === true || advising_error === true) {
       return (
         <div className={classes.loading}>
           <ErrorMessages />
@@ -95,8 +95,8 @@ class App extends Component {
         <div>
           <CoursesTabs
             mobile={mobile}
-            rootElement={rootElement}
-            calendarURL={calendarObj}
+            root_element={root_element}
+            calendar_url={calendar_obj}
           />
         </div>
       )
@@ -105,8 +105,8 @@ class App extends Component {
         <div>
           <AdvisingTabs
             mobile={mobile}
-            rootElement={rootElement}
-            calendarURL={calendarObj}
+            root_element={root_element}
+            calendar_url={calendar_obj}
           />
         </div>
       )
@@ -121,7 +121,9 @@ class App extends Component {
 
 const mapStateToProps = state => ({
   advising: state.advising.advising,
+  advising_error: state.advising.error,
   term_bounds: state.terms.term_bounds,
+  terms_error: state.terms.error,
   terms_fetched: state.terms.fetched,
   terms_fetching: state.terms.fetching
 })

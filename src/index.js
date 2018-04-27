@@ -31,7 +31,7 @@ const theme = createMuiTheme({
   }
 })
 
-const rootElement = 'root'
+const root_element = 'root'
 const jss = create(preset())
 
 ReactDOM.render(
@@ -39,11 +39,11 @@ ReactDOM.render(
     <JssProvider jss={jss}>
       <MuiThemeProvider theme={theme}>
         <Provider store={store}>
-          <App rootElement={rootElement} />
+          <App root_element={root_element} />
         </Provider>
       </MuiThemeProvider>
     </JssProvider>
   </I18nextProvider>,
-  document.getElementById(rootElement)
+  document.getElementById(root_element)
 )
 //registerServiceWorker()
