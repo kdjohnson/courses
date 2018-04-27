@@ -3,13 +3,16 @@ import Button from 'material-ui/Button'
 import React from 'react'
 
 const mobileStyle = {
-  display: 'flex',
-  justifyContent: 'center'
+  margin: 'auto'
+}
+
+const style = {
+  marginLeft: '1em'
 }
 
 export const getBookButton = (books, term, mobile, rightIconStyle) => {
   return (
-    <div style={mobile ? mobileStyle : null}>
+    <div style={mobile ? mobileStyle : style}>
       <Button
         color="secondary"
         title="Buy Books"
