@@ -4,7 +4,7 @@ import logger from 'redux-logger'
 import reducer from './reducers'
 import thunk from 'redux-thunk'
 
-const middleware = null
+let middleware = null
 
 if(process.env.NODE_ENV === 'production') {
   middleware = applyMiddleware(thunk, logger)
