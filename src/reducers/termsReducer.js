@@ -20,11 +20,21 @@ export default function reducer(
       let current_term,
         term_start,
         term_end = null
+
+      if (Object.is(action.payload, []) || Object.is(action.payload, null)) {
+        return {
+          ...state,
+          fetching: false,
+          fetched: true,
+          error: true
+        }
+      }
+
       action.payload.forEach(term => {
         if (term.current === 'true') {
-            current_term = term
-            term_start = parseInt(current_term.start, 10)
-            term_end = parseInt(current_term.end, 10)
+          current_term = term
+          term_start = parseInt(current_term.start, 10)
+          term_end = parseInt(current_term.end, 10)
         }
       })
       const term_bounds = [term_start, term_end]
