@@ -1,13 +1,15 @@
-import Card, { CardContent, CardHeader } from 'material-ui/Card'
-import React, { Component } from 'react'
+import React from 'react'
 
 import AdvisingGrade from './AdvisingGrade'
 import AdvisingInstructors from './AdvisingInstructors'
 import AdvisingMeetings from './AdvisingMeetings'
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import CardHeader from '@material-ui/core/CardHeader'
 import PropTypes from 'prop-types'
-import Typography from 'material-ui/Typography'
+import Typography from '@material-ui/core/Typography'
 import { connect } from 'react-redux'
-import { withStyles } from 'material-ui/styles'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   header: {
@@ -15,7 +17,7 @@ const styles = theme => ({
   }
 })
 
-class AdvisingCourses extends Component {
+class AdvisingCourses extends React.Component {
   handleChange = (event, checked, type) => {
     let temp = this.props.regs
     temp[type] = checked

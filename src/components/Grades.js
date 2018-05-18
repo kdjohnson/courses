@@ -1,18 +1,20 @@
-import Card, { CardContent, CardHeader } from 'material-ui/Card'
-import React, { Component } from 'react'
-import Table, {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow
-} from 'material-ui/Table'
+import React from 'react'
 
 import PropTypes from 'prop-types'
-import Typography from 'material-ui/Typography'
 import { connect } from 'react-redux'
 import { fetch_credits } from './../actions/creditsActions'
 import { translate } from 'react-i18next'
-import { withStyles } from 'material-ui/styles'
+
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import CardHeader from '@material-ui/core/CardHeader'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   cardDiv: {
@@ -50,7 +52,7 @@ const styles = theme => ({
   }
 })
 
-class Grades extends Component {
+class Grades extends React.Component {
   componentDidMount() {
     // eslint-disable-next-line
     this.props.fetch_credits

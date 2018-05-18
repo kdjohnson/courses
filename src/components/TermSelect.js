@@ -1,16 +1,17 @@
 // @flow weak
 
-import React, { Component } from 'react'
-import PropTypes from 'prop-types'
-import { translate } from 'react-i18next'
-import { withStyles } from 'material-ui/styles'
-import { MenuItem } from 'material-ui/Menu'
-import { FormControl } from 'material-ui/Form'
-import Select from 'material-ui/Select'
-import Input from 'material-ui/Input'
+import React from 'react'
 import { connect } from 'react-redux'
 import { fetch_courses } from './../actions/coursesActions'
 import { set_current_term } from './../actions/termsActions'
+import PropTypes from 'prop-types'
+import { translate } from 'react-i18next'
+
+import Input from '@material-ui/core/Input'
+import Select from '@material-ui/core/Select'
+import FormControl from '@material-ui/core/FormControl'
+import MenuItem from '@material-ui/core/MenuItem'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   text: {
@@ -49,7 +50,7 @@ const styles = theme => ({
     color: 'white',
     underline: {
       '&before': {
-        backgroundColor: 'white'
+        borderBottomColor: 'white'
       }
     }
   },
@@ -66,16 +67,16 @@ const styles = theme => ({
 
   underline: {
     '&:before': {
-      backgroundColor: 'white'
+      borderBottomColor: 'white'
     },
 
     '&:after': {
-      backgroundColor: 'white'
+      borderBottomColor: 'white'
     }
   }
 })
 
-class TermSelect extends Component {
+class TermSelect extends React.Component {
   state = {
     selected: '',
     selectedValue: '',

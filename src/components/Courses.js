@@ -1,22 +1,24 @@
 // @flow weak
 
-import Card, { CardActions, CardContent } from 'material-ui/Card'
-import React, { Component } from 'react'
-
-import { CircularProgress } from 'material-ui/Progress'
+import React from 'react'
 import CourseDetails from './CourseDetails'
 import CourseHeader from './CourseHeader'
 import ExpandableCourse from './ExpandableCourse'
 import Instructors from './Instructors'
 import Meetings from './Meetings'
 import PropTypes from 'prop-types'
-import Typography from 'material-ui/Typography'
 import WaitlistCourse from './WaitlistCourse'
 import { connect } from 'react-redux'
 import { fetch_courses } from './../actions/coursesActions'
 import { getBookButton } from './BuyBooks'
 import { translate } from 'react-i18next'
-import { withStyles } from 'material-ui/styles'
+
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   courseContainer: {
@@ -67,7 +69,7 @@ const styles = theme => ({
   }
 })
 
-class Courses extends Component {
+class Courses extends React.Component {
   componentDidMount() {
     const { current_term } = this.props
     this.props.fetch_courses(current_term)

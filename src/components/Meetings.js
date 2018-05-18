@@ -1,10 +1,10 @@
-import React, { Component } from 'react'
+import React from 'react'
 import { displayLink, getMapUrl } from '../utils/mapLinks'
-
-import ExpandableMeetings from './ExpandableMeetings'
 import PropTypes from 'prop-types'
-import Typography from 'material-ui/Typography'
-import { withStyles } from 'material-ui/styles'
+import ExpandableMeetings from './ExpandableMeetings'
+
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   meet: {
@@ -33,7 +33,7 @@ const styles = theme => ({
   }
 })
 
-class Meetings extends Component {
+class Meetings extends React.Component {
   getMeetings = () => {
     const { classes, meetings } = this.props
     if (Object.is(meetings, null)) {

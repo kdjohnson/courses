@@ -1,14 +1,13 @@
-import React, { Component } from 'react'
-import Table, {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow
-} from 'material-ui/Table'
-
-import Paper from 'material-ui/Paper'
+import React from 'react'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
+
+import Paper from '@material-ui/core/Paper'
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   paper: {
@@ -18,7 +17,7 @@ const styles = theme => ({
   }
 })
 
-class AdvisingMeetings extends Component {
+class AdvisingMeetings extends React.Component {
   render() {
     const { classes, meetings } = this.props
     return (

@@ -1,12 +1,13 @@
 // @flow weak
 
+import React from 'react'
+import PropTypes from 'prop-types'
+
 import AddShoppingCartIcon from '@material-ui/icons/AddShoppingCart'
 import AlarmIcon from '@material-ui/icons/Alarm'
 import DeleteIcon from '@material-ui/icons/Delete'
-import IconButton from 'material-ui/IconButton'
-import PropTypes from 'prop-types'
-import React from 'react'
-import { withStyles } from 'material-ui/styles'
+import IconButton from '@material-ui/core/IconButton'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   button: {

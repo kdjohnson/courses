@@ -1,25 +1,23 @@
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle
-} from 'material-ui/Dialog'
-import List, {
-  ListItem,
-  ListItemIcon,
-  ListItemText,
-  ListSubheader
-} from 'material-ui/List'
-import React, { Component } from 'react'
-
-import Button from 'material-ui/Button'
-import Domain from '@material-ui/icons/Domain'
-import MailOutline from '@material-ui/icons/MailOutline'
-import PropTypes from 'prop-types'
-import Slide from 'material-ui/transitions/Slide'
-import Typography from 'material-ui/Typography'
+import React from 'react'
 import { getMapUrl } from '../utils/mapLinks'
 import { translate } from 'react-i18next'
-import { withStyles } from 'material-ui/styles'
+import PropTypes from 'prop-types'
+
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import Domain from '@material-ui/icons/Domain'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemIcon from '@material-ui/core/ListItemIcon'
+import ListItemText from '@material-ui/core/ListItemText'
+import ListSubheader from '@material-ui/core/ListSubheader'
+import MailOutline from '@material-ui/icons/MailOutline'
+import Slide from '@material-ui/core/Slide'
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   button: {
@@ -49,7 +47,7 @@ function Transition(props) {
   return <Slide direction="down" {...props} />
 }
 
-class Instructors extends Component {
+class Instructors extends React.Component {
   state = {
     open: false
   }
@@ -80,7 +78,7 @@ class Instructors extends Component {
           tabIndex="0"
           aria-label="instructor information"
           onClose={this.handleRequestClose}
-          transition={Transition}
+          TransitionComponent={Transition}
         >
           <DialogTitle className={classes.dialogTitle} disableTypography={true}>
             <Typography type="title" tabIndex="0" className={classes.title}>

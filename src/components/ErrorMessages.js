@@ -1,30 +1,33 @@
-import Card, { CardContent, CardHeader, CardMedia } from "material-ui/Card"
-import React, { Component } from "react"
+import React from 'react'
+import PropTypes from 'prop-types'
 
-import Error from "@material-ui/icons/Error"
-import PropTypes from "prop-types"
-import Typography from "material-ui/Typography"
-import { withStyles } from "material-ui/styles"
+import Card from '@material-ui/core/Card'
+import CardContent from '@material-ui/core/CardContent'
+import CardHeader from '@material-ui/core/CardHeader'
+import CardMedia from '@material-ui/core/CardMedia'
+import Error from '@material-ui/icons/Error'
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   root: {
-    position: "relative",
-    width: "90%"
+    position: 'relative',
+    width: '90%'
   },
 
   card: {
-    backgroundColor: "#fafafa ",
-    borderLeftStyle: "solid",
-    borderLeftWidth: "12px",
-    borderLeftColor: "#d32f2f",
-    display: "flex"
+    backgroundColor: '#fafafa ',
+    borderLeftStyle: 'solid',
+    borderLeftWidth: '12px',
+    borderLeftColor: '#d32f2f',
+    display: 'flex'
   },
 
   media: {
-    padding: "10px",
-    display: "flex",
-    alignSelf: "center",
-    marginLeft: "10px"
+    padding: '10px',
+    display: 'flex',
+    alignSelf: 'center',
+    marginLeft: '10px'
   },
 
   content: {
@@ -32,13 +35,13 @@ const styles = theme => ({
   },
 
   icon: {
-    fill: "#d32f2f",
+    fill: '#d32f2f',
     width: 75,
     height: 100
   }
 })
 
-class ErrorMessages extends Component {
+class ErrorMessages extends React.Component {
   render() {
     const { classes } = this.props
     return (
@@ -63,4 +66,4 @@ ErrorMessages.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "ErroMessages" })(ErrorMessages)
+export default withStyles(styles, { name: 'ErroMessages' })(ErrorMessages)

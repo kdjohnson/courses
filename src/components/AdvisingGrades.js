@@ -1,16 +1,15 @@
-import React, { Component } from 'react'
-import Table, {
-  TableBody,
-  TableCell,
-  TableHead,
-  TableRow
-} from 'material-ui/Table'
-
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetch_credits } from './../actions/creditsActions'
 import { translate } from 'react-i18next'
-import { withStyles } from 'material-ui/styles'
+
+import Table from '@material-ui/core/Table'
+import TableBody from '@material-ui/core/TableBody'
+import TableCell from '@material-ui/core/TableCell'
+import TableHead from '@material-ui/core/TableHead'
+import TableRow from '@material-ui/core/TableRow'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   tableHeader: {
@@ -20,7 +19,7 @@ const styles = theme => ({
   }
 })
 
-class AdvisingGrades extends Component {
+class AdvisingGrades extends React.Component {
   state = {
     creditsObj: null
   }

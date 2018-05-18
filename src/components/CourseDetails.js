@@ -1,18 +1,19 @@
-import Dialog, {
-  DialogActions,
-  DialogContent,
-  DialogTitle
-} from 'material-ui/Dialog'
-import List, { ListItem, ListItemText } from 'material-ui/List'
-import React, { Component } from 'react'
-
-import Button from 'material-ui/Button'
-import PropTypes from 'prop-types'
-import Slide from 'material-ui/transitions/Slide'
-import Typography from 'material-ui/Typography'
-import { amber } from 'material-ui/colors'
+import React from 'react'
 import { translate } from 'react-i18next'
-import { withStyles } from 'material-ui/styles'
+import PropTypes from 'prop-types'
+
+import Button from '@material-ui/core/Button'
+import Dialog from '@material-ui/core/Dialog'
+import DialogActions from '@material-ui/core/DialogActions'
+import DialogContent from '@material-ui/core/DialogContent'
+import DialogTitle from '@material-ui/core/DialogTitle'
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
+import Slide from '@material-ui/core/Slide'
+import Typography from '@material-ui/core/Typography'
+import amber from '@material-ui/core/colors/amber'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   button: {
@@ -45,7 +46,7 @@ function Transition(props) {
   return <Slide direction="down" {...props} />
 }
 
-class CourseDetails extends Component {
+class CourseDetails extends React.Component {
   state = {
     open: false
   }
@@ -60,6 +61,7 @@ class CourseDetails extends Component {
 
   render() {
     const { classes, course, courses, t } = this.props
+    const { open } = this.state
     if (Object.is(courses, null)) {
       return <div />
     } else {
@@ -80,9 +82,9 @@ class CourseDetails extends Component {
             id="dialogbox"
             aria-label="course description"
             tabIndex="0"
-            open={this.state.open}
+            open={open}
             onClose={this.handleClose}
-            transition={Transition}
+            TransitionComponent={Transition}
           >
             <DialogTitle
               className={
