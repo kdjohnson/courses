@@ -1,7 +1,7 @@
 import 'typeface-arimo'
 
 //import registerServiceWorker from "./registerServiceWorker"
-import { MuiThemeProvider, createMuiTheme } from 'material-ui/styles'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 
 import App from './App'
 import { I18nextProvider } from 'react-i18next'

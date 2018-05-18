@@ -1,12 +1,14 @@
-import Card, { CardActions, CardContent } from 'material-ui/Card'
-import React, { Component } from 'react'
-
+import React from 'react'
 import CourseDetails from './CourseDetails'
 import CourseHeader from './CourseHeader'
 import Instructors from './Instructors'
 import Meetings from './Meetings'
 import PropTypes from 'prop-types'
-import { withStyles } from 'material-ui/styles'
+
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   courseContainer: {
@@ -63,7 +65,7 @@ const styles = theme => ({
   }
 })
 
-class WaitlistCourse extends Component {
+class WaitlistCourse extends React.Component {
   render() {
     const { classes, course, mobile } = this.props
     return (

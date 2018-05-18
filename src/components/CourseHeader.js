@@ -1,11 +1,11 @@
-import React, { Component } from 'react'
-
-import { CardHeader } from 'material-ui/Card'
+import React from 'react'
 import PropTypes from 'prop-types'
-import Typography from 'material-ui/Typography'
-import { amber } from 'material-ui/colors'
 import { translate } from 'react-i18next'
-import { withStyles } from 'material-ui/styles'
+
+import CardHeader from '@material-ui/core/CardHeader'
+import Typography from '@material-ui/core/Typography'
+import amber from '@material-ui/core/colors/amber'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   classHeader: {
@@ -50,7 +50,7 @@ const styles = theme => ({
   }
 })
 
-class CourseHeader extends Component {
+class CourseHeader extends React.Component {
   getHeader() {
     const { classes, course, t } = this.props
     if (Object.is(course.waitList, '0')) {

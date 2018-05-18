@@ -1,23 +1,24 @@
 // @flow weak
 /* eslint-disable react/no-multi-comp */
 
-import React, { Component } from 'react'
-import Tabs, { Tab } from 'material-ui/Tabs'
-
-import AppBar from 'material-ui/AppBar'
-import Assignment from '@material-ui/icons/Assignment'
+import React from 'react'
 import Calendar from 'reactjs-calendar'
 import Courses from './Courses'
-import Event from '@material-ui/icons/Event'
 import Grades from './Grades'
-import Paper from 'material-ui/Paper'
 import PropTypes from 'prop-types'
-import Spellcheck from '@material-ui/icons/Spellcheck'
 import TermSelect from './TermSelect'
-import Toolbar from 'material-ui/Toolbar'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
-import { withStyles } from 'material-ui/styles'
+
+import AppBar from '@material-ui/core/AppBar'
+import Assignment from '@material-ui/icons/Assignment'
+import Event from '@material-ui/icons/Event'
+import Paper from '@material-ui/core/Paper'
+import Spellcheck from '@material-ui/icons/Spellcheck'
+import Tab from '@material-ui/core/Tab'
+import Tabs from '@material-ui/core/Tabs'
+import Toolbar from '@material-ui/core/Toolbar'
+import { withStyles } from '@material-ui/core/styles'
 
 const TabContainer = props => (
   <div style={{ padding: 20 }}>{props.children}</div>
@@ -56,7 +57,7 @@ const styles = theme => ({
   }
 })
 
-class CoursesTabs extends Component {
+class CoursesTabs extends React.Component {
   state = {
     value: 0
   }

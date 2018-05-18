@@ -1,9 +1,9 @@
-import React, { Component } from 'react'
+import React from 'react'
 
-import { FormControlLabel } from 'material-ui/Form'
-import Switch from 'material-ui/Switch'
+import FormControlLabel from '@material-ui/core/FormControlLabel'
+import Switch from '@material-ui/core/Switch'
 
-class RegistrationTypes extends Component {
+class RegistrationTypes extends React.Component {
   handleChange = (event, checked, type) => {
     let temp = this.props.regs
     temp[type] = checked

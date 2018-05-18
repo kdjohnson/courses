@@ -1,23 +1,24 @@
 // @flow weak
 /* eslint-disable react/no-multi-comp */
 
-import React, { Component } from 'react'
-import Tabs, { Tab } from 'material-ui/Tabs'
-
+import React from 'react'
 import Advising from './Advising'
 import AdvisingGrades from './AdvisingGrades'
-import AppBar from 'material-ui/AppBar'
-import Assignment from '@material-ui/icons/Assignment'
 import Calendar from 'reactjs-calendar'
-import Event from '@material-ui/icons/Event'
-import Paper from 'material-ui/Paper'
 import PropTypes from 'prop-types'
 import TermSelect from './TermSelect'
-import Toolbar from 'material-ui/Toolbar'
 import { connect } from 'react-redux'
 import { fetch_courses } from './../actions/coursesActions'
 import { translate } from 'react-i18next'
-import { withStyles } from 'material-ui/styles'
+
+import AppBar from '@material-ui/core/AppBar'
+import Assignment from '@material-ui/icons/Assignment'
+import Event from '@material-ui/icons/Event'
+import Paper from '@material-ui/core/Paper'
+import Tab from '@material-ui/core/Tabs'
+import Tabs from '@material-ui/core/Tabs'
+import Toolbar from '@material-ui/core/Toolbar'
+import { withStyles } from '@material-ui/core/styles'
 
 const TabContainer = props => (
   <div style={{ padding: 20 }}>{props.children}</div>
@@ -50,7 +51,7 @@ const styles = theme => ({
   }
 })
 
-class AdvisingTabs extends Component {
+class AdvisingTabs extends React.Component {
   componentDidMount() {
     const { current_term } = this.props
     this.props.fetch_courses(current_term)

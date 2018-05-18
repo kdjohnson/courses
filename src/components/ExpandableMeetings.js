@@ -1,14 +1,15 @@
-import React, { Component } from 'react'
+import React from 'react'
+
+import PropTypes from 'prop-types'
+import classnames from 'classnames'
 import { displayLink, getMapUrl } from '../utils/mapLinks'
 
-import { CardContent } from 'material-ui/Card'
-import Collapse from 'material-ui/transitions/Collapse'
+import CardContent from '@material-ui/core/CardContent'
+import Collapse from '@material-ui/core/Collapse'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
-import IconButton from 'material-ui/IconButton'
-import PropTypes from 'prop-types'
-import Typography from 'material-ui/Typography'
-import classnames from 'classnames'
-import { withStyles } from 'material-ui/styles'
+import IconButton from '@material-ui/core/IconButton'
+import Typography from '@material-ui/core/Typography'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   card: { maxWidth: 400 },
@@ -66,7 +67,7 @@ const styles = theme => ({
   }
 })
 
-class ExpandableMeetings extends Component {
+class ExpandableMeetings extends React.Component {
   state = { expanded: false }
 
   handleExpandClick = () => {
@@ -226,9 +227,7 @@ class ExpandableMeetings extends Component {
         <div className={classes.iconButtonDiv}>
           {this.getMeeting()}
           <IconButton
-            aria-label={
-              expanded ? 'Close more meetings' : 'Open more meetings'
-            }
+            aria-label={expanded ? 'Close more meetings' : 'Open more meetings'}
             className={classnames(classes.expand, {
               [classes.expandOpen]: expanded
             })}

@@ -1,10 +1,12 @@
-import List, { ListItem, ListItemText } from 'material-ui/List'
-import React, { Component } from 'react'
-
+import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { translate } from 'react-i18next'
-import { withStyles } from 'material-ui/styles'
+
+import List from '@material-ui/core/List'
+import ListItem from '@material-ui/core/List'
+import ListItemText from '@material-ui/core/List'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   item: {
@@ -12,7 +14,7 @@ const styles = theme => ({
   }
 })
 
-class AdvisingGrade extends Component {
+class AdvisingGrade extends React.Component {
   getGrade = () => {
     const { classes, credits } = this.props
     if (Object.is(credits, null)) {

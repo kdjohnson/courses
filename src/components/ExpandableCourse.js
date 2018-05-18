@@ -1,49 +1,49 @@
-import Card, { CardActions, CardContent } from "material-ui/Card"
-import React, { Component } from "react"
+import React from 'react'
 
-import CourseDetails from "./CourseDetails"
-import CourseHeader from "./CourseHeader"
-import Instructors from "./Instructors"
-import Meetings from "./Meetings"
-import PropTypes from "prop-types"
-import { withStyles } from "material-ui/styles"
+import CourseDetails from './CourseDetails'
+import CourseHeader from './CourseHeader'
+import Instructors from './Instructors'
+import Meetings from './Meetings'
+import PropTypes from 'prop-types'
+
+import Card from '@material-ui/core/Card'
+import CardActions from '@material-ui/core/CardActions'
+import CardContent from '@material-ui/core/CardContent'
+import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   courseContainer: {
-    flex: "1 1 auto",
-    padding: "1em"
+    flex: '1 1 auto',
+    padding: '1em'
   },
 
   card: {
-    backgroundColor: "#fafafa"
+    backgroundColor: '#fafafa'
   },
 
   content: {
     paddingTop: 0,
-    display: "flex",
-    justifyContent: "center"
+    display: 'flex',
+    justifyContent: 'center'
   }
 })
 
-class ExpandableCourse extends Component {
+class ExpandableCourse extends React.Component {
   render() {
     const { classes, course, mobile } = this.props
     return (
       <div className={classes.courseContainer}>
-        <div style={{ marginTop: "1em" }}>
+        <div style={{ marginTop: '1em' }}>
           <Card className={classes.card}>
-            <CourseHeader
-              mobile={mobile}
-              course={course}
-            />
+            <CourseHeader mobile={mobile} course={course} />
             <CardContent className={classes.content}>
               <div>
-                <div style={{ marginTop: "1em" }}>
+                <div style={{ marginTop: '1em' }}>
                   <Meetings meetings={course.meetings} />
                 </div>
               </div>
             </CardContent>
-            <CardActions style={{ justifyContent: "center", flexWrap: "wrap" }}>
+            <CardActions style={{ justifyContent: 'center', flexWrap: 'wrap' }}>
               <CourseDetails course={course} />
               <Instructors teachers={course.instructors} />
             </CardActions>
@@ -58,6 +58,6 @@ ExpandableCourse.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: "ExpandableCourse" })(
+export default withStyles(styles, { name: 'ExpandableCourse' })(
   ExpandableCourse
 )
