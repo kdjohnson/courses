@@ -56,7 +56,6 @@ const styles = theme => ({
     color: '#FFFFFF'
   },
   bar: {
-    backgrondColor: 'tomato !important',
     flexDirection: 'column'
   }
 })
