@@ -54,6 +54,9 @@ const styles = theme => ({
 
   button: {
     color: '#FFFFFF'
+  },
+  bar: {
+    flexDirection: 'column'
   }
 })
 
@@ -82,7 +85,10 @@ class CoursesTabs extends React.Component {
       return (
         <Paper className={classes.inner}>
           <AppBar position="static">
-            <Toolbar disableGutters={true} className={classes.root}>
+            <Toolbar
+              disableGutters={true}
+              className={mobile ? classes.bar : classes.root}
+            >
               {mobile === true && (
                 <Tabs
                   className={classes.flex}
