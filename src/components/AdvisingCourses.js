@@ -13,17 +13,17 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   header: {
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.light
+  },
+  body2: {
+    fontWeight: 'bolder'
+  },
+  empty: {
+    textAlign: 'center'
   }
 })
 
 class AdvisingCourses extends React.Component {
-  handleChange = (event, checked, type) => {
-    let temp = this.props.regs
-    temp[type] = checked
-    this.props.updateRegs(temp)
-  }
-
   getCourses() {
     let advisorCourses = []
     const { classes, courses, regs } = this.props
@@ -62,15 +62,27 @@ class AdvisingCourses extends React.Component {
             <CardContent key={courses[i].crn + i + Math.random()}>
               <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <div>
-                  <Typography type="title">Instructors</Typography>
+                  <Typography
+                    variant="body2"
+                    classes={{ body2: classes.body2 }}
+                  >
+                    Instructors
+                  </Typography>
                   <AdvisingInstructors instructors={courses[i].instructors} />
                 </div>
                 <div>
-                  <Typography type="title">Grade</Typography>
+                  <Typography
+                    variant="body2"
+                    classes={{ body2: classes.body2 }}
+                  >
+                    Grade
+                  </Typography>
                   <AdvisingGrade grade={courses[i].grade} />
                 </div>
               </div>
-              <Typography type="title">Meetings</Typography>
+              <Typography variant="body2" classes={{ body2: classes.body2 }}>
+                Meetings
+              </Typography>
               <AdvisingMeetings meetings={courses[i].meetings} />
             </CardContent>
           </Card>
@@ -81,9 +93,17 @@ class AdvisingCourses extends React.Component {
   }
 
   render() {
-    const { courses } = this.props
-    if (Object.is(courses, null)) {
+    const { courses_error, courses_fetched, classes, updating } = this.props
+    if (courses_fetched !== true || updating === true) {
       return <div />
+    } else if (courses_error) {
+      return (
+        <div>
+          <Typography variant="display2" className={classes.empty} tabIndex="0">
+            No Courses.
+          </Typography>
+        </div>
+      )
     } else {
       return <div>{this.getCourses()}</div>
     }
@@ -96,8 +116,11 @@ AdvisingCourses.propTypes = {
 
 const mapStateToProps = state => ({
   courses: state.courses.courses,
+  courses_error: state.courses.error,
   courses_fetched: state.courses.fetched,
-  current_term: state.terms.current_term
+  current_term: state.terms.current_term,
+  regs: state.courses.regs,
+  updating: state.courses.updating
 })
 
 export default withStyles(styles, { name: 'AdvisingCourses' })(

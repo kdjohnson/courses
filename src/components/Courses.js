@@ -141,12 +141,20 @@ class Courses extends React.Component {
       books,
       current_term,
       classes,
-      courses,
+      courses_error,
       courses_fetched,
       courses_fetching,
       mobile
     } = this.props
-    if (courses_fetching) {
+    if (courses_error) {
+      return (
+        <div>
+          <Typography variant="display2" className={classes.empty} tabIndex="0">
+            No Courses.
+          </Typography>
+        </div>
+      )
+    } else if (courses_fetching) {
       return (
         <div className={classes.loading}>
           <CircularProgress
@@ -157,37 +165,23 @@ class Courses extends React.Component {
         </div>
       )
     } else if (courses_fetched) {
-      if (Object.is(courses, null)) {
-        return (
-          <div>
-            <Typography
-              variant="display2"
-              className={classes.empty}
-              tabIndex="0"
-            >
-              No Courses.
-            </Typography>
+      return (
+        <div ref={el => (this.componentRef = el)}>
+          <div className={classes.buttonsDiv}>
+            {getBookButton(
+              books,
+              current_term.description,
+              mobile,
+              classes.rightIcon
+            )}
           </div>
-        )
-      } else {
-        return (
-          <div ref={el => (this.componentRef = el)}>
-            <div className={classes.buttonsDiv}>
-              {getBookButton(
-                books,
-                current_term.description,
-                mobile,
-                classes.rightIcon
-              )}
-            </div>
-            <div
-              className={mobile ? classes.coursesDivMobile : classes.coursesDiv}
-            >
-              {this.getCourses()}
-            </div>
+          <div
+            className={mobile ? classes.coursesDivMobile : classes.coursesDiv}
+          >
+            {this.getCourses()}
           </div>
-        )
-      }
+        </div>
+      )
     } else {
       return <div />
     }
@@ -201,6 +195,7 @@ Courses.propTypes = {
 const mapStateToProps = state => ({
   books: state.courses.books,
   courses: state.courses.courses,
+  courses_error: state.courses.error,
   courses_fetched: state.courses.fetched,
   courses_fetching: state.courses.fetching,
   current_term: state.terms.current_term

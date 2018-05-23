@@ -13,3 +13,10 @@ export function fetch_courses(new_term) {
       })
   }
 }
+
+export function update_regs(newRegs) {
+  return function(dispatch) {
+    dispatch({ type: 'UPDATING_REGS', payload: {} })
+    dispatch({ type: 'UPDATE_REGS', payload: newRegs })
+  }
+}

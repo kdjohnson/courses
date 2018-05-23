@@ -3,7 +3,7 @@ export default function reducer(
     terms: [],
     fetching: false,
     fetched: false,
-    error: null,
+    error: false,
     current_term: null,
     term_bounds: null
   },
@@ -13,15 +13,15 @@ export default function reducer(
     case 'FETCH_TERMS_START': {
       return { ...state, fetching: true, fetched: false }
     }
-    case 'FETCH_TERMS_ERRORS': {
-      return { ...state, fetching: false, error: action.payload }
+    case 'FETCH_TERMS_ERROR': {
+      return { ...state, fetching: false, fetched: true, error: true }
     }
     case 'RECEIVE_TERMS': {
       let current_term,
         term_start,
         term_end = null
 
-      if (Object.is(action.payload, []) || Object.is(action.payload, null)) {
+      if (action.payload === [] || action.payload === null) {
         return {
           ...state,
           fetching: false,
@@ -48,9 +48,13 @@ export default function reducer(
       }
     }
     case 'RECEIVE_CURRENT_TERM': {
+      let term_start = parseInt(action.payload.start, 10)
+      let term_end = parseInt(action.payload.end, 10)
+      const term_bounds = [term_start, term_end]
       return {
         ...state,
-        current_term: action.payload
+        current_term: action.payload,
+        term_bounds: term_bounds
       }
     }
     default:

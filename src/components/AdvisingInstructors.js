@@ -1,16 +1,21 @@
 import React from 'react'
 
 import List from '@material-ui/core/List'
-import ListItem from '@material-ui/core/List'
-import ListItemText from '@material-ui/core/List'
+import ListItem from '@material-ui/core/ListItem'
+import ListItemText from '@material-ui/core/ListItemText'
 import PropTypes from 'prop-types'
 import { translate } from 'react-i18next'
 import { withStyles } from '@material-ui/core/styles'
 
-const styles = theme => ({})
+const styles = theme => ({
+  itemText: {
+    color: 'rgba(0, 0, 0, 0.87)'
+  }
+})
 
 class AdvisingInstructors extends React.Component {
   getInsturctors = () => {
+    const { classes } = this.props
     let teachers = []
     for (let i = 0; i < this.props.instructors.length; i++) {
       teachers.push(
@@ -19,7 +24,10 @@ class AdvisingInstructors extends React.Component {
           key={this.props.instructors[i].crn + Math.random()}
         >
           <ListItemText
-            primary={
+            classes={{
+              secondary: classes.itemText
+            }}
+            secondary={
               this.props.instructors[i].firstName +
               ' ' +
               this.props.instructors[i].lastName
