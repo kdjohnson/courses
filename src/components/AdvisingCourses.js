@@ -14,6 +14,9 @@ import { withStyles } from '@material-ui/core/styles'
 const styles = theme => ({
   header: {
     backgroundColor: theme.palette.primary.light
+  },
+  body2: {
+    fontWeight: 'bolder'
   }
 })
 
@@ -56,15 +59,27 @@ class AdvisingCourses extends React.Component {
             <CardContent key={courses[i].crn + i + Math.random()}>
               <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <div>
-                  <Typography type="title">Instructors</Typography>
+                  <Typography
+                    variant="body2"
+                    classes={{ body2: classes.body2 }}
+                  >
+                    Instructors
+                  </Typography>
                   <AdvisingInstructors instructors={courses[i].instructors} />
                 </div>
                 <div>
-                  <Typography type="title">Grade</Typography>
+                  <Typography
+                    variant="body2"
+                    classes={{ body2: classes.body2 }}
+                  >
+                    Grade
+                  </Typography>
                   <AdvisingGrade grade={courses[i].grade} />
                 </div>
               </div>
-              <Typography type="title">Meetings</Typography>
+              <Typography variant="body2" classes={{ body2: classes.body2 }}>
+                Meetings
+              </Typography>
               <AdvisingMeetings meetings={courses[i].meetings} />
             </CardContent>
           </Card>
