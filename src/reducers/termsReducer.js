@@ -48,9 +48,13 @@ export default function reducer(
       }
     }
     case 'RECEIVE_CURRENT_TERM': {
+      let term_start = parseInt(action.payload.start, 10)
+      let term_end = parseInt(action.payload.end, 10)
+      const term_bounds = [term_start, term_end]
       return {
         ...state,
-        current_term: action.payload
+        current_term: action.payload,
+        term_bounds: term_bounds
       }
     }
     default:

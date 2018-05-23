@@ -15,12 +15,13 @@ export default function reducer(
       return { ...state, fetching: true, fetched: false, error: false }
     }
     case 'FETCH_COURSES_ERROR': {
-      return { ...state, fetching: false, error: true }
+      return { ...state, fetching: false, fetched: true, error: true }
     }
     case 'RECEIVE_COURSES': {
       if (action.payload.courses === null) {
         return {
           ...state,
+          courses: null,
           fetching: false,
           fetched: true,
           error: true
