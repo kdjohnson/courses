@@ -38,8 +38,12 @@ class RegistrationTypes extends React.Component {
   }
 
   render() {
-    const { courses_fetched, updating } = this.props
-    if (courses_fetched !== true || updating === true) {
+    const { courses_error, courses_fetched, updating } = this.props
+    if (
+      courses_fetched !== true ||
+      updating === true ||
+      courses_error === true
+    ) {
       return <div />
     } else {
       return <div>{this.getSwitches()}</div>
@@ -48,6 +52,7 @@ class RegistrationTypes extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  courses_error: state.courses.error,
   courses_fetched: state.courses.fetched,
   updating: state.courses.updating,
   regs: state.courses.regs

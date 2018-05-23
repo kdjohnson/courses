@@ -17,6 +17,9 @@ const styles = theme => ({
   },
   body2: {
     fontWeight: 'bolder'
+  },
+  empty: {
+    textAlign: 'center'
   }
 })
 
@@ -90,9 +93,17 @@ class AdvisingCourses extends React.Component {
   }
 
   render() {
-    const { courses_fetched, updating } = this.props
+    const { courses_error, courses_fetched, classes, updating } = this.props
     if (courses_fetched !== true || updating === true) {
       return <div />
+    } else if (courses_error) {
+      return (
+        <div>
+          <Typography variant="display2" className={classes.empty} tabIndex="0">
+            No Courses.
+          </Typography>
+        </div>
+      )
     } else {
       return <div>{this.getCourses()}</div>
     }
@@ -105,6 +116,7 @@ AdvisingCourses.propTypes = {
 
 const mapStateToProps = state => ({
   courses: state.courses.courses,
+  courses_error: state.courses.error,
   courses_fetched: state.courses.fetched,
   current_term: state.terms.current_term,
   regs: state.courses.regs,

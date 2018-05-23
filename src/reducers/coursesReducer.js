@@ -4,7 +4,7 @@ export default function reducer(
     courses: [],
     fetching: false,
     fetched: false,
-    error: null,
+    error: false,
     regs: null,
     updating: false
   },
@@ -12,10 +12,10 @@ export default function reducer(
 ) {
   switch (action.type) {
     case 'FETCH_COURSES_START': {
-      return { ...state, fetching: true, fetched: false }
+      return { ...state, fetching: true, fetched: false, error: false }
     }
-    case 'FETCH_COURSES_ERRORS': {
-      return { ...state, fetching: false, error: action.payload }
+    case 'FETCH_COURSES_ERROR': {
+      return { ...state, fetching: false, error: true }
     }
     case 'RECEIVE_COURSES': {
       if (action.payload.courses === null) {
@@ -41,17 +41,16 @@ export default function reducer(
         fetched: true,
         courses: action.payload.courses,
         books: action.payload.bookXML,
-        regs: regs
+        regs: regs,
+        error: false
       }
     }
 
     case 'UPDATING_REGS': {
-      return { ...state, updating: true }
+      return { ...state, updating: true, error: false }
     }
     case 'UPDATE_REGS': {
-      console.log('update regs')
-      console.log(action.payload)
-      return { ...state, regs: action.payload, updating: false }
+      return { ...state, regs: action.payload, updating: false, error: false }
     }
 
     default:

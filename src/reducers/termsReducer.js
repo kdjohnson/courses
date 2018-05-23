@@ -3,7 +3,7 @@ export default function reducer(
     terms: [],
     fetching: false,
     fetched: false,
-    error: null,
+    error: false,
     current_term: null,
     term_bounds: null
   },
@@ -13,8 +13,8 @@ export default function reducer(
     case 'FETCH_TERMS_START': {
       return { ...state, fetching: true, fetched: false }
     }
-    case 'FETCH_TERMS_ERRORS': {
-      return { ...state, fetching: false, fetched: true, error: action.payload }
+    case 'FETCH_TERMS_ERROR': {
+      return { ...state, fetching: false, fetched: true, error: true }
     }
     case 'RECEIVE_TERMS': {
       let current_term,
