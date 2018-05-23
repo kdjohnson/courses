@@ -16,6 +16,10 @@ const styles = theme => ({
     color: 'rgba(0, 0, 0, 1)',
     fontWeight: 600,
     fontSize: 14
+  },
+  cell: {
+    color: 'rgba(0, 0, 0, 0.87)',
+    fontWeight: 'bolder'
   }
 })
 
@@ -53,9 +57,15 @@ class AdvisingGrades extends React.Component {
         <Table>
           <TableHead>
             <TableRow className={classes.tableHeader}>
-              <TableCell scope="col">{t('level', {})}</TableCell>
-              <TableCell scope="col">{t('credits', {})}</TableCell>
-              <TableCell scope="col">GPA</TableCell>
+              <TableCell classes={{ head: classes.cell }} scope="col">
+                {t('level', {})}
+              </TableCell>
+              <TableCell classes={{ head: classes.cell }} scope="col">
+                {t('credits', {})}
+              </TableCell>
+              <TableCell classes={{ head: classes.cell }} scope="col">
+                GPA
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>{this.getRows(credits)}</TableBody>

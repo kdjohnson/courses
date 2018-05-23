@@ -20,44 +20,18 @@ const styles = theme => ({
 })
 
 class Advising extends React.Component {
-  state = {
-    regs: {}
-  }
-
-  componentDidMount() {
-    let set = new Set()
-    const { courses, courses_fetched } = this.props
-    if (courses_fetched && !Object.is(courses, null)) {
-      for (let i = 0; i < courses.length; i++) {
-        set.add(courses[i].registrationStatusDescription)
-      }
-
-      let regs = {}
-      for (let type of set) {
-        regs[type] = true
-      }
-
-      this.setState({ regs })
-    }
-  }
-
   getAdvising = () => {
     const { courses } = this.props
-    const { regs } = this.state
     if (Object.is(courses, null)) {
       return <div />
     }
 
     return (
       <div>
-        <RegistrationTypes updateRegs={this.updateRegs} regs={regs} />
-        <AdvisingCourses courses={courses} regs={regs} />
+        <RegistrationTypes />
+        <AdvisingCourses />
       </div>
     )
-  }
-
-  updateRegs = newRegs => {
-    this.setState({ regs: newRegs })
   }
 
   render() {
@@ -77,6 +51,7 @@ class Advising extends React.Component {
 }
 
 const mapStateToProps = state => ({
+  regs: state.courses.regs,
   courses: state.courses.courses,
   courses_fetched: state.courses.fetched
 })

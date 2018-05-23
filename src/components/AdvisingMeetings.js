@@ -14,6 +14,10 @@ const styles = theme => ({
     width: '100%',
     marginTop: theme.spacing.unit * 3,
     overflowX: 'auto'
+  },
+  cell: {
+    color: 'rgba(0, 0, 0, 0.87)',
+    fontWeight: 'bolder'
   }
 })
 
@@ -25,11 +29,19 @@ class AdvisingMeetings extends React.Component {
         <Table>
           <TableHead>
             <TableRow>
-              <TableCell>Meet Type</TableCell>
-              <TableCell numeric>Start / End Time</TableCell>
-              <TableCell numeric>Start / End Date</TableCell>
-              <TableCell numeric>Days</TableCell>
-              <TableCell numeric>Location</TableCell>
+              <TableCell classes={{ head: classes.cell }}>Meet Type</TableCell>
+              <TableCell classes={{ head: classes.cell }} numeric>
+                Start / End Time
+              </TableCell>
+              <TableCell classes={{ head: classes.cell }} numeric>
+                Start / End Date
+              </TableCell>
+              <TableCell classes={{ head: classes.cell }} numeric>
+                Days
+              </TableCell>
+              <TableCell classes={{ head: classes.cell }} numeric>
+                Location
+              </TableCell>
             </TableRow>
           </TableHead>
           <TableBody>
@@ -38,7 +50,7 @@ class AdvisingMeetings extends React.Component {
                 <TableRow key={meet.crn + Math.random()}>
                   <TableCell>{meet.courseType}</TableCell>
                   <TableCell numeric>
-                    {meet.startTime + '-' + meet.endTime}
+                    {meet.startTime + ' - ' + meet.endTime}
                   </TableCell>
                   <TableCell numeric>
                     {meet.startMonth +
@@ -46,7 +58,7 @@ class AdvisingMeetings extends React.Component {
                       meet.startDay +
                       '/' +
                       meet.startYear +
-                      '-' +
+                      ' - ' +
                       meet.endMonth +
                       '/' +
                       meet.endDay +

@@ -66,6 +66,7 @@ class App extends Component {
       advising,
       advising_error,
       classes,
+      courses_error,
       root_element,
       terms_fetched,
       terms_fetching,
@@ -84,7 +85,11 @@ class App extends Component {
           />
         </div>
       )
-    } else if (terms_error === true || advising_error === true) {
+    } else if (
+      terms_error === true ||
+      advising_error === true ||
+      courses_error === true
+    ) {
       return (
         <div className={classes.loading}>
           <ErrorMessages />
@@ -122,6 +127,7 @@ class App extends Component {
 const mapStateToProps = state => ({
   advising: state.advising.advising,
   advising_error: state.advising.error,
+  courses_error: state.courses.error,
   term_bounds: state.terms.term_bounds,
   terms_error: state.terms.error,
   terms_fetched: state.terms.fetched,

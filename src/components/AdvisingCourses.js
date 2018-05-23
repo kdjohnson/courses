@@ -13,17 +13,11 @@ import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
   header: {
-    backgroundColor: theme.palette.primary.main
+    backgroundColor: theme.palette.primary.light
   }
 })
 
 class AdvisingCourses extends React.Component {
-  handleChange = (event, checked, type) => {
-    let temp = this.props.regs
-    temp[type] = checked
-    this.props.updateRegs(temp)
-  }
-
   getCourses() {
     let advisorCourses = []
     const { classes, courses, regs } = this.props
@@ -81,8 +75,8 @@ class AdvisingCourses extends React.Component {
   }
 
   render() {
-    const { courses } = this.props
-    if (Object.is(courses, null)) {
+    const { courses_fetched, updating } = this.props
+    if (courses_fetched !== true || updating === true) {
       return <div />
     } else {
       return <div>{this.getCourses()}</div>
@@ -97,7 +91,9 @@ AdvisingCourses.propTypes = {
 const mapStateToProps = state => ({
   courses: state.courses.courses,
   courses_fetched: state.courses.fetched,
-  current_term: state.terms.current_term
+  current_term: state.terms.current_term,
+  regs: state.courses.regs,
+  updating: state.courses.updating
 })
 
 export default withStyles(styles, { name: 'AdvisingCourses' })(

@@ -14,14 +14,14 @@ export default function reducer(
       return { ...state, fetching: true, fetched: false }
     }
     case 'FETCH_TERMS_ERRORS': {
-      return { ...state, fetching: false, error: action.payload }
+      return { ...state, fetching: false, fetched: true, error: action.payload }
     }
     case 'RECEIVE_TERMS': {
       let current_term,
         term_start,
         term_end = null
 
-      if (Object.is(action.payload, []) || Object.is(action.payload, null)) {
+      if (action.payload === [] || action.payload === null) {
         return {
           ...state,
           fetching: false,
