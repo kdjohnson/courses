@@ -109,7 +109,11 @@ class Instructors extends React.Component {
         return (
           <List
             subheader={
-              <ListSubheader tabIndex="0" classes={classes.instructor}>
+              <ListSubheader
+                tabIndex="0"
+                classes={classes.instructor}
+                disableSticky={true}
+              >
                 "N/A"
               </ListSubheader>
             }
@@ -132,7 +136,11 @@ class Instructors extends React.Component {
         list.push(
           <List
             subheader={
-              <ListSubheader tabIndex="0" className={classes.instructor}>
+              <ListSubheader
+                tabIndex="0"
+                className={classes.instructor}
+                disableSticky={true}
+              >
                 {teachers[i].firstName + '  ' + teachers[i].lastName}
               </ListSubheader>
             }
