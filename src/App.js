@@ -84,32 +84,38 @@ class App extends Component {
           />
         </div>
       )
-    } else if (terms_error === true || advising_error === true) {
-      return (
-        <div className={classes.loading}>
-          <ErrorMessages />
-        </div>
-      )
-    } else if (advising === false && terms_fetched === true) {
-      return (
-        <div>
-          <CoursesTabs
-            mobile={mobile}
-            root_element={root_element}
-            calendar_url={calendar_obj}
-          />
-        </div>
-      )
-    } else if (advising === true && terms_fetched === true) {
-      return (
-        <div>
-          <AdvisingTabs
-            mobile={mobile}
-            root_element={root_element}
-            calendar_url={calendar_obj}
-          />
-        </div>
-      )
+    } else if (terms_fetched === true) {
+      if (terms_error === true || advising_error === true) {
+        return (
+          <div className={classes.loading}>
+            <ErrorMessages />
+          </div>
+        )
+      }
+
+      if (advising === false) {
+        return (
+          <div>
+            <CoursesTabs
+              mobile={mobile}
+              root_element={root_element}
+              calendar_url={calendar_obj}
+            />
+          </div>
+        )
+      }
+
+      if (advising === true) {
+        return (
+          <div>
+            <AdvisingTabs
+              mobile={mobile}
+              root_element={root_element}
+              calendar_url={calendar_obj}
+            />
+          </div>
+        )
+      }
     }
   }
 
