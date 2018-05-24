@@ -2,7 +2,7 @@ export const get_terms = async url => {
   try {
     const response = await fetch(url)
     const terms = await response.json()
-    return terms.terms
+    return terms
   } catch (err) {
     return err
   }
