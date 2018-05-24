@@ -82,8 +82,6 @@ class CoursesTabs extends React.Component {
       root_element
     } = this.props
     const { value } = this.state
-    console.log(current_term)
-
     if (terms_fetched) {
       return (
         <Paper className={classes.inner}>
