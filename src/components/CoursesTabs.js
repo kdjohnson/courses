@@ -76,11 +76,14 @@ class CoursesTabs extends React.Component {
       classes,
       mobile,
       t,
+      current_term,
       terms_fetched,
       term_bounds,
       root_element
     } = this.props
     const { value } = this.state
+    console.log(current_term)
+
     if (terms_fetched) {
       return (
         <Paper className={classes.inner}>
@@ -157,6 +160,7 @@ class CoursesTabs extends React.Component {
           {value === 1 && (
             <TabContainer>
               <Calendar
+                current_term={current_term.code}
                 eventsURLObj={calendar_url}
                 termBounds={term_bounds}
                 rootID={root_element}
