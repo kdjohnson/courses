@@ -14,7 +14,6 @@ class RegistrationTypes extends React.Component {
 
   getSwitches() {
     const { regs } = this.props
-    console.log(regs)
     let switches = []
     Object.entries(regs).forEach(([type, value]) => {
       switches.push(
