@@ -4,7 +4,7 @@ import BookIcon from '@material-ui/icons/ImportContacts'
 import Button from '@material-ui/core/Button'
 
 const mobileStyle = {
-  margin: 'auto'
+  marginLeft: '0px'
 }
 
 const style = {
