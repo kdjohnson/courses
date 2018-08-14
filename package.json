@@ -3,8 +3,8 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "1.0.0",
-    "@material-ui/icons": "1.0.0",
+    "@material-ui/core": "1.4.3",
+    "@material-ui/icons": "2.0.1",
     "detect-browser": "^1.9.0",
     "i18next": "^8.4.0",
     "i18next-browser-languagedetector": "^1.0.1",
