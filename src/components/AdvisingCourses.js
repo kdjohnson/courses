@@ -39,7 +39,7 @@ class AdvisingCourses extends React.Component {
               title={
                 <Typography
                   tabIndex="0"
-                  component="h1"
+                  variant="h1"
                   style={{ fontSize: '20px' }}
                 >
                   {courses[i].subjectCode +
@@ -63,7 +63,7 @@ class AdvisingCourses extends React.Component {
               <div style={{ display: 'flex', justifyContent: 'space-around' }}>
                 <div>
                   <Typography
-                    variant="body2"
+                    variant="body1"
                     classes={{ body2: classes.body2 }}
                   >
                     Instructors
@@ -72,7 +72,7 @@ class AdvisingCourses extends React.Component {
                 </div>
                 <div>
                   <Typography
-                    variant="body2"
+                    variant="body1"
                     classes={{ body2: classes.body2 }}
                   >
                     Grade
@@ -80,7 +80,7 @@ class AdvisingCourses extends React.Component {
                   <AdvisingGrade grade={courses[i].grade} />
                 </div>
               </div>
-              <Typography variant="body2" classes={{ body2: classes.body2 }}>
+              <Typography variant="body1" classes={{ body2: classes.body2 }}>
                 Meetings
               </Typography>
               <AdvisingMeetings meetings={courses[i].meetings} />
@@ -99,7 +99,7 @@ class AdvisingCourses extends React.Component {
     } else if (courses_error) {
       return (
         <div>
-          <Typography variant="display2" className={classes.empty} tabIndex="0">
+          <Typography variant="h3" className={classes.empty} tabIndex="0">
             No Courses.
           </Typography>
         </div>

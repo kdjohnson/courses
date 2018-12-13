@@ -53,7 +53,7 @@ class ErrorMessages extends React.Component {
           <div>
             <CardHeader title="We were unable to fetch your data at this time." />
             <CardContent className={classes.content}>
-              <Typography type="subheading">Please try again later.</Typography>
+              <Typography variant="subtitle1">Please try again later.</Typography>
             </CardContent>
           </div>
         </Card>

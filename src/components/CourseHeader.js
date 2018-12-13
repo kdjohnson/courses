@@ -59,7 +59,7 @@ class CourseHeader extends React.Component {
           className={classes.classHeader}
           title={
             <Typography
-              type="subheading"
+              variant="subtitle1"
               tabIndex="0"
               className={classes.courseTitle}
             >
