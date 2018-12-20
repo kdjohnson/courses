@@ -3,10 +3,10 @@ import ReactDOM from 'react-dom'
 import 'typeface-arimo'
 import App from './App'
 import i18n from './utils/i18n'
-import preset from 'jss-preset-default'
+import { jssPreset } from '@material-ui/core/styles'
 import store from './store'
 import { I18nextProvider } from 'react-i18next'
-import { JssProvider } from 'react-jss'
+import JssProvider from 'react-jss/lib/JssProvider'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { Provider } from 'react-redux'
 import { create } from 'jss'
@@ -32,7 +32,7 @@ const theme = createMuiTheme({
 })
 
 const root_element = 'root'
-const jss = create(preset())
+const jss = create(jssPreset())
 
 ReactDOM.render(
   <I18nextProvider i18n={i18n}>

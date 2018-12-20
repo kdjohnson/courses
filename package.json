@@ -12,12 +12,11 @@
     "i18next-localstorage-cache": "^1.1.1",
     "i18next-xhr-backend": "^1.4.1",
     "iterators-polyfill": "^1.0.2",
-    "jss": "^9.8.1",
+    "react-jss": "^8.6.1",
     "react": "16.x",
     "react-dom": "16.x",
     "react-i18next": "^4.1.0",
     "react-redux": "^5.0.7",
-    "reactjs-calendar": "^0.2.24",
     "redux": "^3.7.2",
     "redux-devtools": "^3.4.1",
     "redux-logger": "^3.0.6",
@@ -29,7 +28,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && yarn run build:clean",
+    "build": "react-scripts build && npm run build:clean",
     "build:clean": "cd build/static/js/ && cp *.js ./main.js && cp *.map ./main.js.map && cp ../../service-worker.js .",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
