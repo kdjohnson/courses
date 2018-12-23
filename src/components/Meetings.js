@@ -41,19 +41,19 @@ class Meetings extends React.Component {
     } else if (meetings.length === 0) {
       return (
         <div>
-          <Typography type="body2" className={classes.meetNoLink} tabIndex="0">
+          <Typography variant="body1" className={classes.meetNoLink} tabIndex="0">
             N/A
           </Typography>
-          <Typography type="body2" className={classes.meet} tabIndex="0">
+          <Typography variant="body1" className={classes.meet} tabIndex="0">
             N/A
           </Typography>
-          <Typography type="body2" className={classes.meet} tabIndex="0">
+          <Typography variant="body1" className={classes.meet} tabIndex="0">
             N/A
           </Typography>
-          <Typography type="body2" className={classes.meet} tabIndex="0">
+          <Typography variant="body1" className={classes.meet} tabIndex="0">
             N/A
           </Typography>
-          <Typography type="body2" className={classes.meet} tabIndex="0">
+          <Typography variant="body1" className={classes.meet} tabIndex="0">
             N/A
           </Typography>
         </div>
@@ -77,21 +77,21 @@ class Meetings extends React.Component {
             )}
             {!displayLink(meetings[0].buildingRoom, meetings[0].campus) && (
               <Typography
-                type="body2"
+                variant="body1"
                 className={classes.meetNoLink}
                 tabIndex="0"
               >
                 {meetings[0].buildingRoom + ' [' + meetings[0].campus + ']'}
               </Typography>
             )}
-            <Typography type="body2" className={classes.meet} tabIndex="0">
+            <Typography variant="body1" className={classes.meet} tabIndex="0">
               {`${meetings[0].meetDays} `}
             </Typography>
-            <Typography type="body2" className={classes.meet} tabIndex="0">
+            <Typography varaint="body1" className={classes.meet} tabIndex="0">
               {meetings[0].startTime + ' - ' + meetings[0].endTime}
             </Typography>
             <Typography
-              type="body2"
+              variant="body1"
               className={classes.meet}
               tabIndex="0"
               aria-label={
@@ -120,7 +120,7 @@ class Meetings extends React.Component {
                 '/' +
                 meetings[0].endYear}
             </Typography>
-            <Typography type="body2" className={classes.meet} tabIndex="0">
+            <Typography variant="body1" className={classes.meet} tabIndex="0">
               {meetings[0].courseType}
             </Typography>
           </div>

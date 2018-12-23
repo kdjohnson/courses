@@ -1,10 +1,10 @@
 {
   "name": "courses",
-  "version": "0.1.0",
+  "version": "1.0.0",
   "private": true,
   "dependencies": {
-    "@material-ui/core": "1.4.3",
-    "@material-ui/icons": "2.0.1",
+    "@material-ui/core": "~3.6.2",
+    "@material-ui/icons": "~3.0.1",
     "detect-browser": "^1.9.0",
     "i18next": "^8.4.0",
     "i18next-browser-languagedetector": "^1.0.1",
@@ -12,10 +12,10 @@
     "i18next-localstorage-cache": "^1.1.1",
     "i18next-xhr-backend": "^1.4.1",
     "iterators-polyfill": "^1.0.2",
-    "jss": "^9.8.1",
     "react": "16.x",
     "react-dom": "16.x",
     "react-i18next": "^4.1.0",
+    "react-jss": "^8.6.1",
     "react-redux": "^5.0.7",
     "reactjs-calendar": "^0.2.24",
     "redux": "^3.7.2",
@@ -25,13 +25,19 @@
     "typeface-arimo": "^0.0.22"
   },
   "devDependencies": {
-    "react-scripts": "^1.1.4"
+    "react-scripts": "^2.1.1"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "react-scripts build && yarn run build:clean",
+    "build": "react-scripts build && npm run build:clean",
     "build:clean": "cd build/static/js/ && cp *.js ./main.js && cp *.map ./main.js.map && cp ../../service-worker.js .",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "browserslist": [
+    ">0.2%",
+    "not dead",
+    "not ie <= 11",
+    "not op_mini all"
+  ]
 }

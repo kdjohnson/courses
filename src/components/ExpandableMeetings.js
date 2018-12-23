@@ -93,18 +93,18 @@ class ExpandableMeetings extends React.Component {
           )}
           {!displayLink(meetings[i].buildingRoom, meetings[i].campus) && (
             <Typography
-              type="body2"
+              variant="body1"
               className={classes.meetNoLink}
               tabIndex="0"
             >
               {meetings[i].buildingRoom + ' [' + meetings[i].campus + ']'}
             </Typography>
           )}
-          <Typography type="body2" className={classes.meet} tabIndex="0">
+          <Typography variant="body1" className={classes.meet} tabIndex="0">
             {`${meetings[i].meetDays} `}
           </Typography>
           <Typography
-            type="body2"
+            variant="body1"
             className={classes.meet}
             tabIndex="0"
             key={meetings[i].endDate + Math.random()}
@@ -112,7 +112,7 @@ class ExpandableMeetings extends React.Component {
             {meetings[i].startTime + ' - ' + meetings[i].endTime}
           </Typography>
           <Typography
-            type="body2"
+            variant="body1"
             className={classes.meet}
             tabIndex="0"
             aria-label={
@@ -141,7 +141,7 @@ class ExpandableMeetings extends React.Component {
               '/' +
               meetings[i].endYear}
           </Typography>
-          <Typography type="body2" className={classes.meet} tabIndex="0">
+          <Typography variant="body1" className={classes.meet} tabIndex="0">
             {meetings[i].courseType}
           </Typography>
         </div>
@@ -167,15 +167,15 @@ class ExpandableMeetings extends React.Component {
           </a>
         )}
         {!displayLink(meeting.buildingRoom, meeting.campus) && (
-          <Typography type="body2" className={classes.meetNoLink} tabIndex="0">
+          <Typography variant="body1" className={classes.meetNoLink} tabIndex="0">
             {meeting.buildingRoom + ' [' + meeting.campus + ']'}
           </Typography>
         )}
-        <Typography type="body2" className={classes.meet} tabIndex="0">
+        <Typography variant="body1" className={classes.meet} tabIndex="0">
           {`${meeting.meetDays} `}
         </Typography>
         <Typography
-          type="body2"
+          variant="body1"
           className={classes.meet}
           tabIndex="0"
           key={meeting.endDate + Math.random()}
@@ -183,7 +183,7 @@ class ExpandableMeetings extends React.Component {
           {meeting.startTime + ' - ' + meeting.endTime}
         </Typography>
         <Typography
-          type="body2"
+          variant="body1"
           className={classes.meet}
           tabIndex="0"
           aria-label={
@@ -212,7 +212,7 @@ class ExpandableMeetings extends React.Component {
             '/' +
             meeting.endYear}
         </Typography>
-        <Typography type="body2" className={classes.meet} tabIndex="0">
+        <Typography variant="body1" className={classes.meet} tabIndex="0">
           {meeting.courseType}
         </Typography>
       </div>

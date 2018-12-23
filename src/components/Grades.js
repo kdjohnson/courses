@@ -91,7 +91,7 @@ class Grades extends React.Component {
             title={
               <Typography
                 tabIndex="0"
-                component="h1"
+                variant="h1"
                 className={classes.classHeaderSpan}
                 style={{ fontSize: '20px' }}
               >

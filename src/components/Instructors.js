@@ -81,7 +81,7 @@ class Instructors extends React.Component {
           TransitionComponent={Transition}
         >
           <DialogTitle className={classes.dialogTitle} disableTypography={true}>
-            <Typography type="title" tabIndex="0" className={classes.title}>
+            <Typography variant="h6" tabIndex="0" className={classes.title}>
               {teachers.length >= 2 && 'Instructors Information'}
               {teachers.length < 2 && 'Instructor Information'}
             </Typography>

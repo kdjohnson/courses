@@ -17,7 +17,7 @@ export const getBookButton = (books, term, mobile, rightIconStyle) => {
       <Button
         color="secondary"
         title="Buy Books"
-        variant="raised"
+        variant="contained"
         tabIndex="0"
         onClick={handleBuyBooks}
       >

@@ -4,8 +4,8 @@ import React from 'react'
 
 import AdvisingCourses from './AdvisingCourses'
 import RegistrationTypes from './RegistrationTypes'
-import { connect } from 'react-redux'
 import Typography from '@material-ui/core/Typography'
+import { connect } from 'react-redux'
 import { withStyles } from '@material-ui/core/styles'
 
 const styles = theme => ({
@@ -41,7 +41,7 @@ class Advising extends React.Component {
     } else {
       return (
         <div>
-          <Typography variant="display2" className={classes.empty} tabIndex="0">
+          <Typography variant="h3" className={classes.empty} tabIndex="0">
             No Courses.
           </Typography>
         </div>

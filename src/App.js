@@ -1,14 +1,12 @@
-import 'iterators-polyfill' // This is for supporting IE 😢
-
 import React, { Component } from 'react'
+import 'iterators-polyfill' // This is for supporting IE 😢
 import AdvisingTabs from './components/AdvisingTabs'
+import CircularProgress from '@material-ui/core/CircularProgress'
 import CoursesTabs from './components/CoursesTabs'
 import ErrorMessages from './components/ErrorMessages'
 import { connect } from 'react-redux'
 import { fetch_advising } from './actions/advisingActions'
 import { fetch_terms } from './actions/termsActions'
-
-import CircularProgress from '@material-ui/core/CircularProgress'
 import { withStyles } from '@material-ui/core/styles'
 
 const calendar_obj = {

@@ -149,7 +149,7 @@ class Courses extends React.Component {
     if (courses_error) {
       return (
         <div>
-          <Typography variant="display2" className={classes.empty} tabIndex="0">
+          <Typography variant="h3" className={classes.empty} tabIndex="0">
             No Courses.
           </Typography>
         </div>

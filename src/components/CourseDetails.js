@@ -94,7 +94,7 @@ class CourseDetails extends React.Component {
               }
               disableTypography={true}
             >
-              <Typography type="title" tabIndex="0" className={classes.title}>
+              <Typography variant="h6" tabIndex="0" className={classes.title}>
                 {course.courseTitle}
               </Typography>
             </DialogTitle>
