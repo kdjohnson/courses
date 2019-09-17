@@ -1,4 +1,3 @@
-
 import React from 'react'
 import Calendar from 'reactjs-calendar'
 import Courses from './Courses'

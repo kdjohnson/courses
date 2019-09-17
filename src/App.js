@@ -15,30 +15,13 @@ const calendar_obj = {
   credentialsNeeded: false
 }
 
-// const useStyles = makeStyles( theme => ({
-//   root: {
-//     position: 'relative'
-//   },
-
-//   progress: {
-//     margin: `0 ${theme.spacing.unit * 2}px`
-//   },
-
-//   loading: {
-//     display: 'flex',
-//     justifyContent: 'center'
-//   }
-
-// }));
-
-
 const styles = theme => ({
   root: {
     position: 'relative'
   },
 
   progress: {
-    margin: `0 ${theme.spacing.unit * 2}px`
+    margin: `0 ${theme.spacing(2)}px`
   },
 
   loading: {
