@@ -4,10 +4,9 @@ import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import PropTypes from 'prop-types'
-import { translate } from 'react-i18next'
 import { withStyles } from '@material-ui/core/styles'
 
-const styles = theme => ({
+const styles = () => ({
   itemText: {
     color: 'rgba(0, 0, 0, 0.87)'
   }
@@ -47,6 +46,4 @@ AdvisingInstructors.propTypes = {
   classes: PropTypes.object.isRequired
 }
 
-export default withStyles(styles, { name: 'AdvisingInstructors' })(
-  translate('view', { wait: true })(AdvisingInstructors)
-)
+export default withStyles(styles, { name: 'AdvisingInstructors' })(AdvisingInstructors)

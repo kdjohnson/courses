@@ -2,7 +2,7 @@ import React from 'react'
 import PropTypes from 'prop-types'
 import { connect } from 'react-redux'
 import { fetch_credits } from './../actions/creditsActions'
-import { translate } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
 
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
@@ -51,17 +51,18 @@ class AdvisingGrades extends React.Component {
 
   render() {
     //const { creditsObj } = this.state
-    const { classes, credits, credits_fetched, t } = this.props
+    const { t } = useTranslation();
+    const { classes, credits, credits_fetched } = this.props
     if (credits_fetched === true) {
       return (
         <Table>
           <TableHead>
             <TableRow className={classes.tableHeader}>
               <TableCell classes={{ head: classes.cell }} scope="col">
-                {t('level', {})}
+                {t('level')}
               </TableCell>
               <TableCell classes={{ head: classes.cell }} scope="col">
-                {t('credits', {})}
+                {t('credits')}
               </TableCell>
               <TableCell classes={{ head: classes.cell }} scope="col">
                 GPA
@@ -93,7 +94,5 @@ const mapDispatchToProps = dispatch => {
 }
 
 export default withStyles(styles, { name: 'AdvisingGrades' })(
-  translate('view', { wait: true })(
-    connect(mapStateToProps, mapDispatchToProps)(AdvisingGrades)
-  )
+  connect(mapStateToProps, mapDispatchToProps)(AdvisingGrades)
 )

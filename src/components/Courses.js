@@ -1,26 +1,21 @@
-// @flow weak
-
-import React from 'react'
+import React, { useEffect } from 'react'
 import CourseDetails from './CourseDetails'
 import CourseHeader from './CourseHeader'
 import ExpandableCourse from './ExpandableCourse'
 import Instructors from './Instructors'
 import Meetings from './Meetings'
-import PropTypes from 'prop-types'
 import WaitlistCourse from './WaitlistCourse'
-import { connect } from 'react-redux'
 import { fetch_courses } from './../actions/coursesActions'
 import { getBookButton } from './BuyBooks'
-import { translate } from 'react-i18next'
+import { useSelector, useDispatch } from 'react-redux'
 
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import CircularProgress from '@material-ui/core/CircularProgress'
 import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   courseContainer: {
     flex: '1 1 auto',
     padding: '1em'
@@ -33,11 +28,11 @@ const styles = theme => ({
   },
 
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing()
   },
 
   rightIcon: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing()
   },
 
   coursesDiv: {
@@ -65,150 +60,92 @@ const styles = theme => ({
   },
 
   progress: {
-    margin: `0 ${theme.spacing.unit * 2}px`
+    margin: `0 ${theme.spacing(2)}px`
   }
-})
+}))
 
-class Courses extends React.Component {
-  componentDidMount() {
-    const { current_term } = this.props
-    this.props.fetch_courses(current_term)
-  }
+const Courses = props => {
+  const classes = useStyles()
+  const current_term = useSelector(state => state.terms.current_term)
+  const courses = useSelector(state => state.courses.courses)
+  const { mobile } = props
+  const dispatch = useDispatch();
 
-  getCourses = () => {
-    const { classes, courses, mobile } = this.props
-    let elements = []
-    for (let i = 0, total = courses.length; i < total; i++) {
-      if (courses[i].meetings.length > 1 || courses[i].instructors.length > 1) {
-        elements.push(
-          <ExpandableCourse
-            course={courses[i]}
-            key={'expandable' + Math.random()}
-            mobile={mobile}
-          />
-        )
-      } else if (!Object.is(courses[i].waitList, '0')) {
-        elements.push(
-          <WaitlistCourse
-            course={courses[i]}
-            key={'waitlist' + Math.random()}
-            mobile={mobile}
-          />
-        )
-      } else {
-        elements.push(
-          <div
-            className={classes.courseContainer}
-            key={courses[i].crn + i + Math.random()}
-          >
-            <div style={{ marginTop: '1em' }}>
-              <Card
-                className={classes.card}
-                key={courses[i].crn + i + Math.random()}
-              >
-                <CourseHeader mobile={mobile} course={courses[i]} />
-                <CardContent
-                  className={classes.content}
-                  key={courses[i].crn + i + Math.random()}
-                >
-                  <div>
-                    <div
-                      style={{ marginTop: '1em' }}
-                      key={courses[i].crn + i + Math.random()}
-                    >
-                      <Meetings meetings={courses[i].meetings} />
-                    </div>
-                  </div>
-                </CardContent>
-                <CardActions
-                  key={courses[i].crn + i + Math.random()}
-                  style={{ justifyContent: 'center', flexWrap: 'wrap' }}
-                >
-                  <CourseDetails course={courses[i]} />
-                  <Instructors teachers={courses[i].instructors} />
-                </CardActions>
-              </Card>
-            </div>
-          </div>
-        )
-      }
-    }
-    return elements
+  useEffect(() => {
+    dispatch(fetch_courses(current_term))
+  }, [dispatch, current_term])
+
+  if (courses === null || courses === []) {
+    return (
+      <Typography variant="h3" className={classes.empty} tabIndex="0">
+        You currently have no courses for this semester.
+      </Typography>
+    )
   }
 
-  render() {
-    const {
-      books,
-      current_term,
-      classes,
-      courses_error,
-      courses_fetched,
-      courses_fetching,
-      mobile
-    } = this.props
-    if (courses_error) {
-      return (
-        <div>
-          <Typography variant="h3" className={classes.empty} tabIndex="0">
-            No Courses.
-          </Typography>
-        </div>
+
+  let elements = []
+  for (let [i, course] of courses.entries()) {
+    if (course.meetings.length > 1 || course.instructors.length > 1) {
+      elements.push(
+        <ExpandableCourse
+          course={course}
+          key={'expandable' + Math.random()}
+          mobile={mobile}
+        />
       )
-    } else if (courses_fetching) {
-      return (
-        <div className={classes.loading}>
-          <CircularProgress
-            color="secondary"
-            className={classes.progress}
-            size={50}
-          />
-        </div>
-      )
-    } else if (courses_fetched) {
-      return (
-        <div ref={el => (this.componentRef = el)}>
-          <div className={classes.buttonsDiv}>
-            {getBookButton(
-              books,
-              current_term.description,
-              mobile,
-              classes.rightIcon
-            )}
-          </div>
-          <div
-            className={mobile ? classes.coursesDivMobile : classes.coursesDiv}
-          >
-            {this.getCourses()}
-          </div>
-        </div>
+    } else if (!Object.is(course.waitList, '0')) {
+      elements.push(
+        <WaitlistCourse
+          course={course}
+          key={'waitlist' + Math.random()}
+          mobile={mobile}
+        />
       )
     } else {
-      return <div />
+      elements.push(
+        <div
+          className={classes.courseContainer}
+          key={course.crn}
+        >
+          <div style={{ marginTop: '1em' }}>
+            <Card
+              className={classes.card}
+              key={course.crn + i + Math.random()}
+            >
+              <CourseHeader mobile={mobile} course={course} />
+              <CardContent
+                className={classes.content}
+                key={course.crn + i + Math.random()}
+              >
+                <div>
+                  <div
+                    style={{ marginTop: '1em' }}
+                    key={course.crn + i + Math.random()}
+                  >
+                    <Meetings meetings={course.meetings} />
+                  </div>
+                </div>
+              </CardContent>
+              <CardActions
+                key={course.crn + i + Math.random()}
+                style={{ justifyContent: 'center', flexWrap: 'wrap' }}
+              >
+                <CourseDetails course={course} />
+                <Instructors teachers={course.instructors} />
+              </CardActions>
+            </Card>
+          </div>
+        </div>
+      )
     }
   }
-}
 
-Courses.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-const mapStateToProps = state => ({
-  books: state.courses.books,
-  courses: state.courses.courses,
-  courses_error: state.courses.error,
-  courses_fetched: state.courses.fetched,
-  courses_fetching: state.courses.fetching,
-  current_term: state.terms.current_term
-})
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetch_courses: current_term => dispatch(fetch_courses(current_term))
-  }
-}
-
-export default withStyles(styles, { name: 'Courses' })(
-  translate('view', { wait: true })(
-    connect(mapStateToProps, mapDispatchToProps)(Courses)
+  return (
+    <div>
+      {elements}
+    </div>
   )
-)
+}
+
+export default Courses

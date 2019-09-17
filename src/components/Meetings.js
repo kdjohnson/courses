@@ -4,9 +4,9 @@ import PropTypes from 'prop-types'
 import ExpandableMeetings from './ExpandableMeetings'
 
 import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/styles'
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   meet: {
     color: 'black'
   },
@@ -31,11 +31,14 @@ const styles = theme => ({
     borderLeftWidth: '0.3em',
     paddingLeft: '1em'
   }
-})
+}))
 
-class Meetings extends React.Component {
-  getMeetings = () => {
-    const { classes, meetings } = this.props
+// TODO: Maybe this branching can be reduced? 
+export default function Meetings(props) {
+  const classes = useStyles()
+  const { meetings } = props
+
+  function getMeetings() {
     if (Object.is(meetings, null)) {
       return <div key={'emptyDiv' + Math.random()} />
     } else if (meetings.length === 0) {
@@ -129,23 +132,15 @@ class Meetings extends React.Component {
     }
   }
 
-  render() {
-    return (
-      <div>
-        <Typography
-          tabIndex="0"
-          style={{ fontWeight: 'bolder', paddingBottom: '0.5em' }}
-        >
-          CLASS INFORMATION
-        </Typography>
-        {this.getMeetings()}
-      </div>
-    )
-  }
+  return (
+    <div>
+      <Typography
+        tabIndex="0"
+        style={{ fontWeight: 'bolder', paddingBottom: '0.5em' }}
+      >
+        CLASS INFORMATION
+    </Typography>
+      {getMeetings()}
+    </div>
+  )
 }
-
-Meetings.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles, { name: 'Meetings' })(Meetings)

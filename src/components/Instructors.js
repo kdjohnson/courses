@@ -1,7 +1,6 @@
-import React from 'react'
+import React, { useState } from 'react'
 import { getMapUrl } from '../utils/mapLinks'
-import { translate } from 'react-i18next'
-import PropTypes from 'prop-types'
+import { useTranslation } from 'react-i18next';
 
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -17,9 +16,9 @@ import ListSubheader from '@material-ui/core/ListSubheader'
 import MailOutline from '@material-ui/icons/MailOutline'
 import Slide from '@material-ui/core/Slide'
 import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   button: {
     fontWeight: 'bolder'
   },
@@ -41,68 +40,13 @@ const styles = theme => ({
   close: {
     fontWeight: 'bolder'
   }
-})
+}))
 
-function Transition(props) {
-  return <Slide direction="down" {...props} />
-}
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
 
-class Instructors extends React.Component {
-  state = {
-    open: false
-  }
-
-  handleRequestClose = () => {
-    this.setState({ open: false })
-  }
-
-  getInstructors() {
-    const { classes, t, teachers } = this.props
-    return (
-      <div>
-        <Button
-          onClick={() =>
-            this.setState({
-              open: true
-            })
-          }
-          color="secondary"
-          style={{ fontWeight: 'bolder' }}
-        >
-          {teachers.length >= 2 && 'Instructors'}
-          {teachers.length < 2 && 'Instructor'}
-        </Button>
-        <Dialog
-          open={this.state.open}
-          id="instructor-dialog"
-          tabIndex="0"
-          aria-label="instructor information"
-          onClose={this.handleRequestClose}
-          TransitionComponent={Transition}
-        >
-          <DialogTitle className={classes.dialogTitle} disableTypography={true}>
-            <Typography variant="h6" tabIndex="0" className={classes.title}>
-              {teachers.length >= 2 && 'Instructors Information'}
-              {teachers.length < 2 && 'Instructor Information'}
-            </Typography>
-          </DialogTitle>
-          <DialogContent>{this.getList()}</DialogContent>
-          <DialogActions>
-            <Button
-              onClick={this.handleRequestClose}
-              color="secondary"
-              className={classes.close}
-            >
-              {t('close', {})}
-            </Button>
-          </DialogActions>
-        </Dialog>
-      </div>
-    )
-  }
-
-  getList = () => {
-    const { classes, teachers } = this.props
+const  getList = (classes, teachers) => {
     let list = []
     for (let i = 0, total = teachers.length; i < total; i++) {
       if (Object.is(teachers, null) || Object.is(teachers[0], undefined)) {
@@ -191,15 +135,49 @@ class Instructors extends React.Component {
     return list
   }
 
-  render() {
-    return <div>{this.getInstructors()}</div>
-  }
+const Instructors = props => {
+  const { teachers } = props
+  const [open, setOpen] = useState(false)
+  const classes = useStyles()
+  const { t } = useTranslation()
+
+  return (
+    <div>
+      <Button
+        onClick={() => setOpen(true)}
+        color="secondary"
+        style={{ fontWeight: 'bolder' }}
+      >
+        {teachers.length >= 2 && 'Instructors'}
+        {teachers.length < 2 && 'Instructor'}
+      </Button>
+      <Dialog
+        open={open}
+        id="instructor-dialog"
+        tabIndex="0"
+        aria-label="instructor information"
+        onClose={() => setOpen(false)}
+        TransitionComponent={Transition}
+      >
+        <DialogTitle className={classes.dialogTitle} disableTypography={true}>
+          <Typography variant="h6" tabIndex="0" className={classes.title}>
+            {teachers.length >= 2 && 'Instructors Information'}
+            {teachers.length < 2 && 'Instructor Information'}
+          </Typography>
+        </DialogTitle>
+        <DialogContent>{getList(classes, teachers)}</DialogContent>
+        <DialogActions>
+          <Button
+            onClick={() => setOpen(false)}
+            color="secondary"
+            className={classes.close}
+          >
+            {t('close')}
+          </Button>
+        </DialogActions>
+      </Dialog>
+    </div>
+  )
 }
 
-Instructors.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles, { name: 'Instructors' })(
-  translate('view', { wait: true })(Instructors)
-)
+export default Instructors

@@ -1,14 +1,12 @@
-// @flow weak
-
-import React from 'react'
-
+import React, { useEffect } from 'react'
 import AdvisingCourses from './AdvisingCourses'
 import RegistrationTypes from './RegistrationTypes'
 import Typography from '@material-ui/core/Typography'
-import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
+import { useSelector, useDispatch } from 'react-redux'
+import { makeStyles } from '@material-ui/styles'
+import { fetch_courses } from '../actions/coursesActions'
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   term: {
     marginBottom: '1em',
     fontWeight: 'bolder'
@@ -17,45 +15,32 @@ const styles = theme => ({
   empty: {
     textAlign: 'center'
   }
-})
+}))
 
-class Advising extends React.Component {
-  getAdvising = () => {
-    const { courses } = this.props
-    if (Object.is(courses, null)) {
-      return <div />
-    }
+const Advising = () => {
+  const classes = useStyles()
+  const current_term = useSelector(state => state.terms.current_term)
+  const courses = useSelector(state => state.courses.courses)
+  const dispatch = useDispatch();
 
+  useEffect(() => {
+    dispatch(fetch_courses(current_term))
+  }, [dispatch, current_term])
+
+  if (courses === null || courses === []) {
     return (
-      <div>
-        <RegistrationTypes />
-        <AdvisingCourses />
-      </div>
+      <Typography variant="h3" className={classes.empty} tabIndex="0">
+        This student is not registered for any courses for this semester currently.
+      </Typography>
     )
   }
 
-  render() {
-    const { classes, courses } = this.props
-    if (courses !== null) {
-      return <div>{this.getAdvising()}</div>
-    } else {
-      return (
-        <div>
-          <Typography variant="h3" className={classes.empty} tabIndex="0">
-            No Courses.
-          </Typography>
-        </div>
-      )
-    }
-  }
+  return (
+    <div>
+      <RegistrationTypes />
+      <AdvisingCourses />
+    </div>
+  )
 }
 
-const mapStateToProps = state => ({
-  regs: state.courses.regs,
-  courses: state.courses.courses,
-  courses_fetched: state.courses.fetched
-})
-
-export default withStyles(styles, { name: 'Advising' })(
-  connect(mapStateToProps)(Advising)
-)
+export default Advising

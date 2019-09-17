@@ -6,6 +6,7 @@ export function fetch_terms() {
     dispatch({ type: 'FETCH_TERMS_START', payload: {} })
     get_terms(terms_url)
       .then(terms => {
+        console.log(terms)
         dispatch({ type: 'RECEIVE_TERMS', payload: terms })
       })
       .catch(err => {
