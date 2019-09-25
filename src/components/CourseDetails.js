@@ -79,7 +79,6 @@ class CourseDetails extends React.Component {
           </Button>
 
           <Dialog
-            //role="dialog"
             id="dialogbox"
             aria-label="course description"
             tabIndex="0"

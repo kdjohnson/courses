@@ -8,7 +8,6 @@ import { connect } from 'react-redux'
 import { fetch_advising } from './actions/advisingActions'
 import { fetch_terms } from './actions/termsActions'
 import { withStyles } from '@material-ui/core/styles'
-// import { makeStyles } from '@material-ui/styles'
 
 const calendar_obj = {
   url: 'http://localhost:8082/api/calendar',
