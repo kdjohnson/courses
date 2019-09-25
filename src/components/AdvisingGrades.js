@@ -1,5 +1,4 @@
-import React, { useState, useEffect } from 'react'
-import PropTypes from 'prop-types'
+import React, { useEffect } from 'react'
 import { useDispatch, useSelector } from 'react-redux'
 import { fetch_credits } from './../actions/creditsActions'
 import { useTranslation } from 'react-i18next';
@@ -11,7 +10,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import { makeStyles } from '@material-ui/styles'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   tableHeader: {
     color: 'rgba(0, 0, 0, 1)',
     fontWeight: 600,
@@ -27,7 +26,7 @@ export default function AdvisingGrades() {
   const classes = useStyles()
   const { t } = useTranslation()
   const credits = useSelector(state => state.credits.credits)
-  const credits_fetched = useSelector(state => state.credits.credits_fetched)
+  const credits_fetched = useSelector(state => state.credits.fetched)
   const dispatch = useDispatch()
 
   useEffect(() => {
@@ -35,22 +34,19 @@ export default function AdvisingGrades() {
   }, [dispatch])
 
   function getRows() {
-    if (credits !== null) {
-      let rows = []
-      let i = 0
-      console.log(credits)
-      for (let cr of credits) {
-        rows.push(
-          <TableRow key={i}>
-            <TableCell>{cr.level}</TableCell>
-            <TableCell>{cr.credits}</TableCell>
-            <TableCell>{cr.gpa}</TableCell>
-          </TableRow>
-        )
-        i++
-      }
-      return rows
+    let rows = []
+    let i = 0
+    for (let cr of credits) {
+      rows.push(
+        <TableRow key={i}>
+          <TableCell>{cr.level}</TableCell>
+          <TableCell>{cr.credits}</TableCell>
+          <TableCell>{cr.gpa}</TableCell>
+        </TableRow>
+      )
+      i++
     }
+    return rows
   }
 
   return (
@@ -68,7 +64,7 @@ export default function AdvisingGrades() {
             </TableCell>
         </TableRow>
       </TableHead>
-      <TableBody>{getRows()}</TableBody>
+      <TableBody>{credits_fetched && getRows()}</TableBody>
     </Table>
   )
 }

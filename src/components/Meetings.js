@@ -1,6 +1,5 @@
 import React from 'react'
 import { displayLink, getMapUrl } from '../utils/mapLinks'
-import PropTypes from 'prop-types'
 import ExpandableMeetings from './ExpandableMeetings'
 
 import Typography from '@material-ui/core/Typography'
