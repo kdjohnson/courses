@@ -2,7 +2,6 @@ import React, { useState } from 'react'
 
 import classnames from 'classnames'
 import { displayLink, getMapUrl } from '../utils/mapLinks'
-
 import CardContent from '@material-ui/core/CardContent'
 import Collapse from '@material-ui/core/Collapse'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
