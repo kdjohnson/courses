@@ -33,11 +33,11 @@ const styles = theme => ({
   },
 
   button: {
-    margin: theme.spacing.unit
+    margin: theme.spacing()
   },
 
   rightIcon: {
-    marginLeft: theme.spacing.unit
+    marginLeft: theme.spacing()
   },
 
   coursesDiv: {
@@ -65,7 +65,7 @@ const styles = theme => ({
   },
 
   progress: {
-    margin: `0 ${theme.spacing.unit * 2}px`
+    margin: `0 ${theme.spacing(2)}px`
   }
 })
 

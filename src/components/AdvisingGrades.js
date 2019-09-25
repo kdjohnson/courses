@@ -35,7 +35,7 @@ class AdvisingGrades extends React.Component {
 
   getRows = creditsObj => {
     let rows = []
-    let i = 0
+  let i = 0
     for (let cr of creditsObj) {
       rows.push(
         <TableRow key={i}>

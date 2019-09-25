@@ -10,7 +10,7 @@ import DialogTitle from '@material-ui/core/DialogTitle'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import Slide from '@material-ui/core/Slide'
+import Slide from '@material-ui/core/Slide';
 import Typography from '@material-ui/core/Typography'
 import amber from '@material-ui/core/colors/amber'
 import { withStyles } from '@material-ui/core/styles'
@@ -42,9 +42,10 @@ const styles = theme => ({
   }
 })
 
-function Transition(props) {
-  return <Slide direction="down" {...props} />
-}
+const Transition = React.forwardRef(function Transition(props, ref) {
+  return <Slide direction="up" ref={ref} {...props} />;
+});
+
 
 class CourseDetails extends React.Component {
   state = {
@@ -78,7 +79,6 @@ class CourseDetails extends React.Component {
           </Button>
 
           <Dialog
-            role="dialog"
             id="dialogbox"
             aria-label="course description"
             tabIndex="0"

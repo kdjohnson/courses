@@ -20,7 +20,7 @@ const styles = theme => ({
   },
 
   progress: {
-    margin: `0 ${theme.spacing.unit * 2}px`
+    margin: `0 ${theme.spacing(2)}px`
   },
 
   loading: {
@@ -118,7 +118,7 @@ class App extends Component {
   }
 
   render() {
-    const classes = this.props.classes
+    const { classes } = this.props
     return <div className={classes.root}>{this.getView()}</div>
   }
 }
