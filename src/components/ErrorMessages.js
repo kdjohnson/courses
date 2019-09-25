@@ -1,6 +1,4 @@
 import React from 'react'
-import PropTypes from 'prop-types'
-
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
@@ -9,7 +7,7 @@ import Error from '@material-ui/icons/Error'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   root: {
     position: 'relative',
     width: '90%'

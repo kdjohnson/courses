@@ -1,6 +1,5 @@
-import React from 'react'
+import React, { useState } from 'react'
 
-import PropTypes from 'prop-types'
 import classnames from 'classnames'
 import { displayLink, getMapUrl } from '../utils/mapLinks'
 
@@ -9,9 +8,9 @@ import Collapse from '@material-ui/core/Collapse'
 import ExpandMoreIcon from '@material-ui/icons/ExpandMore'
 import IconButton from '@material-ui/core/IconButton'
 import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/styles'
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   card: { maxWidth: 400 },
   expand: {
     transform: 'rotate(0deg)',
@@ -65,18 +64,83 @@ const styles = theme => ({
     borderLeftWidth: '0.3em',
     paddingLeft: '1em'
   }
-})
+}))
 
-class ExpandableMeetings extends React.Component {
-  state = { expanded: false }
+export default function ExpandableMeetings(props) {
+  const classes = useStyles()
+  const [expanded, setExpanded] = useState(false)
+  const { meetings } = this.props
 
-  handleExpandClick = () => {
-    this.setState({ expanded: !this.state.expanded })
+  function getMeeting() {
+    const meeting = meetings[0]
+    return (
+      <div key={meeting.endDate + Math.random()} className={classes.meetBorder}>
+        {displayLink(meeting.buildingRoom, meeting.campus) && (
+          <a
+            className={classes.meetLink}
+            tabIndex="0"
+            target="_blank"
+            href={getMapUrl(meeting.buildingRoom, false)}
+            rel="noopener noreferrer"
+          >
+            {meeting.buildingRoom + ' [' + meeting.campus + ']'}
+          </a>
+        )}
+        {!displayLink(meeting.buildingRoom, meeting.campus) && (
+          <Typography variant="body1" className={classes.meetNoLink} tabIndex="0">
+            {meeting.buildingRoom + ' [' + meeting.campus + ']'}
+          </Typography>
+        )}
+        <Typography variant="body1" className={classes.meet} tabIndex="0">
+          {`${meeting.meetDays} `}
+        </Typography>
+        <Typography
+          variant="body1"
+          className={classes.meet}
+          tabIndex="0"
+          key={meeting.endDate + Math.random()}
+        >
+          {meeting.startTime + ' - ' + meeting.endTime}
+        </Typography>
+        <Typography
+          variant="body1"
+          className={classes.meet}
+          tabIndex="0"
+          aria-label={
+            meeting.startMonth +
+            '-' +
+            meeting.startDay +
+            '-' +
+            meeting.startYear +
+            ' to ' +
+            meeting.endMonth +
+            '-0' +
+            meeting.endDay +
+            '-' +
+            meeting.endYear
+          }
+        >
+          {meeting.startMonth +
+            '/' +
+            meeting.startDay +
+            '/' +
+            meeting.startYear +
+            ' - ' +
+            meeting.endMonth +
+            '/' +
+            meeting.endDay +
+            '/' +
+            meeting.endYear}
+        </Typography>
+        <Typography variant="body1" className={classes.meet} tabIndex="0">
+          {meeting.courseType}
+        </Typography>
+      </div>
+    )
   }
 
-  getExpandedMeetings = () => {
+  function getExpandedMeetings() {
     let elements = []
-    const { classes, meetings } = this.props
     for (let i = 1, total = meetings.length; i < total; i++) {
       elements.push(
         <div key={i} className={classes.expandedDiv}>
@@ -149,106 +213,24 @@ class ExpandableMeetings extends React.Component {
     }
     return elements
   }
-
-  getMeeting = () => {
-    const { classes, meetings } = this.props
-    const meeting = meetings[0]
-    return (
-      <div key={meeting.endDate + Math.random()} className={classes.meetBorder}>
-        {displayLink(meeting.buildingRoom, meeting.campus) && (
-          <a
-            className={classes.meetLink}
-            tabIndex="0"
-            target="_blank"
-            href={getMapUrl(meeting.buildingRoom, false)}
-            rel="noopener noreferrer"
-          >
-            {meeting.buildingRoom + ' [' + meeting.campus + ']'}
-          </a>
-        )}
-        {!displayLink(meeting.buildingRoom, meeting.campus) && (
-          <Typography variant="body1" className={classes.meetNoLink} tabIndex="0">
-            {meeting.buildingRoom + ' [' + meeting.campus + ']'}
-          </Typography>
-        )}
-        <Typography variant="body1" className={classes.meet} tabIndex="0">
-          {`${meeting.meetDays} `}
-        </Typography>
-        <Typography
-          variant="body1"
-          className={classes.meet}
-          tabIndex="0"
-          key={meeting.endDate + Math.random()}
+  return (
+    <div>
+      <div className={classes.iconButtonDiv}>
+        {getMeeting()}
+        <IconButton
+          aria-label={expanded ? 'Close more meetings' : 'Open more meetings'}
+          className={classnames(classes.expand, {
+            [classes.expandOpen]: expanded
+          })}
+          onClick={() => setExpanded(!expanded)}
         >
-          {meeting.startTime + ' - ' + meeting.endTime}
-        </Typography>
-        <Typography
-          variant="body1"
-          className={classes.meet}
-          tabIndex="0"
-          aria-label={
-            meeting.startMonth +
-            '-' +
-            meeting.startDay +
-            '-' +
-            meeting.startYear +
-            ' to ' +
-            meeting.endMonth +
-            '-0' +
-            meeting.endDay +
-            '-' +
-            meeting.endYear
-          }
-        >
-          {meeting.startMonth +
-            '/' +
-            meeting.startDay +
-            '/' +
-            meeting.startYear +
-            ' - ' +
-            meeting.endMonth +
-            '/' +
-            meeting.endDay +
-            '/' +
-            meeting.endYear}
-        </Typography>
-        <Typography variant="body1" className={classes.meet} tabIndex="0">
-          {meeting.courseType}
-        </Typography>
+          <ExpandMoreIcon />
+        </IconButton>
       </div>
-    )
-  }
-
-  render() {
-    const { classes } = this.props
-    const { expanded } = this.state
-    return (
-      <div>
-        <div className={classes.iconButtonDiv}>
-          {this.getMeeting()}
-          <IconButton
-            aria-label={expanded ? 'Close more meetings' : 'Open more meetings'}
-            className={classnames(classes.expand, {
-              [classes.expandOpen]: expanded
-            })}
-            onClick={this.handleExpandClick}
-          >
-            <ExpandMoreIcon />
-          </IconButton>
-        </div>
-        <div className={classes.flexGrow} />
-        <Collapse in={expanded} unmountOnExit>
-          <CardContent>{this.getExpandedMeetings()}</CardContent>
-        </Collapse>
-      </div>
-    )
-  }
+      <div className={classes.flexGrow} />
+      <Collapse in={expanded} unmountOnExit>
+        <CardContent>{getExpandedMeetings()}</CardContent>
+      </Collapse>
+    </div>
+  )
 }
-
-ExpandableMeetings.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles, { name: 'ExpandableMeetings' })(
-  ExpandableMeetings
-)
