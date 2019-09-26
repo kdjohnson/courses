@@ -6,7 +6,7 @@ import { useSelector, useDispatch } from 'react-redux'
 import { makeStyles } from '@material-ui/styles'
 import { fetch_courses } from '../actions/coursesActions'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   term: {
     marginBottom: '1em',
     fontWeight: 'bolder'
@@ -17,7 +17,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Advising = () => {
+export default function Advising() {
   const classes = useStyles()
   const current_term = useSelector(state => state.terms.current_term)
   const courses = useSelector(state => state.courses.courses)
@@ -42,5 +42,3 @@ const Advising = () => {
     </div>
   )
 }
-
-export default Advising
