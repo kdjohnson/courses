@@ -6,12 +6,11 @@ import AdvisingMeetings from './AdvisingMeetings'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
-import PropTypes from 'prop-types'
 import Typography from '@material-ui/core/Typography'
-import { connect } from 'react-redux'
-import { withStyles } from '@material-ui/core/styles'
+import { useSelector } from 'react-redux'
+import { makeStyles } from '@material-ui/styles'
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   header: {
     backgroundColor: theme.palette.primary.light
   },
@@ -21,12 +20,18 @@ const styles = theme => ({
   empty: {
     textAlign: 'center'
   }
-})
+}))
 
-class AdvisingCourses extends React.Component {
-  getCourses() {
+export default function AdvisingCourses() {
+  const classes = useStyles()
+  const courses = useSelector(state => state.courses.courses)
+  const courses_error = useSelector(state => state.courses.error)
+  const courses_fetched = useSelector(state => state.courses.fetched)
+  const regs = useSelector(state => state.courses.regs)
+  const updating = useSelector(state => state.courses.updating)
+
+  const getCourses = () => {
     let advisorCourses = []
-    const { classes, courses, regs } = this.props
     for (let i = 0; i < courses.length; i++) {
       if (Object.is(regs[courses[i].registrationStatusDescription], true)) {
         advisorCourses.push(
@@ -90,39 +95,20 @@ class AdvisingCourses extends React.Component {
       }
     }
     return advisorCourses
+    
   }
 
-  render() {
-    const { courses_error, courses_fetched, classes, updating } = this.props
-    if (courses_fetched !== true || updating === true) {
-      return <div />
-    } else if (courses_error) {
-      return (
-        <div>
-          <Typography variant="h3" className={classes.empty} tabIndex="0">
-            No Courses.
-          </Typography>
-        </div>
-      )
-    } else {
-      return <div>{this.getCourses()}</div>
-    }
-  }
+  if (courses_fetched !== true || updating === true) {
+    return <div />
+  } else if (courses_error) {
+    return (
+      <div>
+        <Typography variant="h3" className={classes.empty} tabIndex="0">
+          No Courses.
+        </Typography>
+      </div>
+    )
+  } else {
+    return <div>{getCourses()}</div>
+  } 
 }
-
-AdvisingCourses.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-const mapStateToProps = state => ({
-  courses: state.courses.courses,
-  courses_error: state.courses.error,
-  courses_fetched: state.courses.fetched,
-  current_term: state.terms.current_term,
-  regs: state.courses.regs,
-  updating: state.courses.updating
-})
-
-export default withStyles(styles, { name: 'AdvisingCourses' })(
-  connect(mapStateToProps)(AdvisingCourses)
-)
