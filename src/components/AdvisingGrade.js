@@ -4,7 +4,7 @@ import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
 import { makeStyles } from '@material-ui/styles'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles(() => ({
   item: {
     paddingLeft: 0
   },
@@ -13,7 +13,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const AdvisingGrade = props => {
+export default function AdvisingGrade(props) {
   const classes = useStyles()
   const { grade } = props
 
@@ -45,5 +45,3 @@ const AdvisingGrade = props => {
     )
   }
 }
-
-export default AdvisingGrade

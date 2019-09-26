@@ -11,7 +11,7 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const AdvisingInstructors = props => {
+export default function AdvisingInstructors(props) {
   const classes = useStyles()
   let teachers = []
   const { instructors } = props
@@ -38,5 +38,3 @@ const AdvisingInstructors = props => {
     <List>{teachers}</List>
   )
 }
-
-export default AdvisingInstructors

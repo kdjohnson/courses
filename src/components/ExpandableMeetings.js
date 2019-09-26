@@ -68,7 +68,7 @@ const useStyles = makeStyles(theme => ({
 export default function ExpandableMeetings(props) {
   const classes = useStyles()
   const [expanded, setExpanded] = useState(false)
-  const { meetings } = this.props
+  const { meetings } = props
 
   function getMeeting() {
     const meeting = meetings[0]

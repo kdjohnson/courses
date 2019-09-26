@@ -20,7 +20,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const AdvisingMeetings = props => {
+export default function AdvisingMeetings(props) {
   const classes = useStyles()
   const { meetings } = props
   return (
@@ -74,5 +74,3 @@ const AdvisingMeetings = props => {
     </Paper>
   )
 }
-
-export default AdvisingMeetings

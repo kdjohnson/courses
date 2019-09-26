@@ -57,7 +57,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const CoursesTabs = props => {
+export default function CoursesTabs(props) {
   const [value, setValue] = useState(0)
   const term_bounds = useSelector(state => state.terms.term_bounds)
   const { mobile } = props
@@ -150,5 +150,3 @@ const CoursesTabs = props => {
     </Paper>
   )
 }
-
-export default CoursesTabs

@@ -46,7 +46,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const AdvisingTabs = props => {
+export default function AdvisingTabs(props) {
   const { mobile } = props
   const [value, setValue] = useState(0)
   const { t } = useTranslation()
@@ -114,5 +114,3 @@ const AdvisingTabs = props => {
     </Paper>
   )
 }
-
-export default AdvisingTabs

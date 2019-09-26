@@ -46,7 +46,7 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 });
 
 
-const CourseDetails = props => {
+export default function CourseDetails(props) {
   const [open, setOpen] = useState(false)
   const {course } = props
   const classes = useStyles()
@@ -116,5 +116,3 @@ const CourseDetails = props => {
     )
   }
 }
-
-export default CourseDetails

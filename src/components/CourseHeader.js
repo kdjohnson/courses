@@ -49,7 +49,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const CourseHeader = props => {
+export default function CourseHeader(props) {
   const classes = useStyles()
   const { t } = useTranslation()
   const { course } = props
@@ -120,5 +120,3 @@ const CourseHeader = props => {
     )
   }
 }
-
-export default CourseHeader

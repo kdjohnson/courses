@@ -39,7 +39,7 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-const ErrorMessages = () => {
+export default function ErrorMessages() {
   const classes = useStyles()
   return (
     <div className={classes.root}>
@@ -57,5 +57,3 @@ const ErrorMessages = () => {
     </div>
   )
 }
-
-export default ErrorMessages

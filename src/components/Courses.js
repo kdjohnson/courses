@@ -64,7 +64,7 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-const Courses = props => {
+export default function Courses(props) {
   const classes = useStyles()
   const current_term = useSelector(state => state.terms.current_term)
   const courses = useSelector(state => state.courses.courses)
@@ -147,5 +147,3 @@ const Courses = props => {
     </div>
   )
 }
-
-export default Courses
