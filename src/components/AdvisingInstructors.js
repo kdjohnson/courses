@@ -3,50 +3,38 @@ import React from 'react'
 import List from '@material-ui/core/List'
 import ListItem from '@material-ui/core/ListItem'
 import ListItemText from '@material-ui/core/ListItemText'
-import PropTypes from 'prop-types'
-import { translate } from 'react-i18next'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/styles'
 
-const styles = theme => ({
+const useStyles = makeStyles(() => ({
   itemText: {
     color: 'rgba(0, 0, 0, 0.87)'
   }
-})
+}))
 
-class AdvisingInstructors extends React.Component {
-  getInsturctors = () => {
-    const { classes } = this.props
-    let teachers = []
-    for (let i = 0; i < this.props.instructors.length; i++) {
-      teachers.push(
-        <ListItem
-          style={{ paddingLeft: 0 }}
-          key={this.props.instructors[i].crn + Math.random()}
-        >
-          <ListItemText
+export default function AdvisingInstructors(props) {
+  const classes = useStyles()
+  let teachers = []
+  const { instructors } = props
+  for (let [i, instructor] of instructors.entries()) {
+    teachers.push(
+      <ListItem
+        style={{ paddingLeft: 0 }}
+        key={instructor.crn + Math.random()}>
+        <ListItemText
             classes={{
               secondary: classes.itemText
             }}
             secondary={
-              this.props.instructors[i].firstName +
+              instructor.firstName +
               ' ' +
-              this.props.instructors[i].lastName
+              instructor.lastName
             }
           />
-        </ListItem>
-      )
-    }
-    return teachers
+      </ListItem>
+    )
   }
-  render() {
-    return <List> {this.getInsturctors()}</List>
-  }
-}
 
-AdvisingInstructors.propTypes = {
-  classes: PropTypes.object.isRequired
+  return (
+    <List>{teachers}</List>
+  )
 }
-
-export default withStyles(styles, { name: 'AdvisingInstructors' })(
-  translate('view', { wait: true })(AdvisingInstructors)
-)

@@ -1,19 +1,23 @@
 import React from 'react'
-
-import { connect } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { update_regs } from './../actions/coursesActions'
 import FormControlLabel from '@material-ui/core/FormControlLabel'
 import Switch from '@material-ui/core/Switch'
 
-class RegistrationTypes extends React.Component {
-  handleChange = (event, checked, type) => {
-    let temp = this.props.regs
-    temp[type] = checked
-    this.props.update_regs(temp, checked, type)
+export default function RegistrationTypes() {
+  const courses_error = useSelector(state => state.courses.error)
+  const courses_fetched = useSelector(state => state.courses.fetched)
+  const updating = useSelector(state => state.courses.updating)
+  const regs = useSelector(state => state.courses.regs)
+  const dispatch = useDispatch()
+
+  const handleChange = name => event => {
+    let temp = regs
+    temp[name] = event.target.checked
+    dispatch(update_regs(temp, event.target.checked, name))
   }
 
-  getSwitches() {
-    const { regs } = this.props
+   const getSwitches = () => {
     let switches = []
     Object.entries(regs).forEach(([type, value]) => {
       switches.push(
@@ -23,10 +27,7 @@ class RegistrationTypes extends React.Component {
             <Switch
               color="secondary"
               checked={regs[type]}
-              onChange={(event, checked, key) =>
-                this.handleChange(event, checked, type)
-              }
-            />
+              onChange={handleChange(type)} />
           }
           label={type}
         />
@@ -36,31 +37,13 @@ class RegistrationTypes extends React.Component {
     return switches
   }
 
-  render() {
-    const { courses_error, courses_fetched, updating } = this.props
-    if (
-      courses_fetched !== true ||
-      updating === true ||
-      courses_error === true
-    ) {
-      return <div />
-    } else {
-      return <div>{this.getSwitches()}</div>
-    }
+  if (
+    courses_fetched !== true ||
+    updating === true ||
+    courses_error === true
+  ) {
+    return <div />
+  } else {
+    return <div>{getSwitches()}</div>
   }
 }
-
-const mapStateToProps = state => ({
-  courses_error: state.courses.error,
-  courses_fetched: state.courses.fetched,
-  updating: state.courses.updating,
-  regs: state.courses.regs
-})
-
-const mapDispatchToProps = dispatch => {
-  return {
-    update_regs: new_regs => dispatch(update_regs(new_regs))
-  }
-}
-
-export default connect(mapStateToProps, mapDispatchToProps)(RegistrationTypes)

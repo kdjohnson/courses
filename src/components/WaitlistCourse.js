@@ -3,14 +3,13 @@ import CourseDetails from './CourseDetails'
 import CourseHeader from './CourseHeader'
 import Instructors from './Instructors'
 import Meetings from './Meetings'
-import PropTypes from 'prop-types'
 
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/styles'
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   courseContainer: {
     flex: '1 1 auto',
     padding: '1em'
@@ -63,36 +62,29 @@ const styles = theme => ({
     display: 'flex',
     justifyContent: 'center'
   }
-})
+}))
 
-class WaitlistCourse extends React.Component {
-  render() {
-    const { classes, course, mobile } = this.props
-    return (
-      <div className={classes.courseContainer}>
-        <div style={{ marginTop: '1em' }}>
-          <Card className={classes.card}>
-            <CourseHeader mobile={mobile} course={course} />
-            <CardContent className={classes.content}>
-              <div>
-                <div style={{ marginTop: '1em' }}>
-                  <Meetings meetings={course.meetings} />
-                </div>
+export default function WaitlistCourse(props) {
+  const classes = useStyles()
+  const { mobile, course } = props
+  return (
+    <div className={classes.courseContainer}>
+      <div style={{ marginTop: '1em' }}>
+        <Card className={classes.card}>
+          <CourseHeader mobile={mobile} course={course} />
+          <CardContent className={classes.content}>
+            <div>
+              <div style={{ marginTop: '1em' }}>
+                <Meetings meetings={course.meetings} />
               </div>
-            </CardContent>
-            <CardActions style={{ justifyContent: 'center', flexWrap: 'wrap' }}>
-              <CourseDetails course={course} />
-              <Instructors teachers={course.instructors} />
-            </CardActions>
-          </Card>
-        </div>
+            </div>
+          </CardContent>
+          <CardActions style={{ justifyContent: 'center', flexWrap: 'wrap' }}>
+            <CourseDetails course={course} />
+            <Instructors teachers={course.instructors} />
+          </CardActions>
+        </Card>
       </div>
-    )
-  }
+    </div>
+  )
 }
-
-WaitlistCourse.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-export default withStyles(styles, { name: 'WaitlistCourse' })(WaitlistCourse)

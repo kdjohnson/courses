@@ -1,19 +1,15 @@
-// @flow weak
-
-import React from 'react'
-import { connect } from 'react-redux'
+import React, { useEffect, useState } from 'react'
+import { useSelector, useDispatch } from 'react-redux'
 import { fetch_courses } from './../actions/coursesActions'
 import { set_current_term } from './../actions/termsActions'
-import PropTypes from 'prop-types'
-import { translate } from 'react-i18next'
 
 import Input from '@material-ui/core/Input'
 import Select from '@material-ui/core/Select'
 import FormControl from '@material-ui/core/FormControl'
 import MenuItem from '@material-ui/core/MenuItem'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   text: {
     color: '#FFFFFF'
   },
@@ -74,110 +70,81 @@ const styles = theme => ({
       borderBottomColor: 'white'
     }
   }
-})
+}))
 
-class TermSelect extends React.Component {
-  state = {
-    selected: '',
-    selectedValue: '',
-    open: false
-  }
-  componentDidMount() {
-    const { current_term } = this.props
-    this.setState({
-      selected: current_term.description,
-      selectedValue: current_term.code
-    })
-  }
+const getTerms = terms => {
+  let items = terms.map(term => {
+    return (
+      <MenuItem key={term.code} value={term.code}>
+        {term.description}
+      </MenuItem>
+    )
+  })
+  return items
+}
 
-  getTerms = () => {
-    const { terms } = this.props
-    let items = terms.map(term => {
-      return (
-        <MenuItem key={term.code} value={term.code}>
-          {term.description}
-        </MenuItem>
-      )
-    })
-    return items
-  }
 
-  handleChange = event => {
-    const { terms } = this.props
+export default function TermSelect() {
+  const current_term = useSelector(state => state.terms.current_term)
+  const terms = useSelector(state => state.terms.terms)
+  const [selectedValue, setSelectedValue] = useState('')
+  const classes = useStyles()
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if (current_term !== null) {
+      setSelectedValue(current_term.code)
+    }
+  }, [current_term])
+
+
+  function handleChange(event) {
     let new_term = null
-    for (const term of terms) {
-      if (Object.is(term.code, event.target.value)) {
-        new_term = term
-        this.setState({
-          selected: term.description,
-          selectedValue: event.target.value,
-          open: false
-        })
-        new_term = term
+
+    // only update as needed
+    if (event.target.value !== selectedValue) {
+      for (let [_index, term] of terms.entries()) {
+        if (term.code === event.target.value) {
+          setSelectedValue(oldValues => ({
+            ...oldValues,
+            [event.target.value]: event.target.value
+          }));
+          new_term = term
+        }
       }
-    }
 
-    this.props.set_current_term(new_term)
-    this.props.fetch_courses(new_term)
+      dispatch(fetch_courses(new_term))
+      dispatch(set_current_term(new_term))
+    }
   }
 
-  render() {
-    const { classes, terms } = this.props
-    const { selectedValue } = this.state
-    if (Object.is(terms, null)) {
-      return <div />
-    } else {
-      return (
-        <div>
-          <form className={classes.root} autoComplete="off">
-            <FormControl className={classes.formControl}>
-              <Select
-                value={selectedValue}
-                onChange={this.handleChange}
-                autoWidth={true}
+  return (
+    <div>
+      <form className={classes.root} autoComplete="off">
+        <FormControl className={classes.formControl}>
+          <Select
+            value={selectedValue}
+            onChange={handleChange}
+            autoWidth={true}
+            classes={{
+              select: classes.select,
+              icon: classes.selectIcon
+            }}
+            input={
+              <Input
+                id="terms-dropdown"
+                name="terms"
                 classes={{
-                  select: classes.select,
-                  icon: classes.selectIcon
+                  root: classes.inputRoot,
+                  underline: classes.underline
                 }}
-                input={
-                  <Input
-                    id="terms-dropdown"
-                    name="terms"
-                    classes={{
-                      root: classes.inputRoot,
-                      underline: classes.underline
-                    }}
-                  />
-                }
-              >
-                {this.getTerms()}
-              </Select>
-            </FormControl>
-          </form>
-        </div>
-      )
-    }
-  }
-}
-
-TermSelect.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-const mapStateToProps = state => ({
-  current_term: state.terms.current_term,
-  terms: state.terms.terms
-})
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetch_courses: new_term => dispatch(fetch_courses(new_term)),
-    set_current_term: new_term => dispatch(set_current_term(new_term))
-  }
-}
-
-export default withStyles(styles, { name: 'TermSelect' })(
-  translate('view', { wait: true })(
-    connect(mapStateToProps, mapDispatchToProps)(TermSelect)
+              />
+            }
+          >
+            {getTerms(terms)}
+          </Select>
+        </FormControl>
+      </form>
+    </div>
   )
-)
+}

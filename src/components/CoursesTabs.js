@@ -1,11 +1,11 @@
-import React from 'react'
+import React, { useState } from 'react'
 import Calendar from 'reactjs-calendar'
 import Courses from './Courses'
 import Grades from './Grades'
 import PropTypes from 'prop-types'
 import TermSelect from './TermSelect'
-import { connect } from 'react-redux'
-import { translate } from 'react-i18next'
+import { useSelector } from 'react-redux'
+import { useTranslation } from 'react-i18next';
 
 import AppBar from '@material-ui/core/AppBar'
 import Assignment from '@material-ui/icons/Assignment'
@@ -15,7 +15,7 @@ import Spellcheck from '@material-ui/icons/Spellcheck'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 import Toolbar from '@material-ui/core/Toolbar'
-import { withStyles } from '@material-ui/core/styles'
+import { makeStyles } from '@material-ui/styles';
 
 const TabContainer = props => (
   <div style={{ padding: 20 }}>{props.children}</div>
@@ -25,7 +25,7 @@ TabContainer.propTypes = {
   children: PropTypes.node.isRequired
 }
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   root: {
     minHeight: 0
   },
@@ -55,132 +55,98 @@ const styles = theme => ({
   bar: {
     flexDirection: 'column'
   }
-})
+}))
 
-class CoursesTabs extends React.Component {
-  state = {
-    value: 0
-  }
+export default function CoursesTabs(props) {
+  const [value, setValue] = useState(0)
+  const term_bounds = useSelector(state => state.terms.term_bounds)
+  const { mobile } = props
+  const { t } = useTranslation()
+  const classes = useStyles()
 
-  handleChange = (event, value) => {
-    this.setState({ value })
-  }
-
-  render() {
-    const {
-      books,
-      calendar_url,
-      classes,
-      mobile,
-      t,
-      terms_fetched,
-      term_bounds,
-      root_element
-    } = this.props
-    const { value } = this.state
-    if (terms_fetched) {
-      return (
-        <Paper className={classes.inner}>
-          <AppBar position="static">
-            <Toolbar
-              disableGutters={true}
-              className={mobile ? classes.bar : classes.root}
+  return (
+    <Paper>
+      <AppBar position="static">
+        <Toolbar disableGutters={true} className={mobile ? classes.bar : classes.root}>
+          {mobile === true && (
+            <Tabs
+              className={classes.flex}
+              value={value}
+              onChange={(_event, value) => setValue(value)}
             >
-              {mobile === true && (
-                <Tabs
-                  className={classes.flex}
-                  value={value}
-                  onChange={this.handleChange}
-                >
-                  <Tab
-                    aria-label={t('courses', {})}
-                    title="Courses"
-                    className={classes.tab}
-                    icon={
-                      <Assignment
-                        className={classes.button}
-                        alt="View your courses for the selected term"
-                      />
-                    }
-                    tabIndex="0"
+              <Tab
+                aria-label={t('courses')}
+                title="Courses"
+                className={classes.tab}
+                icon={
+                  <Assignment
+                    className={classes.button}
+                    alt="View your courses for the selected term"
                   />
-                  <Tab
-                    aria-label={t('calendar', {})}
-                    title="Calendar"
-                    className={classes.tab}
-                    icon={
-                      <Event
-                        className={classes.button}
-                        alt="View your calendar events"
-                      />
-                    }
-                    tabIndex="0"
-                  />
-                  <Tab
-                    aria-label={t('grades', {})}
-                    title="Grades"
-                    className={classes.tab}
-                    icon={
-                      <Spellcheck
-                        className={classes.button}
-                        alt="View your grades"
-                      />
-                    }
-                    tabIndex="0"
-                  />
-                </Tabs>
-              )}
-              {mobile === false && (
-                <Tabs
-                  className={classes.flex}
-                  value={value}
-                  onChange={this.handleChange}
-                >
-                  <Tab label={t('courses', {})} tabIndex="0" />
-                  <Tab label={t('calendar', {})} tabIndex="0" />
-                  <Tab label={t('grades', {})} tabIndex="0" />
-                </Tabs>
-              )}
-              <TermSelect mobile={mobile} />
-            </Toolbar>
-          </AppBar>
-          {value === 0 && (
-            <TabContainer>
-              <div>
-                <Courses tabIndex="0" mobile={mobile} books={books} />
-              </div>
-            </TabContainer>
-          )}
-          {value === 1 && (
-            <TabContainer>
-              <Calendar
-                eventsURLObj={calendar_url}
-                termBounds={term_bounds}
-                rootID={root_element}
+                }
+                tabIndex="0"
               />
-            </TabContainer>
+              <Tab
+                aria-label={t('calendar')}
+                title="Calendar"
+                className={classes.tab}
+                icon={
+                  <Event
+                    className={classes.button}
+                    alt="View your calendar events"
+                  />
+                }
+                tabIndex="0"
+              />
+              <Tab
+                aria-label={t('grades')}
+                title="Grades"
+                className={classes.tab}
+                icon={
+                  <Spellcheck
+                    className={classes.button}
+                    alt="View your grades"
+                  />
+                }
+                tabIndex="0"
+              />
+            </Tabs>
           )}
-          {value === 2 && (
-            <TabContainer>
-              <Grades tabIndex="0" mobile={mobile} />
-            </TabContainer>
+          {mobile === false && (
+            <Tabs
+              className={classes.flex}
+              value={value}
+              onChange={(event, value) => setValue(value)}
+            >
+              <Tab label={t('courses')} tabIndex="0" />
+              <Tab label={t('calendar')} tabIndex="0" />
+              <Tab label={t('grades')} tabIndex="0" />
+            </Tabs>
           )}
-        </Paper>
-      )
-    }
-  }
+          <TermSelect mobile={mobile} />
+        </Toolbar>
+      </AppBar>
+      {value === 0 && (
+        <TabContainer>
+          <div>
+            <Courses tabIndex="0" mobile={mobile} />
+          </div>
+        </TabContainer>
+      )}
+      {value === 1 && (
+        <TabContainer>
+          <Calendar
+            eventsURLObj={props.calendar_url}
+            termBounds={term_bounds}
+            rootID={props.root_element}
+          />
+        </TabContainer>
+      )}
+      {value === 2 && (
+        <TabContainer>
+          <Grades tabIndex="0" mobile={mobile} />
+        </TabContainer>
+      )}
+    </Paper>
+  )
 }
-
-CoursesTabs.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-const mapStateToProps = state => ({
-  current_term: state.terms.current_term,
-  terms_fetched: state.terms.fetched,
-  term_bounds: state.terms.term_bounds
-})
-
-export default withStyles(styles, { name: 'CourseTabs' })(
-  translate('view', { wait: true })(connect(mapStateToProps)(CoursesTabs))
-)

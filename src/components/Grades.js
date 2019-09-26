@@ -1,9 +1,7 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 
-import PropTypes from 'prop-types'
-import { connect } from 'react-redux'
 import { fetch_credits } from './../actions/creditsActions'
-import { translate } from 'react-i18next'
+import { useTranslation } from 'react-i18next';
 
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -14,9 +12,10 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
-import { withStyles } from '@material-ui/core/styles'
+import { useSelector, useDispatch } from 'react-redux'
+import { makeStyles } from '@material-ui/styles';
 
-const styles = theme => ({
+const useStyles = makeStyles(theme => ({
   cardDiv: {
     display: 'flex',
     flexDirection: 'row',
@@ -50,96 +49,7 @@ const styles = theme => ({
     fontSize: 14,
     width: '33%'
   }
-})
-
-class Grades extends React.Component {
-  componentDidMount() {
-    // eslint-disable-next-line
-    this.props.fetch_credits
-  }
-
-  getOverallCredits = credits => {
-    let rows = []
-    let i = 0
-    for (let cr of credits) {
-      rows.push(
-        <TableRow key={i++}>
-          <TableCell>{cr.level}</TableCell>
-          <TableCell>{cr.credits}</TableCell>
-          <TableCell>{cr.gpa}</TableCell>
-        </TableRow>
-      )
-    }
-    return rows
-  }
-
-  render() {
-    const {
-      classes,
-      courses,
-      courses_fetched,
-      credits,
-      credits_fetched,
-      mobile,
-      t
-    } = this.props
-    if (courses_fetched && credits_fetched) {
-      return (
-        <Card className={classes.card}>
-          <CardHeader
-            className={classes.classHeader}
-            title={
-              <Typography
-                tabIndex="0"
-                variant="h1"
-                className={classes.classHeaderSpan}
-                style={{ fontSize: '20px' }}
-              >
-                {t('gac', {})}
-              </Typography>
-            }
-          />
-          <CardContent className={mobile ? classes.content : null}>
-            <Table>
-              <TableHead>
-                <TableRow className={classes.tableHeader}>
-                  <TableCell className={classes.tableCell} scope="col">
-                    {t('level', {})}
-                  </TableCell>
-                  <TableCell className={classes.tableCell} scope="col">
-                    {t('credits', {})}
-                  </TableCell>
-                  <TableCell className={classes.tableCell} scope="col">
-                    GPA
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>{this.getOverallCredits(credits)}</TableBody>
-            </Table>
-            <Table>
-              <TableHead>
-                <TableRow className={classes.tableHeader}>
-                  <TableCell className={classes.tableCell} scope="col">
-                    {t('course', {})}
-                  </TableCell>
-                  <TableCell className={classes.tableCell} scope="col">
-                    {t('credits', {})}
-                  </TableCell>
-                  <TableCell className={classes.tableCell} scope="col">
-                    {t('grades', {})}
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>{GradeRow(courses)}</TableBody>
-            </Table>
-          </CardContent>
-        </Card>
-      )
-    } else {
-      return <div />
-    }
-  }
-}
+}))
 
 const GradeRow = courses => {
   try {
@@ -163,25 +73,90 @@ const GradeRow = courses => {
   }
 }
 
-Grades.propTypes = {
-  classes: PropTypes.object.isRequired
-}
-
-const mapStateToProps = state => ({
-  credits: state.credits.credits,
-  credits_fetched: state.credits.fetched,
-  courses: state.courses.courses,
-  courses_fetched: state.courses.fetched
-})
-
-const mapDispatchToProps = dispatch => {
-  return {
-    fetch_credits: dispatch(fetch_credits())
+const getOverallCredits = credits => {
+  let rows = []
+  let i = 0
+  for (let cr of credits) {
+    rows.push(
+      <TableRow key={i++}>
+        <TableCell>{cr.level}</TableCell>
+        <TableCell>{cr.credits}</TableCell>
+        <TableCell>{cr.gpa}</TableCell>
+      </TableRow>
+    )
   }
+  return rows
 }
 
-export default withStyles(styles, { name: 'Grade' })(
-  translate('view', { wait: true })(
-    connect(mapStateToProps, mapDispatchToProps)(Grades)
-  )
-)
+const Grades = props => {
+  const classes = useStyles()
+  const { t } = useTranslation()
+  const { mobile } = props
+  const dispatch = useDispatch();
+  const credits = useSelector(state => state.credits.credits)
+  const credits_fetched = useSelector(state => state.credits.fetched)
+  const courses = useSelector(state => state.courses.courses)
+  const courses_fetched = useSelector(state => state.courses.fetched)
+
+  useEffect(() => {
+    dispatch(fetch_credits())
+  }, [dispatch])
+
+  if (courses_fetched && credits_fetched) {
+      return (
+        <Card className={classes.card}>
+          <CardHeader
+            className={classes.classHeader}
+            title={
+              <Typography
+                tabIndex="0"
+                variant="h1"
+                className={classes.classHeaderSpan}
+                style={{ fontSize: '20px' }}
+              >
+                {t('gac')}
+              </Typography>
+            }
+          />
+          <CardContent className={mobile ? classes.content : null}>
+            <Table>
+              <TableHead>
+                <TableRow className={classes.tableHeader}>
+                  <TableCell className={classes.tableCell} scope="col">
+                    {t('level')}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} scope="col">
+                    {t('grades')}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} scope="col">
+                    GPA
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{getOverallCredits(credits)}</TableBody>
+            </Table>
+            <Table>
+              <TableHead>
+                <TableRow className={classes.tableHeader}>
+                  <TableCell className={classes.tableCell} scope="col">
+                    {t('course')}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} scope="col">
+                    {t('credits')}
+                  </TableCell>
+                  <TableCell className={classes.tableCell} scope="col">
+                    {t('grades')}
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>{GradeRow(courses)}</TableBody>
+            </Table>
+          </CardContent>
+        </Card>
+      )
+    } else {
+      return <div />
+    }
+}
+
+export default Grades
