@@ -5,8 +5,8 @@ import credits from './creditsReducer'
 import terms from './termsReducer'
 
 export default combineReducers({
-  terms,
+  // terms,
   courses,
-  credits,
-  advising
+  // credits,
+  // advising
 })

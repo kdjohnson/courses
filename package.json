@@ -5,6 +5,11 @@
   "dependencies": {
     "@material-ui/core": "^4.0.0",
     "@material-ui/icons": "^4.0.0",
+    "@types/jest": "^24.0.19",
+    "@types/node": "^12.11.1",
+    "@types/react": "^16.9.7",
+    "@types/react-dom": "^16.9.2",
+    "@types/react-redux": "^7.1.4",
     "detect-browser": "^1.9.0",
     "i18next": "^17.0.16",
     "i18next-browser-languagedetector": "^3.0.3",
@@ -22,7 +27,8 @@
     "redux-logger": "^3.0.6",
     "redux-thunk": "^2.2.0",
     "rewire": "^4.0.1",
-    "typeface-arimo": "^0.0.22"
+    "typeface-arimo": "^0.0.22",
+    "typescript": "^3.6.4"
   },
   "devDependencies": {
     "react-scripts": "^3.1.1"

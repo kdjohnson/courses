@@ -10,9 +10,6 @@ import { ThemeProvider } from '@material-ui/styles';
 import { Provider } from 'react-redux'
 
 const theme = createMuiTheme({
-  typography: {
-    useNextVariants: true,
-  },
   palette: {
     primary: {
       light: '#b89f74',
@@ -30,6 +27,8 @@ const theme = createMuiTheme({
 })
 
 const root_element = 'root'
+
+console.log(store)
 
 ReactDOM.render(
   <I18nextProvider i18n={i18n}>

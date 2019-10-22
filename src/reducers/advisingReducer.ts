@@ -1,11 +1,18 @@
+interface IAdvising {
+  advising: boolean,
+  fetching: boolean,
+  fetched: boolean,
+  error: object
+
+}
 export default function reducer(
-  state = {
+  state: IAdvising = {
     advising: false,
     fetching: false,
     fetched: false,
-    error: null
+    error: {} 
   },
-  action
+  action: any
 ) {
   switch (action.type) {
     case 'FETCH_ADVISING_START': {

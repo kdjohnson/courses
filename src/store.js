@@ -3,6 +3,7 @@ import { applyMiddleware, createStore } from 'redux'
 import logger from 'redux-logger'
 import reducer from './reducers'
 import thunk from 'redux-thunk'
+import courses from './reducers/coursesReducer'
 
 let middleware = null
 
@@ -12,4 +13,5 @@ if(process.env.NODE_ENV === 'production') {
   middleware = applyMiddleware(thunk, logger)
 }
 
-export default createStore(reducer, middleware)
+// export default createStore(reducer, middleware)
+export default createStore(courses, middleware)
