@@ -1,30 +1,30 @@
 import { Course } from './../store/types/Course'
 import { Registration } from './../store/types/Registration'
 import { CourseActions } from './../store/types/CourseActions'
-interface CoursesState {
-  books: boolean,
+export interface CoursesState {
+  books: object,
   courses: Course[],
   fetching: boolean,
   fetched: boolean,
-  error: object,
+  error: boolean,
   regs: object,
   updating: boolean
 }
 
 const initialState: CoursesState = {
-    books: false,
+    books: {},
     courses: [],
     fetching: false,
     fetched: false,
-    error: {},
+    error: false,
     regs: {},
     updating: false
-  
 }
+
 export default function coursesReducer(
   state = initialState,
   action: CourseActions
-) {
+) : CoursesState {
   switch (action.type) {
     case 'FETCH_COURSES_START': {
       return { ...state, fetching: true, fetched: false, error: false }
@@ -36,32 +36,26 @@ export default function coursesReducer(
       if (action.payload.courses === null) {
         return {
           ...state,
-          courses: null,
+          // courses: null,
           fetching: false,
           fetched: true,
           error: true
         }
       }
-      // let set = new Set()
+
+      // TODO: RENAME VAR
       let tmp: string[] = []
       action.payload.courses.forEach(course => {
         if(!tmp.includes(course.registrationStatusDescription)) {
           tmp.push(course.registrationStatusDescription)
         }
       })
-      // for (let i = 0; i < action.payload.courses.length; i++) {
-      //   set.add(action.payload.courses[i].registrationStatusDescription)
-      // }
 
       let regs: Registration = {}
       tmp.forEach(desc => {
         regs[desc] = true
       })
 
-      // for (let type in set) {
-      //   let tmp = set[type]
-      //   regs[type] = true
-      // }
       return {
         ...state,
         fetching: false,
@@ -81,6 +75,6 @@ export default function coursesReducer(
     }
 
     default:
-      return initialState
+      return state
   }
 }

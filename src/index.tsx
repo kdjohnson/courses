@@ -28,8 +28,6 @@ const theme = createMuiTheme({
 
 const root_element = 'root'
 
-console.log(store)
-
 ReactDOM.render(
   <I18nextProvider i18n={i18n}>
       <ThemeProvider theme={theme}>

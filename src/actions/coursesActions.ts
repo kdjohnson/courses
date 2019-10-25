@@ -1,6 +1,6 @@
 import { get_courses } from '../api/api'
 import { Term } from './../store/types/Term'
-import { Dispatch } from 'react'
+import { Dispatch } from 'redux'
 
 const courses_url = 'http://localhost:8082/api/courses'
 

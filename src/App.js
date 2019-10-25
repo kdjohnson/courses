@@ -32,19 +32,22 @@ const useStyles = makeStyles(theme => ({
 const App = props => {
   const [mobile, setMobile] = useState(false)
   const classes = useStyles()
-  // const isAdvisor = useSelector(state => state.advising.advising)
-  // const terms_fetched = useSelector(state => state.terms.fetched)
-  // const advising_fetching = useSelector(state => state.advising.fetching);
-  // const terms_fetching = useSelector(state => state.terms.fetching)
-  // const advising_error = useSelector(state => state.advising.error)
-  // const terms_error = useSelector(state => state.terms.error)
 
-  const isAdvisor = false
+  const isAdvisor = useSelector(state => state.advising.advising)
+  // const terms_fetched = useSelector(state => state.terms.fetched)
   const terms_fetched = false
-  const advising_fetching = false
+  const advising_fetching = useSelector(state => state.advising.fetching);
+  // const terms_fetching = useSelector(state => state.terms.fetching)
   const terms_fetching = true
-  const advising_error = false
+  const advising_error = useSelector(state => state.advising.error)
+  // const terms_error = useSelector(state => state.terms.error)
   const terms_error = false
+
+  // const isAdvisor = false
+  // const advising_fetching = false
+  // const terms_fetching = true
+  // const advising_error = false
+  // const terms_error = false
 
   const dispatch = useDispatch();
 
@@ -56,6 +59,7 @@ const App = props => {
     if (document.getElementById('root').clientWidth < 650) {
       setMobile(true)
     }
+    // TODO: cleanup listener
   }, [dispatch])
 
 
