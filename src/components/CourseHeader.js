@@ -4,7 +4,6 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Typography from '@material-ui/core/Typography'
 import amber from '@material-ui/core/colors/amber'
 import { makeStyles } from '@material-ui/styles';
-import { useTranslation } from 'react-i18next';
 
 const useStyles = makeStyles(theme => ({
   classHeader: {
@@ -51,10 +50,9 @@ const useStyles = makeStyles(theme => ({
 
 export default function CourseHeader(props) {
   const classes = useStyles()
-  const { t } = useTranslation()
   const { course } = props
 
-  if (Object.is(course.waitList, '0')) {
+  if (Object.is(course.waitlist, '0')) {
     return (
       <CardHeader
         className={classes.classHeader}
@@ -79,7 +77,7 @@ export default function CourseHeader(props) {
                 course.crn}
             </span>
             <span tabIndex="0" className={classes.courseInfo}>
-              {t('credits') + ': ' + course.credit}
+              Credits: {course.credit}
             </span>
           </div>
         }
@@ -108,10 +106,10 @@ export default function CourseHeader(props) {
             </span>
             <div className={classes.subHeaderDiv}>
               <span tabIndex="0" className={classes.courseInfo}>
-                {t('credits') + ': ' + course.credit}
+                Credits: {course.credit}
               </span>
               <span tabIndex="0" className={classes.courseInfo}>
-                {t('waitlist') + ': ' + course.waitList}
+                Waitlist + ': ' + course.waitlist
               </span>
             </div>
           </div>

@@ -1,6 +1,5 @@
 import React, { useState } from 'react'
 import { getMapUrl } from '../utils/mapLinks'
-import { useTranslation } from 'react-i18next';
 
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -139,7 +138,6 @@ const Instructors = props => {
   const { teachers } = props
   const [open, setOpen] = useState(false)
   const classes = useStyles()
-  const { t } = useTranslation()
 
   return (
     <div>
@@ -172,7 +170,7 @@ const Instructors = props => {
             color="secondary"
             className={classes.close}
           >
-            {t('close')}
+            Close
           </Button>
         </DialogActions>
       </Dialog>

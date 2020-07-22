@@ -1,5 +1,4 @@
 import React, { useState } from 'react'
-import { useTranslation } from 'react-i18next';
 
 import Button from '@material-ui/core/Button'
 import Dialog from '@material-ui/core/Dialog'
@@ -48,10 +47,8 @@ const Transition = React.forwardRef(function Transition(props, ref) {
 
 export default function CourseDetails(props) {
   const [open, setOpen] = useState(false)
-  const {course } = props
+  const { course } = props
   const classes = useStyles()
-  const { t } = useTranslation()
-  
 
   if (Object.is(course, null)) {
     return <div />
@@ -65,7 +62,7 @@ export default function CourseDetails(props) {
           id={'openbutton' + course.crn}
           aria-label="course description"
         >
-          {t('description')}
+          Description
         </Button>
 
         <Dialog
@@ -79,7 +76,7 @@ export default function CourseDetails(props) {
         >
           <DialogTitle
             className={
-              Object.is(course.waitList, '0')
+              Object.is(course.waitlist, '0')
                 ? classes.dialogHeader
                 : classes.dialogHeaderWaitList
             }
@@ -107,7 +104,7 @@ export default function CourseDetails(props) {
                 tabIndex="0"
                 color="secondary"
               >
-                {t('close')}
+                Close
               </Button>
             </DialogActions>
           </DialogContent>
