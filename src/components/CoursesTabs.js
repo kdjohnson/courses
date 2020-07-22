@@ -2,10 +2,11 @@ import React, { useState } from 'react'
 import Calendar from 'reactjs-calendar'
 import Courses from './Courses'
 import Grades from './Grades'
+import { getBookButton } from './BuyBooks'
+import { printCourses } from './PrintCourses'
 import PropTypes from 'prop-types'
 import TermSelect from './TermSelect'
 import { useSelector } from 'react-redux'
-import { useTranslation } from 'react-i18next';
 
 import AppBar from '@material-ui/core/AppBar'
 import Assignment from '@material-ui/icons/Assignment'
@@ -29,13 +30,11 @@ const useStyles = makeStyles(theme => ({
   root: {
     minHeight: 0
   },
-
   tab: {
     '@media (min-width: 1024px)': {
       minWidth: 72
     }
   },
-
   inner: {
     marginTop: 30,
     width: '100%'
@@ -44,24 +43,26 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: theme.palette.primary.main,
     color: theme.palette.primary.contrastText
   },
-
   flex: {
     flex: 1
   },
-
   button: {
     color: '#FFFFFF'
   },
   bar: {
     flexDirection: 'column'
+  },
+  btnContainer: {
+    display: 'flex'
   }
 }))
 
 export default function CoursesTabs(props) {
   const [value, setValue] = useState(0)
-  const term_bounds = useSelector(state => state.terms.term_bounds)
+  const courses = useSelector(state => state.courses)
+  const books = useSelector(state => state.books)
+  const term_bounds = useSelector(state => state.term_bounds)
   const { mobile } = props
-  const { t } = useTranslation()
   const classes = useStyles()
 
   return (
@@ -75,7 +76,7 @@ export default function CoursesTabs(props) {
               onChange={(_event, value) => setValue(value)}
             >
               <Tab
-                aria-label={t('courses')}
+                aria-label="courses"
                 title="Courses"
                 className={classes.tab}
                 icon={
@@ -87,7 +88,7 @@ export default function CoursesTabs(props) {
                 tabIndex="0"
               />
               <Tab
-                aria-label={t('calendar')}
+                aria-label="calendar"
                 title="Calendar"
                 className={classes.tab}
                 icon={
@@ -99,7 +100,7 @@ export default function CoursesTabs(props) {
                 tabIndex="0"
               />
               <Tab
-                aria-label={t('grades')}
+                aria-label="grades"
                 title="Grades"
                 className={classes.tab}
                 icon={
@@ -118,9 +119,9 @@ export default function CoursesTabs(props) {
               value={value}
               onChange={(event, value) => setValue(value)}
             >
-              <Tab label={t('courses')} tabIndex="0" />
-              <Tab label={t('calendar')} tabIndex="0" />
-              <Tab label={t('grades')} tabIndex="0" />
+              <Tab label="Courses" tabIndex="0" />
+              <Tab label="Calendar" tabIndex="0" />
+              <Tab label="Grades" tabIndex="0" />
             </Tabs>
           )}
           <TermSelect mobile={mobile} />
@@ -129,6 +130,9 @@ export default function CoursesTabs(props) {
       {value === 0 && (
         <TabContainer>
           <div>
+            <div className={classes.btnContainer}>
+             { getBookButton(books, mobile) }
+            </div>
             <Courses tabIndex="0" mobile={mobile} />
           </div>
         </TabContainer>

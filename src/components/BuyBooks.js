@@ -11,7 +11,12 @@ const style = {
   marginLeft: '1em'
 }
 
-export const getBookButton = (books, term, mobile, rightIconStyle) => {
+const icon = {
+  paddingRight: 5,
+  marginLeft: -5
+}
+
+export const getBookButton = (books, mobile) => {
   return (
     <div style={mobile ? mobileStyle : style}>
       <Button
@@ -21,8 +26,8 @@ export const getBookButton = (books, term, mobile, rightIconStyle) => {
         tabIndex="0"
         onClick={handleBuyBooks}
       >
+        <BookIcon style={icon}/>
         Buy Books
-        <BookIcon className={rightIconStyle} />
       </Button>
       <form
         name="BNForm"
@@ -38,8 +43,8 @@ export const getBookButton = (books, term, mobile, rightIconStyle) => {
         <input type="hidden" name="termMapping" value="N" />
         <input type="hidden" name="courseXml" value={books} />
         <button
-          className="courses-portlet-react-form-submit"
-          id="courses-portlet-react-form-submit"
+          className="courses-soffit-react-form-submit"
+          id="courses-soffit-react-form-submit"
           type="submit"
         />
       </form>
@@ -48,5 +53,5 @@ export const getBookButton = (books, term, mobile, rightIconStyle) => {
 }
 
 const handleBuyBooks = () => {
-  document.getElementById('courses-portlet-react-form-submit').click()
+  document.getElementById('courses-soffit-react-form-submit').click()
 }

@@ -1,7 +1,4 @@
-import React, { useEffect } from 'react'
-
-import { fetch_credits } from './../actions/creditsActions'
-import { useTranslation } from 'react-i18next';
+import React, { useEffect, useState } from 'react'
 
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -13,6 +10,7 @@ import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
 import { useSelector, useDispatch } from 'react-redux'
+import { fetch_selected_courses } from '../actions/termActions'
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -24,21 +22,17 @@ const useStyles = makeStyles(theme => ({
   card: {
     backgroundColor: '#fafafa'
   },
-
   courseTitle: {
     fontSize: 16,
     color: theme.palette.text.primary
   },
-
   classHeader: {
     backgroundColor: theme.palette.primary.light
   },
-
   classHeaderSpan: {
     fontWeight: 600,
     color: 'rgba(0, 0, 0, 0.75)'
   },
-
   content: {
     paddingTop: 0,
     overflowX: 'scroll'
@@ -79,7 +73,7 @@ const getOverallCredits = credits => {
   for (let cr of credits) {
     rows.push(
       <TableRow key={i++}>
-        <TableCell>{cr.level}</TableCell>
+        <TableCell>{cr.standing}</TableCell>
         <TableCell>{cr.credits}</TableCell>
         <TableCell>{cr.gpa}</TableCell>
       </TableRow>
@@ -90,19 +84,23 @@ const getOverallCredits = credits => {
 
 const Grades = props => {
   const classes = useStyles()
-  const { t } = useTranslation()
   const { mobile } = props
-  const dispatch = useDispatch();
-  const credits = useSelector(state => state.credits.credits)
-  const credits_fetched = useSelector(state => state.credits.fetched)
-  const courses = useSelector(state => state.courses.courses)
-  const courses_fetched = useSelector(state => state.courses.fetched)
+  const credits = useSelector(state => state.credits)
+  const dispatch = useDispatch()
+  const courses = useSelector(state => state.courses)
+  const courses_fetched = useSelector(state => state.fetched)
+  const selected_term = useSelector(state => state.selected_term)
+  const [term, set_term] = useState(null)
 
   useEffect(() => {
-    dispatch(fetch_credits())
-  }, [dispatch])
+    if (term === null) {
+      set_term(selected_term)
+    } else {
+      dispatch(fetch_selected_courses(selected_term))
+    }
+  }, [selected_term])
 
-  if (courses_fetched && credits_fetched) {
+  if (credits !== []) {
       return (
         <Card className={classes.card}>
           <CardHeader
@@ -114,7 +112,7 @@ const Grades = props => {
                 className={classes.classHeaderSpan}
                 style={{ fontSize: '20px' }}
               >
-                {t('gac')}
+               Grades and Credits 
               </Typography>
             }
           />
@@ -123,10 +121,10 @@ const Grades = props => {
               <TableHead>
                 <TableRow className={classes.tableHeader}>
                   <TableCell className={classes.tableCell} scope="col">
-                    {t('level')}
+                    Level
                   </TableCell>
                   <TableCell className={classes.tableCell} scope="col">
-                    {t('grades')}
+                    Grades
                   </TableCell>
                   <TableCell className={classes.tableCell} scope="col">
                     GPA
@@ -135,22 +133,24 @@ const Grades = props => {
               </TableHead>
               <TableBody>{getOverallCredits(credits)}</TableBody>
             </Table>
+            {courses_fetched && (
             <Table>
               <TableHead>
                 <TableRow className={classes.tableHeader}>
                   <TableCell className={classes.tableCell} scope="col">
-                    {t('course')}
+                    Course
                   </TableCell>
                   <TableCell className={classes.tableCell} scope="col">
-                    {t('credits')}
+                    Credits
                   </TableCell>
                   <TableCell className={classes.tableCell} scope="col">
-                    {t('grades')}
+                    Grades
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>{GradeRow(courses)}</TableBody>
             </Table>
+            )}
           </CardContent>
         </Card>
       )

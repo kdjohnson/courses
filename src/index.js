@@ -2,12 +2,13 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import 'typeface-arimo'
 import App from './App'
-import i18n from './utils/i18n'
 import store from './store'
+import { StylesProvider, createGenerateClassName } from '@material-ui/styles'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { I18nextProvider } from 'react-i18next'
-import { createMuiTheme } from '@material-ui/core/styles'
-import { ThemeProvider } from '@material-ui/styles';
 import { Provider } from 'react-redux'
+
+const project_name = 'courses-soffit'
 
 const theme = createMuiTheme({
   typography: {
@@ -29,15 +30,18 @@ const theme = createMuiTheme({
   }
 })
 
-const root_element = 'root'
+const generateClassName = createGenerateClassName({
+  productionPrefix: project_name,
+  disableGlobal: true
+})
 
 ReactDOM.render(
-  <I18nextProvider i18n={i18n}>
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <App root_element={root_element} />
-        </Provider>
-      </ThemeProvider>
-  </I18nextProvider>,
-  document.getElementById(root_element)
+  <StylesProvider generateClassName={generateClassName}>
+    <MuiThemeProvider theme={theme}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </MuiThemeProvider>
+  </StylesProvider>,
+  document.getElementById(project_name)
 )
