@@ -74,20 +74,20 @@ export default function ExpandableMeetings(props) {
     const meeting = meetings[0]
     return (
       <div key={meeting.endDate + Math.random()} className={classes.meetBorder}>
-        {displayLink(meeting.buildingRoom, meeting.campus) && (
+        {displayLink(meeting.location, meeting.campus) && (
           <a
             className={classes.meetLink}
             tabIndex="0"
             target="_blank"
-            href={getMapUrl(meeting.buildingRoom, false)}
+            href={getMapUrl(meeting.location, false)}
             rel="noopener noreferrer"
           >
-            {meeting.buildingRoom + ' [' + meeting.campus + ']'}
+            {meeting.location + ' [' + meeting.campus + ']'}
           </a>
         )}
-        {!displayLink(meeting.buildingRoom, meeting.campus) && (
+        {!displayLink(meeting.location, meeting.campus) && (
           <Typography variant="body1" className={classes.meetNoLink} tabIndex="0">
-            {meeting.buildingRoom + ' [' + meeting.campus + ']'}
+            {meeting.location + ' [' + meeting.campus + ']'}
           </Typography>
         )}
         <Typography variant="body1" className={classes.meet} tabIndex="0">
@@ -143,24 +143,24 @@ export default function ExpandableMeetings(props) {
     for (let i = 1, total = meetings.length; i < total; i++) {
       elements.push(
         <div key={i} className={classes.expandedDiv}>
-          {displayLink(meetings[i].buildingRoom, meetings[i].campus) && (
+          {displayLink(meetings[i].location, meetings[i].campus) && (
             <a
               className={classes.meetLink}
               tabIndex="0"
               target="_blank"
-              href={getMapUrl(meetings[i].buildingRoom, false)}
+              href={getMapUrl(meetings[i].location, false)}
               rel="noopener noreferrer"
             >
-              {meetings[i].buildingRoom + ' [' + meetings[i].campus + ']'}
+              {meetings[i].location + ' [' + meetings[i].campus + ']'}
             </a>
           )}
-          {!displayLink(meetings[i].buildingRoom, meetings[i].campus) && (
+          {!displayLink(meetings[i].location, meetings[i].campus) && (
             <Typography
               variant="body1"
               className={classes.meetNoLink}
               tabIndex="0"
             >
-              {meetings[i].buildingRoom + ' [' + meetings[i].campus + ']'}
+              {meetings[i].location + ' [' + meetings[i].campus + ']'}
             </Typography>
           )}
           <Typography variant="body1" className={classes.meet} tabIndex="0">

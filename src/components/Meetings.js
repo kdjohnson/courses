@@ -66,24 +66,24 @@ export default function Meetings(props) {
       } else {
         return (
           <div className={classes.meetBorder}>
-            {displayLink(meetings[0].buildingRoom, meetings[0].campus) && (
+            {displayLink(meetings[0].location, meetings[0].campus) && (
               <a
                 className={classes.meetLink}
                 tabIndex="0"
                 target="_blank"
-                href={getMapUrl(meetings[0].buildingRoom, false)}
+                href={getMapUrl(meetings[0].location, false)}
                 rel="noopener noreferrer"
               >
-                {meetings[0].buildingRoom + ' [' + meetings[0].campus + ']'}
+                {meetings[0].location + ' [' + meetings[0].campus + ']'}
               </a>
             )}
-            {!displayLink(meetings[0].buildingRoom, meetings[0].campus) && (
+            {!displayLink(meetings[0].location, meetings[0].campus) && (
               <Typography
                 variant="body1"
                 className={classes.meetNoLink}
                 tabIndex="0"
               >
-                {meetings[0].buildingRoom + ' [' + meetings[0].campus + ']'}
+                {meetings[0].location + ' [' + meetings[0].campus + ']'}
               </Typography>
             )}
             <Typography variant="body1" className={classes.meet} tabIndex="0">
