@@ -6,7 +6,7 @@
   "dependencies": {
     "@material-ui/core": "^4.0.0",
     "@material-ui/icons": "^4.0.0",
-    "@react-pdf/renderer": "^2.0.0-beta.6",
+    "@react-pdf/renderer": "^2.0.0-beta.14",
     "detect-browser": "^1.9.0",
     "i18next": "^17.0.16",
     "i18next-browser-languagedetector": "^3.0.3",
@@ -27,7 +27,7 @@
     "typeface-arimo": "^0.0.22"
   },
   "devDependencies": {
-    "react-scripts": "^3.1.1"
+    "react-scripts": "^3.4.1"
   },
   "scripts": {
     "start": "react-scripts start",
