@@ -7,18 +7,19 @@ const initial_state = {
     fetched: false,
     error: false,
     term_bounds: null,
-    selected_term: null
+    selected_term: null,
+    visible: false
 }
 
 export default function reducer(state = initial_state, action) {
   switch (action.type) {
     case 'FETCH_COURSES_START': 
     case 'FETCH_SELECTED_COURSES_START': {
-      return { ...state, fetching: true, fetched: false, error: false }
+      return { ...state, visible: false, fetching: true, fetched: false, error: false }
     }
     case 'FETCH_COURSES_ERROR': 
     case 'FETCH_SELECTED_COURSES_ERROR': {
-      return { ...state, fetching: false, fetched: true, error: true }
+      return { ...state, visible: false, fetching: false, fetched: true, error: true }
     }
     case 'RECEIVE_COURSES': {
       let selected_term, term_start, term_end = null
@@ -32,6 +33,7 @@ export default function reducer(state = initial_state, action) {
           ...state,
           fetching: false,
           fetched: true,
+          visible: false,
           error: true
         }
       }
@@ -56,14 +58,12 @@ export default function reducer(state = initial_state, action) {
         selected_term: selected_term,
         term_bounds: term_bounds,
         credits: action.payload.credit,
-        error: false
+        error: false,
+        visible: true
       }
     }
 
     case 'RECEIVE_SELECTED_COURSES': {
-      let term_start = parseInt(action.payload.start, 10)
-      let term_end = parseInt(action.payload.end, 10)
-      const term_bounds = [term_start, term_end]
       return {
         ...state,
         courses: action.payload.data.courses,
@@ -71,6 +71,7 @@ export default function reducer(state = initial_state, action) {
         fetching: false,
         fetched: true,
         error: false,
+        visible: true
       }
     }
 
@@ -81,7 +82,8 @@ export default function reducer(state = initial_state, action) {
       return {
         ...state, 
         term_bounds: term_bounds,
-        selected_term: action.payload
+        selected_term: action.payload,
+        visible: false
       }
     }
 

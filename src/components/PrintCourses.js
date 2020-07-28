@@ -2,6 +2,7 @@ import React from 'react'
 
 import PrintIcon from '@material-ui/icons/Print'
 import Button from '@material-ui/core/Button'
+import { useSelector } from 'react-redux'
 import {
   Document,
   PDFDownloadLink,
@@ -16,13 +17,18 @@ const link = {
   textDecoration: 'none'
 }
 
-const button = {
+const btnContainer = {
   marginLeft: '1em'
 }
 
 const icon = {
   paddingRight: 5,
-  marginLeft: -5
+  marginLeft: -5,
+  marginTop: -7
+}
+
+const button = {
+  paddingTop: 10
 }
 
 const pdfStyle = StyleSheet.create({
@@ -84,7 +90,10 @@ const pdfStyle = StyleSheet.create({
   }
 })
 
-export const printCourses = (courses) => {
+const PrintCourses = (props) => {
+  const visible = useSelector(state => state.visible)
+  const { courses, mobile } = props
+
   const CoursesDoc = () => (
     <Document>
       <Page size="A4" style={pdfStyle.page}>
@@ -141,18 +150,25 @@ export const printCourses = (courses) => {
   )
 
   return (
-    <div style={button}>
-      <PDFDownloadLink style={link} document={<CoursesDoc />} fileName="course-list.pdf">
-        <Button
-          color="secondary"
-          title="Print Courses"
-          variant="contained"
-          tabIndex="0"
-        >
-          <PrintIcon style={icon}/>
-          Print Courses
-        </Button>
-      </PDFDownloadLink>
+    <div style={btnContainer}>
+      {visible && 
+        (
+          <PDFDownloadLink style={link} document={<CoursesDoc />} fileName="course-list.pdf">
+            <Button
+              color="secondary"
+              title="Print Courses"
+              variant="contained"
+              tabIndex="0"
+              style={button}
+            >
+              <PrintIcon style={icon}/>
+              Print Courses
+            </Button>
+          </PDFDownloadLink>
+        )
+      }
     </div>
   )
 }
+
+export default PrintCourses
