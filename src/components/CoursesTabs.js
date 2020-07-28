@@ -2,8 +2,8 @@ import React, { useState } from 'react'
 import Calendar from 'reactjs-calendar'
 import Courses from './Courses'
 import Grades from './Grades'
-import { getBookButton } from './BuyBooks'
-import { printCourses } from './PrintCourses'
+import BuyBooks from './BuyBooks'
+import PrintCourses from './PrintCourses'
 import PropTypes from 'prop-types'
 import TermSelect from './TermSelect'
 import { useSelector } from 'react-redux'
@@ -131,7 +131,14 @@ export default function CoursesTabs(props) {
         <TabContainer>
           <div>
             <div className={classes.btnContainer}>
-             { getBookButton(books, mobile) }
+              <BuyBooks
+                books={books}
+                mobile={mobile}
+              />
+              <PrintCourses
+                courses={courses}
+                mobile={mobile}
+              />
             </div>
             <Courses tabIndex="0" mobile={mobile} />
           </div>

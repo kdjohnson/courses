@@ -7,7 +7,6 @@ import Meetings from './Meetings'
 import WaitlistCourse from './WaitlistCourse'
 import { useSelector, useDispatch } from 'react-redux'
 import { fetch_selected_courses } from '../actions/termActions'
-import { fetch_courses } from '../actions/coursesActions'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import ErrorMessages from './ErrorMessages'
 
@@ -57,6 +56,11 @@ const useStyles = makeStyles(theme => ({
   },
   loading: {
     display: 'flex',
+    marginTop: 50,
+    justifyContent: 'center'
+  },
+  error: {
+    display: 'flex',
     justifyContent: 'center'
   }
 }))
@@ -77,9 +81,8 @@ export default function Courses(props) {
       set_term(selected_term)
     } else {
       dispatch(fetch_selected_courses(selected_term))
-      console.log("hello")
     }
-  }, [selected_term])
+  }, [dispatch, selected_term])
 
  if (courses_fetching === true) {
     return (
@@ -92,7 +95,7 @@ export default function Courses(props) {
     )
   } else if (courses_fetched === true && courses_error === true) {
     return (
-      <div className={classes.loading}>
+      <div className={classes.error}>
         <ErrorMessages />
       </div>
     )

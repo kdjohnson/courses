@@ -2,9 +2,14 @@ import React from 'react'
 
 import BookIcon from '@material-ui/icons/ImportContacts'
 import Button from '@material-ui/core/Button'
+import { useSelector } from 'react-redux'
 
 const mobileStyle = {
-  marginLeft: '0px'
+  marginLeft: 0
+}
+
+const button = {
+  paddingTop: 10
 }
 
 const style = {
@@ -13,11 +18,17 @@ const style = {
 
 const icon = {
   paddingRight: 5,
-  marginLeft: -5
+  marginLeft: -5,
+  marginTop: -7
 }
 
-export const getBookButton = (books, mobile) => {
+const BuyBooks = (props) => {
+  const { books, mobile } = props 
+  const courses_fetched = useSelector(state => state.fetched)
+  const courses_error = useSelector(state => state.error)
+
   return (
+    courses_fetched && !courses_error && (
     <div style={mobile ? mobileStyle : style}>
       <Button
         color="secondary"
@@ -25,6 +36,7 @@ export const getBookButton = (books, mobile) => {
         variant="contained"
         tabIndex="0"
         onClick={handleBuyBooks}
+        style={button}
       >
         <BookIcon style={icon}/>
         Buy Books
@@ -49,9 +61,12 @@ export const getBookButton = (books, mobile) => {
         />
       </form>
     </div>
+    )
   )
 }
 
 const handleBuyBooks = () => {
   document.getElementById('courses-soffit-react-form-submit').click()
 }
+
+export default BuyBooks

@@ -5,7 +5,6 @@ import App from './App'
 import store from './store'
 import { StylesProvider, createGenerateClassName } from '@material-ui/styles'
 import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
-import { I18nextProvider } from 'react-i18next'
 import { Provider } from 'react-redux'
 
 const project_name = 'courses-soffit'

@@ -1,7 +1,7 @@
 import React, { Suspense, useEffect, useState } from 'react'
 import CoursesTabs from './components/CoursesTabs'
-import { useSelector, useDispatch } from 'react-redux'
 import { fetch_courses } from './actions/coursesActions'
+import { useDispatch } from 'react-redux'
 
 const calendar_obj = {
   url: 'http://localhost:8090/v1/events/current',
@@ -14,12 +14,14 @@ const App = props => {
 
   useEffect(() => {
     dispatch(fetch_courses("current-term"))
+  }, [dispatch])
 
+  useEffect(() => {
     window.addEventListener('resize', () => { window.innerWidth < 650 ? setMobile(true) : setMobile(false)})
     if (window.innerWidth < 650) {
       setMobile(true)
     }
-  }, [dispatch, mobile])
+  }, [mobile])
 
   return (
     <Suspense fallback={<div />}>

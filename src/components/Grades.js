@@ -98,7 +98,7 @@ const Grades = props => {
     } else {
       dispatch(fetch_selected_courses(selected_term))
     }
-  }, [selected_term])
+  }, [selected_term, dispatch])
 
   if (credits !== []) {
       return (
