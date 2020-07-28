@@ -3,6 +3,7 @@ import React, { useEffect, useState } from 'react'
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
 import CardHeader from '@material-ui/core/CardHeader'
+import ErrorMessages from './ErrorMessages'
 import Table from '@material-ui/core/Table'
 import TableBody from '@material-ui/core/TableBody'
 import TableCell from '@material-ui/core/TableCell'
@@ -14,6 +15,10 @@ import { fetch_selected_courses } from '../actions/termActions'
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
+  error: {
+    display: 'flex',
+    justifyContent: 'center'
+  },
   cardDiv: {
     display: 'flex',
     flexDirection: 'row',
@@ -89,6 +94,7 @@ const Grades = props => {
   const dispatch = useDispatch()
   const courses = useSelector(state => state.courses)
   const courses_fetched = useSelector(state => state.fetched)
+  const courses_error = useSelector(state => state.error)
   const selected_term = useSelector(state => state.selected_term)
   const [term, set_term] = useState(null)
 
@@ -99,6 +105,14 @@ const Grades = props => {
       dispatch(fetch_selected_courses(selected_term))
     }
   }, [selected_term, dispatch])
+
+  if (courses_error || credits.length === 0) {
+    return (
+      <div className={classes.error}>
+        <ErrorMessages />
+      </div>
+    )
+  }
 
   if (credits !== []) {
       return (
