@@ -124,24 +124,20 @@ export default function CoursesTabs(props) {
               <Tab label="Grades" tabIndex="0" />
             </Tabs>
           )}
-          <TermSelect mobile={mobile} />
+          <TermSelect />
         </Toolbar>
       </AppBar>
       {value === 0 && (
         <TabContainer>
-          <div>
-            <div className={classes.btnContainer}>
-              <BuyBooks
-                books={books}
-                mobile={mobile}
-              />
-              <PrintCourses
-                courses={courses}
-                mobile={mobile}
-              />
-            </div>
-            <Courses tabIndex="0" mobile={mobile} />
+          <div className={classes.btnContainer}>
+            <BuyBooks
+              books={books}
+            />
+            <PrintCourses
+              courses={courses}
+            />
           </div>
+          <Courses tabIndex="0" mobile={mobile} />
         </TabContainer>
       )}
       {value === 1 && (

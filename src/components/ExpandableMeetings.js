@@ -27,7 +27,10 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     justifyContent: 'space-between'
   },
-
+  icon: {
+    display: 'flex',
+    alignSelf: 'center'
+  },
   expandedDiv: {
     marginTop: '1em',
     display: 'flex',
@@ -216,15 +219,17 @@ export default function ExpandableMeetings(props) {
     <div>
       <div className={classes.iconButtonDiv}>
         {getMeeting()}
-        <IconButton
-          aria-label={expanded ? 'Close more meetings' : 'Open more meetings'}
-          className={classnames(classes.expand, {
-            [classes.expandOpen]: expanded
-          })}
-          onClick={() => setExpanded(!expanded)}
-        >
-          <ExpandMoreIcon />
-        </IconButton>
+        <div className={classes.icon}>
+          <IconButton
+            aria-label={expanded ? 'Close more meetings' : 'Open more meetings'}
+            className={classnames(classes.expand, {
+              [classes.expandOpen]: expanded
+            })}
+            onClick={() => setExpanded(!expanded)}
+          >
+            <ExpandMoreIcon />
+          </IconButton>
+        </div>
       </div>
       <div className={classes.flexGrow} />
       <Collapse in={expanded} unmountOnExit>

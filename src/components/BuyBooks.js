@@ -4,15 +4,11 @@ import BookIcon from '@material-ui/icons/ImportContacts'
 import Button from '@material-ui/core/Button'
 import { useSelector } from 'react-redux'
 
-const mobileStyle = {
-  marginLeft: 0
-}
-
 const button = {
   paddingTop: 10
 }
 
-const style = {
+const btnStyle = {
   marginLeft: '1em'
 }
 
@@ -23,13 +19,13 @@ const icon = {
 }
 
 const BuyBooks = (props) => {
-  const { books, mobile } = props 
+  const { books } = props 
   const courses_fetched = useSelector(state => state.fetched)
   const courses_error = useSelector(state => state.error)
 
   return (
     courses_fetched && !courses_error && (
-    <div style={mobile ? mobileStyle : style}>
+    <div style={btnStyle}>
       <Button
         color="secondary"
         title="Buy Books"

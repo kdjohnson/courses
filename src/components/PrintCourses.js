@@ -92,7 +92,7 @@ const pdfStyle = StyleSheet.create({
 
 const PrintCourses = (props) => {
   const visible = useSelector(state => state.visible)
-  const { courses, mobile } = props
+  const { courses } = props
 
   const CoursesDoc = () => (
     <Document>

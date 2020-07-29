@@ -70,7 +70,6 @@ export default function Courses(props) {
   const selected_term = useSelector(state => state.selected_term)
   const courses = useSelector(state => state.courses)
   const [term, set_term] = useState(null)
-  const { mobile } = props
   const dispatch = useDispatch()
   const courses_fetched = useSelector(state => state.fetched)
   const courses_fetching = useSelector(state => state.fetching)
@@ -113,7 +112,6 @@ export default function Courses(props) {
           <ExpandableCourse
             course={course}
             key={'expandable' + Math.random()}
-            mobile={mobile}
           />
         )
       } else if (!Object.is(course.waitlist, '0')) {
@@ -121,7 +119,6 @@ export default function Courses(props) {
           <WaitlistCourse
             course={course}
             key={'waitlist' + Math.random()}
-            mobile={mobile}
           />
         )
       } else {
@@ -135,7 +132,7 @@ export default function Courses(props) {
                 className={classes.card}
                 key={course.crn + i + Math.random()}
               >
-                <CourseHeader mobile={mobile} course={course} />
+                <CourseHeader course={course} />
                 <CardContent
                   className={classes.content}
                   key={course.crn + i + Math.random()}

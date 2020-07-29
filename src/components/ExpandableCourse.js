@@ -28,13 +28,13 @@ const useStyles = makeStyles(() => ({
 
 const ExpandableCourse = props => {
   const classes = useStyles()
-  const { course, mobile } = props
+  const { course } = props
 
   return (
     <div className={classes.courseContainer}>
     <div style={{ marginTop: '1em' }}>
       <Card className={classes.card}>
-        <CourseHeader mobile={mobile} course={course} />
+        <CourseHeader course={course} />
         <CardContent className={classes.content}>
           <div>
             <div style={{ marginTop: '1em' }}>
