@@ -1,0 +1,420 @@
+{
+    "courses": [
+        {
+            "crn": "43069",
+            "waitlist": "0",
+            "registrationStatus": "RW",
+            "registrationStatusDescription": "Web Register",
+            "departmentCode": "CSI",
+            "departmentDescription": "Computer Sci. and Informatics",
+            "courseTitle": "Ruby for Web Developers",
+            "courseDescription": "This course introduces the dynamic programming language Ruby -- focusing on language fundamentals, debugging and external language binding techniques, and extremely popular web development framework Ruby on the Rail (ROR). The basic ROR topics include discussion of convention over configuration as used by ROR and RESTful web development with practical exercises. \nPrerequisite(s): CSI 1300 or CSI 2300",
+            "subjectCode": "CSI",
+            "subjectNumber": "2340",
+            "section": "001",
+            "credit": "2",
+            "grade": {
+                "credit": "2",
+                "grade": "N/A",
+                "crn": "43069"
+            },
+            "meetings": [
+                {
+                    "crn": "43069",
+                    "startDate": "2020-09-03T04:00:00.000+0000",
+                    "endDate": "2020-12-15T05:00:00.000+0000",
+                    "startTime": "10:00 AM",
+                    "endTime": "11:47 AM",
+                    "courseType": "In-Person Class Meeting",
+                    "courseTypeCode": "CLAS",
+                    "location": "DH 135",
+                    "campus": "Main Campus",
+                    "meetDays": "Thursday ",
+                    "startHour": 0,
+                    "startMinutes": 0,
+                    "startMonth": 9,
+                    "startYear": 2020,
+                    "startDay": 3,
+                    "startDayOfWeek": 5,
+                    "startWeekOfMonth": 1,
+                    "endHour": 0,
+                    "endMinutes": 0,
+                    "endMonth": 12,
+                    "endYear": 2020,
+                    "endDay": 15,
+                    "endDayOfWeek": 3,
+                    "endWeekOfMonth": 3
+                }
+            ],
+            "instructors": [
+                {
+                    "crn": "43069",
+                    "firstName": "Hany",
+                    "lastName": "Othman",
+                    "office": "N/A",
+                    "email": "test.othman@oakland.edu"
+                }
+            ]
+        },
+        {
+            "crn": "45049",
+            "waitlist": "1",
+            "registrationStatus": "RW",
+            "registrationStatusDescription": "Web Register",
+            "departmentCode": "HC",
+            "departmentDescription": "Honors College",
+            "courseTitle": "Cartography:Intersections of A",
+            "courseDescription": "Looks to social science and its particular methods of scientific inquiry. Of particular interest are the ways societal and cultural factors influence and shape individual and/or group behaviors and values.  May be repeated for 4 extra credits.  Satisfies the university general education requirement in the social science knowledge exploration area.",
+            "subjectCode": "HC",
+            "subjectNumber": "2060",
+            "section": "3",
+            "credit": "4",
+            "grade": {
+                "credit": "4",
+                "grade": "N/A",
+                "crn": "45049"
+            },
+            "meetings": [
+                {
+                    "crn": "45049",
+                    "startDate": "2020-09-03T04:00:00.000+0000",
+                    "endDate": "2020-12-15T05:00:00.000+0000",
+                    "startTime": "12:00 PM",
+                    "endTime": "1:07 PM",
+                    "courseType": "In-Person Class Meeting",
+                    "courseTypeCode": "CLAS",
+                    "location": "EH 239",
+                    "campus": "Main Campus",
+                    "meetDays": "Monday Wednesday Friday ",
+                    "startHour": 0,
+                    "startMinutes": 0,
+                    "startMonth": 9,
+                    "startYear": 2020,
+                    "startDay": 3,
+                    "startDayOfWeek": 5,
+                    "startWeekOfMonth": 1,
+                    "endHour": 0,
+                    "endMinutes": 0,
+                    "endMonth": 12,
+                    "endYear": 2020,
+                    "endDay": 15,
+                    "endDayOfWeek": 3,
+                    "endWeekOfMonth": 3
+                }
+            ],
+            "instructors": [
+                {
+                    "crn": "45049",
+                    "firstName": "Doris",
+                    "lastName": "Plantus",
+                    "office": "542 ODH",
+                    "email": "test.plantus@oakland.edu"
+                }
+            ]
+        },
+        {
+            "crn": "44975",
+            "waitlist": "0",
+            "registrationStatus": "RW",
+            "registrationStatusDescription": "Web Register",
+            "departmentCode": "CSI",
+            "departmentDescription": "Computer Sci. and Informatics",
+            "courseTitle": "Senior Capstone Project",
+            "courseDescription": "A team-oriented senior project to synthesize the knowledge and skills gained in the CS/IT curricula. Written and oral reports are required in addition to a working demo. Satisfies the university general education requirement for the capstone experience. Satisfies the university general education requirement for a writing intensive course in the major. Prerequisite for writing intensive: completion of the university writing foundation requirement. Prerequisites(s): CSI 3370, CSI 3450, (CSI 3500 or CSI 3520 or CSI 3640), major standing and senior standing.\n\n\n\n\n\n\n",
+            "subjectCode": "CSI",
+            "subjectNumber": "4999",
+            "section": "002",
+            "credit": "4",
+            "grade": {
+                "credit": "4",
+                "grade": "N/A",
+                "crn": "44975"
+            },
+            "meetings": [
+                {
+                    "crn": "44975",
+                    "startDate": "2020-09-03T04:00:00.000+0000",
+                    "endDate": "2020-12-15T05:00:00.000+0000",
+                    "startTime": "10:00 AM",
+                    "endTime": "11:47 AM",
+                    "courseType": "In-Person Class Meeting",
+                    "courseTypeCode": "CLAS",
+                    "location": "HHB 2023",
+                    "campus": "Main Campus",
+                    "meetDays": "Monday Wednesday ",
+                    "startHour": 0,
+                    "startMinutes": 0,
+                    "startMonth": 9,
+                    "startYear": 2020,
+                    "startDay": 3,
+                    "startDayOfWeek": 5,
+                    "startWeekOfMonth": 1,
+                    "endHour": 0,
+                    "endMinutes": 0,
+                    "endMonth": 12,
+                    "endYear": 2020,
+                    "endDay": 15,
+                    "endDayOfWeek": 3,
+                    "endWeekOfMonth": 3
+                }
+            ],
+            "instructors": [
+                {
+                    "crn": "44975",
+                    "firstName": "Hua",
+                    "lastName": "Ming",
+                    "office": "516 EC",
+                    "email": "ming@oakland.edu"
+                }
+            ]
+        },
+        {
+            "crn": "42896",
+            "waitlist": "0",
+            "registrationStatus": "RW",
+            "registrationStatusDescription": "Web Register",
+            "departmentCode": "CSE",
+            "departmentDescription": "Computer Science & Engineering",
+            "courseTitle": "Info Retrieval/Knowldg Discov",
+            "courseDescription": "This course covers the models for information retrieval from text and multimedia databases. Methodologies for database indexing and visualization are discussed. Statistical and deterministic algorithms for discovering knowledge from databases, including, decision trees, clustering, regression, and neural models are covered. Formerly CSE 581. Cross-listed with CSI 4810. Prerequisite: CSI 5450 or equivalent.",
+            "subjectCode": "CSI",
+            "subjectNumber": "5810",
+            "section": "001",
+            "credit": "4",
+            "grade": {
+                "credit": "4",
+                "grade": "N/A",
+                "crn": "42896"
+            },
+            "meetings": [
+                {
+                    "crn": "42896",
+                    "startDate": "2020-09-03T04:00:00.000+0000",
+                    "endDate": "2020-12-15T05:00:00.000+0000",
+                    "startTime": "7:30 PM",
+                    "endTime": "9:17 PM",
+                    "courseType": "In-Person Class Meeting",
+                    "courseTypeCode": "CLAS",
+                    "location": "EC 550",
+                    "campus": "Main Campus",
+                    "meetDays": "Tuesday Thursday ",
+                    "startHour": 0,
+                    "startMinutes": 0,
+                    "startMonth": 9,
+                    "startYear": 2020,
+                    "startDay": 3,
+                    "startDayOfWeek": 5,
+                    "startWeekOfMonth": 1,
+                    "endHour": 0,
+                    "endMinutes": 0,
+                    "endMonth": 12,
+                    "endYear": 2020,
+                    "endDay": 15,
+                    "endDayOfWeek": 3,
+                    "endWeekOfMonth": 3
+                }
+            ],
+            "instructors": [
+                {
+                    "crn": "42896",
+                    "firstName": "Ishwar",
+                    "lastName": "Sethi",
+                    "office": "522 EC",
+                    "email": "isethi@oakland.edu"
+                }
+            ]
+        },
+        {
+            "crn": "45367",
+            "waitlist": "0",
+            "registrationStatus": "RW",
+            "registrationStatusDescription": "Web Register",
+            "departmentCode": "HC",
+            "departmentDescription": "Honors College",
+            "courseTitle": "Honors Aspire IV",
+            "courseDescription": "Culmination of The Honors College service, experiential learning, and leadership, with professional presentation of honors projects.",
+            "subjectCode": "HC",
+            "subjectNumber": "4004",
+            "section": "0",
+            "credit": "0",
+            "grade": {
+                "credit": "0",
+                "grade": "N/A",
+                "crn": "45367"
+            },
+            "meetings": [
+                {
+                    "crn": "45367",
+                    "startDate": "2020-09-03T04:00:00.000+0000",
+                    "endDate": "2020-12-15T05:00:00.000+0000",
+                    "startTime": "N/A",
+                    "endTime": "N/A",
+                    "courseType": "Project",
+                    "courseTypeCode": "PROJ",
+                    "location": "N/A ",
+                    "campus": "Main Campus",
+                    "meetDays": "N/A",
+                    "startHour": 0,
+                    "startMinutes": 0,
+                    "startMonth": 9,
+                    "startYear": 2020,
+                    "startDay": 3,
+                    "startDayOfWeek": 5,
+                    "startWeekOfMonth": 1,
+                    "endHour": 0,
+                    "endMinutes": 0,
+                    "endMonth": 12,
+                    "endYear": 2020,
+                    "endDay": 15,
+                    "endDayOfWeek": 3,
+                    "endWeekOfMonth": 3
+                }
+            ],
+            "instructors": [
+                {
+                    "crn": "45367",
+                    "firstName": "Anne",
+                    "lastName": "Stratton",
+                    "office": "Oak View Hall Rm 210",
+                    "email": "jackson3@oakland.edu"
+                }
+            ]
+        },
+        {
+            "crn": "43064",
+            "waitlist": "1",
+            "registrationStatus": "RW",
+            "registrationStatusDescription": "Web Register",
+            "departmentCode": "CSI",
+            "departmentDescription": "Computer Sci. and Informatics",
+            "courseTitle": "Fundamentals of Operating Sys",
+            "courseDescription": "Introduction to the concepts and design of operating systems. Typical topics include: sequential processes, concurrent processes, processor management, memory management, scheduling, file management, and resource protection. Offered winter. \nPrerequisite(s): CSI 3610 and CSI 3640 and major standing in CS or CE.",
+            "subjectCode": "CSI",
+            "subjectNumber": "4500",
+            "section": "001",
+            "credit": "4",
+            "grade": {
+                "credit": "4",
+                "grade": "N/A",
+                "crn": "43064"
+            },
+            "meetings": [
+                {
+                    "crn": "43064",
+                    "startDate": "2020-09-03T04:00:00.000+0000",
+                    "endDate": "2020-12-15T05:00:00.000+0000",
+                    "startTime": "1:00 PM",
+                    "endTime": "2:47 PM",
+                    "courseType": "In-Person Class Meeting",
+                    "courseTypeCode": "CLAS",
+                    "location": "EC 281",
+                    "campus": "Main Campus",
+                    "meetDays": "Tuesday Thursday ",
+                    "startHour": 0,
+                    "startMinutes": 0,
+                    "startMonth": 9,
+                    "startYear": 2020,
+                    "startDay": 3,
+                    "startDayOfWeek": 5,
+                    "startWeekOfMonth": 1,
+                    "endHour": 0,
+                    "endMinutes": 0,
+                    "endMonth": 12,
+                    "endYear": 2020,
+                    "endDay": 15,
+                    "endDayOfWeek": 3,
+                    "endWeekOfMonth": 3
+                }
+            ],
+            "instructors": [
+                {
+                    "crn": "43064",
+                    "firstName": "Guangzhi",
+                    "lastName": "Qu",
+                    "office": "538 EC",
+                    "email": "gqu@oakland.edu"
+                }
+            ]
+        }
+    ],
+    "books": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><textbookorder><school id=\"244\"/><courses><course dept=\"CSI\" num=\"2340\" sect=\"43069\" term=\"F20\"/><course dept=\"CSI\" num=\"4500\" sect=\"43064\" term=\"F20\"/><course dept=\"CSI\" num=\"4999\" sect=\"44975\" term=\"F20\"/><course dept=\"CSI\" num=\"5810\" sect=\"42896\" term=\"F20\"/><course dept=\"HC\" num=\"2060\" sect=\"45049\" term=\"F20\"/><course dept=\"HC\" num=\"4004\" sect=\"45367\" term=\"F20\"/></courses></textbookorder>",
+    "terms": [
+        {
+            "description": "Winter Semester 2021",
+            "code": "202110",
+            "start": "2021-01-06T05:00:00.000+0000",
+            "end": "2021-04-27T04:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Fall Semester 2020",
+            "code": "202040",
+            "start": "2020-09-03T04:00:00.000+0000",
+            "end": "2020-12-15T05:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Winter Semester 2020",
+            "code": "202010",
+            "start": "2020-01-06T05:00:00.000+0000",
+            "end": "2020-04-25T04:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Fall Semester 2019",
+            "code": "201940",
+            "start": "2019-09-04T04:00:00.000+0000",
+            "end": "2019-12-14T05:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Summer Semester 2019",
+            "code": "201930",
+            "start": "2019-05-06T04:00:00.000+0000",
+            "end": "2019-08-24T04:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Winter Semester 2019",
+            "code": "201910",
+            "start": "2019-01-03T05:00:00.000+0000",
+            "end": "2019-04-24T04:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Fall Semester 2018",
+            "code": "201840",
+            "start": "2018-09-05T04:00:00.000+0000",
+            "end": "2018-12-15T05:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Summer Semester 2018",
+            "code": "201830",
+            "start": "2018-05-07T04:00:00.000+0000",
+            "end": "2018-08-25T04:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Winter Semester 2018",
+            "code": "201810",
+            "start": "2018-01-03T05:00:00.000+0000",
+            "end": "2018-04-25T04:00:00.000+0000",
+            "current": true
+        },
+        {
+            "description": "Fall Semester 2017",
+            "code": "201740",
+            "start": "2017-09-06T04:00:00.000+0000",
+            "end": "2017-12-16T05:00:00.000+0000",
+            "current": false
+        }
+    ],
+    "credit": [
+        {
+            "standing": "Undergraduate",
+            "gpa": "3.84",
+            "credits": "115"
+        }
+    ]
+}
