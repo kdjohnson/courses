@@ -2,40 +2,39 @@ import React from 'react'
 
 import BookIcon from '@material-ui/icons/ImportContacts'
 import Button from '@material-ui/core/Button'
-import { useSelector } from 'react-redux'
+import { makeStyles } from '@material-ui/core/styles'
 
-const button = {
-  paddingTop: 10
-}
+const useStyles = makeStyles(theme => ({
+  button: {
+    paddingTop: 10,
+    marginLeft: '1em'
+  },
+  icon: {
+    paddingLeft: 5,
+    marginTop: -7
+  }
+}))
 
-const btnStyle = {
-  marginLeft: '1em'
-}
-
-const icon = {
-  paddingRight: 5,
-  marginLeft: -5,
-  marginTop: -7
-}
-
-const BuyBooks = (props) => {
+export default function BuyBooks(props) {
   const { books } = props 
-  const courses_fetched = useSelector(state => state.fetched)
-  const courses_error = useSelector(state => state.error)
+  const classes = useStyles()
+
+  const handleBuyBooks = () => {
+    document.getElementById('courses-soffit-react-form-submit').click()
+  }
 
   return (
-    courses_fetched && !courses_error && (
-    <div style={btnStyle}>
+    <div>
       <Button
         color="secondary"
         title="Buy Books"
         variant="contained"
         tabIndex="0"
         onClick={handleBuyBooks}
-        style={button}
+        className={classes.button}
       >
-        <BookIcon style={icon}/>
         Buy Books
+        <BookIcon className={classes.icon} />
       </Button>
       <form
         name="BNForm"
@@ -57,12 +56,6 @@ const BuyBooks = (props) => {
         />
       </form>
     </div>
-    )
   )
 }
 
-const handleBuyBooks = () => {
-  document.getElementById('courses-soffit-react-form-submit').click()
-}
-
-export default BuyBooks

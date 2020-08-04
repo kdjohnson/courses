@@ -106,10 +106,10 @@ export default function CourseHeader(props) {
             </span>
             <div className={classes.subHeaderDiv}>
               <span tabIndex="0" className={classes.courseInfo}>
-                Credits: {course.credit}
+                Waitlist: {course.waitlist}
               </span>
               <span tabIndex="0" className={classes.courseInfo}>
-                Waitlist + ': ' + course.waitlist
+                Credits: {course.credit}
               </span>
             </div>
           </div>
