@@ -1,5 +1,5 @@
 const initial_state = {
-    books: null,
+    books: '',
     credits: null,
     terms: [],
     courses: [],
@@ -8,18 +8,29 @@ const initial_state = {
     error: false,
     term_bounds: null,
     selected_term: null,
-    visible: false
+    events: []
 }
 
 export default function reducer(state = initial_state, action) {
   switch (action.type) {
+    case 'FETCH_EVENTS_START':
     case 'FETCH_COURSES_START': 
     case 'FETCH_SELECTED_COURSES_START': {
-      return { ...state, visible: false, fetching: true, fetched: false, error: false }
+      return { ...state, fetching: true, fetched: false, error: false }
     }
+    case 'FETCH_EVENTS_ERROR':
     case 'FETCH_COURSES_ERROR': 
     case 'FETCH_SELECTED_COURSES_ERROR': {
-      return { ...state, visible: false, fetching: false, fetched: true, error: true }
+      return { ...state, fetching: false, fetched: true, error: true }
+    }
+    case 'RECEIVE_EVENTS': {
+      return { 
+        ...state,
+        fetching: false,
+        fetched: true,
+        error: false,
+        events: action.payload
+      }
     }
     case 'RECEIVE_COURSES': {
       let selected_term, term_start, term_end = null
@@ -33,7 +44,6 @@ export default function reducer(state = initial_state, action) {
           ...state,
           fetching: false,
           fetched: true,
-          visible: false,
           error: true
         }
       }
@@ -41,8 +51,8 @@ export default function reducer(state = initial_state, action) {
       action.payload.terms.forEach(term => {
         if (term.current) {
           selected_term = term
-          term_start = parseInt(selected_term.start, 10)
-          term_end = parseInt(selected_term.end, 10)
+          term_start = selected_term.start
+          term_end = selected_term.end
         }
       })
 
@@ -59,7 +69,6 @@ export default function reducer(state = initial_state, action) {
         term_bounds: term_bounds,
         credits: action.payload.credit,
         error: false,
-        visible: true
       }
     }
 
@@ -71,19 +80,17 @@ export default function reducer(state = initial_state, action) {
         fetching: false,
         fetched: true,
         error: false,
-        visible: true
       }
     }
 
     case 'UPDATE_TERM': {
-      let term_start = parseInt(action.payload.start, 10)
-      let term_end = parseInt(action.payload.end, 10)
+      let term_start = action.payload.start
+      let term_end = action.payload.end
       const term_bounds = [term_start, term_end]
       return {
         ...state, 
         term_bounds: term_bounds,
         selected_term: action.payload,
-        visible: false
       }
     }
 

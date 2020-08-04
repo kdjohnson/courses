@@ -1,0 +1,55 @@
+@media only screen and (max-width: 600px) {
+  .fc .fc-toolbar.fc-header-toolbar {
+    flex-direction: column;
+  }
+
+  .fc .fc-toolbar-title {
+    padding-bottom: 10px;
+  }
+}
+
+.fc .fc-toolbar.fc-footer-toolbar {
+    margin-top: 60px;
+}
+
+.fc .fc-button {
+  background-color:  rgba(255, 255, 255, 0);
+  border: 1px solid rgba(25, 118, 210, 0.5);
+  color: #0074b7;
+  transition: 0.3s;
+}
+
+.fc .fc-button:hover {
+  background-color: rgba(25, 118, 210, 0.04);
+  color: #0074b7;
+  border: 1px solid #0074b7;
+}
+
+.fc .fc-button-primary:not(:disabled):active, .fc .fc-button-primary:not(:disabled).fc-button-active {
+  background-color: #dbeeff;
+  border: 1px solid rgba(25, 118, 210, 0.5);
+  color: #006eae;
+}
+
+.fc .fc-button-primary:disabled {
+  background-color: #e0e0e0;
+  color: #000000;
+  border: 1px solid #e0e0e0;
+}
+
+.fc-media-screen .fc-timegrid-event-harness {
+  cursor: pointer
+}
+
+.fc-daygrid-event-harness {
+  cursor: pointer;
+}
+
+.fc-theme-standard .fc-list-day-cushion {
+  background-color: f1f1f1;
+  opacity: 1;
+}
+
+.fc-list-event {
+  cursor: pointer;
+}

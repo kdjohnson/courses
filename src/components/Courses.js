@@ -1,12 +1,11 @@
-import React, { useState, useEffect } from 'react'
+import React from 'react'
 import CourseDetails from './CourseDetails'
 import CourseHeader from './CourseHeader'
 import ExpandableCourse from './ExpandableCourse'
 import Instructors from './Instructors'
 import Meetings from './Meetings'
 import WaitlistCourse from './WaitlistCourse'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetch_selected_courses } from '../actions/termActions'
+import { useSelector } from 'react-redux'
 import CircularProgress from '@material-ui/core/CircularProgress'
 import ErrorMessages from './ErrorMessages'
 
@@ -67,22 +66,11 @@ const useStyles = makeStyles(theme => ({
 
 export default function Courses(props) {
   const classes = useStyles()
-  const selected_term = useSelector(state => state.selected_term)
   const courses = useSelector(state => state.courses)
-  const [term, set_term] = useState(null)
-  const dispatch = useDispatch()
   const courses_fetched = useSelector(state => state.fetched)
   const courses_fetching = useSelector(state => state.fetching)
   const courses_error = useSelector(state => state.error)
   
-  useEffect(() => {
-    if(term === null) {
-      set_term(selected_term)
-    } else {
-      dispatch(fetch_selected_courses(selected_term))
-    }
-  }, [dispatch, selected_term])
-
  if (courses_fetching === true) {
     return (
       <div className={classes.loading}>

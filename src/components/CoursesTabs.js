@@ -1,5 +1,4 @@
-import React, { useState } from 'react'
-import Calendar from 'reactjs-calendar'
+import React, { useState, useEffect } from 'react'
 import Courses from './Courses'
 import Grades from './Grades'
 import BuyBooks from './BuyBooks'
@@ -7,7 +6,8 @@ import PrintCourses from './PrintCourses'
 import PropTypes from 'prop-types'
 import TermSelect from './TermSelect'
 import { useSelector } from 'react-redux'
-
+import useMediaQuery from '@material-ui/core/useMediaQuery'
+import { useTheme } from '@material-ui/core'
 import AppBar from '@material-ui/core/AppBar'
 import Assignment from '@material-ui/icons/Assignment'
 import Event from '@material-ui/icons/Event'
@@ -16,7 +16,11 @@ import Spellcheck from '@material-ui/icons/Spellcheck'
 import Tab from '@material-ui/core/Tab'
 import Tabs from '@material-ui/core/Tabs'
 import Toolbar from '@material-ui/core/Toolbar'
-import { makeStyles } from '@material-ui/styles';
+import Calendar from './Calendar'
+import { makeStyles } from '@material-ui/styles'
+import { useDispatch } from 'react-redux'
+import { fetch_selected_courses } from '../actions/termActions'
+import { fetch_events } from '../actions/eventsActions'
 
 const TabContainer = props => (
   <div style={{ padding: 20 }}>{props.children}</div>
@@ -57,13 +61,25 @@ const useStyles = makeStyles(theme => ({
   }
 }))
 
-export default function CoursesTabs(props) {
+export default function CoursesTabs() {
   const [value, setValue] = useState(0)
   const courses = useSelector(state => state.courses)
   const books = useSelector(state => state.books)
-  const term_bounds = useSelector(state => state.term_bounds)
-  const { mobile } = props
+  const selected_term = useSelector(state => state.selected_term)
   const classes = useStyles()
+  const theme = useTheme()
+  const mobile = useMediaQuery(theme.breakpoints.down('xs'))
+  const[term, set_term] = useState(null)
+  const dispatch = useDispatch()
+
+  useEffect(() => {
+    if(term === null) {
+      set_term(selected_term)
+    } else {
+      dispatch(fetch_selected_courses(selected_term))
+      dispatch(fetch_events(selected_term.code))
+    }
+  }, [selected_term, dispatch])
 
   return (
     <Paper>
@@ -142,11 +158,7 @@ export default function CoursesTabs(props) {
       )}
       {value === 1 && (
         <TabContainer>
-          <Calendar
-            eventsURLObj={props.calendar_url}
-            termBounds={term_bounds}
-            rootID={props.root_element}
-          />
+          <Calendar mobile={mobile} />
         </TabContainer>
       )}
       {value === 2 && (

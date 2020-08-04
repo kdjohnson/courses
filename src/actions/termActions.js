@@ -1,3 +1,5 @@
+/* global is_demo */
+
 import { get_courses } from '../api/api'
 
 const courses_url = '/v1/courses/'
@@ -5,9 +7,9 @@ const courses_url = '/v1/courses/'
 export function fetch_selected_courses(selected_term) {
   return function(dispatch) {
     dispatch({ type: 'FETCH_SELECTED_COURSES_START', payload: {} })
-    get_courses(selected_term.code, courses_url)
+    get_courses(is_demo, selected_term.code, courses_url)
       .then(data => { 
-        dispatch({ type: 'RECEIVE_SELECTED_COURSES', payload: { data, selected_term }})
+        dispatch({ type: 'RECEIVE_SELECTED_COURSES', payload: { data, selected_term } })
       })
       .catch(err => {
         dispatch({ type: 'FETCH_SELECTED_COURSES_ERROR', payload: err })

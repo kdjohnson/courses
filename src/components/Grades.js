@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React from 'react'
 
 import Card from '@material-ui/core/Card'
 import CardContent from '@material-ui/core/CardContent'
@@ -10,8 +10,7 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
-import { useSelector, useDispatch } from 'react-redux'
-import { fetch_selected_courses } from '../actions/termActions'
+import { useSelector } from 'react-redux'
 import { makeStyles } from '@material-ui/styles';
 
 const useStyles = makeStyles(theme => ({
@@ -91,20 +90,9 @@ const Grades = props => {
   const classes = useStyles()
   const { mobile } = props
   const credits = useSelector(state => state.credits)
-  const dispatch = useDispatch()
   const courses = useSelector(state => state.courses)
   const courses_fetched = useSelector(state => state.fetched)
   const courses_error = useSelector(state => state.error)
-  const selected_term = useSelector(state => state.selected_term)
-  const [term, set_term] = useState(null)
-
-  useEffect(() => {
-    if (term === null) {
-      set_term(selected_term)
-    } else {
-      dispatch(fetch_selected_courses(selected_term))
-    }
-  }, [selected_term, dispatch])
 
   if (courses_error || credits.length === 0) {
     return (
