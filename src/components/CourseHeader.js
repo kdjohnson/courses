@@ -1,51 +1,51 @@
 import React from 'react'
 
+import amber from '@material-ui/core/colors/amber'
 import CardHeader from '@material-ui/core/CardHeader'
 import Typography from '@material-ui/core/Typography'
-import amber from '@material-ui/core/colors/amber'
-import { makeStyles } from '@material-ui/styles';
+import { makeStyles } from '@material-ui/styles'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   classHeader: {
     backgroundColor: theme.palette.primary.light,
-    textAlign: 'center'
+    textAlign: 'center',
   },
 
   classHeaderWaitList: {
     backgroundColor: amber[200],
-    textAlign: 'center'
+    textAlign: 'center',
   },
 
   classHeaderSpanDiv: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
 
   classHeaderSpanWaitList: {
     fontWeight: 600,
-    color: 'rgba(0, 0, 0, 0.75)'
+    color: 'rgba(0, 0, 0, 0.75)',
   },
 
   subHeaderDiv: {
     display: 'flex',
     flexDirection: 'column-reverse',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 
   subHeaderDivMobile: {
     display: 'flex',
     flexDirection: 'column-reverse',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
 
   courseTitle: {
-    fontWeight: 'bolder'
+    fontWeight: 'bolder',
   },
 
   courseInfo: {
     fontWeight: '500',
-    color: '#000'
-  }
+    color: '#000',
+  },
 }))
 
 export default function CourseHeader(props) {
@@ -58,8 +58,8 @@ export default function CourseHeader(props) {
         className={classes.classHeader}
         title={
           <Typography
-            variant="subtitle1"
-            tabIndex="0"
+            variant='subtitle1'
+            tabIndex='0'
             className={classes.courseTitle}
           >
             {course.courseTitle}
@@ -67,7 +67,7 @@ export default function CourseHeader(props) {
         }
         subheader={
           <div className={classes.classHeaderSpanDiv}>
-            <span tabIndex="0" className={classes.courseInfo}>
+            <span tabIndex='0' className={classes.courseInfo}>
               {course.subjectCode +
                 '-' +
                 course.subjectNumber +
@@ -76,7 +76,7 @@ export default function CourseHeader(props) {
                 '-' +
                 course.crn}
             </span>
-            <span tabIndex="0" className={classes.courseInfo}>
+            <span tabIndex='0' className={classes.courseInfo}>
               Credits: {course.credit}
             </span>
           </div>
@@ -88,14 +88,14 @@ export default function CourseHeader(props) {
       <CardHeader
         className={classes.classHeaderWaitList}
         title={
-          <Typography tabIndex="0" className={classes.courseTitle}>
+          <Typography tabIndex='0' className={classes.courseTitle}>
             {course.courseTitle}
           </Typography>
         }
         key={course.crn + 0 + 3}
         subheader={
           <div className={classes.classHeaderSpanDiv}>
-            <span tabIndex="0" className={classes.courseInfo}>
+            <span tabIndex='0' className={classes.courseInfo}>
               {course.subjectCode +
                 '-' +
                 course.subjectNumber +
@@ -105,10 +105,10 @@ export default function CourseHeader(props) {
                 course.crn}
             </span>
             <div className={classes.subHeaderDiv}>
-              <span tabIndex="0" className={classes.courseInfo}>
+              <span tabIndex='0' className={classes.courseInfo}>
                 Waitlist: {course.waitlist}
               </span>
-              <span tabIndex="0" className={classes.courseInfo}>
+              <span tabIndex='0' className={classes.courseInfo}>
                 Credits: {course.credit}
               </span>
             </div>

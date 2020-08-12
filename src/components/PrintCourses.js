@@ -1,19 +1,19 @@
 import React from 'react'
 
-import PrintIcon from '@material-ui/icons/Print'
 import Button from '@material-ui/core/Button'
+import PrintIcon from '@material-ui/icons/Print'
 import { generate_pdf } from '../api/api'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(() => ({
   icon: {
     paddingLeft: 5,
-    marginTop: -6
+    marginTop: -6,
   },
   button: {
     paddingTop: 10,
-    marginLeft: '1em'
-  }
+    marginLeft: '1em',
+  },
 }))
 
 export default function PrintCourses(props) {
@@ -26,10 +26,10 @@ export default function PrintCourses(props) {
 
   return (
     <Button
-      color="secondary"
-      title="Print Courses"
-      variant="contained"
-      tabIndex="0"
+      color='secondary'
+      title='Print Courses'
+      variant='contained'
+      tabIndex='0'
       className={classes.button}
       onClick={handleClick}
     >

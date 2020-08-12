@@ -10,46 +10,38 @@ import TableCell from '@material-ui/core/TableCell'
 import TableHead from '@material-ui/core/TableHead'
 import TableRow from '@material-ui/core/TableRow'
 import Typography from '@material-ui/core/Typography'
+import { makeStyles } from '@material-ui/styles'
 import { useSelector } from 'react-redux'
-import { makeStyles } from '@material-ui/styles';
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   error: {
     display: 'flex',
-    justifyContent: 'center'
-  },
-  cardDiv: {
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around'
+    justifyContent: 'center',
   },
   card: {
-    backgroundColor: '#fafafa'
-  },
-  courseTitle: {
-    fontSize: 16,
-    color: theme.palette.text.primary
+    backgroundColor: '#fafafa',
   },
   classHeader: {
-    backgroundColor: theme.palette.primary.light
+    backgroundColor: theme.palette.primary.light,
   },
   classHeaderSpan: {
     fontWeight: 600,
-    color: 'rgba(0, 0, 0, 0.75)'
+    color: 'rgba(0, 0, 0, 0.75)',
+    fontSize: 20,
   },
   content: {
     paddingTop: 0,
-    overflowX: 'scroll'
+    overflowX: 'scroll',
   },
   tableCell: {
     color: 'rgba(0, 0, 0, 1)',
     fontWeight: 600,
     fontSize: 14,
-    width: '33%'
-  }
+    width: '33%',
+  },
 }))
 
-const GradeRow = courses => {
+const GradeRow = (courses) => {
   try {
     let tableArray = []
     for (let i = 0; i < courses.length; i++) {
@@ -71,7 +63,7 @@ const GradeRow = courses => {
   }
 }
 
-const getOverallCredits = credits => {
+const getOverallCredits = (credits) => {
   let rows = []
   let i = 0
   for (let cr of credits) {
@@ -86,13 +78,13 @@ const getOverallCredits = credits => {
   return rows
 }
 
-const Grades = props => {
+const Grades = (props) => {
   const classes = useStyles()
   const { mobile } = props
-  const credits = useSelector(state => state.credits)
-  const courses = useSelector(state => state.courses)
-  const courses_fetched = useSelector(state => state.fetched)
-  const courses_error = useSelector(state => state.error)
+  const credits = useSelector((state) => state.credits)
+  const courses = useSelector((state) => state.courses)
+  const courses_fetched = useSelector((state) => state.fetched)
+  const courses_error = useSelector((state) => state.error)
 
   if (courses_error || credits.length === 0) {
     return (
@@ -103,62 +95,61 @@ const Grades = props => {
   }
 
   if (credits !== []) {
-      return (
-        <Card className={classes.card}>
-          <CardHeader
-            className={classes.classHeader}
-            title={
-              <Typography
-                tabIndex="0"
-                variant="h1"
-                className={classes.classHeaderSpan}
-                style={{ fontSize: '20px' }}
-              >
-               Grades and Credits 
-              </Typography>
-            }
-          />
-          <CardContent className={mobile ? classes.content : null}>
+    return (
+      <Card className={classes.card}>
+        <CardHeader
+          className={classes.classHeader}
+          title={
+            <Typography
+              tabIndex='0'
+              variant='h1'
+              className={classes.classHeaderSpan}
+            >
+              Grades and Credits
+            </Typography>
+          }
+        />
+        <CardContent className={mobile ? classes.content : null}>
+          <Table>
+            <TableHead>
+              <TableRow>
+                <TableCell className={classes.tableCell} scope='col'>
+                  Level
+                </TableCell>
+                <TableCell className={classes.tableCell} scope='col'>
+                  Grades
+                </TableCell>
+                <TableCell className={classes.tableCell} scope='col'>
+                  GPA
+                </TableCell>
+              </TableRow>
+            </TableHead>
+            <TableBody>{getOverallCredits(credits)}</TableBody>
+          </Table>
+          {courses_fetched && (
             <Table>
               <TableHead>
-                <TableRow className={classes.tableHeader}>
-                  <TableCell className={classes.tableCell} scope="col">
-                    Level
-                  </TableCell>
-                  <TableCell className={classes.tableCell} scope="col">
-                    Grades
-                  </TableCell>
-                  <TableCell className={classes.tableCell} scope="col">
-                    GPA
-                  </TableCell>
-                </TableRow>
-              </TableHead>
-              <TableBody>{getOverallCredits(credits)}</TableBody>
-            </Table>
-            {courses_fetched && (
-            <Table>
-              <TableHead>
-                <TableRow className={classes.tableHeader}>
-                  <TableCell className={classes.tableCell} scope="col">
+                <TableRow>
+                  <TableCell className={classes.tableCell} scope='col'>
                     Course
                   </TableCell>
-                  <TableCell className={classes.tableCell} scope="col">
+                  <TableCell className={classes.tableCell} scope='col'>
                     Credits
                   </TableCell>
-                  <TableCell className={classes.tableCell} scope="col">
+                  <TableCell className={classes.tableCell} scope='col'>
                     Grades
                   </TableCell>
                 </TableRow>
               </TableHead>
               <TableBody>{GradeRow(courses)}</TableBody>
             </Table>
-            )}
-          </CardContent>
-        </Card>
-      )
-    } else {
-      return <div />
-    }
+          )}
+        </CardContent>
+      </Card>
+    )
+  } else {
+    return <div />
+  }
 }
 
 export default Grades

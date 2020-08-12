@@ -1,83 +1,65 @@
 import React from 'react'
-import CourseDetails from './CourseDetails'
-import CourseHeader from './CourseHeader'
-import ExpandableCourse from './ExpandableCourse'
-import Instructors from './Instructors'
-import Meetings from './Meetings'
-import WaitlistCourse from './WaitlistCourse'
-import { useSelector } from 'react-redux'
-import CircularProgress from '@material-ui/core/CircularProgress'
-import ErrorMessages from './ErrorMessages'
 
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import CourseDetails from './CourseDetails'
+import CourseHeader from './CourseHeader'
+import ErrorMessages from './ErrorMessages'
+import ExpandableCourse from './ExpandableCourse'
+import Instructors from './Instructors'
+import Meetings from './Meetings'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/styles';
+import WaitlistCourse from './WaitlistCourse'
+import { makeStyles } from '@material-ui/styles'
+import { useSelector } from 'react-redux'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   courseContainer: {
     flex: '1 1 auto',
-    padding: '1em'
-  },
-  buttonsDiv: {
-    display: 'flex',
-    justifyContent: 'start',
-    alignItems: 'center'
-  },
-  button: {
-    margin: theme.spacing()
-  },
-  rightIcon: {
-    marginLeft: theme.spacing()
-  },
-  coursesDiv: {
-    display: 'flex',
-    flexFlow: 'wrap'
-  },
-  coursesDivMobile: {
-    display: 'flex',
-    flexDirection: 'column'
+    padding: '1em',
   },
   card: {
-    backgroundColor: '#fafafa'
+    backgroundColor: '#fafafa',
   },
   content: {
     paddingTop: 0,
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   empty: {
-    textAlign: 'center'
-  },
-  progress: {
-    margin: `0 ${theme.spacing(2)}px`
+    textAlign: 'center',
   },
   loading: {
     display: 'flex',
     marginTop: 50,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   error: {
     display: 'flex',
-    justifyContent: 'center'
-  }
+    justifyContent: 'center',
+  },
+  container: {
+    marginTop: '1em',
+  },
+  actions: {
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
 }))
 
 export default function Courses(props) {
   const classes = useStyles()
-  const courses = useSelector(state => state.courses)
-  const courses_fetched = useSelector(state => state.fetched)
-  const courses_fetching = useSelector(state => state.fetching)
-  const courses_error = useSelector(state => state.error)
-  
- if (courses_fetching === true) {
+  const courses = useSelector((state) => state.courses)
+  const courses_fetched = useSelector((state) => state.fetched)
+  const courses_fetching = useSelector((state) => state.fetching)
+  const courses_error = useSelector((state) => state.error)
+
+  if (courses_fetching === true) {
     return (
       <div className={classes.loading}>
-        <CircularProgress
-          color="secondary"
-          size={50}
-        />
+        <CircularProgress color='secondary' size={50} />
       </div>
     )
   } else if (courses_fetched === true && courses_error === true) {
@@ -88,7 +70,7 @@ export default function Courses(props) {
     )
   } else if (courses === null || courses === []) {
     return (
-      <Typography variant="h3" className={classes.empty} tabIndex="0">
+      <Typography variant='h3' className={classes.empty} tabIndex='0'>
         You currently have no courses for this semester.
       </Typography>
     )
@@ -104,18 +86,12 @@ export default function Courses(props) {
         )
       } else if (!Object.is(course.waitlist, '0')) {
         elements.push(
-          <WaitlistCourse
-            course={course}
-            key={'waitlist' + Math.random()}
-          />
+          <WaitlistCourse course={course} key={'waitlist' + Math.random()} />
         )
       } else {
         elements.push(
-          <div
-            className={classes.courseContainer}
-            key={course.crn}
-          >
-            <div style={{ marginTop: '1em' }}>
+          <div className={classes.courseContainer} key={course.crn}>
+            <div className={classes.container}>
               <Card
                 className={classes.card}
                 key={course.crn + i + Math.random()}
@@ -127,7 +103,7 @@ export default function Courses(props) {
                 >
                   <div>
                     <div
-                      style={{ marginTop: '1em' }}
+                      className={classes.container}
                       key={course.crn + i + Math.random()}
                     >
                       <Meetings meetings={course.meetings} />
@@ -136,7 +112,7 @@ export default function Courses(props) {
                 </CardContent>
                 <CardActions
                   key={course.crn + i + Math.random()}
-                  style={{ justifyContent: 'center', flexWrap: 'wrap' }}
+                  className={classes.actions}
                 >
                   <CourseDetails course={course} />
                   <Instructors teachers={course.instructors} />
@@ -146,11 +122,7 @@ export default function Courses(props) {
           </div>
         )
       }
-    } 
-    return (
-      <div>
-        {elements}
-      </div>
-    )
+    }
+    return <div>{elements}</div>
   }
 }

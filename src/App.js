@@ -4,13 +4,12 @@ import { fetch_courses } from './actions/coursesActions'
 import { fetch_events } from './actions/eventsActions'
 import { useDispatch } from 'react-redux'
 
-
 const App = () => {
-  const dispatch = useDispatch();
+  const dispatch = useDispatch()
 
   useEffect(() => {
-    dispatch(fetch_courses("current-term"))
-    dispatch(fetch_events("current"))
+    dispatch(fetch_courses('current-term'))
+    dispatch(fetch_events('current'))
   }, [dispatch])
 
   return (

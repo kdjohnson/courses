@@ -14,8 +14,8 @@ export const get_courses = async (is_demo, term, url) => {
       method: 'GET',
       headers: {
         Accept: 'application/json',
-        Authorization: 'Bearer ' + token 
-      }
+        Authorization: 'Bearer ' + token,
+      },
     })
 
     const data = await response.json()
@@ -29,15 +29,15 @@ export const get_events = async (is_demo, term, url) => {
   if (is_demo) {
     return events
   }
-  
+
   try {
     const response = await fetch(url + term, {
       credentials: 'include',
       method: 'GET',
       headers: {
         Accept: 'application/json',
-        Authorization: 'Bearer ' + token 
-      }
+        Authorization: 'Bearer ' + token,
+      },
     })
 
     const data = await response.json()
@@ -48,31 +48,31 @@ export const get_events = async (is_demo, term, url) => {
 }
 
 export const generate_pdf = async (is_demo, term_code) => {
-  if(is_demo) { 
+  if (is_demo) {
     return
   }
 
   try {
-    const response = await fetch(
-      '/v1/generate-pdf/' + term_code, {
-        credentials: 'include',
-        method: 'GET',
-        headers: {
-          Accept: 'application/pdf',
-          Authorization: 'Bearer ' + token
-        }
-      }
-    )
-
-    await response.body.getReader().read().then(data => { 
-      const blob = new Blob([data.value], {type: 'application/pdf'})
-      const link = document.createElement('a')
-      link.href = window.URL.createObjectURL(blob)
-      link.download = "course-list.pdf"
-      link.click()
+    const response = await fetch('/v1/generate-pdf/' + term_code, {
+      credentials: 'include',
+      method: 'GET',
+      headers: {
+        Accept: 'application/pdf',
+        Authorization: 'Bearer ' + token,
+      },
     })
-    
-  } catch(err) {
+
+    await response.body
+      .getReader()
+      .read()
+      .then((data) => {
+        const blob = new Blob([data.value], { type: 'application/pdf' })
+        const link = document.createElement('a')
+        link.href = window.URL.createObjectURL(blob)
+        link.download = 'course-list.pdf'
+        link.click()
+      })
+  } catch (err) {
     return err
   }
 }

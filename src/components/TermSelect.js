@@ -1,72 +1,55 @@
 import React, { useState, useEffect } from 'react'
-import { useSelector, useDispatch } from 'react-redux'
-import { update_term } from './../actions/termActions'
 
-import Input from '@material-ui/core/Input'
-import Select from '@material-ui/core/Select'
 import FormControl from '@material-ui/core/FormControl'
+import Input from '@material-ui/core/Input'
 import MenuItem from '@material-ui/core/MenuItem'
+import Select from '@material-ui/core/Select'
 import { makeStyles } from '@material-ui/styles'
+import { update_term } from './../actions/termActions'
+import { useSelector, useDispatch } from 'react-redux'
 
-const useStyles = makeStyles(theme => ({
-  text: {
-    color: '#FFFFFF'
-  },
-  button: {
-    marginRight: '1em',
-    color: '#FFFFFF'
-  },
-  header: {
-    backgroundColor: theme.palette.primary.main
-  },
-  title: {
-    fontWeight: 600,
-    color: theme.palette.primary.contrastText
-  },
+const useStyles = makeStyles((theme) => ({
   root: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   formControl: {
     margin: theme.spacing(),
-    minWidth: 120
-  },
-  selectEmpty: {
-    marginTop: theme.spacing(2)
+    minWidth: 120,
   },
   input: {
     paddingBottom: 2,
-    paddingLeft: 10
+    paddingLeft: 10,
   },
   inputRoot: {
     color: 'white',
     underline: {
       '&before': {
-        borderBottomColor: 'white'
-      }
+        borderBottomColor: 'white',
+      },
     },
   },
   select: {
     '&:focus': {
-      color: 'white'
-    }
+      color: 'white',
+    },
   },
   selectIcon: {
-    color: 'white'
+    color: 'white',
   },
   underline: {
     '&:before': {
-      borderBottomColor: 'white'
+      borderBottomColor: 'white',
     },
     '&:after': {
-      borderBottomColor: 'white'
-    }
-  }
+      borderBottomColor: 'white',
+    },
+  },
 }))
 
 export default function TermSelect() {
-  const selected_term = useSelector(state => state.selected_term)
-  const terms = useSelector(state => state.terms)
+  const selected_term = useSelector((state) => state.selected_term)
+  const terms = useSelector((state) => state.terms)
   const [selectedTerm, setSelectedTerm] = useState(null)
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -78,17 +61,17 @@ export default function TermSelect() {
   }, [selected_term])
 
   const handleChange = (event) => {
-    terms.forEach(term => {
+    terms.forEach((term) => {
       if (term.code === event.target.value) {
         dispatch(update_term(term))
         setSelectedTerm(term)
       }
     })
   }
-  
+
   return (
     <div>
-      <form className={classes.root} autoComplete="off">
+      <form className={classes.root} autoComplete='off'>
         <FormControl className={classes.formControl}>
           {selectedTerm && (
             <Select
@@ -98,24 +81,24 @@ export default function TermSelect() {
               classes={{
                 select: classes.select,
                 icon: classes.selectIcon,
-                root: classes.input
+                root: classes.input,
               }}
               input={
                 <Input
-                  id="terms-dropdown"
-                  name="terms"
+                  id='terms-dropdown'
+                  name='terms'
                   classes={{
                     root: classes.inputRoot,
-                    underline: classes.underline
+                    underline: classes.underline,
                   }}
                 />
               }
             >
-              {terms.map(term => 
+              {terms.map((term) => (
                 <MenuItem key={term.code} value={term.code}>
                   {term.description}
                 </MenuItem>
-              )}
+              ))}
             </Select>
           )}
         </FormControl>
