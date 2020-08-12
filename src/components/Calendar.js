@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useRef, useState } from 'react'
 
 import Popover from '@material-ui/core/Popover'
 import ErrorMessages from './ErrorMessages'
@@ -37,13 +37,15 @@ export default function Calendar(props) {
   const classes = useStyles()
 
   const [data, set_data] = useState(null)
-  const [open, set_open] = useState(false)
+  const [anchor, set_anchor] = useState(null)
   const events = useSelector(state => state.events)
   const events_error = useSelector(state => state.error)
   const term_bounds = useSelector(state => state.term_bounds)
+  const ref = useRef()
   const { mobile } = props
 
   const initialView = mobile ? "listWeek" : "timeGridWeek"
+  const open = Boolean(anchor)
 
   if (events.length === 0 || events_error) {
     return (
@@ -55,7 +57,7 @@ export default function Calendar(props) {
 
   return (
     <>
-    <div className={classes.root}>
+    <div ref={ref} className={classes.root}>
       <FullCalendar
         plugins={[ dayGridPlugin, listPlugin, timeGridPlugin ]}
         initialView={initialView}
@@ -119,7 +121,7 @@ export default function Calendar(props) {
               <Typography>{info.event.extendedProps.location}</Typography>
             </div>
           )
-          set_open(true)
+          set_anchor(ref.current)
         }}
         validRange={{
           start: term_bounds[0],
@@ -129,7 +131,8 @@ export default function Calendar(props) {
     </div>
     <Popover
       open={open}
-      onClose={() => set_open(false)}
+      anchorEl={anchor}
+      onClose={() => set_anchor(null)}
       anchorOrigin={{
         vertical: 'center',
         horizontal: 'center'
