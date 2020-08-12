@@ -2,6 +2,7 @@ import React from 'react'
 
 import PrintIcon from '@material-ui/icons/Print'
 import Button from '@material-ui/core/Button'
+import { generate_pdf } from '../api/api'
 import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(() => ({
@@ -15,8 +16,13 @@ const useStyles = makeStyles(() => ({
   }
 }))
 
-export default function PrintCourses() {
+export default function PrintCourses(props) {
   const classes = useStyles()
+  const { selected_term } = props
+
+  const handleClick = () => {
+    generate_pdf(false, selected_term.code)
+  }
 
   return (
     <Button
@@ -25,6 +31,7 @@ export default function PrintCourses() {
       variant="contained"
       tabIndex="0"
       className={classes.button}
+      onClick={handleClick}
     >
       Print Courses
       <PrintIcon className={classes.icon} />

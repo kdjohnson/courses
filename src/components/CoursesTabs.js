@@ -151,6 +151,7 @@ export default function CoursesTabs() {
             />
             <PrintCourses
               courses={courses}
+              selected_term={selected_term}
             />
           </div>
           <Courses tabIndex="0" mobile={mobile} />

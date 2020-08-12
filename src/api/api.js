@@ -46,3 +46,33 @@ export const get_events = async (is_demo, term, url) => {
     return err
   }
 }
+
+export const generate_pdf = async (is_demo, term_code) => {
+  if(is_demo) { 
+    return
+  }
+
+  try {
+    const response = await fetch(
+      '/v1/generate-pdf/' + term_code, {
+        credentials: 'include',
+        method: 'GET',
+        headers: {
+          Accept: 'application/pdf',
+          Authorization: 'Bearer ' + token
+        }
+      }
+    )
+
+    await response.body.getReader().read().then(data => { 
+      const blob = new Blob([data.value], {type: 'application/pdf'})
+      const link = document.createElement('a')
+      link.href = window.URL.createObjectURL(blob)
+      link.download = "course-list.pdf"
+      link.click()
+    })
+    
+  } catch(err) {
+    return err
+  }
+}
