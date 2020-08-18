@@ -53,7 +53,7 @@ export const generate_pdf = async (is_demo, term_code) => {
   }
 
   try {
-    const response = await fetch('/v1/generate-pdf/' + term_code, {
+    const response = await fetch('/v1/courses/' + term_code + '/pdf', {
       credentials: 'include',
       method: 'GET',
       headers: {
