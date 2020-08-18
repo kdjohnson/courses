@@ -78,7 +78,7 @@
                     "firstName": "Iraida",
                     "lastName": "Lazareva",
                     "office": "N/A",
-                    "email": "lazareva@oakland.edu"
+                    "email": "lazareva@email.test"
                 }
             ]
         },
@@ -107,7 +107,7 @@
                     "firstName": "Billy",
                     "lastName": "Swift",
                     "office": "542 ODH",
-                    "email": "bswift@oakland.edu"
+                    "email": "bswift@email.test"
                 }
             ]
         },
@@ -163,7 +163,7 @@
                     "firstName": "Trofim",
                     "lastName": "Muravyov",
                     "office": "516 EC",
-                    "email": "muravyov@oakland.edu"
+                    "email": "muravyov@email.test"
                 }
             ]
         },
@@ -219,7 +219,7 @@
                     "firstName": "Genji",
                     "lastName": "Chu",
                     "office": "522 EC",
-                    "email": "genjichu@oakland.edu"
+                    "email": "genjichu@email.test"
                 }
             ]
         },
@@ -275,7 +275,7 @@
                     "firstName": "Elise",
                     "lastName": "Carroll",
                     "office": "Oak View Hall Rm 210",
-                    "email": "ecarroll@oakland.edu"
+                    "email": "ecarroll@email.test"
                 }
             ]
         },
@@ -357,7 +357,7 @@
                     "firstName": "Cheng",
                     "lastName": "Wan",
                     "office": "538 EC",
-                    "email": "wan@oakland.edu"
+                    "email": "wan@email.test"
                 }
             ]
         }
