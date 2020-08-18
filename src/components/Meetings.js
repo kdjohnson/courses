@@ -44,7 +44,7 @@ export default function Meetings(props) {
       return <div key={'emptyDiv' + Math.random()} />
     } else if (meetings.length === 0) {
       return (
-        <div>
+        <div className={classes.meetBorder}>
           <Typography
             variant='body1'
             className={classes.meetNoLink}
