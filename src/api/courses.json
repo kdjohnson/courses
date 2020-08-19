@@ -2,7 +2,7 @@
     "courses": [
         {
             "crn": "43069",
-            "waitlist": "0",
+            "waitlist": "1",
             "registrationStatus": "RW",
             "registrationStatusDescription": "Web Register",
             "departmentCode": "CSI",
@@ -44,48 +44,18 @@
                     "endDay": 15,
                     "endDayOfWeek": 3,
                     "endWeekOfMonth": 3
-                }
-            ],
-            "instructors": [
+                },
                 {
                     "crn": "43069",
-                    "firstName": "Hany",
-                    "lastName": "Othman",
-                    "office": "N/A",
-                    "email": "test.othman@oakland.edu"
-                }
-            ]
-        },
-        {
-            "crn": "45049",
-            "waitlist": "1",
-            "registrationStatus": "RW",
-            "registrationStatusDescription": "Web Register",
-            "departmentCode": "HC",
-            "departmentDescription": "Honors College",
-            "courseTitle": "Cartography:Intersections of A",
-            "courseDescription": "Looks to social science and its particular methods of scientific inquiry. Of particular interest are the ways societal and cultural factors influence and shape individual and/or group behaviors and values.  May be repeated for 4 extra credits.  Satisfies the university general education requirement in the social science knowledge exploration area.",
-            "subjectCode": "HC",
-            "subjectNumber": "2060",
-            "section": "3",
-            "credit": "4",
-            "grade": {
-                "credit": "4",
-                "grade": "N/A",
-                "crn": "45049"
-            },
-            "meetings": [
-                {
-                    "crn": "45049",
                     "startDate": "2020-09-03T04:00:00.000+0000",
                     "endDate": "2020-12-15T05:00:00.000+0000",
                     "startTime": "12:00 PM",
-                    "endTime": "1:07 PM",
+                    "endTime": "1:00 PM",
                     "courseType": "In-Person Class Meeting",
                     "courseTypeCode": "CLAS",
-                    "location": "EH 239",
+                    "location": "DH 135",
                     "campus": "Main Campus",
-                    "meetDays": "Monday Wednesday Friday ",
+                    "meetDays": "Thursday ",
                     "startHour": 0,
                     "startMinutes": 0,
                     "startMonth": 9,
@@ -104,11 +74,40 @@
             ],
             "instructors": [
                 {
+                    "crn": "43069",
+                    "firstName": "Iraida",
+                    "lastName": "Lazareva",
+                    "office": "N/A",
+                    "email": "lazareva@email.test"
+                }
+            ]
+        },
+        {
+            "crn": "45049",
+            "waitlist": "0",
+            "registrationStatus": "RW",
+            "registrationStatusDescription": "Web Register",
+            "departmentCode": "HC",
+            "departmentDescription": "Honors College",
+            "courseTitle": "Cartography:Intersections of A",
+            "courseDescription": "Looks to social science and its particular methods of scientific inquiry. Of particular interest are the ways societal and cultural factors influence and shape individual and/or group behaviors and values.  May be repeated for 4 extra credits.  Satisfies the university general education requirement in the social science knowledge exploration area.",
+            "subjectCode": "HC",
+            "subjectNumber": "2060",
+            "section": "3",
+            "credit": "4",
+            "grade": {
+                "credit": "4",
+                "grade": "N/A",
+                "crn": "45049"
+            },
+            "meetings": [],
+            "instructors": [
+                {
                     "crn": "45049",
-                    "firstName": "Doris",
-                    "lastName": "Plantus",
+                    "firstName": "Billy",
+                    "lastName": "Swift",
                     "office": "542 ODH",
-                    "email": "test.plantus@oakland.edu"
+                    "email": "bswift@email.test"
                 }
             ]
         },
@@ -161,10 +160,10 @@
             "instructors": [
                 {
                     "crn": "44975",
-                    "firstName": "Hua",
-                    "lastName": "Ming",
+                    "firstName": "Trofim",
+                    "lastName": "Muravyov",
                     "office": "516 EC",
-                    "email": "ming@oakland.edu"
+                    "email": "muravyov@email.test"
                 }
             ]
         },
@@ -214,15 +213,7 @@
                     "endWeekOfMonth": 3
                 }
             ],
-            "instructors": [
-                {
-                    "crn": "42896",
-                    "firstName": "Ishwar",
-                    "lastName": "Sethi",
-                    "office": "522 EC",
-                    "email": "isethi@oakland.edu"
-                }
-            ]
+            "instructors": []
         },
         {
             "crn": "45367",
@@ -273,16 +264,16 @@
             "instructors": [
                 {
                     "crn": "45367",
-                    "firstName": "Anne",
-                    "lastName": "Stratton",
+                    "firstName": "Elise",
+                    "lastName": "Carroll",
                     "office": "Oak View Hall Rm 210",
-                    "email": "jackson3@oakland.edu"
+                    "email": "ecarroll@email.test"
                 }
             ]
         },
         {
             "crn": "43064",
-            "waitlist": "1",
+            "waitlist": "0",
             "registrationStatus": "RW",
             "registrationStatusDescription": "Web Register",
             "departmentCode": "CSI",
@@ -324,15 +315,41 @@
                     "endDay": 15,
                     "endDayOfWeek": 3,
                     "endWeekOfMonth": 3
+                },
+                {
+                    "crn": "43064",
+                    "startDate": "2020-09-03T04:00:00.000+0000",
+                    "endDate": "2020-12-15T05:00:00.000+0000",
+                    "startTime": "3:00 PM",
+                    "endTime": "4:00 PM",
+                    "courseType": "In-Person Class Meeting",
+                    "courseTypeCode": "CLAS",
+                    "location": "EC 281",
+                    "campus": "Main Campus",
+                    "meetDays": "Tuesday Thursday ",
+                    "startHour": 0,
+                    "startMinutes": 0,
+                    "startMonth": 9,
+                    "startYear": 2020,
+                    "startDay": 3,
+                    "startDayOfWeek": 5,
+                    "startWeekOfMonth": 1,
+                    "endHour": 0,
+                    "endMinutes": 0,
+                    "endMonth": 12,
+                    "endYear": 2020,
+                    "endDay": 15,
+                    "endDayOfWeek": 3,
+                    "endWeekOfMonth": 3
                 }
             ],
             "instructors": [
                 {
                     "crn": "43064",
-                    "firstName": "Guangzhi",
-                    "lastName": "Qu",
+                    "firstName": "Cheng",
+                    "lastName": "Wan",
                     "office": "538 EC",
-                    "email": "gqu@oakland.edu"
+                    "email": "wan@email.test"
                 }
             ]
         }
