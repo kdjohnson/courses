@@ -8,48 +8,48 @@ import { makeStyles } from '@material-ui/styles'
 import { update_term } from './../actions/termActions'
 import { useSelector, useDispatch } from 'react-redux'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    flexWrap: 'wrap',
+    flexWrap: 'wrap'
   },
   formControl: {
     margin: theme.spacing(),
-    minWidth: 120,
+    minWidth: 120
   },
   input: {
     paddingBottom: 2,
-    paddingLeft: 10,
+    paddingLeft: 10
   },
   inputRoot: {
     color: 'white',
     underline: {
       '&before': {
-        borderBottomColor: 'white',
-      },
-    },
+        borderBottomColor: 'white'
+      }
+    }
   },
   select: {
     '&:focus': {
-      color: 'white',
-    },
+      color: 'white'
+    }
   },
   selectIcon: {
-    color: 'white',
+    color: 'white'
   },
   underline: {
     '&:before': {
-      borderBottomColor: 'white',
+      borderBottomColor: 'white'
     },
     '&:after': {
-      borderBottomColor: 'white',
-    },
-  },
+      borderBottomColor: 'white'
+    }
+  }
 }))
 
 export default function TermSelect() {
-  const selected_term = useSelector((state) => state.selected_term)
-  const terms = useSelector((state) => state.terms)
+  const selected_term = useSelector(state => state.selected_term)
+  const terms = useSelector(state => state.terms)
   const [selectedTerm, setSelectedTerm] = useState(null)
   const classes = useStyles()
   const dispatch = useDispatch()
@@ -60,8 +60,8 @@ export default function TermSelect() {
     }
   }, [selected_term])
 
-  const handleChange = (event) => {
-    terms.forEach((term) => {
+  const handleChange = event => {
+    terms.forEach(term => {
       if (term.code === event.target.value) {
         dispatch(update_term(term))
         setSelectedTerm(term)
@@ -81,7 +81,7 @@ export default function TermSelect() {
               classes={{
                 select: classes.select,
                 icon: classes.selectIcon,
-                root: classes.input,
+                root: classes.input
               }}
               input={
                 <Input
@@ -89,12 +89,12 @@ export default function TermSelect() {
                   name='terms'
                   classes={{
                     root: classes.inputRoot,
-                    underline: classes.underline,
+                    underline: classes.underline
                   }}
                 />
               }
             >
-              {terms.map((term) => (
+              {terms.map(term => (
                 <MenuItem key={term.code} value={term.code}>
                   {term.description}
                 </MenuItem>

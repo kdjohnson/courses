@@ -1,6 +1,6 @@
 const initial_state = {
   books: '',
-  credits: null,
+  credits: [],
   terms: [],
   courses: [],
   fetching: false,
@@ -8,7 +8,7 @@ const initial_state = {
   error: false,
   term_bounds: null,
   selected_term: null,
-  events: [],
+  events: []
 }
 
 export default function reducer(state = initial_state, action) {
@@ -29,7 +29,7 @@ export default function reducer(state = initial_state, action) {
         fetching: false,
         fetched: true,
         error: false,
-        events: action.payload,
+        events: action.payload
       }
     }
     case 'RECEIVE_COURSES': {
@@ -47,11 +47,11 @@ export default function reducer(state = initial_state, action) {
           ...state,
           fetching: false,
           fetched: true,
-          error: true,
+          error: true
         }
       }
 
-      action.payload.terms.forEach((term) => {
+      action.payload.terms.forEach(term => {
         if (term.current) {
           selected_term = term
           term_start = selected_term.start
@@ -71,7 +71,7 @@ export default function reducer(state = initial_state, action) {
         selected_term: selected_term,
         term_bounds: term_bounds,
         credits: action.payload.credit,
-        error: false,
+        error: false
       }
     }
 
@@ -82,7 +82,7 @@ export default function reducer(state = initial_state, action) {
         books: action.payload.data.books,
         fetching: false,
         fetched: true,
-        error: false,
+        error: false
       }
     }
 
@@ -93,7 +93,7 @@ export default function reducer(state = initial_state, action) {
       return {
         ...state,
         term_bounds: term_bounds,
-        selected_term: action.payload,
+        selected_term: action.payload
       }
     }
 
