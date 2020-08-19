@@ -23,65 +23,61 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useTheme } from '@material-ui/core'
 
-const TabContainer = (props) => (
-  <div style={{ padding: 20 }}>{props.children}</div>
-)
+const TabContainer = props => <div style={{ padding: 20 }}>{props.children}</div>
 
 TabContainer.propTypes = {
-  children: PropTypes.node.isRequired,
+  children: PropTypes.node.isRequired
 }
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
-    minHeight: 0,
+    minHeight: 0
   },
   tab: {
     '@media (min-width: 1024px)': {
-      minWidth: 72,
-    },
+      minWidth: 72
+    }
   },
   flex: {
-    flex: 1,
+    flex: 1
   },
   button: {
-    color: '#FFFFFF',
+    color: '#FFFFFF'
   },
   bar: {
-    flexDirection: 'column',
+    flexDirection: 'column'
   },
   btnContainer: {
-    display: 'flex',
-  },
+    display: 'flex'
+  }
 }))
 
 export default function CoursesTabs() {
   const [value, setValue] = useState(0)
-  const courses = useSelector((state) => state.courses)
-  const books = useSelector((state) => state.books)
-  const selected_term = useSelector((state) => state.selected_term)
+  const courses = useSelector(state => state.courses)
+  const books = useSelector(state => state.books)
+  const selected_term = useSelector(state => state.selected_term)
   const classes = useStyles()
   const theme = useTheme()
   const mobile = useMediaQuery(theme.breakpoints.down('xs'))
-  const [term, set_term] = useState(null)
+  const [term, set_term] = useState(selected_term)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (term === null) {
-      set_term(selected_term)
+    if (term === selected_term) {
+      set_term(null)
+      return
     } else {
       dispatch(fetch_selected_courses(selected_term))
       dispatch(fetch_events(selected_term.code))
     }
-  }, [selected_term, dispatch])
+  }, [term, selected_term, dispatch])
 
   return (
     <Paper>
       <AppBar position='static'>
-        <Toolbar
-          disableGutters={true}
-          className={mobile ? classes.bar : classes.root}
-        >
-          {mobile === true && (
+        <Toolbar disableGutters={true} className={mobile ? classes.bar : classes.root}>
+          {mobile && (
             <Tabs
               className={classes.flex}
               value={value}
@@ -103,29 +99,19 @@ export default function CoursesTabs() {
                 aria-label='calendar'
                 title='Calendar'
                 className={classes.tab}
-                icon={
-                  <Event
-                    className={classes.button}
-                    alt='View your calendar events'
-                  />
-                }
+                icon={<Event className={classes.button} alt='View your calendar events' />}
                 tabIndex='0'
               />
               <Tab
                 aria-label='grades'
                 title='Grades'
                 className={classes.tab}
-                icon={
-                  <Spellcheck
-                    className={classes.button}
-                    alt='View your grades'
-                  />
-                }
+                icon={<Spellcheck className={classes.button} alt='View your grades' />}
                 tabIndex='0'
               />
             </Tabs>
           )}
-          {mobile === false && (
+          {!mobile && (
             <Tabs
               className={classes.flex}
               value={value}
