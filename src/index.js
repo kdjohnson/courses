@@ -2,12 +2,12 @@ import React from 'react'
 import ReactDOM from 'react-dom'
 import 'typeface-arimo'
 import App from './App'
-import i18n from './utils/i18n'
 import store from './store'
-import { I18nextProvider } from 'react-i18next'
-import { createMuiTheme } from '@material-ui/core/styles'
-import { ThemeProvider } from '@material-ui/styles';
+import { StylesProvider, createGenerateClassName } from '@material-ui/styles'
+import { MuiThemeProvider, createMuiTheme } from '@material-ui/core/styles'
 import { Provider } from 'react-redux'
+
+const project_name = 'courses-soffit'
 
 const theme = createMuiTheme({
   typography: {
@@ -18,26 +18,29 @@ const theme = createMuiTheme({
       light: '#b89f74',
       main: '#877148',
       dark: '#58461f',
-      contrastText: '#fff'
+      contrastText: '#fff',
     },
     secondary: {
       light: '#56a2ea',
       main: '#0074b7',
       dark: '#004987',
-      contrastText: '#fff'
+      contrastText: '#fff',
     },
-  }
+  },
 })
 
-const root_element = 'root'
+const generateClassName = createGenerateClassName({
+  productionPrefix: project_name,
+  disableGlobal: true,
+})
 
 ReactDOM.render(
-  <I18nextProvider i18n={i18n}>
-      <ThemeProvider theme={theme}>
-        <Provider store={store}>
-          <App root_element={root_element} />
-        </Provider>
-      </ThemeProvider>
-  </I18nextProvider>,
-  document.getElementById(root_element)
+  <StylesProvider generateClassName={generateClassName}>
+    <MuiThemeProvider theme={theme}>
+      <Provider store={store}>
+        <App />
+      </Provider>
+    </MuiThemeProvider>
+  </StylesProvider>,
+  document.getElementById(project_name)
 )

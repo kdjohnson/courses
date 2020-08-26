@@ -1,149 +1,128 @@
-import React, { useEffect } from 'react'
-import CourseDetails from './CourseDetails'
-import CourseHeader from './CourseHeader'
-import ExpandableCourse from './ExpandableCourse'
-import Instructors from './Instructors'
-import Meetings from './Meetings'
-import WaitlistCourse from './WaitlistCourse'
-import { fetch_courses } from './../actions/coursesActions'
-import { getBookButton } from './BuyBooks'
-import { useSelector, useDispatch } from 'react-redux'
+import React from 'react'
 
 import Card from '@material-ui/core/Card'
 import CardActions from '@material-ui/core/CardActions'
 import CardContent from '@material-ui/core/CardContent'
+import CircularProgress from '@material-ui/core/CircularProgress'
+import CourseDetails from './CourseDetails'
+import CourseHeader from './CourseHeader'
+import ErrorMessages from './ErrorMessages'
+import ExpandableCourse from './ExpandableCourse'
+import Instructors from './Instructors'
+import Meetings from './Meetings'
 import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/styles';
+import WaitlistCourse from './WaitlistCourse'
+import { makeStyles } from '@material-ui/styles'
+import { useSelector } from 'react-redux'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   courseContainer: {
     flex: '1 1 auto',
-    padding: '1em'
+    padding: '1em',
   },
-
-  buttonsDiv: {
-    display: 'flex',
-    justifyContent: 'start',
-    alignItems: 'center'
-  },
-
-  button: {
-    margin: theme.spacing()
-  },
-
-  rightIcon: {
-    marginLeft: theme.spacing()
-  },
-
-  coursesDiv: {
-    display: 'flex',
-    flexFlow: 'wrap'
-  },
-
-  coursesDivMobile: {
-    display: 'flex',
-    flexDirection: 'column'
-  },
-
   card: {
-    backgroundColor: '#fafafa'
+    backgroundColor: '#fafafa',
   },
-
   content: {
     paddingTop: 0,
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
-
   empty: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
-
-  progress: {
-    margin: `0 ${theme.spacing(2)}px`
-  }
+  loading: {
+    display: 'flex',
+    marginTop: 50,
+    justifyContent: 'center',
+  },
+  error: {
+    display: 'flex',
+    justifyContent: 'center',
+  },
+  container: {
+    marginTop: '1em',
+  },
+  actions: {
+    flexWrap: 'wrap',
+    justifyContent: 'center',
+  },
 }))
 
 export default function Courses(props) {
   const classes = useStyles()
-  const current_term = useSelector(state => state.terms.current_term)
-  const courses = useSelector(state => state.courses.courses)
-  const { mobile } = props
-  const dispatch = useDispatch();
+  const courses = useSelector((state) => state.courses)
+  const courses_fetched = useSelector((state) => state.fetched)
+  const courses_fetching = useSelector((state) => state.fetching)
+  const courses_error = useSelector((state) => state.error)
 
-  useEffect(() => {
-    dispatch(fetch_courses(current_term))
-  }, [dispatch, current_term])
-
-  if (courses === null || courses === []) {
+  if (courses_fetching === true) {
     return (
-      <Typography variant="h3" className={classes.empty} tabIndex="0">
+      <div className={classes.loading}>
+        <CircularProgress color='secondary' size={50} />
+      </div>
+    )
+  } else if (courses_fetched === true && courses_error === true) {
+    return (
+      <div className={classes.error}>
+        <ErrorMessages />
+      </div>
+    )
+  } else if (courses === null || courses === []) {
+    return (
+      <Typography variant='h3' className={classes.empty} tabIndex='0'>
         You currently have no courses for this semester.
       </Typography>
     )
-  }
-
-
-  let elements = []
-  for (let [i, course] of courses.entries()) {
-    if (course.meetings.length > 1 || course.instructors.length > 1) {
-      elements.push(
-        <ExpandableCourse
-          course={course}
-          key={'expandable' + Math.random()}
-          mobile={mobile}
-        />
-      )
-    } else if (!Object.is(course.waitList, '0')) {
-      elements.push(
-        <WaitlistCourse
-          course={course}
-          key={'waitlist' + Math.random()}
-          mobile={mobile}
-        />
-      )
-    } else {
-      elements.push(
-        <div
-          className={classes.courseContainer}
-          key={course.crn}
-        >
-          <div style={{ marginTop: '1em' }}>
-            <Card
-              className={classes.card}
-              key={course.crn + i + Math.random()}
-            >
-              <CourseHeader mobile={mobile} course={course} />
-              <CardContent
-                className={classes.content}
+  } else {
+    let elements = []
+    for (let [i, course] of courses.entries()) {
+      if (course.meetings.length > 1 || course.instructors.length > 1) {
+        elements.push(
+          <ExpandableCourse
+            course={course}
+            key={'expandable' + Math.random()}
+          />
+        )
+      } else if (!Object.is(course.waitlist, '0')) {
+        elements.push(
+          <WaitlistCourse course={course} key={'waitlist' + Math.random()} />
+        )
+      } else {
+        elements.push(
+          <div className={classes.courseContainer} key={course.crn}>
+            <div className={classes.container}>
+              <Card
+                className={classes.card}
                 key={course.crn + i + Math.random()}
               >
-                <div>
-                  <div
-                    style={{ marginTop: '1em' }}
-                    key={course.crn + i + Math.random()}
-                  >
-                    <Meetings meetings={course.meetings} />
+                <CourseHeader course={course} />
+                <CardContent
+                  className={classes.content}
+                  key={course.crn + i + Math.random()}
+                >
+                  <div>
+                    <div
+                      className={classes.container}
+                      key={course.crn + i + Math.random()}
+                    >
+                      <Meetings meetings={course.meetings} />
+                    </div>
                   </div>
-                </div>
-              </CardContent>
-              <CardActions
-                key={course.crn + i + Math.random()}
-                style={{ justifyContent: 'center', flexWrap: 'wrap' }}
-              >
-                <CourseDetails course={course} />
-                <Instructors teachers={course.instructors} />
-              </CardActions>
-            </Card>
+                </CardContent>
+                <CardActions
+                  key={course.crn + i + Math.random()}
+                  className={classes.actions}
+                >
+                  <CourseDetails course={course} />
+                  <Instructors teachers={course.instructors} />
+                </CardActions>
+              </Card>
+            </div>
           </div>
-        </div>
-      )
+        )
+      }
     }
+    return <div>{elements}</div>
   }
-
-  return (
-    <div>
-      {elements}
-    </div>
-  )
 }

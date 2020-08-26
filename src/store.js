@@ -6,7 +6,7 @@ import thunk from 'redux-thunk'
 
 let middleware = null
 
-if(process.env.NODE_ENV === 'production') {
+if (process.env.NODE_ENV === 'production') {
   middleware = applyMiddleware(thunk)
 } else {
   middleware = applyMiddleware(thunk, logger)

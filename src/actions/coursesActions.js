@@ -1,22 +1,18 @@
-import { get_courses } from '../api/api'
-const courses_url = 'http://localhost:8082/api/courses'
+/* global is_demo */
 
-export function fetch_courses(new_term) {
-  return function(dispatch) {
+import { get_courses } from '../api/api'
+
+const courses_url = '/v1/courses/'
+
+export function fetch_courses(term) {
+  return function (dispatch) {
     dispatch({ type: 'FETCH_COURSES_START', payload: {} })
-    get_courses(new_term, courses_url)
-      .then(courses => {
-        dispatch({ type: 'RECEIVE_COURSES', payload: courses })
+    get_courses(is_demo, term, courses_url)
+      .then((data) => {
+        dispatch({ type: 'RECEIVE_COURSES', payload: data })
       })
-      .catch(err => {
+      .catch((err) => {
         dispatch({ type: 'FETCH_COURSES_ERROR', payload: err })
       })
-  }
-}
-
-export function update_regs(newRegs) {
-  return function(dispatch) {
-    dispatch({ type: 'UPDATING_REGS', payload: {} })
-    dispatch({ type: 'UPDATE_REGS', payload: newRegs })
   }
 }
