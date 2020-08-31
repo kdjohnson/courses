@@ -60,18 +60,17 @@ export default function CoursesTabs() {
   const classes = useStyles()
   const theme = useTheme()
   const mobile = useMediaQuery(theme.breakpoints.down('xs'))
-  const [term, set_term] = useState(selected_term)
+  const [term, set_term] = useState(null)
   const dispatch = useDispatch()
 
   useEffect(() => {
-    if (term === selected_term) {
-      set_term(null)
-      return
+    if (term === null) {
+      set_term(selected_term)
     } else {
       dispatch(fetch_selected_courses(selected_term))
       dispatch(fetch_events(selected_term.code))
     }
-  }, [term, selected_term, dispatch])
+  }, [selected_term, dispatch])
 
   return (
     <Paper>

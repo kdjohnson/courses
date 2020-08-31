@@ -5,8 +5,6 @@ import PrintIcon from '@material-ui/icons/Print'
 import { generate_pdf } from '../api/api'
 import { makeStyles } from '@material-ui/core/styles'
 
-/* global is_demo */
-
 const useStyles = makeStyles(() => ({
   icon: {
     paddingLeft: 5,
@@ -23,7 +21,7 @@ export default function PrintCourses(props) {
   const { selected_term } = props
 
   const handleClick = () => {
-    generate_pdf(is_demo, selected_term.code)
+    generate_pdf(selected_term.code)
   }
 
   return (
