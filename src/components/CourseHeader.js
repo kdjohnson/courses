@@ -5,31 +5,31 @@ import CardHeader from '@material-ui/core/CardHeader'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   classHeader: {
     backgroundColor: theme.palette.primary.light,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   classHeaderWaitList: {
     backgroundColor: amber[200],
-    textAlign: 'center'
+    textAlign: 'center',
   },
   classHeaderSpanDiv: {
     display: 'flex',
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   subHeaderDiv: {
     display: 'flex',
     flexDirection: 'column-reverse',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   courseTitle: {
-    fontWeight: 'bolder'
+    fontWeight: 'bolder',
   },
   courseInfo: {
     fontWeight: '500',
-    color: '#000'
-  }
+    color: '#000',
+  },
 }))
 
 export default function CourseHeader(props) {

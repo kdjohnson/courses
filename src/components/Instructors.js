@@ -21,7 +21,7 @@ const useStyles = makeStyles(theme => ({
   instructor: {
     fontSize: 16,
     fontWeight: 'bolder',
-    color: theme.palette.text.primary
+    color: theme.palette.text.primary,
   },
   dialogTitle: {
     backgroundColor: theme.palette.primary.light,

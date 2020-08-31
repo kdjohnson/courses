@@ -30,27 +30,31 @@ const useStyles = makeStyles(theme => ({
     alignSelf: 'center'
   },
   meet: {
-    color: 'black'
+    color: 'black',
   },
   meetLink: {
     color: '#3344dd',
     fontSize: '14px',
     fontWeight: 400,
-    fontFamily: 'Arimo'
+    fontFamily: 'Arimo',
   },
   meetNoLink: {
     color: 'black',
     lineHeight: 1.42857143,
     fontSize: '14px',
     fontWeight: 400,
-    fontFamily: 'Arimo'
+    fontFamily: 'Arimo',
   },
   meetBorder: {
     borderLeftStyle: 'solid',
     borderLeftColor: theme.palette.secondary.main,
     borderLeftWidth: '0.3em',
-    paddingLeft: '1em'
-  }
+    paddingLeft: '1em',
+  },
+  text: {
+    fontWeight: 'bolder',
+    paddingBottom: '0.5em',
+  },
 }))
 
 const NoMeeting = ({ classes }) => {

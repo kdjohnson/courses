@@ -22,7 +22,7 @@ const useStyles = makeStyles(theme => ({
     backgroundColor: '#fafafa'
   },
   classHeader: {
-    backgroundColor: theme.palette.primary.light
+    backgroundColor: theme.palette.primary.light,
   },
   classHeaderSpan: {
     fontWeight: 600,
@@ -69,7 +69,7 @@ const Credits = ({ credits }) => {
   })
 }
 
-const Grades = props => {
+const Grades = (props) => {
   const classes = useStyles()
   const credits = useSelector(state => state.credits)
   const courses = useSelector(state => state.courses)

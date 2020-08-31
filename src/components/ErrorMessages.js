@@ -8,7 +8,7 @@ import { makeStyles } from '@material-ui/styles'
 const useStyles = makeStyles(() => ({
   root: {
     position: 'relative',
-    width: '90%'
+    width: '90%',
   },
   card: {
     backgroundColor: '#fafafa ',

@@ -16,7 +16,8 @@ import { useSelector } from 'react-redux'
 const useStyles = makeStyles(() => ({
   root: {
     display: 'flex',
-    flexFlow: 'wrap'
+    marginTop: 50,
+    justifyContent: 'center',
   },
   courseContainer: {
     flex: '1 1 auto',

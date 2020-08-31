@@ -11,11 +11,11 @@ import { useSelector, useDispatch } from 'react-redux'
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   formControl: {
     margin: theme.spacing(),
-    minWidth: 120
+    minWidth: 120,
   },
   input: {
     paddingBottom: 2,
@@ -25,26 +25,26 @@ const useStyles = makeStyles(theme => ({
     color: 'white',
     underline: {
       '&before': {
-        borderBottomColor: 'white'
-      }
-    }
+        borderBottomColor: 'white',
+      },
+    },
   },
   select: {
     '&:focus': {
-      color: 'white'
-    }
+      color: 'white',
+    },
   },
   selectIcon: {
-    color: 'white'
+    color: 'white',
   },
   underline: {
     '&:before': {
-      borderBottomColor: 'white'
+      borderBottomColor: 'white',
     },
     '&:after': {
-      borderBottomColor: 'white'
-    }
-  }
+      borderBottomColor: 'white',
+    },
+  },
 }))
 
 export default function TermSelect() {

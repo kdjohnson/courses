@@ -26,12 +26,12 @@ import { useTheme } from '@material-ui/core'
 const TabContainer = props => <div style={{ padding: 20 }}>{props.children}</div>
 
 TabContainer.propTypes = {
-  children: PropTypes.node.isRequired
+  children: PropTypes.node.isRequired,
 }
 
 const useStyles = makeStyles(() => ({
   root: {
-    minHeight: 0
+    minHeight: 0,
   },
   tab: {
     '@media (min-width: 1024px)': {
@@ -39,10 +39,10 @@ const useStyles = makeStyles(() => ({
     }
   },
   flex: {
-    flex: 1
+    flex: 1,
   },
   button: {
-    color: '#FFFFFF'
+    color: '#FFFFFF',
   },
   bar: {
     flexDirection: 'column'
