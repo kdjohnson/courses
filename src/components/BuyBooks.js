@@ -6,12 +6,12 @@ import { makeStyles } from '@material-ui/core/styles'
 
 const useStyles = makeStyles(() => ({
   button: {
-    paddingTop: 10
+    paddingTop: 10,
   },
   icon: {
     paddingLeft: 5,
-    marginTop: -7
-  }
+    marginTop: -7,
+  },
 }))
 
 export default function BuyBooks(props) {

@@ -17,7 +17,7 @@ import Typography from '@material-ui/core/Typography'
 import { getMapUrl } from '../utils/mapLinks'
 import { makeStyles } from '@material-ui/styles'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   instructor: {
     fontSize: 16,
     fontWeight: 'bolder',
@@ -25,12 +25,12 @@ const useStyles = makeStyles(theme => ({
   },
   dialogTitle: {
     backgroundColor: theme.palette.primary.light,
-    padding: 16
+    padding: 16,
   },
   title: {
     fontWeight: 600,
-    paddingTop: 3
-  }
+    paddingTop: 3,
+  },
 }))
 
 const Transition = React.forwardRef(function Transition(props, ref) {

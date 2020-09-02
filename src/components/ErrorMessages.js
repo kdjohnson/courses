@@ -15,13 +15,13 @@ const useStyles = makeStyles(() => ({
     borderLeftStyle: 'solid',
     borderLeftWidth: '12px',
     borderLeftColor: '#d32f2f',
-    display: 'flex'
+    display: 'flex',
   },
   icon: {
     fill: '#d32f2f',
     width: 30,
-    height: 30
-  }
+    height: 30,
+  },
 }))
 
 export default function ErrorMessages() {

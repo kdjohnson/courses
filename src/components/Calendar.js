@@ -17,23 +17,23 @@ const useStyles = makeStyles(() => ({
   root: {
     padding: '10px 20px 20px 20px',
     fontFamily: 'Arimo',
-    marginBottom: 20
+    marginBottom: 20,
   },
   error: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   popover: {
     padding: 20,
-    textAlign: 'center'
+    textAlign: 'center',
   },
   title: {
     fontWeight: 'bolder',
-    paddingBottom: 5
+    paddingBottom: 5,
   },
   empty: {
-    textAlign: 'center'
-  }
+    textAlign: 'center',
+  },
 }))
 
 export default function Calendar(props) {
@@ -41,9 +41,9 @@ export default function Calendar(props) {
 
   const [data, set_data] = useState(null)
   const [anchor, set_anchor] = useState(null)
-  const events = useSelector(state => state.events)
-  const events_error = useSelector(state => state.error)
-  const term_bounds = useSelector(state => state.term_bounds)
+  const events = useSelector((state) => state.events)
+  const events_error = useSelector((state) => state.error)
+  const term_bounds = useSelector((state) => state.term_bounds)
   const ref = useRef()
   const { mobile } = props
 
@@ -69,52 +69,52 @@ export default function Calendar(props) {
           headerToolbar={{
             start: 'title',
             center: '',
-            end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek'
+            end: 'dayGridMonth,timeGridWeek,timeGridDay,listWeek',
           }}
           footerToolbar={{
             start: 'today',
             center: '',
-            end: 'prev,next'
+            end: 'prev,next',
           }}
           allDaySlot={false}
           views={{
             dayGridMonth: {
               titleFormat: {
                 year: 'numeric',
-                month: 'long'
-              }
+                month: 'long',
+              },
             },
             timeGridWeek: {
               titleFormat: {
                 month: 'short',
-                day: 'numeric'
-              }
+                day: 'numeric',
+              },
             },
             timeGridDay: {
               titleFormat: {
                 month: 'long',
-                day: 'numeric'
-              }
+                day: 'numeric',
+              },
             },
             listWeek: {
               titleFormat: {
                 month: 'short',
-                day: 'numeric'
-              }
-            }
+                day: 'numeric',
+              },
+            },
           }}
           buttonText={{
             today: 'Today',
             dayGridMonth: 'Month',
             timeGridWeek: 'Week',
             timeGridDay: 'Day',
-            listWeek: 'List'
+            listWeek: 'List',
           }}
           weekNumbers={true}
           nowIndicator={true}
           events={events}
           dayMaxEventRows={true}
-          eventClick={info => {
+          eventClick={(info) => {
             set_data(
               <div className={classes.popover}>
                 <Typography className={classes.title}>{info.event.title}</Typography>
@@ -129,7 +129,7 @@ export default function Calendar(props) {
           }}
           validRange={{
             start: term_bounds[0],
-            end: term_bounds[1]
+            end: term_bounds[1],
           }}
         />
       </div>
@@ -139,11 +139,11 @@ export default function Calendar(props) {
         onClose={() => set_anchor(null)}
         anchorOrigin={{
           vertical: 'center',
-          horizontal: 'center'
+          horizontal: 'center',
         }}
         transformOrigin={{
           vertical: 'center',
-          horizontal: 'center'
+          horizontal: 'center',
         }}
       >
         {data}

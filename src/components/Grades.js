@@ -13,13 +13,13 @@ import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles'
 import { useSelector } from 'react-redux'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   error: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   card: {
-    backgroundColor: '#fafafa'
+    backgroundColor: '#fafafa',
   },
   classHeader: {
     backgroundColor: theme.palette.primary.light,
@@ -27,20 +27,20 @@ const useStyles = makeStyles(theme => ({
   classHeaderSpan: {
     fontWeight: 600,
     color: 'rgba(0, 0, 0, 0.75)',
-    fontSize: 16
+    fontSize: 16,
   },
   tableCell: {
     color: 'rgba(0, 0, 0, 1)',
     fontWeight: 600,
     fontSize: 14,
-    width: '33%'
+    width: '33%',
   },
   empty: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   mobile: {
-    overflowX: 'scroll'
-  }
+    overflowX: 'scroll',
+  },
 }))
 
 const CourseGrades = ({ courses }) => {
@@ -71,9 +71,9 @@ const Credits = ({ credits }) => {
 
 const Grades = (props) => {
   const classes = useStyles()
-  const credits = useSelector(state => state.credits)
-  const courses = useSelector(state => state.courses)
-  const courses_error = useSelector(state => state.error)
+  const credits = useSelector((state) => state.credits)
+  const courses = useSelector((state) => state.courses)
+  const courses_error = useSelector((state) => state.error)
   const { mobile } = props
 
   if (courses_error) {

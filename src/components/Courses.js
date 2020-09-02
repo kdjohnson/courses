@@ -18,12 +18,12 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     marginTop: 10,
     justifyContent: 'center',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
   },
   courseContainer: {
     flex: '1 1 auto',
     paddingLeft: '1em',
-    paddingRight: '1em'
+    paddingRight: '1em',
   },
   card: {
     backgroundColor: '#fafafa',
@@ -31,41 +31,41 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'center',
     flexDirection: 'column',
-    minWidth: 290
+    minWidth: 290,
   },
   content: {
     paddingTop: 0,
     display: 'flex',
     justifyContent: 'center',
-    flex: 1
+    flex: 1,
   },
   empty: {
-    textAlign: 'center'
+    textAlign: 'center',
   },
   loading: {
     display: 'flex',
     marginTop: 50,
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   error: {
     display: 'flex',
-    justifyContent: 'center'
+    justifyContent: 'center',
   },
   container: {
-    marginTop: '2em'
+    marginTop: '2em',
   },
   waitlistContainer: {
-    marginTop: '1em'
+    marginTop: '1em',
   },
   actions: {
     flexWrap: 'wrap',
     justifyContent: 'center',
-    height: 45
-  }
+    height: 45,
+  },
 }))
 
 const Course = ({ classes, courses }) => {
-  return courses.map(course => {
+  return courses.map((course) => {
     return (
       <div className={classes.courseContainer} key={course.crn}>
         <div className={classes.container}>
@@ -91,10 +91,10 @@ const Course = ({ classes, courses }) => {
 
 export default function Courses() {
   const classes = useStyles()
-  const courses = useSelector(state => state.courses)
-  const courses_fetching = useSelector(state => state.fetching)
-  const courses_error = useSelector(state => state.error)
-  const courses_fetched = useSelector(state => state.fetched)
+  const courses = useSelector((state) => state.courses)
+  const courses_fetching = useSelector((state) => state.fetching)
+  const courses_error = useSelector((state) => state.error)
+  const courses_fetched = useSelector((state) => state.fetched)
 
   if (courses_fetched && !courses_error) {
     return (

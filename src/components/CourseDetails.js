@@ -13,24 +13,24 @@ import Slide from '@material-ui/core/Slide'
 import Typography from '@material-ui/core/Typography'
 import { makeStyles } from '@material-ui/styles'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   dialogHeader: {
     backgroundColor: theme.palette.primary.light,
-    padding: 16
+    padding: 16,
   },
   dialogHeaderWaitList: {
     backgroundColor: amber[200],
-    padding: 16
+    padding: 16,
   },
   dialogContent: {
     backgroundColor: '#fafafa',
     background: '#E8EAEE',
-    padding: 5
+    padding: 5,
   },
   title: {
     fontWeight: 600,
-    paddingTop: 3
-  }
+    paddingTop: 3,
+  },
 }))
 
 const Transition = React.forwardRef(function Transition(props, ref) {

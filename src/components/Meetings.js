@@ -9,25 +9,25 @@ import Typography from '@material-ui/core/Typography'
 import { displayLink, getMapUrl } from '../utils/mapLinks'
 import { makeStyles } from '@material-ui/styles'
 
-const useStyles = makeStyles(theme => ({
+const useStyles = makeStyles((theme) => ({
   expand: {
     transform: 'rotate(0deg)',
     transition: theme.transitions.create('transform', {
-      duration: theme.transitions.duration.shortest
-    })
+      duration: theme.transitions.duration.shortest,
+    }),
   },
   expandOpen: {
-    transform: 'rotate(180deg)'
+    transform: 'rotate(180deg)',
   },
   flexGrow: {
-    flex: '1 1 auto'
+    flex: '1 1 auto',
   },
   iconButtonDiv: {
     display: 'flex',
-    justifyContent: 'space-between'
+    justifyContent: 'space-between',
   },
   icon: {
-    alignSelf: 'center'
+    alignSelf: 'center',
   },
   meet: {
     color: 'black',
@@ -148,7 +148,7 @@ export default function Meetings(props) {
               <IconButton
                 aria-label={expanded ? 'Close more meetings' : 'Open more meetings'}
                 className={classnames(classes.expand, {
-                  [classes.expandOpen]: expanded
+                  [classes.expandOpen]: expanded,
                 })}
                 onClick={() => setExpanded(!expanded)}
               >

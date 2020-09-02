@@ -15,8 +15,8 @@ export const get_courses = async (term, url) => {
       method: 'GET',
       headers: {
         Accept: 'application/json',
-        Authorization: 'Bearer ' + token
-      }
+        Authorization: 'Bearer ' + token,
+      },
     })
 
     const data = await response.json()
@@ -37,8 +37,8 @@ export const get_events = async (term, url) => {
       method: 'GET',
       headers: {
         Accept: 'application/json',
-        Authorization: 'Bearer ' + token
-      }
+        Authorization: 'Bearer ' + token,
+      },
     })
 
     const data = await response.json()
@@ -59,14 +59,14 @@ export const generate_pdf = async (term_code) => {
       method: 'GET',
       headers: {
         Accept: 'application/pdf',
-        Authorization: 'Bearer ' + token
-      }
+        Authorization: 'Bearer ' + token,
+      },
     })
 
     await response.body
       .getReader()
       .read()
-      .then(data => {
+      .then((data) => {
         const blob = new Blob([data.value], { type: 'application/pdf' })
         const link = document.createElement('a')
         link.href = window.URL.createObjectURL(blob)

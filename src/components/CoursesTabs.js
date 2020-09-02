@@ -23,7 +23,7 @@ import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useTheme } from '@material-ui/core'
 
-const TabContainer = props => <div style={{ padding: 20 }}>{props.children}</div>
+const TabContainer = (props) => <div style={{ padding: 20 }}>{props.children}</div>
 
 TabContainer.propTypes = {
   children: PropTypes.node.isRequired,
@@ -35,8 +35,8 @@ const useStyles = makeStyles(() => ({
   },
   tab: {
     '@media (min-width: 1024px)': {
-      minWidth: 72
-    }
+      minWidth: 72,
+    },
   },
   flex: {
     flex: 1,
@@ -45,18 +45,18 @@ const useStyles = makeStyles(() => ({
     color: '#FFFFFF',
   },
   bar: {
-    flexDirection: 'column'
+    flexDirection: 'column',
   },
   btnContainer: {
-    display: 'flex'
-  }
+    display: 'flex',
+  },
 }))
 
 export default function CoursesTabs() {
   const [value, setValue] = useState(0)
-  const courses = useSelector(state => state.courses)
-  const books = useSelector(state => state.books)
-  const selected_term = useSelector(state => state.selected_term)
+  const courses = useSelector((state) => state.courses)
+  const books = useSelector((state) => state.books)
+  const selected_term = useSelector((state) => state.selected_term)
   const classes = useStyles()
   const theme = useTheme()
   const mobile = useMediaQuery(theme.breakpoints.down('xs'))

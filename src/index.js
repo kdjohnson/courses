@@ -11,7 +11,7 @@ const project_name = 'courses-soffit'
 
 const theme = createMuiTheme({
   typography: {
-    useNextVariants: true
+    useNextVariants: true,
   },
   palette: {
     primary: {
@@ -24,14 +24,14 @@ const theme = createMuiTheme({
       light: '#56a2ea',
       main: '#0074b7',
       dark: '#004987',
-      contrastText: '#fff'
-    }
-  }
+      contrastText: '#fff',
+    },
+  },
 })
 
 const generateClassName = createGenerateClassName({
   productionPrefix: project_name,
-  disableGlobal: true
+  disableGlobal: true,
 })
 
 ReactDOM.render(
