@@ -1,5 +1,3 @@
-/* global is_demo */
-
 import { get_courses } from '../api/api'
 
 const courses_url = '/v1/courses/'
