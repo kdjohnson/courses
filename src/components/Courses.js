@@ -96,7 +96,7 @@ export default function Courses() {
   const courses_error = useSelector((state) => state.error)
   const courses_fetched = useSelector((state) => state.fetched)
 
-  if (courses_fetched && !courses_error) {
+  if (courses_fetched && !courses_error && courses.length !== 0) {
     return (
       <div className={classes.root}>
         <Course courses={courses} classes={classes} />
@@ -114,9 +114,9 @@ export default function Courses() {
         <CircularProgress color='secondary' size={50} />
       </div>
     )
-  } else {
+  } else if (courses.length === 0) {
     return (
-      <Typography variant='h3' className={classes.empty} tabIndex='0'>
+      <Typography className={classes.empty} tabIndex='0'>
         You currently have no courses for this semester.
       </Typography>
     )

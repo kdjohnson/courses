@@ -105,7 +105,6 @@ const Meeting = ({ classes, meetings }) => {
           variant='body1'
           className={classes.meet}
           tabIndex='0'
-          key={meeting.endDate + Math.random()}
         >
           {`${meeting.startTime} - ${meeting.endTime}`}
         </Typography>

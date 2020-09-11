@@ -57,6 +57,8 @@ export default function CoursesTabs() {
   const courses = useSelector((state) => state.courses)
   const books = useSelector((state) => state.books)
   const selected_term = useSelector((state) => state.selected_term)
+  const courses_fetched = useSelector((state) => state.fetched)
+  const courses_error = useSelector((state) => state.error)
   const classes = useStyles()
   const theme = useTheme()
   const mobile = useMediaQuery(theme.breakpoints.down('xs'))
@@ -126,10 +128,12 @@ export default function CoursesTabs() {
       </AppBar>
       {value === 0 && (
         <TabContainer>
+          {(courses_fetched && !courses_error && courses.length !== 0) && (
           <div className={classes.btnContainer}>
             <BuyBooks books={books} />
             <PrintCourses courses={courses} selected_term={selected_term} />
           </div>
+          )}
           <Courses tabIndex='0' mobile={mobile} />
         </TabContainer>
       )}

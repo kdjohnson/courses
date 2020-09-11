@@ -82,7 +82,7 @@ const Grades = (props) => {
         <ErrorMessages />
       </div>
     )
-  } else if (courses.length === 0 && credits.length === 0) {
+  } else if (courses.length === 0) {
     return <Typography className={classes.empty}>No data to display</Typography>
   } else {
     return (

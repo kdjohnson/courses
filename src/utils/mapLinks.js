@@ -1,18 +1,15 @@
 export const displayLink = (room, campus) => {
   if (room !== undefined) {
-    if (
-      campus === 'Internet' ||
-      campus === 'Off-Campus - Domestic' ||
-      campus === 'Macomb' ||
-      campus === 'Mt. Clemens' ||
-      room.trim() === 'N/A'
-    ) {
-      return false
-    } else {
-      return true
-    }
+    return (
+      campus !== 'Internet' &&
+      campus !== 'Off-Campus - Domestic' &&
+      campus !== 'Macomb' &&
+      campus !== 'Mt. Clemens' &&
+      room.trim() !== 'N/A'
+    )
   }
 }
+
 export const getMapUrl = (location, instructor) => {
   if (instructor) {
     location = location.substring(location.indexOf(' '), location.length)
