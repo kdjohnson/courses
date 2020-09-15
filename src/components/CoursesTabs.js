@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState } from 'react'
 
 import AppBar from '@material-ui/core/AppBar'
 import Assignment from '@material-ui/icons/Assignment'
@@ -16,10 +16,7 @@ import Tabs from '@material-ui/core/Tabs'
 import TermSelect from './TermSelect'
 import Toolbar from '@material-ui/core/Toolbar'
 import useMediaQuery from '@material-ui/core/useMediaQuery'
-import { fetch_events } from '../actions/eventsActions'
-import { fetch_selected_courses } from '../actions/termActions'
 import { makeStyles } from '@material-ui/styles'
-import { useDispatch } from 'react-redux'
 import { useSelector } from 'react-redux'
 import { useTheme } from '@material-ui/core'
 
@@ -62,17 +59,6 @@ export default function CoursesTabs() {
   const classes = useStyles()
   const theme = useTheme()
   const mobile = useMediaQuery(theme.breakpoints.down('xs'))
-  const [term, set_term] = useState(null)
-  const dispatch = useDispatch()
-
-  useEffect(() => {
-    if (term === null) {
-      set_term(selected_term)
-    } else {
-      dispatch(fetch_selected_courses(selected_term))
-      dispatch(fetch_events(selected_term.code))
-    }
-  }, [selected_term, dispatch])
 
   return (
     <Paper>

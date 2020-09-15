@@ -38,6 +38,7 @@ const useStyles = makeStyles(() => ({
     display: 'flex',
     justifyContent: 'center',
     flex: 1,
+    alignItems: 'center'
   },
   empty: {
     textAlign: 'center',

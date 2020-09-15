@@ -57,26 +57,8 @@ const useStyles = makeStyles((theme) => ({
   },
 }))
 
-const NoMeeting = ({ classes }) => {
-  return (
-    <div className={classes.meetBorder}>
-      <Typography variant='body1' className={classes.meetNoLink} tabIndex='0'>
-        N/A
-      </Typography>
-      <Typography variant='body1' className={classes.meet} tabIndex='0'>
-        N/A
-      </Typography>
-      <Typography variant='body1' className={classes.meet} tabIndex='0'>
-        N/A
-      </Typography>
-      <Typography variant='body1' className={classes.meet} tabIndex='0'>
-        N/A
-      </Typography>
-      <Typography variant='body1' className={classes.meet} tabIndex='0'>
-        N/A
-      </Typography>
-    </div>
-  )
+const NoMeeting = () => {
+  return <Typography>No meeting data to display</Typography>
 }
 
 const Meeting = ({ classes, meetings }) => {
