@@ -21,7 +21,7 @@ export default function PrintCourses(props) {
   const { selected_term } = props
 
   const handleClick = () => {
-    generate_pdf(false, selected_term.code)
+    generate_pdf(selected_term.code)
   }
 
   return (

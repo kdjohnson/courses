@@ -2,7 +2,7 @@
     "courses": [
         {
             "crn": "43069",
-            "waitlist": "0",
+            "waitlist": "1",
             "registrationStatus": "RW",
             "registrationStatusDescription": "Web Register",
             "departmentCode": "CSI",
@@ -84,7 +84,7 @@
         },
         {
             "crn": "45049",
-            "waitlist": "1",
+            "waitlist": "0",
             "registrationStatus": "RW",
             "registrationStatusDescription": "Web Register",
             "departmentCode": "HC",
@@ -213,15 +213,7 @@
                     "endWeekOfMonth": 3
                 }
             ],
-            "instructors": [
-                {
-                    "crn": "42896",
-                    "firstName": "Genji",
-                    "lastName": "Chu",
-                    "office": "522 EC",
-                    "email": "genjichu@email.test"
-                }
-            ]
+            "instructors": []
         },
         {
             "crn": "45367",
@@ -281,7 +273,7 @@
         },
         {
             "crn": "43064",
-            "waitlist": "1",
+            "waitlist": "0",
             "registrationStatus": "RW",
             "registrationStatusDescription": "Web Register",
             "departmentCode": "CSI",

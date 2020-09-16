@@ -1,6 +1,6 @@
 const initial_state = {
   books: '',
-  credits: null,
+  credits: [],
   terms: [],
   courses: [],
   fetching: false,

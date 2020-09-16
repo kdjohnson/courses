@@ -1,9 +1,10 @@
 /* global token */
+/* global is_demo */
 
 import courses from './courses.json'
 import events from './events.json'
 
-export const get_courses = async (is_demo, term, url) => {
+export const get_courses = async (term, url) => {
   if (is_demo) {
     return courses
   }
@@ -25,7 +26,7 @@ export const get_courses = async (is_demo, term, url) => {
   }
 }
 
-export const get_events = async (is_demo, term, url) => {
+export const get_events = async (term, url) => {
   if (is_demo) {
     return events
   }
@@ -47,7 +48,7 @@ export const get_events = async (is_demo, term, url) => {
   }
 }
 
-export const generate_pdf = async (is_demo, term_code) => {
+export const generate_pdf = async (term_code) => {
   if (is_demo) {
     return
   }

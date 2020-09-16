@@ -4,10 +4,9 @@ import BookIcon from '@material-ui/icons/ImportContacts'
 import Button from '@material-ui/core/Button'
 import { makeStyles } from '@material-ui/core/styles'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   button: {
     paddingTop: 10,
-    marginLeft: '1em',
   },
   icon: {
     paddingLeft: 5,

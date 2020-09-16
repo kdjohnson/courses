@@ -7,26 +7,38 @@ import CircularProgress from '@material-ui/core/CircularProgress'
 import CourseDetails from './CourseDetails'
 import CourseHeader from './CourseHeader'
 import ErrorMessages from './ErrorMessages'
-import ExpandableCourse from './ExpandableCourse'
 import Instructors from './Instructors'
 import Meetings from './Meetings'
 import Typography from '@material-ui/core/Typography'
-import WaitlistCourse from './WaitlistCourse'
 import { makeStyles } from '@material-ui/styles'
 import { useSelector } from 'react-redux'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
+  root: {
+    display: 'flex',
+    marginTop: 10,
+    justifyContent: 'center',
+    flexWrap: 'wrap',
+  },
   courseContainer: {
     flex: '1 1 auto',
-    padding: '1em',
+    paddingLeft: '1em',
+    paddingRight: '1em',
   },
   card: {
     backgroundColor: '#fafafa',
+    minHeight: 336,
+    display: 'flex',
+    justifyContent: 'center',
+    flexDirection: 'column',
+    minWidth: 290,
   },
   content: {
     paddingTop: 0,
     display: 'flex',
     justifyContent: 'center',
+    flex: 1,
+    alignItems: 'center'
   },
   empty: {
     textAlign: 'center',
@@ -41,88 +53,73 @@ const useStyles = makeStyles((theme) => ({
     justifyContent: 'center',
   },
   container: {
+    marginTop: '2em',
+  },
+  waitlistContainer: {
     marginTop: '1em',
   },
   actions: {
     flexWrap: 'wrap',
     justifyContent: 'center',
+    height: 45,
   },
 }))
 
-export default function Courses(props) {
-  const classes = useStyles()
-  const courses = useSelector((state) => state.courses)
-  const courses_fetched = useSelector((state) => state.fetched)
-  const courses_fetching = useSelector((state) => state.fetching)
-  const courses_error = useSelector((state) => state.error)
-
-  if (courses_fetching === true) {
+const Course = ({ classes, courses }) => {
+  return courses.map((course) => {
     return (
-      <div className={classes.loading}>
-        <CircularProgress color='secondary' size={50} />
+      <div className={classes.courseContainer} key={course.crn}>
+        <div className={classes.container}>
+          <Card className={classes.card}>
+            <CourseHeader course={course} />
+            <CardContent className={classes.content}>
+              <div
+                className={course.waitlist === '0' ? classes.container : classes.waitlistContainer}
+              >
+                <Meetings meetings={course.meetings} />
+              </div>
+            </CardContent>
+            <CardActions className={classes.actions}>
+              <CourseDetails course={course} />
+              <Instructors instructors={course.instructors} />
+            </CardActions>
+          </Card>
+        </div>
       </div>
     )
-  } else if (courses_fetched === true && courses_error === true) {
+  })
+}
+
+export default function Courses() {
+  const classes = useStyles()
+  const courses = useSelector((state) => state.courses)
+  const courses_fetching = useSelector((state) => state.fetching)
+  const courses_error = useSelector((state) => state.error)
+  const courses_fetched = useSelector((state) => state.fetched)
+
+  if (courses_fetched && !courses_error && courses.length !== 0) {
+    return (
+      <div className={classes.root}>
+        <Course courses={courses} classes={classes} />
+      </div>
+    )
+  } else if (courses_fetched && courses_error) {
     return (
       <div className={classes.error}>
         <ErrorMessages />
       </div>
     )
-  } else if (courses === null || courses === []) {
+  } else if (courses_fetching) {
     return (
-      <Typography variant='h3' className={classes.empty} tabIndex='0'>
+      <div className={classes.loading}>
+        <CircularProgress color='secondary' size={50} />
+      </div>
+    )
+  } else if (courses.length === 0) {
+    return (
+      <Typography className={classes.empty} tabIndex='0'>
         You currently have no courses for this semester.
       </Typography>
     )
-  } else {
-    let elements = []
-    for (let [i, course] of courses.entries()) {
-      if (course.meetings.length > 1 || course.instructors.length > 1) {
-        elements.push(
-          <ExpandableCourse
-            course={course}
-            key={'expandable' + Math.random()}
-          />
-        )
-      } else if (!Object.is(course.waitlist, '0')) {
-        elements.push(
-          <WaitlistCourse course={course} key={'waitlist' + Math.random()} />
-        )
-      } else {
-        elements.push(
-          <div className={classes.courseContainer} key={course.crn}>
-            <div className={classes.container}>
-              <Card
-                className={classes.card}
-                key={course.crn + i + Math.random()}
-              >
-                <CourseHeader course={course} />
-                <CardContent
-                  className={classes.content}
-                  key={course.crn + i + Math.random()}
-                >
-                  <div>
-                    <div
-                      className={classes.container}
-                      key={course.crn + i + Math.random()}
-                    >
-                      <Meetings meetings={course.meetings} />
-                    </div>
-                  </div>
-                </CardContent>
-                <CardActions
-                  key={course.crn + i + Math.random()}
-                  className={classes.actions}
-                >
-                  <CourseDetails course={course} />
-                  <Instructors teachers={course.instructors} />
-                </CardActions>
-              </Card>
-            </div>
-          </div>
-        )
-      }
-    }
-    return <div>{elements}</div>
   }
 }

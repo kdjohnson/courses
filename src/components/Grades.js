@@ -27,11 +27,7 @@ const useStyles = makeStyles((theme) => ({
   classHeaderSpan: {
     fontWeight: 600,
     color: 'rgba(0, 0, 0, 0.75)',
-    fontSize: 20,
-  },
-  content: {
-    paddingTop: 0,
-    overflowX: 'scroll',
+    fontSize: 16,
   },
   tableCell: {
     color: 'rgba(0, 0, 0, 1)',
@@ -39,94 +35,88 @@ const useStyles = makeStyles((theme) => ({
     fontSize: 14,
     width: '33%',
   },
+  empty: {
+    textAlign: 'center',
+  },
+  mobile: {
+    overflowX: 'scroll',
+  },
 }))
 
-const GradeRow = (courses) => {
-  try {
-    let tableArray = []
-    for (let i = 0; i < courses.length; i++) {
-      let course = courses[i].subjectCode + ' - ' + courses[i].subjectNumber
-      let credits = courses[i].grade.credit
-      let grade = courses[i].grade.grade
-
-      tableArray.push(
-        <TableRow key={i + Math.random()}>
-          <TableCell>{course}</TableCell>
-          <TableCell>{credits}</TableCell>
-          <TableCell>{grade}</TableCell>
-        </TableRow>
-      )
-    }
-    return tableArray
-  } catch (error) {
-    return <TableRow />
-  }
-}
-
-const getOverallCredits = (credits) => {
-  let rows = []
-  let i = 0
-  for (let cr of credits) {
-    rows.push(
-      <TableRow key={i++}>
-        <TableCell>{cr.standing}</TableCell>
-        <TableCell>{cr.credits}</TableCell>
-        <TableCell>{cr.gpa}</TableCell>
+const CourseGrades = ({ courses }) => {
+  return courses.map((course, i) => {
+    return (
+      <TableRow key={i}>
+        <TableCell>
+          {course.subjectCode} - {course.subjectNumber}
+        </TableCell>
+        <TableCell>{course.grade.credit}</TableCell>
+        <TableCell>{course.grade.grade}</TableCell>
       </TableRow>
     )
-  }
-  return rows
+  })
+}
+
+const Credits = ({ credits }) => {
+  return credits.map((credit, i) => {
+    return (
+      <TableRow key={i}>
+        <TableCell>{credit.standing}</TableCell>
+        <TableCell>{credit.credits}</TableCell>
+        <TableCell>{credit.gpa}</TableCell>
+      </TableRow>
+    )
+  })
 }
 
 const Grades = (props) => {
   const classes = useStyles()
-  const { mobile } = props
   const credits = useSelector((state) => state.credits)
   const courses = useSelector((state) => state.courses)
-  const courses_fetched = useSelector((state) => state.fetched)
   const courses_error = useSelector((state) => state.error)
+  const { mobile } = props
 
-  if (courses_error || credits.length === 0) {
+  if (courses_error) {
     return (
       <div className={classes.error}>
         <ErrorMessages />
       </div>
     )
-  }
-
-  if (credits !== []) {
+  } else if (courses.length === 0) {
+    return <Typography className={classes.empty}>No data to display</Typography>
+  } else {
     return (
       <Card className={classes.card}>
         <CardHeader
           className={classes.classHeader}
           title={
-            <Typography
-              tabIndex='0'
-              variant='h1'
-              className={classes.classHeaderSpan}
-            >
+            <Typography tabIndex='0' className={classes.classHeaderSpan}>
               Grades and Credits
             </Typography>
           }
         />
-        <CardContent className={mobile ? classes.content : null}>
-          <Table>
-            <TableHead>
-              <TableRow>
-                <TableCell className={classes.tableCell} scope='col'>
-                  Level
-                </TableCell>
-                <TableCell className={classes.tableCell} scope='col'>
-                  Grades
-                </TableCell>
-                <TableCell className={classes.tableCell} scope='col'>
-                  GPA
-                </TableCell>
-              </TableRow>
-            </TableHead>
-            <TableBody>{getOverallCredits(credits)}</TableBody>
-          </Table>
-          {courses_fetched && (
+        <CardContent className={mobile ? classes.mobile : null}>
+          {credits.length !== 0 && (
+            <Table>
+              <TableHead>
+                <TableRow>
+                  <TableCell className={classes.tableCell} scope='col'>
+                    Level
+                  </TableCell>
+                  <TableCell className={classes.tableCell} scope='col'>
+                    Grades
+                  </TableCell>
+                  <TableCell className={classes.tableCell} scope='col'>
+                    GPA
+                  </TableCell>
+                </TableRow>
+              </TableHead>
+              <TableBody>
+                <Credits credits={credits} />
+              </TableBody>
+            </Table>
+          )}
+          {courses.length !== 0 && (
             <Table>
               <TableHead>
                 <TableRow>
@@ -141,14 +131,14 @@ const Grades = (props) => {
                   </TableCell>
                 </TableRow>
               </TableHead>
-              <TableBody>{GradeRow(courses)}</TableBody>
+              <TableBody>
+                <CourseGrades courses={courses} />
+              </TableBody>
             </Table>
           )}
         </CardContent>
       </Card>
     )
-  } else {
-    return <div />
   }
 }
 

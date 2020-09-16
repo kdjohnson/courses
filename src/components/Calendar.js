@@ -13,7 +13,7 @@ import { makeStyles } from '@material-ui/styles'
 import { useSelector } from 'react-redux'
 import '../Calendar.css'
 
-const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles(() => ({
   root: {
     padding: '10px 20px 20px 20px',
     fontFamily: 'Arimo',
@@ -31,6 +31,9 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 'bolder',
     paddingBottom: 5,
   },
+  empty: {
+    textAlign: 'center',
+  },
 }))
 
 export default function Calendar(props) {
@@ -47,12 +50,14 @@ export default function Calendar(props) {
   const initialView = mobile ? 'listWeek' : 'timeGridWeek'
   const open = Boolean(anchor)
 
-  if (events.length === 0 || events_error) {
+  if (events_error) {
     return (
       <div className={classes.error}>
         <ErrorMessages />
       </div>
     )
+  } else if (events.length === 0) {
+    return <Typography className={classes.empty}>No events to display</Typography>
   }
 
   return (
@@ -112,13 +117,10 @@ export default function Calendar(props) {
           eventClick={(info) => {
             set_data(
               <div className={classes.popover}>
-                <Typography className={classes.title}>
-                  {info.event.title}
-                </Typography>
+                <Typography className={classes.title}>{info.event.title}</Typography>
                 <Typography>{info.event.extendedProps.desc}</Typography>
                 <Typography>
-                  {info.event.extendedProps.startTime} -
-                  {info.event.extendedProps.endTime}
+                  {info.event.extendedProps.startTime} -{info.event.extendedProps.endTime}
                 </Typography>
                 <Typography>{info.event.extendedProps.location}</Typography>
               </div>
