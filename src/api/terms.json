@@ -1,0 +1,74 @@
+{
+    "terms": [
+        {
+            "description": "Winter Semester 2021",
+            "code": "202110",
+            "start": "2021-01-06T05:00:00.000+0000",
+            "end": "2021-04-27T04:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Fall Semester 2020",
+            "code": "202040",
+            "start": "2020-09-03T04:00:00.000+0000",
+            "end": "2020-12-15T05:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Winter Semester 2020",
+            "code": "202010",
+            "start": "2020-01-06T05:00:00.000+0000",
+            "end": "2020-04-25T04:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Fall Semester 2019",
+            "code": "201940",
+            "start": "2019-09-04T04:00:00.000+0000",
+            "end": "2019-12-14T05:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Summer Semester 2019",
+            "code": "201930",
+            "start": "2019-05-06T04:00:00.000+0000",
+            "end": "2019-08-24T04:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Winter Semester 2019",
+            "code": "201910",
+            "start": "2019-01-03T05:00:00.000+0000",
+            "end": "2019-04-24T04:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Fall Semester 2018",
+            "code": "201840",
+            "start": "2018-09-05T04:00:00.000+0000",
+            "end": "2018-12-15T05:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Summer Semester 2018",
+            "code": "201830",
+            "start": "2018-05-07T04:00:00.000+0000",
+            "end": "2018-08-25T04:00:00.000+0000",
+            "current": false
+        },
+        {
+            "description": "Winter Semester 2018",
+            "code": "201810",
+            "start": "2018-01-03T05:00:00.000+0000",
+            "end": "2018-04-25T04:00:00.000+0000",
+            "current": true
+        },
+        {
+            "description": "Fall Semester 2017",
+            "code": "201740",
+            "start": "2017-09-06T04:00:00.000+0000",
+            "end": "2017-12-16T05:00:00.000+0000",
+            "current": false
+        }
+    ]
+}
