@@ -21,12 +21,12 @@ export interface Credit {
 
 export interface Grade {
     credit: number,
-    grade: string,
+    grade: number,
     crn: number
 }
 
 export interface Meeting {
-    crn: string,
+    crn: number,
     startDate: string,
     endDate: string,
     startTime: string,
@@ -53,7 +53,7 @@ export interface Meeting {
 }
 
 export interface Instructor {
-    crn: string,
+    crn: number,
     firstName: string,
     lastName: string,
     office: string,
@@ -69,7 +69,7 @@ export interface Term {
 }
 
 export interface Course {
-    crn: string,
+    crn: number,
     waitlist: number,
     registrationStatus: RegistrationStatus,
     registrationStatusDescription: string,
@@ -114,7 +114,7 @@ export interface Event {
     endTime: string,
     title: string,
     color: string,
-    crn: string,
+    crn: number,
     daysOfWeek: number[],
     extendedProps: EventExtendedProps[]
 }
@@ -131,7 +131,7 @@ export interface CoursesRequestBody {
 }
 
 export interface EventsResponseBody {
-   events: Event[] 
+    events: Event[]
 }
 
 export interface TermsResponseBody {
@@ -139,4 +139,12 @@ export interface TermsResponseBody {
     terms: Term[],
     books: string,
     credits: Credit[]
+}
+
+export interface CurrentTermResponse {
+    current_term: number
+}
+
+export interface TermsResponse {
+    terms: Term[]
 }

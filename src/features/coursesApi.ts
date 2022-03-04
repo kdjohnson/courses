@@ -2,14 +2,14 @@ import { createApi, fetchBaseQuery } from '@reduxjs/toolkit/query/react'
 
 import { EventsResponseBody, TermsResponseBody } from "../types";
 
-export const dataApi = createApi({
-    reducerPath: 'youtube',
+export const coursesApi = createApi({
+    reducerPath: 'coursesApi',
     baseQuery: fetchBaseQuery({
-        baseUrl: 'http://localhost:8080/api/v1/'
+        baseUrl: 'http://localhost:5000/api/v1/'
     }),
 
     endpoints: (builder) => ({
-        getData: builder.query<TermsResponseBody, number | void>({
+        getCourses: builder.query<TermsResponseBody, number | void>({
             query: (termCode) => `courses/${termCode}`
         }),
 
@@ -20,4 +20,4 @@ export const dataApi = createApi({
 })
 
 // auto-generated based on the defined endpoints
-export const { useGetDataQuery, useGetEventsQuery } = dataApi
+export const { useGetCoursesQuery, useGetEventsQuery } = coursesApi

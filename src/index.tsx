@@ -1,13 +1,13 @@
-import React from 'react'
-import ReactDOM from 'react-dom'
-import 'typeface-arimo'
-import App from './App'
-import { store } from './store'
-import { StylesProvider, createGenerateClassName } from '@material-ui/core/styles'
-import { MuiThemeProvider, createTheme } from '@material-ui/core/styles'
-import { Provider } from 'react-redux'
+import React from 'react';
+import ReactDOM from 'react-dom';
+import 'typeface-arimo';
+import App from './App';
+import { store } from './store';
+import { StylesProvider, createGenerateClassName } from '@material-ui/core/styles';
+import { MuiThemeProvider, createTheme } from '@material-ui/core/styles';
+import { Provider } from 'react-redux';
 
-const project_name = 'courses-soffit'
+const project_name = 'courses-soffit';
 
 const theme = createTheme({
   palette: {
@@ -24,12 +24,12 @@ const theme = createTheme({
       contrastText: '#fff',
     },
   },
-})
+});
 
 const generateClassName = createGenerateClassName({
   productionPrefix: project_name,
   disableGlobal: true,
-})
+});
 
 ReactDOM.render(
   <StylesProvider generateClassName={generateClassName}>
@@ -40,4 +40,4 @@ ReactDOM.render(
     </MuiThemeProvider>
   </StylesProvider>,
   document.getElementById(project_name)
-)
+);

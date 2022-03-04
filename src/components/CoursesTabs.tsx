@@ -19,7 +19,7 @@ import useMediaQuery from '@material-ui/core/useMediaQuery';
 import { makeStyles } from '@material-ui/core/styles';
 import { CircularProgress, useTheme } from '@material-ui/core';
 
-import { useGetDataQuery } from '../api/dataApi';
+import { useGetCoursesQuery } from '../features/coursesApi';
 import ErrorMessages from './ErrorMessages';
 
 const useStyles = makeStyles(() => ({
@@ -55,7 +55,7 @@ export default function CoursesTabs() {
   const [value, setValue] = useState(0);
   const { code, start, end } = useAppSelector((state) => state.selectedTerm);
 
-  const { data, isFetching, isError } = useGetDataQuery(code);
+  const { data, isFetching, isError } = useGetCoursesQuery(code);
 
   const classes = useStyles();
   const theme = useTheme();

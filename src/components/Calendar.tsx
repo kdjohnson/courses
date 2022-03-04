@@ -1,5 +1,4 @@
 import React, { useRef, useState } from 'react';
-import type { RootState } from './../store';
 
 // This needs to be imported before any plugins
 import FullCalendar from '@fullcalendar/react';
@@ -12,7 +11,7 @@ import timeGridPlugin from '@fullcalendar/timegrid';
 import Typography from '@material-ui/core/Typography';
 import { makeStyles } from '@material-ui/core/styles';
 import '../Calendar.css';
-import { useGetEventsQuery } from '../api/dataApi';
+import { useGetEventsQuery } from '../features/coursesApi';
 import { CircularProgress } from '@material-ui/core';
 
 interface CalendarProps {
@@ -53,12 +52,9 @@ const useStyles = makeStyles(() => ({
 export default function Calendar(props: CalendarProps) {
   const classes = useStyles();
 
-  const [calData, setCalData] = useState(<></>);
-  const [anchorEl, setAnchorEl] = useState<HTMLButtonElement | null>(null);
+  const [_, setCalData] = useState(<></>);
+  const [anchorEl, setAnchorEl] = React.useState<HTMLDivElement | null>(null);
   const ref = useRef<HTMLDivElement>(null);
-  const handleClick = (event: React.MouseEvent<HTMLButtonElement>) => {
-    setAnchorEl(event.currentTarget);
-  };
 
   const handleClose = () => {
     setAnchorEl(null);
@@ -87,8 +83,6 @@ export default function Calendar(props: CalendarProps) {
       </div>
     );
   }
-
-    console.log(data.events)
 
   return (
     <>
@@ -155,7 +149,7 @@ export default function Calendar(props: CalendarProps) {
                 <Typography>{info.event.extendedProps.location}</Typography>
               </div>
             );
-            // setAnchorEl(ref.current);
+            setAnchorEl(ref.current);
           }}
           validRange={{
             start: start,

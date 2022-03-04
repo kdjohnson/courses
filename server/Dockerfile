@@ -1,32 +1,12 @@
-FROM golang:1.16-alpine
+# syntax=docker/dockerfile:1
 
-# Set destination for COPY
+FROM python:3.8-slim-buster
+
 WORKDIR /app
 
-# Download Go modules
-COPY ou.pdf .
-COPY events.json .
-COPY go.mod .
-COPY go.sum .
-RUN go mod download
+COPY requirements.txt requirements.txt
+RUN pip3 install -r requirements.txt
 
-# Copy the source code. Note the slash at the end, as explained in
-# https://docs.docker.com/engine/reference/builder/#copy
-COPY *.go ./
+COPY . .
 
-# Build
-RUN go build -o /courses-server
-
-# This is for documentation purposes only.
-# To actually open the port, runtime parameters
-# must be supplied to the docker command.
-EXPOSE 8080
-
-# (Optional) environment variable that our dockerised
-# application can make use of. The value of environment
-# variables can also be set via parameters supplied
-# to the docker command on the command line.
-#ENV HTTP_PORT=8081
-
-# Run
-CMD [ "/courses-server" ]
+CMD [ "python3", "-m" , "flask", "run", "--host=0.0.0.0"]

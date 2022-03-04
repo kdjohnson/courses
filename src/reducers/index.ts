@@ -1,10 +1,10 @@
 import { combineReducers } from '@reduxjs/toolkit'
-import { dataApi } from '../api/dataApi'
+import { coursesApi } from '../features/coursesApi'
 import selectedTermSlice from './selectedTermSlice'
 
 const rootReducer = combineReducers({
+    [coursesApi.reducerPath]: coursesApi.reducer,
     selectedTerm: selectedTermSlice,
-    [dataApi.reducerPath]: dataApi.reducer,
 })
 
 export default rootReducer

@@ -1,28 +1,6 @@
-version: "3.9"
-services:
-  web:
-    image: alpine:latest
-    init: true
 version: '3.9'
 services:
   web:
     build: ./server/
-    depends_on: 
-      - postgres
     ports:
-      - '8080:8080'
-    environment:
-      - POSTGRES_DB=${COURSES_DB_NAME}
-      - POSTGRES_USER=${COURSES_DB_USERNAME}
-      - POSTGRES_PASSWORD=${COURSES_DB_PASSWORD}
-  postgres:
-    container_name: courses-db
-    image: 'postgres'
-    ports:
-      - "5432:5432"
-    volumes:
-      - ./init.sql:/docker-entrypoint-initdb.d/init.sql
-    environment:
-      - POSTGRES_DB=${COURSES_DB_NAME}
-      - POSTGRES_USER=${COURSES_DB_USERNAME}
-      - POSTGRES_PASSWORD=${COURSES_DB_PASSWORD}
+      - '5000:5000'

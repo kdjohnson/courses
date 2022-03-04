@@ -12,7 +12,7 @@ const useStyles = makeStyles(() => ({
     marginTop: -6,
   },
   button: {
-    paddingTop: 10,
+    marginTop: 10.5,
     marginLeft: '1em',
   },
 }));
@@ -22,7 +22,6 @@ export default function PrintCourses() {
   const { code } = useAppSelector((state) => state.selectedTerm);
 
   const handleClick = () => {
-    console.log(code);
     generate_pdf(code);
   };
 

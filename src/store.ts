@@ -1,7 +1,6 @@
 import { configureStore } from '@reduxjs/toolkit'
 import { setupListeners } from '@reduxjs/toolkit/query'
-import { coursesApi } from './services/coursesApi'
-
+import { coursesApi } from './features/coursesApi'
 import logger from 'redux-logger'
 import reducer from './reducers'
 import thunk from 'redux-thunk'
@@ -10,12 +9,9 @@ export const store = configureStore({
     reducer: reducer,
     middleware: (getDefaultMiddleware) => {
         if (process.env.NODE_ENV === 'production') {
-            getDefaultMiddleware().concat(coursesApi.middleware);
-            return getDefaultMiddleware().concat(thunk);
+            return getDefaultMiddleware().concat(coursesApi.middleware).concat(thunk)
         } else {
-            getDefaultMiddleware().concat(coursesApi.middleware);
-            getDefaultMiddleware().concat(thunk);
-            return getDefaultMiddleware().concat(logger);
+            return getDefaultMiddleware().concat(coursesApi.middleware).concat(thunk).concat(logger)
         }
     }
 })

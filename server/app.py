@@ -1,8 +1,28 @@
-{
-    "courses": [
+from flask import Flask, send_file
+from flask_cors import CORS
+
+app = Flask(__name__)
+CORS(app, supports_credentials=True)
+
+
+@app.route('/api/v1/courses/<term_code>/pdf')
+def pdf(term_code):
+    return send_file('ou.pdf')
+
+
+@app.route('/api/v1/courses/<int:term_code>')
+def courses(term_code):
+    if term_code == 0:
+        # default to current term
+        code = 202210
+    else:
+        code = term_code
+
+    courses = [
         {
-            "crn": "43069",
-            "waitlist": "1",
+            "crn": 43069,
+            "code": 202210,
+            "waitlist": 1,
             "registrationStatus": "RW",
             "registrationStatusDescription": "Web Register",
             "departmentCode": "CSI",
@@ -10,17 +30,17 @@
             "courseTitle": "Ruby for Web Developers",
             "courseDescription": "This course introduces the dynamic programming language Ruby -- focusing on language fundamentals, debugging and external language binding techniques, and extremely popular web development framework Ruby on the Rail (ROR). The basic ROR topics include discussion of convention over configuration as used by ROR and RESTful web development with practical exercises. \nPrerequisite(s): CSI 1300 or CSI 2300",
             "subjectCode": "CSI",
-            "subjectNumber": "2340",
+            "subjectNumber": 2340,
             "section": "001",
-            "credit": "2",
+            "credit": 2,
             "grade": {
-                "credit": "2",
+                "credit": 2,
                 "grade": "N/A",
-                "crn": "43069"
+                "crn": 43069
             },
             "meetings": [
                 {
-                    "crn": "43069",
+                    "crn": 43069,
                     "startDate": "2020-09-03T04:00:00.000+0000",
                     "endDate": "2020-12-15T05:00:00.000+0000",
                     "startTime": "10:00 AM",
@@ -46,7 +66,7 @@
                     "endWeekOfMonth": 3
                 },
                 {
-                    "crn": "43069",
+                    "crn": 43069,
                     "startDate": "2020-09-03T04:00:00.000+0000",
                     "endDate": "2020-12-15T05:00:00.000+0000",
                     "startTime": "12:00 PM",
@@ -74,7 +94,7 @@
             ],
             "instructors": [
                 {
-                    "crn": "43069",
+                    "crn": 43069,
                     "firstName": "Iraida",
                     "lastName": "Lazareva",
                     "office": "N/A",
@@ -83,8 +103,9 @@
             ]
         },
         {
-            "crn": "45049",
-            "waitlist": "0",
+            "crn": 45049,
+            "code": 202210,
+            "waitlist": 0,
             "registrationStatus": "RW",
             "registrationStatusDescription": "Web Register",
             "departmentCode": "HC",
@@ -92,13 +113,13 @@
             "courseTitle": "Cartography:Intersections of A",
             "courseDescription": "Looks to social science and its particular methods of scientific inquiry. Of particular interest are the ways societal and cultural factors influence and shape individual and/or group behaviors and values.  May be repeated for 4 extra credits.  Satisfies the university general education requirement in the social science knowledge exploration area.",
             "subjectCode": "HC",
-            "subjectNumber": "2060",
-            "section": "3",
-            "credit": "4",
+            "subjectNumber": 2060,
+            "section": 3,
+            "credit": 4,
             "grade": {
-                "credit": "4",
+                "credit": 4,
                 "grade": "N/A",
-                "crn": "45049"
+                "crn": 45049
             },
             "meetings": [],
             "instructors": [
@@ -112,8 +133,9 @@
             ]
         },
         {
-            "crn": "44975",
-            "waitlist": "0",
+            "crn": 44975,
+            "code": 202240,
+            "waitlist": 0,
             "registrationStatus": "RW",
             "registrationStatusDescription": "Web Register",
             "departmentCode": "CSI",
@@ -121,17 +143,17 @@
             "courseTitle": "Senior Capstone Project",
             "courseDescription": "A team-oriented senior project to synthesize the knowledge and skills gained in the CS/IT curricula. Written and oral reports are required in addition to a working demo. Satisfies the university general education requirement for the capstone experience. Satisfies the university general education requirement for a writing intensive course in the major. Prerequisite for writing intensive: completion of the university writing foundation requirement. Prerequisites(s): CSI 3370, CSI 3450, (CSI 3500 or CSI 3520 or CSI 3640), major standing and senior standing.\n\n\n\n\n\n\n",
             "subjectCode": "CSI",
-            "subjectNumber": "4999",
+            "subjectNumber": 4999,
             "section": "002",
-            "credit": "4",
+            "credit": 4,
             "grade": {
-                "credit": "4",
+                "credit": 4,
                 "grade": "N/A",
-                "crn": "44975"
+                "crn": 44975
             },
             "meetings": [
                 {
-                    "crn": "44975",
+                    "crn": 44975,
                     "startDate": "2020-09-03T04:00:00.000+0000",
                     "endDate": "2020-12-15T05:00:00.000+0000",
                     "startTime": "10:00 AM",
@@ -159,7 +181,7 @@
             ],
             "instructors": [
                 {
-                    "crn": "44975",
+                    "crn": 44975,
                     "firstName": "Trofim",
                     "lastName": "Muravyov",
                     "office": "516 EC",
@@ -168,8 +190,9 @@
             ]
         },
         {
-            "crn": "42896",
-            "waitlist": "0",
+            "crn": 42896,
+            "code": 202240,
+            "waitlist": 0,
             "registrationStatus": "RW",
             "registrationStatusDescription": "Web Register",
             "departmentCode": "CSE",
@@ -177,17 +200,17 @@
             "courseTitle": "Info Retrieval/Knowldg Discov",
             "courseDescription": "This course covers the models for information retrieval from text and multimedia databases. Methodologies for database indexing and visualization are discussed. Statistical and deterministic algorithms for discovering knowledge from databases, including, decision trees, clustering, regression, and neural models are covered. Formerly CSE 581. Cross-listed with CSI 4810. Prerequisite: CSI 5450 or equivalent.",
             "subjectCode": "CSI",
-            "subjectNumber": "5810",
+            "subjectNumber": 5810,
             "section": "001",
-            "credit": "4",
+            "credit": 4,
             "grade": {
-                "credit": "4",
+                "credit": 4,
                 "grade": "N/A",
-                "crn": "42896"
+                "crn": 42896
             },
             "meetings": [
                 {
-                    "crn": "42896",
+                    "crn": 42896,
                     "startDate": "2020-09-03T04:00:00.000+0000",
                     "endDate": "2020-12-15T05:00:00.000+0000",
                     "startTime": "7:30 PM",
@@ -216,8 +239,9 @@
             "instructors": []
         },
         {
-            "crn": "45367",
-            "waitlist": "0",
+            "crn": 45367,
+            "code": 202110,
+            "waitlist": 0,
             "registrationStatus": "RW",
             "registrationStatusDescription": "Web Register",
             "departmentCode": "HC",
@@ -225,17 +249,17 @@
             "courseTitle": "Honors Aspire IV",
             "courseDescription": "Culmination of The Honors College service, experiential learning, and leadership, with professional presentation of honors projects.",
             "subjectCode": "HC",
-            "subjectNumber": "4004",
+            "subjectNumber": 4004,
             "section": "0",
-            "credit": "0",
+            "credit": 0,
             "grade": {
-                "credit": "0",
+                "credit": 0,
                 "grade": "N/A",
-                "crn": "45367"
+                "crn": 45367
             },
             "meetings": [
                 {
-                    "crn": "45367",
+                    "crn": 45367,
                     "startDate": "2020-09-03T04:00:00.000+0000",
                     "endDate": "2020-12-15T05:00:00.000+0000",
                     "startTime": "N/A",
@@ -263,7 +287,7 @@
             ],
             "instructors": [
                 {
-                    "crn": "45367",
+                    "crn": 45367,
                     "firstName": "Elise",
                     "lastName": "Carroll",
                     "office": "Oak View Hall Rm 210",
@@ -272,8 +296,9 @@
             ]
         },
         {
-            "crn": "43064",
-            "waitlist": "0",
+            "crn": 43064,
+            "code": 202140,
+            "waitlist": 0,
             "registrationStatus": "RW",
             "registrationStatusDescription": "Web Register",
             "departmentCode": "CSI",
@@ -281,17 +306,17 @@
             "courseTitle": "Fundamentals of Operating Sys",
             "courseDescription": "Introduction to the concepts and design of operating systems. Typical topics include: sequential processes, concurrent processes, processor management, memory management, scheduling, file management, and resource protection. Offered winter. \nPrerequisite(s): CSI 3610 and CSI 3640 and major standing in CS or CE.",
             "subjectCode": "CSI",
-            "subjectNumber": "4500",
+            "subjectNumber": 4500,
             "section": "001",
-            "credit": "4",
+            "credit": 4,
             "grade": {
-                "credit": "4",
+                "credit": 4,
                 "grade": "N/A",
-                "crn": "43064"
+                "crn": 43064
             },
             "meetings": [
                 {
-                    "crn": "43064",
+                    "crn": 43064,
                     "startDate": "2020-09-03T04:00:00.000+0000",
                     "endDate": "2020-12-15T05:00:00.000+0000",
                     "startTime": "1:00 PM",
@@ -317,7 +342,7 @@
                     "endWeekOfMonth": 3
                 },
                 {
-                    "crn": "43064",
+                    "crn": 43064,
                     "startDate": "2020-09-03T04:00:00.000+0000",
                     "endDate": "2020-12-15T05:00:00.000+0000",
                     "startTime": "3:00 PM",
@@ -345,7 +370,7 @@
             ],
             "instructors": [
                 {
-                    "crn": "43064",
+                    "crn": 43064,
                     "firstName": "Cheng",
                     "lastName": "Wan",
                     "office": "538 EC",
@@ -353,85 +378,180 @@
                 }
             ]
         }
-    ],
-    "books": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><textbookorder><school id=\"244\"/><courses><course dept=\"CSI\" num=\"2340\" sect=\"43069\" term=\"F20\"/><course dept=\"CSI\" num=\"4500\" sect=\"43064\" term=\"F20\"/><course dept=\"CSI\" num=\"4999\" sect=\"44975\" term=\"F20\"/><course dept=\"CSI\" num=\"5810\" sect=\"42896\" term=\"F20\"/><course dept=\"HC\" num=\"2060\" sect=\"45049\" term=\"F20\"/><course dept=\"HC\" num=\"4004\" sect=\"45367\" term=\"F20\"/></courses></textbookorder>",
-    "terms": [
-        {
-            "description": "Winter Semester 2021",
-            "code": "202110",
-            "start": "2021-01-06T05:00:00.000+0000",
-            "end": "2021-04-27T04:00:00.000+0000",
-            "current": false
-        },
-        {
-            "description": "Fall Semester 2020",
-            "code": "202040",
-            "start": "2020-09-03T04:00:00.000+0000",
-            "end": "2020-12-15T05:00:00.000+0000",
-            "current": false
-        },
-        {
-            "description": "Winter Semester 2020",
-            "code": "202010",
-            "start": "2020-01-06T05:00:00.000+0000",
-            "end": "2020-04-25T04:00:00.000+0000",
-            "current": false
-        },
-        {
-            "description": "Fall Semester 2019",
-            "code": "201940",
-            "start": "2019-09-04T04:00:00.000+0000",
-            "end": "2019-12-14T05:00:00.000+0000",
-            "current": false
-        },
-        {
-            "description": "Summer Semester 2019",
-            "code": "201930",
-            "start": "2019-05-06T04:00:00.000+0000",
-            "end": "2019-08-24T04:00:00.000+0000",
-            "current": false
-        },
-        {
-            "description": "Winter Semester 2019",
-            "code": "201910",
-            "start": "2019-01-03T05:00:00.000+0000",
-            "end": "2019-04-24T04:00:00.000+0000",
-            "current": false
-        },
-        {
-            "description": "Fall Semester 2018",
-            "code": "201840",
-            "start": "2018-09-05T04:00:00.000+0000",
-            "end": "2018-12-15T05:00:00.000+0000",
-            "current": false
-        },
-        {
-            "description": "Summer Semester 2018",
-            "code": "201830",
-            "start": "2018-05-07T04:00:00.000+0000",
-            "end": "2018-08-25T04:00:00.000+0000",
-            "current": false
-        },
-        {
-            "description": "Winter Semester 2018",
-            "code": "201810",
-            "start": "2018-01-03T05:00:00.000+0000",
-            "end": "2018-04-25T04:00:00.000+0000",
-            "current": true
-        },
-        {
-            "description": "Fall Semester 2017",
-            "code": "201740",
-            "start": "2017-09-06T04:00:00.000+0000",
-            "end": "2017-12-16T05:00:00.000+0000",
-            "current": false
-        }
-    ],
-    "credit": [
-        {
-            "standing": "Undergraduate",
-            "gpa": "3.84",
-            "credits": "115"
-        }
     ]
-}
+
+    classes = [c for c in courses if c['code'] == code]
+
+    return {
+        "terms": [
+            {
+                "description": "Summer Semester 2022",
+                "code": 202230,
+                "start": "2021-01-06T05:00:00.000+0000",
+                "end": "2021-04-27T04:00:00.000+0000",
+                "current": False
+            },
+            {
+                "description": "Winter Semester 2022",
+                "code": 202210,
+                "start": "2021-01-06T05:00:00.000+0000",
+                "end": "2021-04-27T04:00:00.000+0000",
+                "current": True
+            },
+            {
+                "description": "Fall Semester 2022",
+                "code": 202240,
+                "start": "2020-09-03T04:00:00.000+0000",
+                "end": "2020-12-15T05:00:00.000+0000",
+                "current": False
+            },
+            {
+                "description": "Winter Semester 2021",
+                "code": 202110,
+                "start": "2020-01-06T05:00:00.000+0000",
+                "end": "2020-04-25T04:00:00.000+0000",
+                "current": False
+            },
+            {
+                "description": "Fall Semester 2021",
+                "code": 202140,
+                "start": "2019-09-04T04:00:00.000+0000",
+                "end": "2019-12-14T05:00:00.000+0000",
+                "current": False
+            }
+        ],
+        "courses": classes,
+        "books": "<?xml version=\"1.0\" encoding=\"UTF-8\"?><textbookorder><school id=\"244\"/><courses><course dept=\"CSI\" num=\"2340\" sect=\"43069\" term=\"F20\"/><course dept=\"CSI\" num=\"4500\" sect=\"43064\" term=\"F20\"/><course dept=\"CSI\" num=\"4999\" sect=\"44975\" term=\"F20\"/><course dept=\"CSI\" num=\"5810\" sect=\"42896\" term=\"F20\"/><course dept=\"HC\" num=\"2060\" sect=\"45049\" term=\"F20\"/><course dept=\"HC\" num=\"4004\" sect=\"45367\" term=\"F20\"/></courses></textbookorder>",
+        "credits": [
+            {
+                "standing": "Undergraduate",
+                "gpa": "3.84",
+                "credits": "115"
+            }
+        ],
+    }
+
+
+@app.route('/api/v1/events/<int:term_code>')
+def events(term_code):
+    return {
+        "events": [
+            {
+                "startRecur": "2018-01-03T05:00:00.000+0000",
+                "endRecur": "2018-04-25T04:00:00.000+0000",
+                "startTime": "9:20",
+                "endTime": "10:27",
+                "title": "SPN 1140",
+                "color": "#00796B",
+                "crn": "10217",
+                "daysOfWeek": [
+                    1,
+                    3,
+                    5
+                ],
+                "extendedProps": {
+                    "desc": "Intro Spanish Lang/Culture I",
+                    "location": "SFH 373",
+                    "startTime": "9:20 AM",
+                    "endTime": "10:27 AM"
+                }
+            },
+            {
+                "startRecur": "2018-01-03T05:00:00.000+0000",
+                "endRecur": "2018-04-25T04:00:00.000+0000",
+                "startTime": "10:40",
+                "endTime": "11:47",
+                "title": "APM 2663",
+                "color": "#D81B60",
+                "crn": "10404",
+                "daysOfWeek": [
+                    1,
+                    3,
+                    5
+                ],
+                "extendedProps": {
+                    "desc": "Discrete Mathematics",
+                    "location": "SFH 163",
+                    "startTime": "10:40 AM",
+                    "endTime": "11:47 AM"
+                }
+            },
+            {
+                "startRecur": "2018-01-03T05:00:00.000+0000",
+                "endRecur": "2018-04-25T04:00:00.000+0000",
+                "startTime": "12:00",
+                "endTime": "13:07",
+                "title": "PHY 1610",
+                "color": "#00838F",
+                "crn": "13282",
+                "daysOfWeek": [
+                    1,
+                    3,
+                    5
+                ],
+                "extendedProps": {
+                    "desc": "Fundamentals of Physics I",
+                    "location": "HH 195",
+                    "startTime": "12:00 PM",
+                    "endTime": "1:07 PM"
+                }
+            },
+            {
+                "startRecur": "2018-01-03T05:00:00.000+0000",
+                "endRecur": "2018-04-25T04:00:00.000+0000",
+                "startTime": "13:20",
+                "endTime": "14:20",
+                "title": "PHY 1610",
+                "color": "#00838F",
+                "crn": "13282",
+                "daysOfWeek": [
+                    1,
+                    3,
+                    5
+                ],
+                "extendedProps": {
+                    "desc": "Fundamentals of Physics I",
+                    "location": "HH 195",
+                    "startTime": "1:20 PM",
+                    "endTime": "2:20 PM"
+                }
+            },
+            {
+                "startRecur": "2018-01-03T05:00:00.000+0000",
+                "endRecur": "2018-04-25T04:00:00.000+0000",
+                "startTime": "15:30",
+                "endTime": "17:17",
+                "title": "CSI 2300",
+                "color": "#5E35B1",
+                "crn": "14464",
+                "daysOfWeek": [
+                    1,
+                    3
+                ],
+                "extendedProps": {
+                    "desc": "Object-Oriented Computing",
+                    "location": "PH 306",
+                    "startTime": "3:30 PM",
+                    "endTime": "5:17 PM"
+                }
+            },
+            {
+                "startRecur": "2018-01-03T05:00:00.000+0000",
+                "endRecur": "2018-04-25T04:00:00.000+0000",
+                "startTime": "14:00",
+                "endTime": "14:50",
+                "title": "CSI 2300",
+                "color": "#0277BD",
+                "crn": "14466",
+                "daysOfWeek": [
+                    3
+                ],
+                "extendedProps": {
+                    "desc": "Object-Oriented Computing",
+                    "location": "EC 566",
+                    "startTime": "2:00 PM",
+                    "endTime": "2:50 PM"
+                }
+            }
+        ]
+    }
